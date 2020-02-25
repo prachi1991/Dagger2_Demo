@@ -49,6 +49,7 @@ ext {
     rxJavaVersion = "2.1.1"
 }
 dependencies {
+    implementation project(':shared')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.material:material:1.0.0'
@@ -62,7 +63,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
 
-    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
 
     implementation 'androidx.cardview:cardview:1.0.0'
 
@@ -91,4 +93,11 @@ dependencies {
 //Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    // Dagger
+    implementation "com.google.dagger:dagger-android:2.16"
+    implementation "com.google.dagger:dagger-android-support:2.16"
+    kapt "com.google.dagger:dagger-compiler:2.16"
+    kapt "com.google.dagger:dagger-android-processor:2.16"
+
 }

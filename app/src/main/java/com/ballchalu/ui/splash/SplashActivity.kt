@@ -2,18 +2,20 @@ package com.ballchalu.ui.splash
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import com.ballchalu.R
+import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivitySplashBinding
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+        binding = ActivitySplashBinding.inflate(layoutInflater).apply {
+            lifecycleOwner = this@SplashActivity
+        }
+        setContentView(binding.root)
+
 
         val secondsDelayed = 10
         Handler().postDelayed({

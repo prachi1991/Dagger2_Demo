@@ -51,8 +51,8 @@ class LoginActivity : BaseActivity() {
         })
 
         viewModel.loading.observe(this, Observer {
-            binding?.progressBar?.visibility = if (it) View.VISIBLE else View.GONE
-            binding?.login?.isEnabled = !it
+            binding?.progressBar?.visibility = if (it.hasBeenHandled) View.VISIBLE else View.GONE
+            binding?.login?.isEnabled = !it.hasBeenHandled
         })
         binding?.login?.setOnClickListener {
             viewModel.validateData(

@@ -1,8 +1,8 @@
 package com.ballchalu.base
 
-import androidx.fragment.app.Fragment
+import dagger.android.support.DaggerFragment
 
-open class BaseFragment : Fragment() {
+open class BaseFragment : DaggerFragment() {
     val tAG: String
         get() = this.javaClass.name
 

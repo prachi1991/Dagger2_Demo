@@ -1,24 +1,37 @@
 package com.ballchalu.application
 
-import android.app.Application
 import com.ballchalu.R
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig
+import com.ballchalu.base.di.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import io.github.inflationx.calligraphy3.CalligraphyConfig
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor
+import io.github.inflationx.viewpump.ViewPump
 
 
-class App : Application() {
+class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        CalligraphyConfig.initDefault(
-            CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/OpenSans-Regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
+        ViewPump.init(
+            ViewPump.builder()
+                .addInterceptor(
+                    CalligraphyInterceptor(
+                        CalligraphyConfig.Builder()
+                            .setDefaultFontPath("fonts/OpenSans-Regular.ttf")
+                            .setFontAttrId(R.attr.fontPath)
+                            .build()
+                    )
+                )
                 .build()
         )
 
     }
 
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().create(this)
+    }
     companion object {
         lateinit var instance: App
     }
