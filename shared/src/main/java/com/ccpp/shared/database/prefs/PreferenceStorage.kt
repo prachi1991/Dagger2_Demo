@@ -1,4 +1,4 @@
-package com.ccpp.shared.network.repository.prefs
+package com.ccpp.shared.database.prefs
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
@@ -27,8 +27,16 @@ class SharedPreferenceStorage @Inject constructor(context: Context) :
 
 
     private val prefs = context.applicationContext.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-    override var token by StringPreference(prefs, PREF_TOKEN, "")
-    override var userName by StringPreference(prefs, PREF_USERNAME, "")
+    override var token by StringPreference(
+        prefs,
+        PREF_TOKEN,
+        ""
+    )
+    override var userName by StringPreference(
+        prefs,
+        PREF_USERNAME,
+        ""
+    )
 
     companion object {
         const val PREFS_NAME = "SharePref"

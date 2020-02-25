@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityLoginBinding
@@ -22,11 +22,7 @@ class LoginActivity : BaseActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
-        viewModel =
-            ViewModelProviders.of(
-                this,
-                LoginViewModelFactory()
-            ).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         viewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -34,10 +30,10 @@ class LoginActivity : BaseActivity() {
             // disable login button unless both username / password is valid
 
             if (loginState.usernameError != null) {
-                binding?.username?.error = getString(loginState.usernameError)
+                binding?.username?.error = getString(loginState.usernameError!!)
             }
             if (loginState.passwordError != null) {
-                binding?.password?.error = getString(loginState.passwordError)
+                binding?.password?.error = getString(loginState.passwordError!!)
             }
             if (it.isDataValid) {
                 viewModel.callLogin(binding?.username.toString(), binding?.password.toString())

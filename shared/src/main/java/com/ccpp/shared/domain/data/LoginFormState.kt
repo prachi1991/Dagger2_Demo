@@ -1,4 +1,4 @@
-package com.ballchalu.ui.login.data
+package com.ccpp.shared.domain.data
 
 /**
  * Data validation state of the login form.

@@ -5,11 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
-import com.ballchalu.domain.LoginResult
-import com.ballchalu.ui.login.data.LoginFormState
-import com.ballchalu.ui.login.data.LoginRepository
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
+import com.ccpp.shared.domain.LoginResult
+import com.ccpp.shared.domain.data.LoginFormState
+import com.ccpp.shared.network.repository.LoginRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

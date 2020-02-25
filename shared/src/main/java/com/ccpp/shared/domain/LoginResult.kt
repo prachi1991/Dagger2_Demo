@@ -1,4 +1,4 @@
-package com.ballchalu.domain
+package com.ccpp.shared.domain
 
 /**
  * Authentication result : success (user details) or error message.

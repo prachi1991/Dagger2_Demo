@@ -1,13 +1,11 @@
 package com.ccpp.shared.network
 
+import com.ccpp.shared.domain.LoginResult
+import kotlinx.coroutines.Deferred
+import retrofit2.Response
+import retrofit2.http.GET
+
 internal interface ApiClient {
-
-    /**
-     * Get access token for other apis
-     * Test Link: https://sit-gip.2c2p.com/GIPMobile_TestPage/Home/OAuthTokenRequest
-     * */
-    /*@FormUrlEncoded
-    @POST("/oauth/token")
-    fun getNewAccessToken(@Field("grant_type") grant_type: String): Call<AccessTokenRes>*/
-
+    @GET("top-headlines?sources=google-news&apiKey=f1e5ca69296b4e70a3fb7fc722a63615")
+    fun callLoginAsync(): Deferred<Response<LoginResult>>
 }

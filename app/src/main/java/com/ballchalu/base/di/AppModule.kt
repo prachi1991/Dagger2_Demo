@@ -3,8 +3,8 @@ package com.ballchalu.base.di
 import android.content.ClipboardManager
 import android.content.Context
 import com.ballchalu.application.App
-import com.ccpp.shared.network.repository.prefs.PreferenceStorage
-import com.ccpp.shared.network.repository.prefs.SharedPreferenceStorage
+import com.ccpp.shared.database.prefs.PreferenceStorage
+import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

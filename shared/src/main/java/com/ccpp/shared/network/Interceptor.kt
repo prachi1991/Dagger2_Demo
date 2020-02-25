@@ -12,7 +12,7 @@ class Interceptor @Inject constructor() :
         val mainRequest = chain.request()
         val builder = mainRequest.newBuilder()
             .header("x-api-key", "")
-            .method(mainRequest.method(), mainRequest.body())
+            .method(mainRequest.method, mainRequest.body)
 
         return chain.proceed(builder.build())
     }
