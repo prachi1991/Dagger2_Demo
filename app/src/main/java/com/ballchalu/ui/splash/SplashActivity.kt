@@ -1,5 +1,6 @@
 package com.ballchalu.ui.splash
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
@@ -7,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivitySplashBinding
+import com.ballchalu.ui.login.ui.LoginActivity
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -35,6 +37,7 @@ class SplashActivity : BaseActivity() {
         viewModel.loginResult.observe(this, Observer {
             it.totalResults?.let { it1 ->
                 Toast.makeText(this, it1.toString(), Toast.LENGTH_LONG).show()
+                startActivity(Intent(this, LoginActivity::class.java))
             }
         })
     }

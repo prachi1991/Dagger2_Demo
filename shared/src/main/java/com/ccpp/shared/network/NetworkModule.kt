@@ -3,6 +3,7 @@ package com.ccpp.shared.network
 import com.ccpp.shared.BuildConfig
 import com.ccpp.shared.core.base.BaseRepository
 import com.ccpp.shared.network.repository.LoginRepository
+import com.ccpp.shared.network.repository.SplashRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -74,16 +75,21 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideBaseRepository(): BaseRepository = BaseRepository()
+    fun provideLoginRepository(
+        apiService: ApiService,
+        baseRepository: BaseRepository
+    ): LoginRepository = LoginRepository(apiService, baseRepository)
 
     @Provides
     @Singleton
-    fun provideApiService(): ApiService = ApiService()
-
-    @Provides
-    @Singleton
-    fun provideLoginRepository(): LoginRepository =
-        LoginRepository(provideApiService(), provideBaseRepository())
+    fun provideSplashRepository(
+        apiService: ApiService,
+        baseRepository: BaseRepository
+    ): SplashRepository =
+        SplashRepository(
+            apiService,
+            baseRepository
+        )
 
 
 

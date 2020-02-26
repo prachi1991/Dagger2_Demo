@@ -16,27 +16,28 @@ class LoginActivity : BaseActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var binding: ActivityLoginBinding? = null
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-
+        setContentView(binding.root)
+        
         viewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
 
             if (loginState.usernameError != null) {
-                binding?.username?.error = getString(loginState.usernameError!!)
+                binding.username.error = getString(loginState.usernameError!!)
             }
             if (loginState.passwordError != null) {
-                binding?.password?.error = getString(loginState.passwordError!!)
+                binding.password.error = getString(loginState.passwordError!!)
             }
             if (it.isDataValid) {
-                viewModel.callLogin(binding?.username.toString(), binding?.password.toString())
+                viewModel.callLogin(binding.username.toString(), binding.password.toString())
             }
         })
 
@@ -47,13 +48,14 @@ class LoginActivity : BaseActivity() {
         })
 
         viewModel.loading.observe(this, Observer {
-            binding?.progressBar?.visibility = if (it.hasBeenHandled) View.VISIBLE else View.GONE
-            binding?.login?.isEnabled = !it.hasBeenHandled
+            binding.progressBar.visibility = if (it.hasBeenHandled) View.VISIBLE else View.GONE
+            binding.login.isEnabled = !it.hasBeenHandled
         })
-        binding?.login?.setOnClickListener {
+        binding.login.setOnClickListener {
+            viewModel.callLogin("", "")
             viewModel.validateData(
-                binding?.username?.text.toString(),
-                binding?.password?.text.toString()
+                binding.username.text.toString(),
+                binding.password.text.toString()
             )
         }
     }
