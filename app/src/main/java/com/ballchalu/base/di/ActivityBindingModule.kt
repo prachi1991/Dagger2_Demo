@@ -1,7 +1,8 @@
 package com.ballchalu.base.di
 
-import com.ballchalu.ui.MainModule
-import com.ballchalu.ui.login.ui.LoginActivity
+import com.ballchalu.ui.login.LoginActivity
+import com.ballchalu.ui.navigation.NavigationActivity
+import com.ballchalu.ui.navigation.NavigationModule
 import com.ballchalu.ui.splash.SplashActivity
 import com.ccpp.shared.core.di.ActivityScoped
 import dagger.Module
@@ -22,16 +23,18 @@ abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(
         modules = [
-            MainModule::class
+            NavigationModule::class
         ]
     )
     internal abstract fun mainActivity(): SplashActivity
 
+    internal abstract fun loginActivity(): LoginActivity
+
     @ActivityScoped
     @ContributesAndroidInjector(
         modules = [
-            MainModule::class
+            NavigationModule::class
         ]
     )
-    internal abstract fun loginActivity(): LoginActivity
+    internal abstract fun navigationActivity(): NavigationActivity
 }

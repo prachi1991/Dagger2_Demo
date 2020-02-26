@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/menu_home" />
+    <item
+        android:id="@+id/nav_chat_room"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_chat_room" />
+    <item
+        android:id="@+id/nav_coin_ledgers"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_bc_coins_ledgers" />
+    <item
+        android:id="@+id/nav_sport"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_sports" />
+    <item
+        android:id="@+id/nav_winners"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_winners" />
+    <item
+        android:id="@+id/nav_tipers"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_tipers" />
+    <item
+        android:id="@+id/nav_bc_coins"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_bc_coins" />
+    <item
+        android:id="@+id/nav_how_to_play"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_how_to_play" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_profile" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_logout" />
+
+</menu>

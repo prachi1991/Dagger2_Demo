@@ -1,4 +1,4 @@
-package com.ballchalu.ui.login.ui
+package com.ballchalu.ui.login
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
