@@ -7,7 +7,7 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:openDrawer="left">
+        tools:openDrawer="right">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -66,6 +66,7 @@
             android:layout_gravity="end"
             android:fitsSystemWindows="true"
             android:textAlignment="viewEnd"
+            android:background="#343743"
             app:headerLayout="@layout/nav_header_navigation_"
             app:itemIconTint="@color/menu_light_green"
             app:itemTextAppearance="@style/Base.Theme.AppTheme.menutitle"

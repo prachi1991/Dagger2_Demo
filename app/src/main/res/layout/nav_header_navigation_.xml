@@ -4,16 +4,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
+        android:background="@color/menu_header_background"
+        android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingRight="@dimen/_10sdp">
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/ivCloseDrawer"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
+            android:padding="@dimen/_3sdp"
             android:src="@drawable/ic_close" />
 
         <LinearLayout
@@ -21,37 +25,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:orientation="horizontal">
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvNavEmail"
-                fontPath="fonts/Play-Regular.ttf"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:text="abc@gmail.com |"
-                android:textSize="@dimen/_12ssp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNavEmail"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="abc@gmail.com |"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/tvMoneyValue"
+                    fontPath="fonts/Play-Bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="840"
+                    android:textColor="@color/text_light_green" />
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvMoneyValue"
+                android:id="@+id/textView"
                 fontPath="fonts/Play-Bold.ttf"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="840"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/bc_money"
                 android:textColor="@color/text_light_green" />
-
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView"
-            fontPath="fonts/Play-Bold.ttf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/llEmail"
-            android:layout_alignParentEnd="true"
-            android:text="@string/bc_money"
-            android:textColor="@color/text_light_green" />
-
     </RelativeLayout>
 </layout>

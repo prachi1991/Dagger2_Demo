@@ -10,5 +10,6 @@
 
     <color name="menu_light_green">#64b000</color>
     <color name="color_window_background">#20262d</color>
+    <color name="menu_header_background">#272a31</color>
 
 </resources>
