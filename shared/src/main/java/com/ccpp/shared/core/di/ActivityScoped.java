@@ -2,10 +2,10 @@
 package com.ccpp.shared.core.di;
 
 import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
 import javax.inject.Scope;
+
+import kotlin.annotation.AnnotationRetention;
 
 /**
  * By default, if no scope annotation is present, the injector creates an instance , uses the
@@ -32,6 +32,6 @@ import javax.inject.Scope;
  */
 @Documented
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 public @interface ActivityScoped {
 }

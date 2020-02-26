@@ -2,11 +2,11 @@
 package com.ccpp.shared.core.di;
 
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.inject.Scope;
+
+import kotlin.annotation.AnnotationRetention;
 
 /**
  * The ChildFragmentScoped custom scoping annotation specifies that the lifespan of a dependency be
@@ -14,7 +14,7 @@ import javax.inject.Scope;
  * singleton within the lifespan of a child Fragment
  */
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface ChildFragmentScoped {
 }
