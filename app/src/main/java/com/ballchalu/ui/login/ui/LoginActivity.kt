@@ -4,25 +4,25 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityLoginBinding
+import com.ccpp.shared.util.viewModelProvider
+import javax.inject.Inject
 
 
 class LoginActivity : BaseActivity() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private var binding: ActivityLoginBinding? = null
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel = viewModelProvider(viewModelFactory)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
 
         viewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer

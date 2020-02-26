@@ -1,6 +1,7 @@
 package com.ballchalu.base.di
 
 import com.ballchalu.ui.MainModule
+import com.ballchalu.ui.login.ui.LoginActivity
 import com.ballchalu.ui.splash.SplashActivity
 import com.ccpp.shared.core.di.ActivityScoped
 import dagger.Module
@@ -25,4 +26,12 @@ abstract class ActivityBindingModule {
         ]
     )
     internal abstract fun mainActivity(): SplashActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+        modules = [
+            MainModule::class
+        ]
+    )
+    internal abstract fun loginActivity(): LoginActivity
 }

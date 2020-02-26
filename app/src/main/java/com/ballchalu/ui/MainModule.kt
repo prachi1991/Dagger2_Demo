@@ -2,6 +2,7 @@ package com.ballchalu.ui
 
 import androidx.lifecycle.ViewModel
 import com.ballchalu.ui.login.ui.LoginViewModel
+import com.ballchalu.ui.splash.SplashViewModel
 import com.ccpp.shared.core.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
@@ -21,5 +22,10 @@ internal abstract class MainModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     internal abstract fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashViewModel::class)
+    internal abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
 
 }

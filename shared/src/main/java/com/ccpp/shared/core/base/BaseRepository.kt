@@ -4,10 +4,11 @@ import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.util.ConstantsBase.STATUS_SUCCESS
 import retrofit2.Response
 import java.io.IOException
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-open class BaseRepository {
+open class BaseRepository @Inject constructor() {
     suspend fun <T : Any> safeApiCall(
         call: suspend () -> Response<T>,
         errorMessage: String

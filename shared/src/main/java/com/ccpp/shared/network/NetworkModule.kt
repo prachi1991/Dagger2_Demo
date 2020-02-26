@@ -1,6 +1,8 @@
 package com.ccpp.shared.network
 
 import com.ccpp.shared.BuildConfig
+import com.ccpp.shared.core.base.BaseRepository
+import com.ccpp.shared.network.repository.LoginRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -70,14 +72,19 @@ class NetworkModule {
         return Interceptor()
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideValidateMobileTokenRepository(dataSource: ValidateMobileTokenRepository.Network): ValidateMobileTokenRepository = dataSource
+    @Provides
+    @Singleton
+    fun provideBaseRepository(): BaseRepository = BaseRepository()
+
+    @Provides
+    @Singleton
+    fun provideApiService(): ApiService = ApiService()
+
+    @Provides
+    @Singleton
+    fun provideLoginRepository(): LoginRepository =
+        LoginRepository(provideApiService(), provideBaseRepository())
 
 
-//    @Provides
-//    @Singleton
-//    fun provideVerifyUserRepository(dataSource: VerifyUserLoginRepository.Network): VerifyUserLoginRepository =
-//        dataSource
 
 }
