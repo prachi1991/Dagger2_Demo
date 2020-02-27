@@ -10,7 +10,6 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentSignInUpContainerBinding
 import com.ballchalu.ui.login.signin.SignInFragment
-import com.ballchalu.ui.login.signup.SignUpFragment
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -21,7 +20,7 @@ class SignInUpContainerFragment : BaseFragment() {
     private lateinit var binding: FragmentSignInUpContainerBinding
     private lateinit var viewModel: LoginViewModel
     private val signInFragment by lazy { SignInFragment() }
-    private val signOutFragment by lazy { SignUpFragment() }
+    private val signOutFragment by lazy { SignInFragment() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
