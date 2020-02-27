@@ -1,4 +1,4 @@
-package com.ballchalu.ui.login.signin
+package com.ballchalu.ui.login.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,24 +9,24 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
-import com.ballchalu.databinding.FragmentSignInBinding
+import com.ballchalu.databinding.FragmentSignUpBinding
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
-class SignInFragment : BaseFragment() {
+class SignUpFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var binding: FragmentSignInBinding
-    private lateinit var viewModel: SignInViewModel
+    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var viewModel: SignUpViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewModel = viewModelProvider(viewModelFactory)
-        binding = FragmentSignInBinding.inflate(inflater).apply {
-            lifecycleOwner = this@SignInFragment
+        binding = FragmentSignUpBinding.inflate(inflater).apply {
+            lifecycleOwner = this@SignUpFragment
         }
 
 
@@ -64,16 +64,16 @@ class SignInFragment : BaseFragment() {
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             binding.progressBar.visibility = if (it.hasBeenHandled) View.VISIBLE else View.GONE
-            binding.login.isEnabled = !it.hasBeenHandled
+//            binding.login.isEnabled = !it.hasBeenHandled
         })
 
-        binding.login.setOnClickListener {
-            //            viewModel.callLogin("", "")
-            viewModel.validateData(
-                binding.tvUsernameValue.text.toString(),
-                binding.tvPasswordValue.text.toString()
-            )
-        }
+//        binding.login.setOnClickListener {
+        viewModel.callLogin("", "")
+//            viewModel.validateData(
+//                binding.tvUsernameValue.text.toString(),
+//                binding.tvPasswordValue.text.toString()
+//            )
+//        }
 
     }
 

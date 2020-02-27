@@ -67,6 +67,6 @@ open class ApiService
         }
 
     fun callLoginAsync(username: String, password: String) =
-        apiClient.callLoginAsync(username, password)
+        apiClient.callLoginAsync()
 
 }

@@ -2,6 +2,8 @@ package com.ballchalu.base.di
 
 import com.ballchalu.ui.login.LoginModule
 import com.ballchalu.ui.login.container.LoginActivity
+import com.ballchalu.ui.login.signin.SignInModule
+import com.ballchalu.ui.login.signup.SignUpModule
 import com.ballchalu.ui.navigation.NavigationActivity
 import com.ballchalu.ui.navigation.NavigationModule
 import com.ballchalu.ui.splash.SplashActivity
@@ -34,7 +36,9 @@ abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(
         modules = [
-            LoginModule::class
+            LoginModule::class,
+            SignInModule::class,
+            SignUpModule::class
         ]
     )
     internal abstract fun loginActivity(): LoginActivity
