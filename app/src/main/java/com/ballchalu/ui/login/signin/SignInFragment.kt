@@ -41,16 +41,19 @@ class SignInFragment : BaseFragment() {
         viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             val loginState = it ?: return@Observer
 
-            // disable login button unless both username / password is valid
+            // disable login button unless both tvUsernameValue / tvPasswordValue is valid
 
             if (loginState.usernameError != null) {
-                binding.username.error = getString(loginState.usernameError!!)
+                binding.tvUsernameValue.error = getString(loginState.usernameError!!)
             }
             if (loginState.passwordError != null) {
-                binding.password.error = getString(loginState.passwordError!!)
+                binding.tvPasswordValue.error = getString(loginState.passwordError!!)
             }
             if (it.isDataValid) {
-                viewModel.callLogin(binding.username.toString(), binding.password.toString())
+                viewModel.callLogin(
+                    binding.tvUsernameValue.toString(),
+                    binding.tvPasswordValue.toString()
+                )
             }
         })
 
@@ -66,10 +69,10 @@ class SignInFragment : BaseFragment() {
         })
 
         binding.login.setOnClickListener {
-            viewModel.callLogin("", "")
+            //            viewModel.callLogin("", "")
             viewModel.validateData(
-                binding.username.text.toString(),
-                binding.password.text.toString()
+                binding.tvUsernameValue.text.toString(),
+                binding.tvPasswordValue.text.toString()
             )
         }
 

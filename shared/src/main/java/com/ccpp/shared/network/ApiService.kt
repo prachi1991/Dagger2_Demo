@@ -66,6 +66,7 @@ open class ApiService
             return httpClient.build()
         }
 
-    fun callLoginAsync() = apiClient.callLoginAsync()
+    fun callLoginAsync(username: String, password: String) =
+        apiClient.callLoginAsync(username, password)
 
 }

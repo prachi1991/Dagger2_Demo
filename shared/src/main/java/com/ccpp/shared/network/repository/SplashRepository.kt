@@ -10,7 +10,7 @@ class SplashRepository @Inject constructor(
 ) {
     suspend fun getLoginCall(username: String, password: String) = baseRepository.safeApiCall(
         call = {
-            service.callLoginAsync().await()
+            service.callLoginAsync(username, password).await()
         },
         errorMessage = "Error occurred"
     )
