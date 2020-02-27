@@ -19,7 +19,7 @@ class App : DaggerApplication() {
                 .addInterceptor(
                     CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                            .setDefaultFontPath("fonts/OpenSans-Regular.ttf")
+                            .setDefaultFontPath("fonts/Play-Regular.ttf")
                             .setFontAttrId(R.attr.fontPath)
                             .build()
                     )

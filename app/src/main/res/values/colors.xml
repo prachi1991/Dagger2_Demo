@@ -11,10 +11,13 @@
     <color name="menu_light_green">#64b000</color>
     <color name="color_window_background">#20262d</color>
 
-    <color name="trans_color_window_background">#C620262D</color>
+    <color name="trans_color_window_background">#B3000000</color>
 
     <color name="menu_header_background">#272a31</color>
     <color name="login_blue_color">#3d64a2</color>
     <color name="login_blue_text">#7993b9</color>
+    <color name="divider">#38475d</color>
+    <color name="black">#000</color>
+    <color name="light_blue_text">#a7b8d2</color>
 
 </resources>
