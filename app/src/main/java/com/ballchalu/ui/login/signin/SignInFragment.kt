@@ -1,31 +1,44 @@
-package com.ballchalu.ui.login
+package com.ballchalu.ui.login.signin
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ballchalu.base.BaseActivity
-import com.ballchalu.databinding.ActivityLoginBinding
+import com.ballchalu.base.BaseFragment
+import com.ballchalu.databinding.FragmentSignInBinding
+import com.ballchalu.ui.login.container.LoginViewModel
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
-
-class LoginActivity : BaseActivity() {
+class SignInFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: LoginViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         viewModel = viewModelProvider(viewModelFactory)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        
-        viewModel.loginFormState.observe(this@LoginActivity, Observer {
+        binding = FragmentSignInBinding.inflate(inflater).apply {
+            lifecycleOwner = this@SignInFragment
+        }
+
+
+
+
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             val loginState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
@@ -41,16 +54,17 @@ class LoginActivity : BaseActivity() {
             }
         })
 
-        viewModel.loginResult.observe(this@LoginActivity, Observer {
+        viewModel.loginResult.observe(viewLifecycleOwner, Observer {
             val loginResult = it ?: return@Observer
 
             updateUiWithUser(loginResult.status)
         })
 
-        viewModel.loading.observe(this, Observer {
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
             binding.progressBar.visibility = if (it.hasBeenHandled) View.VISIBLE else View.GONE
             binding.login.isEnabled = !it.hasBeenHandled
         })
+
         binding.login.setOnClickListener {
             viewModel.callLogin("", "")
             viewModel.validateData(
@@ -58,14 +72,14 @@ class LoginActivity : BaseActivity() {
                 binding.password.text.toString()
             )
         }
+
     }
 
     private fun updateUiWithUser(status: String?) {
-        Toast.makeText(applicationContext, "$status", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), "$status", Toast.LENGTH_LONG).show()
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), errorString, Toast.LENGTH_SHORT).show()
     }
-
 }

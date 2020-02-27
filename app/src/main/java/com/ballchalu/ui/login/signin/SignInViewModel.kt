@@ -1,4 +1,4 @@
-package com.ballchalu.ui.login
+package com.ballchalu.ui.login.signin
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
@@ -16,7 +16,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository) :
+class SignInViewModel @Inject constructor(private val loginRepository: LoginRepository) :
     BaseViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()

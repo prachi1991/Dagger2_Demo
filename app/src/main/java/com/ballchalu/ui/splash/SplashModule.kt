@@ -1,4 +1,4 @@
-package com.ballchalu.ui.navigation
+package com.ballchalu.ui.splash
 
 import androidx.lifecycle.ViewModel
 import com.ccpp.shared.core.di.ViewModelKey
@@ -10,7 +10,7 @@ import dagger.multibindings.IntoMap
  * Module where classes needed to create the [MainFragment] are defined.
  */
 @Module
-internal abstract class NavigationModule {
+internal abstract class SplashModule {
 
     //    @FragmentScoped
 //    @ContributesAndroidInjector
@@ -18,8 +18,8 @@ internal abstract class NavigationModule {
 //
     @Binds
     @IntoMap
-    @ViewModelKey(NavigationViewModel::class)
-    internal abstract fun bindViewModel(viewModel: NavigationViewModel): ViewModel
+    @ViewModelKey(SplashViewModel::class)
+    internal abstract fun bindViewModel(viewModel: SplashViewModel): ViewModel
 
 
 }

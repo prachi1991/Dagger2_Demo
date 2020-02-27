@@ -1,11 +1,12 @@
 package com.ballchalu.ui.splash
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivitySplashBinding
+import com.ballchalu.ui.login.container.LoginActivity
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -27,14 +28,10 @@ class SplashActivity : BaseActivity() {
 
         val secondsDelayed = 10
         Handler().postDelayed({
-
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
 
         }, secondsDelayed.toLong())
-        viewModel.loginResult.observe(this, Observer {
-            it.totalResults?.let { it1 ->
-
-            }
-        })
     }
 
     override fun onDestroy() {
