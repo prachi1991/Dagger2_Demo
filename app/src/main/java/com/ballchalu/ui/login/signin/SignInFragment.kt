@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentSignInBinding
+import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -37,8 +37,8 @@ class SignInFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
-            val loginState = it ?: return@Observer
+        viewModel.loginFormState.observe(viewLifecycleOwner, EventObserver {
+            val loginState = it ?: return@EventObserver
 
             // disable login button unless both tvUsernameValue / tvPasswordValue is valid
 
@@ -56,15 +56,15 @@ class SignInFragment : BaseFragment() {
             }
         })
 
-        viewModel.loginResult.observe(viewLifecycleOwner, Observer {
-            val loginResult = it ?: return@Observer
+        viewModel.loginResult.observe(viewLifecycleOwner, EventObserver {
+            val loginResult = it ?: return@EventObserver
 
             updateUiWithUser(loginResult.status)
         })
 
-        viewModel.loading.observe(viewLifecycleOwner, Observer {
-            binding.progressBar.visibility = if (it.hasBeenHandled) View.VISIBLE else View.GONE
-            binding.login.isEnabled = !it.hasBeenHandled
+        viewModel.loading.observe(viewLifecycleOwner, EventObserver {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            binding.login.isEnabled = !it
         })
 
         binding.login.setOnClickListener {

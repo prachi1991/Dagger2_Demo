@@ -19,18 +19,18 @@ import javax.inject.Inject
 class SignInViewModel @Inject constructor(private val loginRepository: LoginRepository) :
     BaseViewModel() {
 
-    private val _loginForm = MutableLiveData<LoginFormState>()
-    val loginFormState: LiveData<LoginFormState> = _loginForm
+    private val _loginForm = MutableLiveData<Event<LoginFormState>>()
+    val loginFormState: LiveData<Event<LoginFormState>> = _loginForm
 
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
+    private val _loginResult = MutableLiveData<Event<LoginResult>>()
+    val loginResult: LiveData<Event<LoginResult>> = _loginResult
     private var job: Job? = null
 
     fun callLogin(username: String, password: String) {
         loading.postValue(Event(true))
         job = CoroutineScope(Dispatchers.IO).launch {
             when (val result = loginRepository.getLoginCall(username, password)) {
-                is Results.Success -> _loginResult.postValue(result.data)
+                is Results.Success -> _loginResult.postValue(Event(result.data))
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
             loading.postValue(Event(false))
@@ -40,18 +40,24 @@ class SignInViewModel @Inject constructor(private val loginRepository: LoginRepo
     fun validateData(username: String, password: String) {
         if (!isUserNameValid(username)) {
             _loginForm.value =
-                LoginFormState(
+                Event(
+                    LoginFormState(
                     usernameError = R.string.invalid_username
+                    )
                 )
         } else if (!isPasswordValid(password)) {
             _loginForm.value =
-                LoginFormState(
+                Event(
+                    LoginFormState(
                     passwordError = R.string.invalid_password
+                    )
                 )
         } else {
             _loginForm.value =
-                LoginFormState(
+                Event(
+                    LoginFormState(
                     isDataValid = true
+                    )
                 )
         }
     }
