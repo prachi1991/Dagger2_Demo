@@ -69,7 +69,7 @@ open class ApiService
     fun callLoginAsync(username: String, password: String) =
         apiClient.callLoginAsync()
 
-    fun callLoginWithSocial(token: String, socialMedia: String, emailId: String) =
+    fun callLoginWithSocialAsync(token: String, socialMedia: String, emailId: String) =
         apiClient.callLoginWithSocialAsync(token, socialMedia, emailId)
 
 }
