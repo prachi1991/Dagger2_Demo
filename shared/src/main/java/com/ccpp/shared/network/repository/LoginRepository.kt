@@ -17,4 +17,11 @@ class LoginRepository @Inject constructor(
         errorMessage = "Error occurred"
     )
 
+    suspend fun getLoginWithSocial(token: String, socialMedia: String, emailId: String) =
+        baseRepository.safeApiCall(
+            call = {
+                service.callLoginWithSocial(token, socialMedia, emailId).await()
+            },
+            errorMessage = "Error occurred"
+        )
 }

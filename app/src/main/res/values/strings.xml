@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Ball Chalu</string>
 
+    <string name="facebook_app_id">1484865978352630</string>
+    <string name="fb_login_protocol_scheme">fb1484865978352630</string>
+
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
