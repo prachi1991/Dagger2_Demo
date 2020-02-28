@@ -40,6 +40,12 @@ android {
 // To inline the bytecode built with JVM target 1.8 into
 // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
 }
+
+android.applicationVariants.all { variant ->
+    variant.outputs.all {
+        outputFileName = "Ball Chalu-${variant.baseName}-${variant.versionName}(${variant.versionCode}).apk"
+    }
+}
 ext {
     coroutinesVersion = "1.1.1"
     rxJavaVersion = "2.1.1"
