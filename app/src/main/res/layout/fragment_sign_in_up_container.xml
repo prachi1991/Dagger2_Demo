@@ -16,19 +16,21 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/_10sdp"
             android:background="@drawable/background_black_trans_round"
-            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingTop="@dimen/_20sdp">
+            android:paddingTop="@dimen/_10sdp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_home" />
 
             <RadioGroup
                 android:id="@+id/rbGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/background_stroke_blue"
                 android:orientation="horizontal"
@@ -67,12 +69,102 @@
                     android:textSize="@dimen/_10ssp" />
             </RadioGroup>
 
-            <FrameLayout
-                android:id="@+id/fragmentSign"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_10sdp" />
+                android:layout_height="match_parent">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:id="@+id/fragmentSign"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_centerVertical="true"
+                            android:background="@color/divider" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="fonts/Play-Bold.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/solid_circle_light_blue"
+                            android:padding="@dimen/_5sdp"
+                            android:text="Or"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp" />
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/llGoogleSignIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:background="@drawable/solid_circle_white"
+                            android:padding="@dimen/_4sdp"
+                            android:src="@drawable/ic_google" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="fonts/Play-Bold.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/login_with_google"
+                            android:textColor="@color/light_blue_text"
+                            android:textSize="@dimen/_10ssp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llFacebookSignIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:background="@drawable/solid_circle_white"
+                            android:padding="@dimen/_4sdp"
+                            android:src="@drawable/ic_facebook" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            fontPath="fonts/Play-Bold.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/login_with_facebook"
+                            android:textColor="@color/light_blue_text"
+                            android:textSize="@dimen/_10ssp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
         </LinearLayout>
 
 

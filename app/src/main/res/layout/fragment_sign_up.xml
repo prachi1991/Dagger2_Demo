@@ -4,14 +4,15 @@
 
     <data>
 
+        <variable
+            name="model"
+            type="com.ballchalu.ui.login.signup.SignUpViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/_16sdp"
-        android:paddingBottom="@dimen/_16sdp">
+        android:layout_height="wrap_content">
 
 
         <LinearLayout
@@ -20,22 +21,92 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvUsernameLabel"
+                android:id="@+id/tvFirstName"
+                fontPath="fonts/Play-Bold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:selectAllOnFocus="true"
+                android:text="@string/first_name"
+                android:textColor="@color/login_blue_text"
+                android:textSize="@dimen/_10ssp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtUsernameValue"
                 fontPath="fonts/Play-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@android:color/transparent"
-                android:inputType="textEmailAddress"
+                android:inputType="textPersonName"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@color/divider" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLastName"
+                fontPath="fonts/Play-Bold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
                 android:paddingTop="@dimen/_5sdp"
                 android:selectAllOnFocus="true"
-                android:text="@string/username"
+                android:text="Last Name"
                 android:textColor="@color/login_blue_text"
                 android:textSize="@dimen/_10ssp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/tvUsernameValue"
+                android:id="@+id/edtLastNameValue"
+                fontPath="fonts/Play-Bold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@android:color/transparent"
+                android:inputType="textPersonName"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@color/divider" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmail"
+                fontPath="fonts/Play-Bold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:selectAllOnFocus="true"
+                android:text="@string/email_id"
+                android:textColor="@color/login_blue_text"
+                android:textSize="@dimen/_10ssp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtEmailValue"
                 fontPath="fonts/Play-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,7 +143,7 @@
                 android:textSize="@dimen/_10ssp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/tvPasswordValue"
+                android:id="@+id/edtPasswordValue"
                 fontPath="fonts/Play-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,114 +164,57 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@color/divider" />
 
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginLeft="@dimen/_15sdp"-->
-            <!--                android:layout_marginTop="@dimen/_15sdp"-->
-            <!--                android:layout_marginRight="@dimen/_15sdp"-->
-            <!--                android:orientation="horizontal">-->
-
-            <!--                <androidx.appcompat.widget.AppCompatButton-->
-            <!--                    android:id="@+id/login"-->
-            <!--                    fontPath="fonts/Play-Bold.ttf"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="@dimen/_28sdp"-->
-            <!--                    android:layout_gravity="start"-->
-            <!--                    android:layout_marginEnd="@dimen/_10sdp"-->
-            <!--                    android:background="@drawable/backgroud_btn_blue"-->
-            <!--                    android:text="@string/sign_in"-->
-            <!--                    android:textAllCaps="false"-->
-            <!--                    android:textColor="@color/light_blue_text"-->
-            <!--                    android:textSize="@dimen/_12sdp" />-->
-
-            <!--                <androidx.appcompat.widget.AppCompatTextView-->
-            <!--                    fontPath="fonts/Play-Bold.ttf"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginTop="@dimen/_10sdp"-->
-            <!--                    android:text="@string/forget_password"-->
-            <!--                    android:textSize="@dimen/_10ssp" />-->
-            <!--            </LinearLayout>-->
-
-            <RelativeLayout
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvConfirmPasswordLabel"
+                fontPath="fonts/Play-Bold.ttf"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_centerVertical="true"
-                    android:background="@color/divider" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    fontPath="fonts/Play-Bold.ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/solid_circle_light_blue"
-                    android:padding="@dimen/_5sdp"
-                    android:text="Or"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
-            </RelativeLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_15sdp"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="@drawable/solid_circle_white"
-                    android:padding="@dimen/_4sdp"
-                    android:src="@drawable/ic_google" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    fontPath="fonts/Play-Bold.ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/login_with_google"
-                    android:textColor="@color/light_blue_text"
-                    android:textSize="@dimen/_10ssp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:orientation="horizontal">
+                android:background="@android:color/transparent"
+                android:paddingTop="@dimen/_5sdp"
+                android:selectAllOnFocus="true"
+                android:text="@string/password"
+                android:textColor="@color/login_blue_text"
+                android:textSize="@dimen/_10ssp" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="@drawable/solid_circle_white"
-                    android:padding="@dimen/_4sdp"
-                    android:src="@drawable/ic_facebook" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtConfirmPasswordValue"
+                fontPath="fonts/Play-Bold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@android:color/transparent"
+                android:inputType="textPassword"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    fontPath="fonts/Play-Bold.ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/login_with_facebook"
-                    android:textColor="@color/light_blue_text"
-                    android:textSize="@dimen/_10ssp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@color/divider" />
 
-            </LinearLayout>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSignUp"
+                fontPath="fonts/Play-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@drawable/backgroud_btn_blue"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="@color/light_blue_text"
+                android:textSize="@dimen/_12sdp" />
 
         </LinearLayout>
 

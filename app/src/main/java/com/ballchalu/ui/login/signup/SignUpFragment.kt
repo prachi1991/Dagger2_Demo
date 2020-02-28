@@ -1,6 +1,8 @@
 package com.ballchalu.ui.login.signup
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentSignUpBinding
+import com.ballchalu.ui.navigation.NavigationActivity
+import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
+
 
 class SignUpFragment : BaseFragment() {
     @Inject
@@ -30,50 +35,76 @@ class SignUpFragment : BaseFragment() {
         }
 
 
+        val filter = InputFilter { source, start, end, dest, dstart, dend ->
+            for (i in start until end) {
+                if (Character.isWhitespace(source[i])) {
+                    return@InputFilter ""
+                }
+            }
+            null
+        }
 
+        binding.edtUsernameValue.filters = arrayOf(filter)
 
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
-            val loginState = it ?: return@Observer
+        viewModel.loginFormState.observe(viewLifecycleOwner, Observer { loginFormState ->
+            val loginState = loginFormState ?: return@Observer
 
-            // disable login button unless both tvUsernameValue / tvPasswordValue is valid
+            loginState.firstName?.let {
+                binding.edtUsernameValue.error = getString(it)
+            }
 
-            if (loginState.usernameError != null) {
-                binding.tvUsernameValue.error = getString(loginState.usernameError!!)
+            loginState.lastName?.let {
+                binding.edtLastNameValue.error = getString(it)
             }
-            if (loginState.passwordError != null) {
-                binding.tvPasswordValue.error = getString(loginState.passwordError!!)
+
+            loginState.emailError?.let {
+                binding.edtEmailValue.error = getString(it)
             }
-            if (it.isDataValid) {
-                viewModel.callLogin(
-                    binding.tvUsernameValue.toString(),
-                    binding.tvPasswordValue.toString()
+
+            loginState.passwordError?.let {
+                binding.edtPasswordValue.error = getString(it)
+            }
+
+            loginState.confirmPasswordError?.let {
+                binding.edtConfirmPasswordValue.error = getString(it)
+            }
+
+
+            if (loginFormState.isDataValid) {
+                viewModel.callSignUp(
+                    binding.edtUsernameValue.toString(),
+                    binding.edtPasswordValue.toString()
                 )
             }
         })
 
-        viewModel.loginResult.observe(viewLifecycleOwner, Observer {
-            val loginResult = it ?: return@Observer
-
+        viewModel.loginResult.observe(viewLifecycleOwner, EventObserver {
+            val loginResult = it ?: return@EventObserver
+            startActivity(Intent(requireContext(), NavigationActivity::class.java))
+            requireActivity().finish()
             updateUiWithUser(loginResult.status)
         })
 
-        viewModel.loading.observe(viewLifecycleOwner, Observer {
-            binding.progressBar.visibility = if (it.hasBeenHandled) View.VISIBLE else View.GONE
-//            binding.login.isEnabled = !it.hasBeenHandled
+
+        viewModel.loading.observe(viewLifecycleOwner, EventObserver {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            binding.btnSignUp.isEnabled = !it
         })
 
-//        binding.login.setOnClickListener {
-        viewModel.callLogin("", "")
-//            viewModel.validateData(
-//                binding.tvUsernameValue.text.toString(),
-//                binding.tvPasswordValue.text.toString()
-//            )
-//        }
+        binding.btnSignUp.setOnClickListener {
+            viewModel.validateData(
+                binding.edtUsernameValue.text.toString(),
+                binding.edtLastNameValue.text.toString(),
+                binding.edtEmailValue.text.toString(),
+                binding.edtPasswordValue.text.toString(),
+                binding.edtConfirmPasswordValue.text.toString()
+            )
+        }
 
     }
 

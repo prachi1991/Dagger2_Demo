@@ -20,4 +20,10 @@ internal interface ApiClient {
         @Query("email")
         emailId: String
     ): Deferred<Response<LoginResult>>
+
+    @GET("top-headlines?sources=google-news&apiKey=f1e5ca69296b4e70a3fb7fc722a63615")
+    fun callSignUpAsync(
+
+    ): Deferred<Response<LoginResult>>
+
 }

@@ -24,4 +24,11 @@ class LoginRepository @Inject constructor(
             },
             errorMessage = "Error occurred"
         )
+
+    suspend fun getSignUpCall(username: String, password: String) = baseRepository.safeApiCall(
+        call = {
+            service.callSignUpAsync(username, password).await()
+        },
+        errorMessage = "Error occurred"
+    )
 }

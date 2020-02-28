@@ -10,10 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentSignInBinding
 import com.ballchalu.ui.navigation.NavigationActivity
-import com.ballchalu.utils.AppConstants
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.util.viewModelProvider
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import javax.inject.Inject
 
 
@@ -33,14 +31,12 @@ class SignInFragment : BaseFragment() {
             lifecycleOwner = this@SignInFragment
         }
 
-        val account = GoogleSignIn.getLastSignedInAccount(requireContext())
 
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.initGoogleAndFB()
 
         viewModel.loginFormState.observe(viewLifecycleOwner, EventObserver {
             val loginState = it ?: return@EventObserver
@@ -78,32 +74,13 @@ class SignInFragment : BaseFragment() {
             )
         }
 
-        binding.llGoogleSignIn.setOnClickListener {
-            startGoogleSignIn()
-        }
-        binding.llFacebookSignIn.setOnClickListener {
-            viewModel.initFacebook(this)
-        }
+
     }
-
-    private fun startGoogleSignIn() {
-        val signInIntent = viewModel.mGoogleSignInClient?.signInIntent
-        startActivityForResult(signInIntent, AppConstants.GOOGLE_SIGN_IN_REQUEST)
-    }
-
-
 
     private fun updateUiWithUser(status: String?) {
         Toast.makeText(requireContext(), "$status", Toast.LENGTH_LONG).show()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        viewModel.callbackManager?.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AppConstants.GOOGLE_SIGN_IN_REQUEST) {
-            viewModel.handleSignInResult(GoogleSignIn.getSignedInAccountFromIntent(data))
-        }
-        super.onActivityResult(requestCode, resultCode, data)
-    }
 
 
 
