@@ -148,6 +148,7 @@
 
 
             <LinearLayout
+                android:id="@+id/llGoogleSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
@@ -175,6 +176,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llFacebookSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"

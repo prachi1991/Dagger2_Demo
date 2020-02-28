@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'com.google.gms.google-services'
 
 android {
 
@@ -97,4 +97,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:2.16"
     kapt "com.google.dagger:dagger-android-processor:2.16"
 
+    //google
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-core:17.2.3'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
 }

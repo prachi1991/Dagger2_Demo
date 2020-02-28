@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "421358726989",
+    "firebase_url": "https://bcm-app-1582866454043.firebaseio.com",
+    "project_id": "bcm-app-1582866454043",
+    "storage_bucket": "bcm-app-1582866454043.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421358726989:android:305df4a084a54f8138d104",
+        "android_client_info": {
+          "package_name": "com.ballchalu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421358726989-d9t2chlvlmm4r4unmn6dhqtpfi4g5772.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ballchalu",
+            "certificate_hash": "38638a8b680133365c192d4b6d864568f13872db"
+          }
+        },
+        {
+          "client_id": "421358726989-4c45vhovgun512to4q354f84ipccn6ok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC28KEYvtnLXlLTEZmURIBqtl56KLcJus0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421358726989-4c45vhovgun512to4q354f84ipccn6ok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
