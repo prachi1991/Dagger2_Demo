@@ -4,9 +4,11 @@
     <color name="colorPrimary">#343743</color>
     <color name="colorSecondary">#1a1d27</color>
     <color name="colorPrimaryDark">#292d38</color>
-    <color name="colorAccent">#F9AA33</color>
+    <color name="colorAccent">#bc8b43</color>
     <color name="white">#fff</color>
     <color name="text_light_green">#a0de4e</color>
+
+    <color name="text_color_Accent">#bc8b43</color>
 
     <color name="menu_light_green">#64b000</color>
     <color name="color_window_background">#20262d</color>
@@ -19,5 +21,7 @@
     <color name="divider">#38475d</color>
     <color name="black">#000</color>
     <color name="light_blue_text">#a7b8d2</color>
+    <color name="text_color_grey">#999</color>
+    <color name="dark_grey">#3a3f49</color>
 
 </resources>
