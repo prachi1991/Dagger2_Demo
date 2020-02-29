@@ -31,4 +31,11 @@ class LoginRepository @Inject constructor(
         },
         errorMessage = "Error occurred"
     )
+
+    suspend fun getForgetPassword(username: String) = baseRepository.safeApiCall(
+        call = {
+            service.callForgetPasswordAsync(username).await()
+        },
+        errorMessage = "Error occurred"
+    )
 }

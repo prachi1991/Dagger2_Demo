@@ -2,6 +2,7 @@ package com.ballchalu.base.di
 
 import com.ballchalu.ui.login.LoginModule
 import com.ballchalu.ui.login.container.LoginActivity
+import com.ballchalu.ui.login.forget.ForgetPasswordModule
 import com.ballchalu.ui.login.signin.SignInModule
 import com.ballchalu.ui.login.signup.SignUpModule
 import com.ballchalu.ui.navigation.NavigationActivity
@@ -38,7 +39,8 @@ abstract class ActivityBindingModule {
         modules = [
             LoginModule::class,
             SignInModule::class,
-            SignUpModule::class
+            SignUpModule::class,
+            ForgetPasswordModule::class
         ]
     )
     internal abstract fun loginActivity(): LoginActivity

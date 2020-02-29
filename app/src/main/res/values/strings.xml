@@ -61,4 +61,6 @@
     <string name="first_name">First Name</string>
     <string name="email_id">Email ID</string>
     <string name="invalid_email">Invalid email</string>
+    <string name="email">Email</string>
+    <string name="send_me_reset_password_instruction">Send Me Reset Password Instruction</string>
 </resources>

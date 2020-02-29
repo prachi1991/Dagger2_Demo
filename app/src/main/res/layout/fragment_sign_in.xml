@@ -114,9 +114,10 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     fontPath="fonts/Play-Bold.ttf"
+                    android:id="@+id/tvForgetPassword"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="@string/forget_password"
                     android:textSize="@dimen/_10ssp" />
             </LinearLayout>

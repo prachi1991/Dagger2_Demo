@@ -74,4 +74,5 @@ open class ApiService
 
     fun callSignUpAsync(username: String, password: String) = apiClient.callSignUpAsync()
 
+    fun callForgetPasswordAsync(username: String) = apiClient.callForgetPasswordAsync()
 }

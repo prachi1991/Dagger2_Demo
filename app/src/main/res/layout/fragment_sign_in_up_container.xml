@@ -3,7 +3,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
@@ -12,9 +14,12 @@
             android:src="@drawable/image_login_background" />
 
         <LinearLayout
+            android:id="@+id/llParentTab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:layout_margin="@dimen/_10sdp"
+            android:animateLayoutChanges="true"
             android:background="@drawable/background_black_trans_round"
             android:orientation="vertical"
             android:paddingTop="@dimen/_10sdp">
@@ -30,8 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/background_stroke_blue"
                 android:orientation="horizontal"
                 android:padding="@dimen/_2sdp"
