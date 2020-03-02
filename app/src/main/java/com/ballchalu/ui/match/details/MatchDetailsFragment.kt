@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
+import com.ballchalu.ui.match.details.adapter.EndingDigitAdapter
+import com.ballchalu.ui.match.details.adapter.EvenOddAdapter
 import com.ballchalu.ui.match.details.adapter.SessionAdapter
 import com.ccpp.shared.util.viewModelProvider
-import kotlinx.android.synthetic.main.fragment_match_details.*
 import javax.inject.Inject
 
 class MatchDetailsFragment : BaseFragment() {
     private var sessionAdapter: SessionAdapter? = null
+    private var evenOddAdapter: EvenOddAdapter? = null
+    private var endingDigitAdapter: EndingDigitAdapter? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -35,12 +38,24 @@ class MatchDetailsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initAdapter()
+        initSessionAdapterAdapter()
+        initEvenOddAdapter()
+        initEndingDigitAdapterAdapter()
     }
 
 
-    private fun initAdapter() {
+    private fun initSessionAdapterAdapter() {
         sessionAdapter = SessionAdapter()
-        rvSession.adapter = sessionAdapter
+        binding.rvSession.adapter = sessionAdapter
+    }
+
+    private fun initEndingDigitAdapterAdapter() {
+        endingDigitAdapter = EndingDigitAdapter()
+        binding.rvEndingDigit.adapter = endingDigitAdapter
+    }
+
+    private fun initEvenOddAdapter() {
+        evenOddAdapter = EvenOddAdapter()
+        binding.rvEvenOdd.adapter = evenOddAdapter
     }
 }

@@ -29,7 +29,6 @@
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="@string/session"
                     android:textColor="@color/white"
@@ -39,7 +38,6 @@
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="|"
                     android:textColor="@color/white"
@@ -50,7 +48,6 @@
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="40 Overs"
                     android:textColor="@color/text_light_green"
@@ -61,6 +58,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <RelativeLayout
@@ -92,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_toRightOf="@id/tvYesLabel"
+                        android:layout_toEndOf="@id/tvYesLabel"
                         android:background="@drawable/backgroud_solid_dark_blue"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingTop="@dimen/_3sdp"
@@ -143,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_toRightOf="@id/tvNoLabel"
+                        android:layout_toEndOf="@id/tvNoLabel"
                         android:background="@drawable/backgroud_solid_dark_blue"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingTop="@dimen/_3sdp"

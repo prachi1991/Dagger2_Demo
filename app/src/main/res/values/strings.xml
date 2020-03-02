@@ -69,4 +69,7 @@
     <string name="market">Market</string>
     <string name="all">All</string>
     <string name="yes">YES</string>
+    <string name="even">Even</string>
+    <string name="odd">Odd</string>
+    <string name="ending_digit_adapter_title">Ending Digit |</string>
 </resources>
