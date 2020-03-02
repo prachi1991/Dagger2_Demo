@@ -63,4 +63,10 @@
     <string name="invalid_email">Invalid email</string>
     <string name="email">Email</string>
     <string name="send_me_reset_password_instruction">Send Me Reset Password Instruction</string>
+    <string name="even_odd">Even Odd</string>
+    <string name="ending_digit">Ending Digit</string>
+    <string name="session">Session</string>
+    <string name="market">Market</string>
+    <string name="all">All</string>
+    <string name="yes">YES</string>
 </resources>

@@ -5,6 +5,7 @@ import com.ballchalu.ui.login.container.LoginActivity
 import com.ballchalu.ui.login.forget.ForgetPasswordModule
 import com.ballchalu.ui.login.signin.SignInModule
 import com.ballchalu.ui.login.signup.SignUpModule
+import com.ballchalu.ui.match.details.MatchDetailsModule
 import com.ballchalu.ui.navigation.NavigationActivity
 import com.ballchalu.ui.navigation.NavigationModule
 import com.ballchalu.ui.splash.SplashActivity
@@ -48,7 +49,8 @@ abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(
         modules = [
-            NavigationModule::class
+            NavigationModule::class,
+            MatchDetailsModule::class
         ]
     )
     internal abstract fun navigationActivity(): NavigationActivity

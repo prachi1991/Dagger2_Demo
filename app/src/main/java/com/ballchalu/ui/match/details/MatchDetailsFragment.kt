@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
+import com.ballchalu.ui.match.details.adapter.SessionAdapter
 import com.ccpp.shared.util.viewModelProvider
+import kotlinx.android.synthetic.main.fragment_match_details.*
 import javax.inject.Inject
 
 class MatchDetailsFragment : BaseFragment() {
+    private var sessionAdapter: SessionAdapter? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -32,5 +35,12 @@ class MatchDetailsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        initAdapter()
+    }
+
+
+    private fun initAdapter() {
+        sessionAdapter = SessionAdapter()
+        rvSession.adapter = sessionAdapter
     }
 }
