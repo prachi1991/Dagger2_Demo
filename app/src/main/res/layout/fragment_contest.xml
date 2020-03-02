@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/backgroud_solid_secondary"
+                android:padding="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMatchName"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="IND_Demo1 VS PAK_DEMO2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTime"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:drawableStart="@drawable/ic_clock"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:text="00:00:00"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp" />
+            </RelativeLayout>
+
+            <RadioGroup
+                android:id="@+id/rbGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/backgroud_solid_primary"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/_5sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbSignUp"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:checked="true"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="@string/all_contest"
+                    android:textColor="@color/selector_white_grey"
+                    android:textSize="@dimen/_10ssp" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="|"
+                    android:textColor="@color/selector_white_grey"
+                    android:textSize="@dimen/_10ssp" />
+
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbSignIn"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="@string/my_contest"
+                    android:textColor="@color/selector_white_grey"
+                    android:textSize="@dimen/_10ssp" />
+            </RadioGroup>
+
+            <include layout="@layout/item_all_contest" />
+            <!--            <androidx.recyclerview.widget.RecyclerView-->
+            <!--                android:id="@+id/rvContest"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="vertical"-->
+            <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+            <!--                tools:itemCount="1"-->
+            <!--                tools:listitem="@layout/item_all_contest" />-->
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

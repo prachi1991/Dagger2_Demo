@@ -72,4 +72,7 @@
     <string name="even">Even</string>
     <string name="odd">Odd</string>
     <string name="ending_digit_adapter_title">Ending Digit |</string>
+    <string name="all_contest">All Contest</string>
+    <string name="my_contest">My Contest</string>
+    <string name="total_10_spot">Total 10 Spot</string>
 </resources>

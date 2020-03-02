@@ -110,5 +110,6 @@ dependencies {
 
     //facebook
     implementation 'com.facebook.android:facebook-login:5.9.0'
+    implementation 'com.beardedhen:androidbootstrap:2.3.1'
 
 }

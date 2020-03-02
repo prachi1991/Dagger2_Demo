@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/backgroud_solid_corner_dark_grey"
+            android:orientation="vertical"
+            android:padding="@dimen/_3sdp">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="fonts/Play-Regular.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:background="@drawable/backgroud_solid_dark_grey"
+                android:padding="@dimen/_5sdp"
+                android:text="Test Contest"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/_12ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPriceLabel"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Price -"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_grey"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPrice"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:text="1000/-"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivWinner"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@drawable/shape_circle_primary"
+                    android:padding="@dimen/_3sdp"
+                    android:src="@drawable/ic_trophy" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvEntryLabel"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:text="Entry -"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_grey"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvEntryValue"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:text="100/-"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_3sdp"
+                android:background="@drawable/background_stroke_dark_blue"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTotalWinner"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:text="Total Winners - "
+                    android:textColor="@color/text_color_grey"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTotalWinnerValue"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:text="|"
+                    android:textColor="@color/text_color_grey"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCreditLabel"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Credit - "
+                    android:textColor="@color/text_color_grey"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCreditValue"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:text="10000/-"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp" />
+            </LinearLayout>
+
+            <com.beardedhen.androidbootstrap.BootstrapProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                app:animated="true"
+                app:bootstrapBrand="warning"
+                app:bootstrapProgress="20"
+                app:roundedCorners="true"
+                app:striped="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTotalSpots"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:text="@string/total_10_spot"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_grey"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSpotsLeftValue"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_toStartOf="@+id/tvSpotsLeftLabel"
+                    android:gravity="center_vertical"
+                    android:text="5"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSpotsLeftLabel"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:text="Spots Left"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_grey"
+                    android:textSize="@dimen/_10ssp" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>
