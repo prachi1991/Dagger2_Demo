@@ -1,6 +1,7 @@
 package com.ballchalu.ui.contest.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemAllContestBinding
@@ -23,8 +24,13 @@ class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
         holder.setData(list?.get(position), position)
     }
 
+    fun setItemList(list: List<String>?) {
+        this.list = list
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
-        return 2// list.size
+        return list?.size ?: 2
     }
 
 
@@ -33,6 +39,8 @@ class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
 
         fun setData(s: String?, position: Int) {
             with(binding) {
+                if (s?.isNotEmpty() == true) tvPlayNow.visibility = View.VISIBLE
+                else tvPlayNow.visibility = View.GONE
             }
 
         }

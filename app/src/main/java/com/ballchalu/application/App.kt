@@ -32,6 +32,7 @@ class App : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponent.builder().create(this)
     }
+
     companion object {
         lateinit var instance: App
     }
