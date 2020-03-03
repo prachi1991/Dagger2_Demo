@@ -1,5 +1,6 @@
 package com.ballchalu.ui.login.container
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +10,7 @@ import com.ballchalu.base.BaseViewModel
 import com.ballchalu.utils.AppConstants
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
+import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.LoginResult
 import com.ccpp.shared.network.repository.LoginRepository
 import com.facebook.CallbackManager
@@ -26,7 +28,11 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository) :
+class LoginViewModel @Inject constructor(
+    private val sharedPreferenceStorage: SharedPreferenceStorage,
+    private val loginRepository: LoginRepository,
+    private val context: Context
+) :
     BaseViewModel() {
     internal var mGoogleSignInClient: GoogleSignInClient? = null
     internal var callbackManager: CallbackManager? = null
@@ -102,4 +108,15 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         mGoogleSignInClient = GoogleSignIn.getClient(App.instance, gso);
     }
 
+    private val _loggedInEvent = MutableLiveData<Event<String>>()
+    val loggedInEvent: LiveData<Event<String>> = _loggedInEvent
+
+    fun checkLogin() {
+        GoogleSignIn.getLastSignedInAccount(context)?.let {
+            _loggedInEvent.postValue(Event(it.idToken.toString()))
+        }
+        sharedPreferenceStorage.token?.let {
+            _loggedInEvent.postValue(Event(it))
+        }
+    }
 }

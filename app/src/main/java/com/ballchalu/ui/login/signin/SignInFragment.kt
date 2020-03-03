@@ -50,17 +50,18 @@ class SignInFragment : BaseFragment() {
             }
             if (it.isDataValid) {
                 viewModel.callLogin(
-                    binding.tvUsernameValue.toString(),
-                    binding.tvPasswordValue.toString()
+                    binding.tvUsernameValue.text.toString(),
+                    binding.tvPasswordValue.text.toString()
                 )
             }
         })
 
         viewModel.loginResult.observe(viewLifecycleOwner, EventObserver {
-            val loginResult = it ?: return@EventObserver
-            startActivity(Intent(requireContext(), NavigationActivity::class.java))
-            requireActivity().finish()
-            updateUiWithUser(loginResult.status)
+            it.access_token?.isNotEmpty().let {
+                startActivity(Intent(requireContext(), NavigationActivity::class.java))
+                requireActivity().finish()
+                updateUiWithUser("Success")
+            }
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
@@ -69,7 +70,7 @@ class SignInFragment : BaseFragment() {
         })
 
         binding.login.setOnClickListener {
-            //            viewModel.callLogin("", "")
+            hideSoftKeyBoard()
             viewModel.validateData(
                 binding.tvUsernameValue.text.toString(),
                 binding.tvPasswordValue.text.toString()

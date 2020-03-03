@@ -54,4 +54,6 @@ class NavigationActivity : BaseActivity() {
             binding.drawerLayout.openDrawer(GravityCompat.END)
 
     }
+
+
 }

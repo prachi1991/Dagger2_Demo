@@ -2,6 +2,7 @@ package com.ccpp.shared.network
 
 import com.ccpp.shared.BuildConfig
 import com.ccpp.shared.core.base.BaseRepository
+import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.network.repository.LoginRepository
 import com.ccpp.shared.network.repository.SplashRepository
 import dagger.Module
@@ -76,9 +77,10 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideLoginRepository(
+        preferenceStorage: SharedPreferenceStorage,
         apiService: ApiService,
         baseRepository: BaseRepository
-    ): LoginRepository = LoginRepository(apiService, baseRepository)
+    ): LoginRepository = LoginRepository(preferenceStorage, apiService, baseRepository)
 
     @Provides
     @Singleton

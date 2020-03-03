@@ -54,11 +54,12 @@ open class ApiService
             httpClient.addInterceptor(Interceptor { chain: Interceptor.Chain ->
                 val original = chain.request()
                 val url = original.url.newBuilder()
-                    .addQueryParameter("api_key", BuildConfig.apiKey)
+//                    .addQueryParameter("api_key", )
                     .build()
                 val request = original.newBuilder()
+                    .addHeader("Api-Key", BuildConfig.apiKey)
                     .addHeader("Accept", "application/json")
-                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .url(url).build()
 
                 chain.proceed(request)
@@ -66,8 +67,8 @@ open class ApiService
             return httpClient.build()
         }
 
-    fun callLoginAsync(username: String, password: String) =
-        apiClient.callLoginAsync()
+    fun callLoginAsync(query: HashMap<String, String>) =
+        apiClient.callLoginAsync(query)
 
     fun callLoginWithSocialAsync(token: String, socialMedia: String, emailId: String) =
         apiClient.callLoginWithSocialAsync(token, socialMedia, emailId)

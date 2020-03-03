@@ -8,7 +8,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.domain.LoginResult
+import com.ccpp.shared.domain.LoginRes
 import com.ccpp.shared.domain.data.LoginFormState
 import com.ccpp.shared.network.repository.LoginRepository
 import kotlinx.coroutines.Dispatchers
@@ -20,19 +20,26 @@ class SignInViewModel @Inject constructor(private val loginRepository: LoginRepo
     private val _loginForm = MutableLiveData<Event<LoginFormState>>()
     val loginFormState: LiveData<Event<LoginFormState>> = _loginForm
 
-    private val _loginResult = MutableLiveData<Event<LoginResult>>()
-    val loginResult: LiveData<Event<LoginResult>> = _loginResult
+    private val _loginResult = MutableLiveData<Event<LoginRes>>()
+    val loginResult: LiveData<Event<LoginRes>> = _loginResult
 
     fun callLogin(username: String, password: String) {
+        if (loading.value?.peekContent() == false) return
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = loginRepository.getLoginCall(username, password)) {
+            when (val result = loginRepository.getLoginCall(getMapQuery(username, password))) {
                 is Results.Success -> _loginResult.postValue(Event(result.data))
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
             loading.postValue(Event(false))
         }
     }
+
+    private fun getMapQuery(username: String, password: String) =
+        hashMapOf<String, String>().apply {
+            put("user_name", username)
+            put("password", password)
+        }
 
     fun validateData(username: String, password: String) {
         if (!isUserNameValid(username)) {

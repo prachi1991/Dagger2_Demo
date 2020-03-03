@@ -1,11 +1,6 @@
 package com.ccpp.shared.core.result
 
-import com.ccpp.shared.core.exception.Failure
-import com.ccpp.shared.core.exception.Failure.ServerError
-import com.ccpp.shared.core.result.Either.Left
-import com.ccpp.shared.core.result.Either.Right
 import com.ccpp.shared.core.result.Results.Success
-import retrofit2.Call
 
 /**
  * A generic class that holds a value with its loading status.
@@ -24,24 +19,6 @@ sealed class Results<out R> {
             Loading -> "Loading"
         }
     }
-
-    companion object {
-        fun <T, R> request(
-            call: Call<T>,
-            transform: (T) -> R,
-            default: T
-        ): Either<Failure, R> {
-            return try {
-                val response = call.execute()
-                when (response.isSuccessful) {
-                    true -> Right(transform((response.body() ?: default)))
-                    false -> Left(ServerError())
-                }
-            } catch (exception: Throwable) {
-                Left(ServerError())
-            }
-        }
-    }
 }
 
 /**
@@ -49,3 +26,7 @@ sealed class Results<out R> {
  */
 val Results<*>.succeeded
     get() = this is Success && data != null
+
+fun <T> Results<T>.successOr(fallback: T): T {
+    return (this as? Success<T>)?.data ?: fallback
+}
