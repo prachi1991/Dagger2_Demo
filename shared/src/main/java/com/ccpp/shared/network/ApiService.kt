@@ -1,6 +1,7 @@
 package com.ccpp.shared.network
 
 import com.ccpp.shared.BuildConfig
+import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.util.ConstantsBase.REQUEST_TIMEOUT
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
@@ -14,25 +15,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-open class ApiService
-@Inject constructor(
-) {
+open class ApiService @Inject constructor() {
 
-    //    private lateinit var retrofit: Retrofit
-//
-//        val client: Retrofit
-//        get() {
-//            if (okHttpClient == null) initOkHttp()
-//            if (!::retrofit.isInitialized) {
-//                retrofit = Retrofit.Builder()
-//                    .baseUrl(BuildConfig.baseUrl)
-//                    .client(okHttpClient!!)
-//                    .addConverterFactory(MoshiConverterFactory.create())
-//                    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-//                    .build()
-//            }
-//            return retrofit
-//        }
     private val apiClient = Retrofit.Builder()
         .baseUrl(BuildConfig.baseUrl)
         .client(initOkHttp)
@@ -73,7 +57,7 @@ open class ApiService
     fun callLoginWithSocialAsync(token: String, socialMedia: String, emailId: String) =
         apiClient.callLoginWithSocialAsync(token, socialMedia, emailId)
 
-    fun callSignUpAsync(username: String, password: String) = apiClient.callSignUpAsync()
+    fun callSignUpAsync(signUpReq: SignUpReq) = apiClient.callSignUpAsync(signUpReq)
 
-    fun callForgetPasswordAsync(username: String) = apiClient.callForgetPasswordAsync()
+    fun callForgetPasswordAsync(email: String) = apiClient.callForgetPasswordAsync(email)
 }

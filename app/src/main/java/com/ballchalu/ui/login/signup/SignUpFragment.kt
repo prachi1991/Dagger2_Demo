@@ -2,7 +2,6 @@ package com.ballchalu.ui.login.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,8 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentSignUpBinding
 import com.ballchalu.ui.navigation.NavigationActivity
 import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.domain.SignUpReq
+import com.ccpp.shared.domain.User
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -34,18 +35,6 @@ class SignUpFragment : BaseFragment() {
             lifecycleOwner = this@SignUpFragment
         }
 
-
-        val filter = InputFilter { source, start, end, dest, dstart, dend ->
-            for (i in start until end) {
-                if (Character.isWhitespace(source[i])) {
-                    return@InputFilter ""
-                }
-            }
-            null
-        }
-
-        binding.edtUsernameValue.filters = arrayOf(filter)
-
         return binding.root
     }
 
@@ -55,7 +44,7 @@ class SignUpFragment : BaseFragment() {
             val loginState = loginFormState ?: return@Observer
 
             loginState.firstName?.let {
-                binding.edtUsernameValue.error = getString(it)
+                binding.edtFirstName.error = getString(it)
             }
 
             loginState.lastName?.let {
@@ -77,17 +66,24 @@ class SignUpFragment : BaseFragment() {
 
             if (loginFormState.isDataValid) {
                 viewModel.callSignUp(
-                    binding.edtUsernameValue.toString(),
-                    binding.edtPasswordValue.toString()
+                    SignUpReq(
+                        User(
+                            firstName = binding.edtFirstName.text.toString(),
+                            lastName = binding.edtLastNameValue.text.toString(),
+                            userName = binding.edtEmailValue.text.toString(),
+                            email = binding.edtEmailValue.text.toString(),
+                            password = binding.edtPasswordValue.text.toString(),
+                            confirmPassword = binding.edtConfirmPasswordValue.text.toString()
+                        )
+                    )
                 )
             }
         })
 
         viewModel.loginResult.observe(viewLifecycleOwner, EventObserver {
-            val loginResult = it ?: return@EventObserver
             startActivity(Intent(requireContext(), NavigationActivity::class.java))
             requireActivity().finish()
-            updateUiWithUser(loginResult.status)
+            updateUiWithUser("Success")
         })
 
 
@@ -96,9 +92,14 @@ class SignUpFragment : BaseFragment() {
             binding.btnSignUp.isEnabled = !it
         })
 
+        viewModel.failure.observe(viewLifecycleOwner, EventObserver {
+            updateUiWithUser(it)
+        })
+
         binding.btnSignUp.setOnClickListener {
+            hideSoftKeyBoard()
             viewModel.validateData(
-                binding.edtUsernameValue.text.toString(),
+                binding.edtFirstName.text.toString(),
                 binding.edtLastNameValue.text.toString(),
                 binding.edtEmailValue.text.toString(),
                 binding.edtPasswordValue.text.toString(),

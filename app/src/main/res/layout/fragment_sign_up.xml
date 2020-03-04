@@ -34,7 +34,7 @@
                 android:textSize="@dimen/_10ssp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtUsernameValue"
+                android:id="@+id/edtFirstName"
                 fontPath="fonts/Play-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

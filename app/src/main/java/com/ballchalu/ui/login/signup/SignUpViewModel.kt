@@ -8,7 +8,8 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.domain.LoginResult
+import com.ccpp.shared.domain.LoginRes
+import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.domain.data.LoginFormState
 import com.ccpp.shared.network.repository.LoginRepository
 import kotlinx.coroutines.Dispatchers
@@ -21,17 +22,23 @@ class SignUpViewModel @Inject constructor(private val loginRepository: LoginRepo
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-    private val _loginResult = MutableLiveData<Event<LoginResult>>()
-    val loginResult: LiveData<Event<LoginResult>> = _loginResult
+    private val _loginResult = MutableLiveData<Event<LoginRes>>()
+    val loginResult: LiveData<Event<LoginRes>> = _loginResult
 
-    fun callSignUp(username: String, password: String) {
+    fun callSignUp(req: SignUpReq) {
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = loginRepository.getSignUpCall(username, password)) {
-                is Results.Success -> _loginResult.postValue(Event(result.data))
+            when (val result = loginRepository.getSignUpCall(req)) {
+                is Results.Success -> handleSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
             loading.postValue(Event(false))
+        }
+    }
+
+    private fun handleSuccess(result: LoginRes) {
+        result.access_token?.isNotEmpty()?.let {
+            _loginResult.postValue(Event(result))
         }
     }
 

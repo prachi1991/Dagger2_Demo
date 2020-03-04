@@ -1,7 +1,7 @@
 package com.ccpp.shared.core.base
 
 import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.util.ConstantsBase.STATUS_SUCCESS
+import com.ccpp.shared.util.ConstantsBase
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
@@ -14,8 +14,10 @@ open class BaseRepository @Inject constructor() {
         errorMessage: String
     ): Results<T> = try {
         val response = call.invoke()
-        if (response.isSuccessful && response.code() == STATUS_SUCCESS) {
+        if (response.isSuccessful && response.code() == ConstantsBase.STATUS_SUCCESS) {
             Results.Success(response.body()!!)
+        } else if (response.code() == ConstantsBase.INTERNAL_ERROR) {
+            Results.Error(IOException("Internal Server Error"))
         } else if (response.errorBody() != null) {
             Results.Error(IOException(response.errorBody()?.toString()))
         } else {

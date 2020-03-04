@@ -8,7 +8,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.domain.LoginResult
+import com.ccpp.shared.domain.ForgetPassRes
 import com.ccpp.shared.domain.data.LoginFormState
 import com.ccpp.shared.network.repository.LoginRepository
 import kotlinx.coroutines.Dispatchers
@@ -20,20 +20,25 @@ class ForgetPasswordViewModel @Inject constructor(private val loginRepository: L
     private val _loginForm = MutableLiveData<Event<LoginFormState>>()
     val loginFormState: LiveData<Event<LoginFormState>> = _loginForm
 
-    private val _loginResult = MutableLiveData<Event<LoginResult>>()
-    val loginResult: LiveData<Event<LoginResult>> = _loginResult
+    private val _loginResult = MutableLiveData<Event<ForgetPassRes>>()
+    val loginResult: LiveData<Event<ForgetPassRes>> = _loginResult
 
-    fun callForgetPassword(username: String) {
+    fun callForgetPassword(email: String) {
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = loginRepository.getForgetPassword(username)) {
-                is Results.Success -> _loginResult.postValue(Event(result.data))
+            when (val result = loginRepository.getForgetPassword(email)) {
+                is Results.Success -> handleSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
             loading.postValue(Event(false))
         }
     }
 
+    private fun handleSuccess(result: ForgetPassRes) {
+        result.password_token?.isNotEmpty()?.let {
+            _loginResult.postValue(Event(result))
+        }
+    }
     fun validateData(username: String) {
         if (!isUserNameValid(username)) {
             _loginForm.value =

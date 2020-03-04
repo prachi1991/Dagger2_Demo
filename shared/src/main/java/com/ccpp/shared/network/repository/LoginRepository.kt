@@ -4,6 +4,7 @@ import com.ccpp.shared.core.base.BaseRepository
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.LoginRes
+import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.network.ApiService
 import javax.inject.Inject
 
@@ -14,15 +15,17 @@ class LoginRepository @Inject constructor(
 ) {
 
 
-    suspend fun getLoginCall(query: HashMap<String, String>): Results<LoginRes> {
-        val result = baseRepository.safeApiCall(
-            call = { service.callLoginAsync(query).await() },
+    suspend fun getLoginCall(query: HashMap<String, String>): Results<LoginRes> =
+        baseRepository.safeApiCall(
+            call = {
+                service.callLoginAsync(query).await()
+            },
             errorMessage = "Error occurred"
-        )
-        if (result is Results.Success)
-            sharedPref.token = result.data.access_token
-        return result
-    }
+        ).let {
+            if (it is Results.Success)
+                sharedPref.token = it.data.access_token
+            return it
+        }
 
     suspend fun getLoginWithSocial(token: String, socialMedia: String, emailId: String) =
         baseRepository.safeApiCall(
@@ -32,16 +35,21 @@ class LoginRepository @Inject constructor(
             errorMessage = "Error occurred"
         )
 
-    suspend fun getSignUpCall(username: String, password: String) = baseRepository.safeApiCall(
-        call = {
-            service.callSignUpAsync(username, password).await()
-        },
-        errorMessage = "Error occurred"
-    )
+    suspend fun getSignUpCall(signUpReq: SignUpReq): Results<LoginRes> =
+        baseRepository.safeApiCall(
+            call = {
+                service.callSignUpAsync(signUpReq).await()
+            },
+            errorMessage = "Error occurred"
+        ).let {
+            if (it is Results.Success)
+                sharedPref.token = it.data.access_token
+            return it
+        }
 
-    suspend fun getForgetPassword(username: String) = baseRepository.safeApiCall(
+    suspend fun getForgetPassword(email: String) = baseRepository.safeApiCall(
         call = {
-            service.callForgetPasswordAsync(username).await()
+            service.callForgetPasswordAsync(email).await()
         },
         errorMessage = "Error occurred"
     )

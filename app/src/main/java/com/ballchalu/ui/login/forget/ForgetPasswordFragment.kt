@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentForgetPasswordBinding
@@ -37,18 +38,21 @@ class ForgetPasswordFragment : BaseFragment() {
         viewModel.loginFormState.observe(viewLifecycleOwner, EventObserver {
             val loginState = it ?: return@EventObserver
             if (loginState.usernameError != null) {
-                binding.tvUsernameValue.error = getString(loginState.usernameError!!)
+                binding.edtEmailValue.error = getString(loginState.usernameError!!)
             }
 
             if (it.isDataValid) {
                 viewModel.callForgetPassword(
-                    binding.tvUsernameValue.toString()
+                    binding.edtEmailValue.toString()
                 )
             }
         })
 
+        viewModel.failure.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+        })
+
         viewModel.loginResult.observe(viewLifecycleOwner, EventObserver {
-            val loginResult = it ?: return@EventObserver
             activity?.onBackPressed()
         })
 
@@ -59,7 +63,7 @@ class ForgetPasswordFragment : BaseFragment() {
 
         binding.btnSignUp.setOnClickListener {
             viewModel.validateData(
-                binding.tvUsernameValue.text.toString()
+                binding.edtEmailValue.text.toString()
             )
         }
     }
