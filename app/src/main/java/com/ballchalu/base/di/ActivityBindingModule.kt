@@ -1,6 +1,7 @@
 package com.ballchalu.base.di
 
 import com.ballchalu.ui.contest.ContestModule
+import com.ballchalu.ui.ledgers.BcCoinsLedgersModule
 import com.ballchalu.ui.login.LoginModule
 import com.ballchalu.ui.login.container.LoginActivity
 import com.ballchalu.ui.login.forget.ForgetPasswordModule
@@ -52,7 +53,8 @@ abstract class ActivityBindingModule {
         modules = [
             NavigationModule::class,
             MatchDetailsModule::class,
-            ContestModule::class
+            ContestModule::class,
+            BcCoinsLedgersModule::class
         ]
     )
     internal abstract fun navigationActivity(): NavigationActivity

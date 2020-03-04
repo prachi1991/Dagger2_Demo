@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/backgroud_solid_dark_grey"
+            android:orientation="vertical"
+            android:padding="@dimen/_2sdp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:background="@drawable/backgroud_solid_primary_dark2dp"
+                android:gravity="center"
+                android:padding="@dimen/_8sdp"
+                android:text="Note-Purchased Bc-Coins Offer"
+                android:textSize="@dimen/_12ssp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:background="@drawable/backgroud_solid_primary_dark2dp"
+                android:gravity="center"
+                android:padding="@dimen/_8sdp"
+                android:text="Date - Feb 29, 2020"
+                android:textSize="@dimen/_12ssp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:background="@drawable/backgroud_solid_primary_dark2dp"
+                android:gravity="center"
+                android:padding="@dimen/_8sdp"
+                android:text="Reference - BcCoinsOffer"
+                android:textSize="@dimen/_12ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_1sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/backgroud_solid_primary_dark2dp"
+                    android:gravity="center"
+                    android:padding="@dimen/_8sdp"
+                    android:text="Debit -"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/_12ssp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_1sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/backgroud_solid_primary_dark2dp"
+                    android:gravity="center"
+                    android:padding="@dimen/_8sdp"
+                    android:text="Credit - 10"
+                    android:textSize="@dimen/_12ssp" />
+
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/backgroud_solid_primary_dark2dp"
+                android:gravity="center"
+                android:padding="@dimen/_8sdp"
+                android:text="Balance - 760"
+                android:textSize="@dimen/_12ssp" />
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>
