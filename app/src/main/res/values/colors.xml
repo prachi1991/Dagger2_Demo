@@ -6,6 +6,7 @@
     <color name="colorPrimaryDark">#292d38</color>
     <color name="colorAccent">#bc8b43</color>
     <color name="white">#fff</color>
+    <color name="red">#ff5a5a</color>
     <color name="text_light_green">#a0de4e</color>
 
     <color name="text_color_Accent">#bc8b43</color>

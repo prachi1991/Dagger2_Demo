@@ -18,5 +18,9 @@
         android:id="@+id/nav_contest"
         android:name="com.ballchalu.ui.contest.ContestFragment"
         android:label="ContestFragment" />
+    <fragment
+        android:id="@+id/nav_coin_ledgers"
+        android:name="com.ballchalu.ui.ledgers.BcCoinsLedgersFragment"
+        android:label="BcCoinsLedgersFragment" />
 
 </navigation>
