@@ -66,4 +66,6 @@ open class ApiService @Inject constructor(private val sharedPref: SharedPreferen
     fun callMatchContestAsync(matchId: String) = apiClient.callMatchContestAsync(matchId)
 
     fun callUserMatchContestAsync(matchId: String) = apiClient.callUserMatchContestAsync(matchId)
+
+    fun callCretateContestAsync(matchId: String) = apiClient.callCretateContestAsync(matchId)
 }

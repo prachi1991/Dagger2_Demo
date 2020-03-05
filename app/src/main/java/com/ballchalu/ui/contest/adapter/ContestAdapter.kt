@@ -8,8 +8,14 @@ import com.ballchalu.databinding.ItemAllContestBinding
 import com.ccpp.shared.domain.contest.Contest
 
 
-class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
+class ContestAdapter(private var onItemClickListener : OnItemClickListener?) : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
     private var list: ArrayList<Contest>? = null
+    private var isMyContest: Boolean = false
+
+    interface OnItemClickListener {
+        fun onClick(contestModel: Contest?)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemAllContestBinding.inflate(
@@ -25,7 +31,8 @@ class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
         holder.setData(list?.get(position), position)
     }
 
-    fun setItemList(list: ArrayList<Contest>?) {
+    fun setItemList(list: ArrayList<Contest>?,status:Boolean = false) {
+        isMyContest = status
         this.list = list
         notifyDataSetChanged()
     }
@@ -41,10 +48,32 @@ class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
         fun setData(contest: Contest?, position: Int) {
             with(binding) {
                 binding.contest = contest
-                if(!contest!!.isParticipated)
+                if(!contest!!.isParticipated && !isMyContest)
                 {
+                    binding.tvPlayNow.visibility = View.VISIBLE
                     binding.tvPlayNow.text = "Buy Now"
                 }
+                else if(isMyContest)
+                {
+                    binding.tvPlayNow.visibility = View.VISIBLE
+                    binding.tvPlayNow.text = "Playing Now"
+                }
+                else{
+                    binding.tvPlayNow.visibility = View.GONE
+                }
+            }
+
+            binding.tvPlayNow.setOnClickListener {
+
+                if(!isMyContest && binding.tvPlayNow.text == "Buy Now")
+                {
+                    binding.tvPlayNow.visibility = View.GONE
+                    onItemClickListener?.onClick(contest)
+
+                }else{
+
+                }
+
             }
 
         }
