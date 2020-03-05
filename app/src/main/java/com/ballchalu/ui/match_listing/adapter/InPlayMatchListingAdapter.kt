@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ballchalu.databinding.ItemAllContestBinding
 import com.ballchalu.databinding.RowInPlayMatchListingBinding
 
 
@@ -31,7 +30,7 @@ class InPlayMatchListingAdapter : RecyclerView.Adapter<InPlayMatchListingAdapter
     }
 
     override fun getItemCount(): Int {
-        return list?.size ?: 2
+        return 2
     }
 
 

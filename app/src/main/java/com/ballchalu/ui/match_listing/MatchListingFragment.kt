@@ -11,6 +11,8 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchListingBinding
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
+import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.domain.MatchListingReq
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -24,6 +26,8 @@ class MatchListingFragment : BaseFragment() {
 
     private var inPlayMatchListingAdapter: InPlayMatchListingAdapter? = null
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,19 +36,33 @@ class MatchListingFragment : BaseFragment() {
         binding = FragmentMatchListingBinding.inflate(inflater).apply {
             lifecycleOwner = this@MatchListingFragment
         }
-
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        initSessionAdapterAdapter()
+        getMatchesListing()
     }
 
-    private fun initSessionAdapterAdapter() {
+    private fun getMatchesListing() {
+
         inPlayMatchListingAdapter = InPlayMatchListingAdapter()
         binding.rvMatchListing.adapter = inPlayMatchListingAdapter
+
+        viewModel.callMatchListing("cricket","inplay")
+        viewModel.matchListingCall.observe(viewLifecycleOwner,EventObserver{
+            println("matchListing_size: "+it.matches?.size)
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, EventObserver {
+
+        })
+
+        viewModel.failure.observe(viewLifecycleOwner, EventObserver {
+            println("matchListing_error: $it")
+        })
+
+
     }
 
     companion object {

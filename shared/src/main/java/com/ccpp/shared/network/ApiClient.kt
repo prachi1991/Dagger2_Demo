@@ -1,9 +1,6 @@
 package com.ccpp.shared.network
 
-import com.ccpp.shared.domain.ForgetPassRes
-import com.ccpp.shared.domain.LoginRes
-import com.ccpp.shared.domain.LoginResult
-import com.ccpp.shared.domain.SignUpReq
+import com.ccpp.shared.domain.*
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -26,6 +23,9 @@ internal interface ApiClient {
 
     @POST("api/v1/sign_up")
     fun callSignUpAsync(@Body signUpReq: SignUpReq): Deferred<Response<LoginRes>>
+
+    @GET("api/v1/matches")
+    fun callMatchesListingAsync(@QueryMap event_type: String,@QueryMap play_status: String): Deferred<Response<MatchListingRes>>
 
 
     @GET("api/v1/passwords/forgot")

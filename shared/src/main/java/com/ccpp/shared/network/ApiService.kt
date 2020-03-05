@@ -2,6 +2,7 @@ package com.ccpp.shared.network
 
 import com.ccpp.shared.BuildConfig
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.domain.MatchListingReq
 import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.util.ConstantsBase.REQUEST_TIMEOUT
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -62,4 +63,6 @@ open class ApiService @Inject constructor(private val sharedPref: SharedPreferen
     fun callSignUpAsync(signUpReq: SignUpReq) = apiClient.callSignUpAsync(signUpReq)
 
     fun callForgetPasswordAsync(email: String) = apiClient.callForgetPasswordAsync(email)
+
+    fun callMatchesListingAsync(event_type: String,play_status: String) = apiClient.callMatchesListingAsync(event_type,play_status)
 }
