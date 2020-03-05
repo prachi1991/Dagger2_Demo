@@ -63,7 +63,9 @@ class SignInFragment : BaseFragment() {
                 updateUiWithUser("Success")
             }
         })
-
+        viewModel.failure.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+        })
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
             binding.login.isEnabled = !it

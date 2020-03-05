@@ -3,10 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-android.buildTypes.each { type ->
-    type.buildConfigField 'String', 'baseUrl', baseurl
-    type.buildConfigField 'String', 'apiKey', apiKey
-}
 
 android {
     compileSdkVersion 29
@@ -21,9 +17,25 @@ android {
 
     buildTypes {
         release {
+            debuggable = false
             minifyEnabled false
         }
-        debug {}
+        stage {
+            signingConfig signingConfigs.debug
+            debuggable = true
+            buildConfigField 'String', 'ENVIRONMENT', '"STAGING"'
+            buildConfigField 'String', 'baseUrl', baseUrlStaging
+            buildConfigField 'String', 'apiKey', apiKey
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        prod {
+            signingConfig signingConfigs.debug
+            debuggable = true
+            buildConfigField 'String', 'ENVIRONMENT', '"PRODUCTION"'
+            buildConfigField 'String', 'baseUrl', baseUrlStaging
+            buildConfigField 'String', 'apiKey', apiKey
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
 
     lintOptions {
