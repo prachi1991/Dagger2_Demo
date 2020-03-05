@@ -108,22 +108,24 @@
                             android:orientation="vertical">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvBatTeamName"
                                 fontPath="fonts/Play-Bold.ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:text="IND"
                                 android:textColor="@color/menu_light_green"
-                                android:textSize="@dimen/_10ssp" />
+                                android:textSize="@dimen/_12ssp"
+                                tools:text="IND" />
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvBatTeamScore"
                                 fontPath="fonts/Play-Regular.ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:text="25/0 (1.4OVS)"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="25/0 (1.4OVS)" />
 
                         </LinearLayout>
 
@@ -138,28 +140,31 @@
 
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvBallTeamName"
                                 fontPath="fonts/Play-Bold.ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/_10sdp"
-                                android:text="PAK"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_12ssp" />
+                                android:textSize="@dimen/_12ssp"
+                                tools:text="PAK" />
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvBallTeamScore"
                                 fontPath="fonts/Play-Regular.ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/_10sdp"
-                                android:text="Bowling..."
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="Bowling..." />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tvBetStatus"
                         fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_50sdp"
@@ -167,8 +172,8 @@
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:background="@drawable/backgroud_solid_dark_grey"
                         android:gravity="center"
-                        android:text="BET OPEN"
-                        android:textSize="@dimen/_16ssp" />
+                        android:textSize="@dimen/_16ssp"
+                        tools:text="BET OPEN" />
 
                 </LinearLayout>
 
@@ -181,6 +186,7 @@
                     android:padding="@dimen/_5sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTabAll"
                         fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -198,6 +204,7 @@
 
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTabMarket"
                         fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -214,6 +221,7 @@
 
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTabSession"
                         fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -230,6 +238,7 @@
 
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTabEvenOdd"
                         fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -245,6 +254,7 @@
                         android:background="@color/white" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTabEnding"
                         fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -293,10 +303,10 @@
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_toRightOf="@+id/tvMarketLabel"
-                            android:text="Match Winner"
+                            android:layout_toEndOf="@+id/tvMarketLabel"
                             android:textColor="@color/text_light_green"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textSize="@dimen/_10ssp"
+                            tools:text="Match Winner" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             fontPath="fonts/Play-Regular.ttf"
@@ -305,9 +315,9 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:text="0"
                             android:textColor="@color/text_light_green"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textSize="@dimen/_10ssp"
+                            tools:text="0" />
 
                     </RelativeLayout>
 
@@ -326,9 +336,9 @@
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_5sdp"
-                            android:text="IND_DEMO1"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textSize="@dimen/_10ssp"
+                            tools:text="IND_DEMO1" />
 
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -340,13 +350,14 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_toStartOf="@id/tvTeam1Back"
                             android:background="@drawable/backgroud_solid_dark_blue"
-                            android:paddingLeft="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:minWidth="@dimen/_35sdp"
                             android:paddingTop="@dimen/_3sdp"
-                            android:paddingRight="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_3sdp"
-                            android:text="1.2"
+                            android:singleLine="true"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textSize="@dimen/_10ssp"
+                            tools:text="1.2" />
 
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -358,13 +369,14 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:background="@drawable/backgroud_solid_light_blue1"
-                            android:paddingLeft="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:minWidth="@dimen/_35sdp"
                             android:paddingTop="@dimen/_3sdp"
-                            android:paddingRight="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_3sdp"
-                            android:text="1.2"
+                            android:singleLine="true"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textSize="@dimen/_10ssp"
+                            tools:text="1.2" />
 
                     </RelativeLayout>
 
@@ -383,9 +395,9 @@
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_5sdp"
-                            android:text="IND_DEMO2"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textSize="@dimen/_10ssp"
+                            tools:text="IND_DEMO2" />
 
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -397,13 +409,14 @@
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_toStartOf="@id/tvTeam2Back"
                             android:background="@drawable/backgroud_solid_dark_blue"
-                            android:paddingLeft="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:minWidth="@dimen/_35sdp"
                             android:paddingTop="@dimen/_3sdp"
-                            android:paddingRight="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_3sdp"
-                            android:text="1.2"
+                            android:singleLine="true"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textSize="@dimen/_10ssp"
+                            tools:text="1.2" />
 
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -415,13 +428,14 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:background="@drawable/backgroud_solid_light_blue1"
-                            android:paddingLeft="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:minWidth="@dimen/_35sdp"
                             android:paddingTop="@dimen/_3sdp"
-                            android:paddingRight="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_3sdp"
-                            android:text="1.2"
+                            android:singleLine="true"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textSize="@dimen/_10ssp"
+                            tools:text="1.2" />
 
                     </RelativeLayout>
 
