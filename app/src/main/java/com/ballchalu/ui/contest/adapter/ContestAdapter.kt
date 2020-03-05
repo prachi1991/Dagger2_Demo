@@ -9,7 +9,7 @@ import com.ccpp.shared.domain.contest.Contest
 
 
 class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
-    private var list: List<Contest>? = null
+    private var list: ArrayList<Contest>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemAllContestBinding.inflate(
@@ -25,7 +25,7 @@ class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
         holder.setData(list?.get(position), position)
     }
 
-    fun setItemList(list: List<Contest>?) {
+    fun setItemList(list: ArrayList<Contest>?) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -41,9 +41,19 @@ class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
         fun setData(contest: Contest?, position: Int) {
             with(binding) {
                 binding.contest = contest
+                if(!contest!!.isParticipated)
+                {
+                    binding.tvPlayNow.text = "Buy Now"
+                }
             }
 
         }
+    }
+
+    fun clear() {
+        val size: Int = list!!.size
+        list?.clear()
+        notifyItemRangeRemoved(0, size)
     }
 
 }

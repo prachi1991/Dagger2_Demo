@@ -10,6 +10,7 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
@@ -22,7 +23,7 @@ class ContestFragment : BaseFragment() {
     private lateinit var binding: FragmentContestBinding
     private lateinit var viewModel: ContestViewModel
 
-    private var myContestList: ArrayList<Contest> = arrayListOf()
+    private var myContestList: ArrayList<Contest>? = arrayListOf()
     private var allContestList: ArrayList<Contest>? = arrayListOf()
 
     override fun onCreateView(
@@ -43,19 +44,34 @@ class ContestFragment : BaseFragment() {
      //   myContestList.add("Play")
 
 
-        viewModel.callSignUp("8")
+        viewModel.getAllMatchesContest("8")
 
         viewModel.matchContestResult.observe(viewLifecycleOwner,EventObserver{
             allContestList = it.contests as ArrayList<Contest>?
             contestAdapter?.setItemList(allContestList)
         })
 
+        viewModel.matchUserContestResult.observe(viewLifecycleOwner,EventObserver{
+            myContestList = it.contests as ArrayList<Contest>?
+            contestAdapter?.setItemList(myContestList)
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner,EventObserver{
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        })
+
 
         binding.rbGroup.setOnCheckedChangeListener { group, checkedId ->
             run {
                 when (checkedId) {
-                    R.id.rbAllContest -> contestAdapter?.setItemList(allContestList)
-                    R.id.rbMyContest -> contestAdapter?.setItemList(myContestList)
+                    R.id.rbAllContest -> {
+                        contestAdapter?.clear()
+                        viewModel.getAllMatchesContest("8")
+                    }
+                    R.id.rbMyContest -> {
+                        contestAdapter?.clear()
+                        viewModel.getUserMatchesContest("8")
+                    }
                     else -> false
                 }
             }

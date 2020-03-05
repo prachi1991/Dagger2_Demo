@@ -42,7 +42,7 @@ data class Contest(
 
     @SerializedName("is_participated")
     @Expose
-    val isParticipated: Boolean
+    val isParticipated: Boolean = false
 ) {
 
     public fun getPrice()= "$pricePool/-"

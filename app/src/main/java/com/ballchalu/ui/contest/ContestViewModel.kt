@@ -22,7 +22,10 @@ class ContestViewModel @Inject constructor(
     private val _matchContestResult = MutableLiveData<Event<MatchContestRes>>()
     val matchContestResult: LiveData<Event<MatchContestRes>> = _matchContestResult
 
-    fun callSignUp(Id: String) {
+    private val _matchUserContestResult = MutableLiveData<Event<MatchContestRes>>()
+    val matchUserContestResult: LiveData<Event<MatchContestRes>> = _matchUserContestResult
+
+    fun getAllMatchesContest(Id: String) {
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = contestRepository.getMatchContest(Id)) {
@@ -33,8 +36,23 @@ class ContestViewModel @Inject constructor(
         }
     }
 
+    fun getUserMatchesContest(Id: String) {
+        loading.postValue(Event(true))
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val result = contestRepository.getUserMatchContest(Id)) {
+                is Results.Success -> handleUserContestSuccess(result.data)
+                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+            }
+            loading.postValue(Event(false))
+        }
+    }
+
     private fun handleSuccess(result: MatchContestRes) {
         _matchContestResult.postValue(Event(result))
+    }
+
+    private fun handleUserContestSuccess(result: MatchContestRes) {
+        _matchUserContestResult.postValue(Event(result))
     }
 
 }

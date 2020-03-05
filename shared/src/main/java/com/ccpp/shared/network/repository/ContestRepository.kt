@@ -17,4 +17,11 @@ class ContestRepository @Inject constructor(
         },
         errorMessage = "Error occurred"
     )
+
+    suspend fun getUserMatchContest(matchId: String) = baseRepository.safeApiCall(
+        call = {
+            service.callUserMatchContestAsync(matchId).await()
+        },
+        errorMessage = "Error occurred"
+    )
 }
