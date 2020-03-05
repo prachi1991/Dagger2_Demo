@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
 import com.ballchalu.ui.match.details.adapter.EndingDigitAdapter
 import com.ballchalu.ui.match.details.adapter.EvenOddAdapter
 import com.ballchalu.ui.match.details.adapter.SessionAdapter
+import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -41,6 +43,16 @@ class MatchDetailsFragment : BaseFragment() {
         initSessionAdapterAdapter()
         initEvenOddAdapter()
         initEndingDigitAdapterAdapter()
+
+        viewModel.matchResult.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+        })
+
+        viewModel.failure.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+        })
+
+        viewModel.callMatchDetailsAsync()
     }
 
 

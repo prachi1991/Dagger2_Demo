@@ -18,13 +18,21 @@ import javax.inject.Singleton
 @Singleton
 open class ApiService @Inject constructor(private val sharedPref: SharedPreferenceStorage) {
 
-    private val apiClient = Retrofit.Builder()
-        .baseUrl(BuildConfig.baseUrl)
+    private val builder = Retrofit.Builder()
         .client(initOkHttp)
         .addConverterFactory(GsonConverterFactory.create())
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build().create(ApiClient::class.java)
+
+    private val apiClient =
+        builder.baseUrl(BuildConfig.baseUrl)
+            .build().create(ApiClient::class.java)
+
+
+    private val matchDetailsApiClient =
+        builder.baseUrl(BuildConfig.matchDetailsUrl)
+            .build().create(ApiClient::class.java)
+
 
     private val initOkHttp: OkHttpClient
         get() {
@@ -44,7 +52,7 @@ open class ApiService @Inject constructor(private val sharedPref: SharedPreferen
                 val request = original.newBuilder()
                     .addHeader("Api-Key", BuildConfig.apiKey)
                     .addHeader("Accept", "application/json")
-                    .addHeader("Authorization", sharedPref.token.toString())
+                    .addHeader("Authorization", "Bearer ${sharedPref.token.toString()}")
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .url(url).build()
 
@@ -62,4 +70,6 @@ open class ApiService @Inject constructor(private val sharedPref: SharedPreferen
     fun callSignUpAsync(signUpReq: SignUpReq) = apiClient.callSignUpAsync(signUpReq)
 
     fun callForgetPasswordAsync(email: String) = apiClient.callForgetPasswordAsync(email)
+
+    fun callMatchDetailsAsync(matchId: Int) = matchDetailsApiClient.callMatchDetailsAsync(matchId)
 }
