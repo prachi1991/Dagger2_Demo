@@ -1,18 +1,16 @@
 package com.ballchalu.ui.match_listing
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 
-import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchListingBinding
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
 import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.domain.MatchListingReq
+import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -24,7 +22,7 @@ class MatchListingFragment : BaseFragment() {
     private lateinit var binding: FragmentMatchListingBinding
     private lateinit var viewModel: MatchListingViewModel
 
-    private var inPlayMatchListingAdapter: InPlayMatchListingAdapter? = null
+    private var inPlayListAdapter: InPlayMatchListingAdapter? = null
 
 
 
@@ -45,21 +43,35 @@ class MatchListingFragment : BaseFragment() {
     }
 
     private fun getMatchesListing() {
+        viewModel.callMatchListing(ConstantsBase.EVENT_TYPE,ConstantsBase.IN_PLAY)
+        viewModel.callMatchListing(ConstantsBase.EVENT_TYPE,ConstantsBase.UPCOMING)
 
-        inPlayMatchListingAdapter = InPlayMatchListingAdapter()
-        binding.rvMatchListing.adapter = inPlayMatchListingAdapter
+        binding.llInplay.visibility=View.GONE
+        binding.llUpcoming.visibility=View.GONE
 
-        viewModel.callMatchListing("cricket","inplay")
-        viewModel.matchListingCall.observe(viewLifecycleOwner,EventObserver{
-            println("matchListing_size: "+it.matches?.size)
+
+        viewModel.inPlayListEvent.observe(viewLifecycleOwner,EventObserver{
+
+            if(it.matches?.size!=0)
+                binding.llInplay.visibility=View.VISIBLE
+
+            inPlayListAdapter = InPlayMatchListingAdapter()
+            binding.rvInPlayMatchListing.adapter = inPlayListAdapter
+            inPlayListAdapter?.setItemList(it.matches,ConstantsBase.IN_PLAY)
+        })
+        viewModel.upcomingListEvent.observe(viewLifecycleOwner,EventObserver{
+            if(it.matches?.size!=0)
+                binding.llUpcoming.visibility=View.VISIBLE
+            inPlayListAdapter = InPlayMatchListingAdapter()
+            binding.rvUpcomingMatchListing.adapter = inPlayListAdapter
+            inPlayListAdapter?.setItemList(it.matches,ConstantsBase.UPCOMING)
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
-
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
-            println("matchListing_error: $it")
         })
 
 

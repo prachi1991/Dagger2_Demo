@@ -5,4 +5,8 @@ object ConstantsBase {
     const val REQUEST_TIMEOUT = 60
     const val INTERNAL_ERROR = 500
 
+    const val EVENT_TYPE = "cricket"
+    const val IN_PLAY = "inplay"
+    const val UPCOMING = "upcoming"
+
 }

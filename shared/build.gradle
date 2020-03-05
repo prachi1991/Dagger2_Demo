@@ -19,11 +19,17 @@ android {
         release {
             debuggable = false
             minifyEnabled false
+            buildConfigField 'String', 'ENVIRONMENT', '"STAGING"'
+            buildConfigField 'String', 'matchDetailsUrl', matchDetailsUrlStaging
+            buildConfigField 'String', 'baseUrl', baseUrlStaging
+            buildConfigField 'String', 'apiKey', apiKey
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         stage {
             signingConfig signingConfigs.debug
             debuggable = true
             buildConfigField 'String', 'ENVIRONMENT', '"STAGING"'
+            buildConfigField 'String', 'matchDetailsUrl', matchDetailsUrlStaging
             buildConfigField 'String', 'baseUrl', baseUrlStaging
             buildConfigField 'String', 'apiKey', apiKey
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -32,6 +38,7 @@ android {
             signingConfig signingConfigs.debug
             debuggable = true
             buildConfigField 'String', 'ENVIRONMENT', '"PRODUCTION"'
+            buildConfigField 'String', 'matchDetailsUrl', matchDetailsUrlStaging
             buildConfigField 'String', 'baseUrl', baseUrlStaging
             buildConfigField 'String', 'apiKey', apiKey
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
