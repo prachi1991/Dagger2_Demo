@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemAllContestBinding
+import com.ccpp.shared.domain.contest.Contest
 
 
 class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
-    private var list: List<String>? = null
+    private var list: List<Contest>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemAllContestBinding.inflate(
@@ -24,23 +25,22 @@ class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
         holder.setData(list?.get(position), position)
     }
 
-    fun setItemList(list: List<String>?) {
+    fun setItemList(list: List<Contest>?) {
         this.list = list
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-        return list?.size ?: 2
+        return list?.size ?: 0
     }
 
 
     inner class ViewHolder(val binding: ItemAllContestBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(s: String?, position: Int) {
+        fun setData(contest: Contest?, position: Int) {
             with(binding) {
-                if (s?.isNotEmpty() == true) tvPlayNow.visibility = View.VISIBLE
-                else tvPlayNow.visibility = View.GONE
+                binding.contest = contest
             }
 
         }

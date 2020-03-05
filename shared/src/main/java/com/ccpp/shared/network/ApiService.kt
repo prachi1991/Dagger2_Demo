@@ -44,7 +44,7 @@ open class ApiService @Inject constructor(private val sharedPref: SharedPreferen
                 val request = original.newBuilder()
                     .addHeader("Api-Key", BuildConfig.apiKey)
                     .addHeader("Accept", "application/json")
-                    .addHeader("Authorization", sharedPref.token.toString())
+                    .addHeader("Authorization", "Bearer "+ sharedPref.token.toString())
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .url(url).build()
 
@@ -62,4 +62,6 @@ open class ApiService @Inject constructor(private val sharedPref: SharedPreferen
     fun callSignUpAsync(signUpReq: SignUpReq) = apiClient.callSignUpAsync(signUpReq)
 
     fun callForgetPasswordAsync(email: String) = apiClient.callForgetPasswordAsync(email)
+
+    fun callMatchContestAsync(matchId: String) = apiClient.callMatchContestAsync(matchId)
 }

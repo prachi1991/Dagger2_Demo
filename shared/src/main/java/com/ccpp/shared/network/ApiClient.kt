@@ -4,6 +4,7 @@ import com.ccpp.shared.domain.ForgetPassRes
 import com.ccpp.shared.domain.LoginRes
 import com.ccpp.shared.domain.LoginResult
 import com.ccpp.shared.domain.SignUpReq
+import com.ccpp.shared.domain.contest.MatchContestRes
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -30,5 +31,8 @@ internal interface ApiClient {
 
     @GET("api/v1/passwords/forgot")
     fun callForgetPasswordAsync(@QueryMap emailId: String): Deferred<Response<ForgetPassRes>>
+
+    @GET("ballchalu/api/v1/contests")
+    fun callMatchContestAsync(@Query("match_id") match_id: String): Deferred<Response<MatchContestRes>>
 
 }

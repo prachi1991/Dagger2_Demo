@@ -9,6 +9,8 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.adapter.ContestAdapter
+import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -20,8 +22,8 @@ class ContestFragment : BaseFragment() {
     private lateinit var binding: FragmentContestBinding
     private lateinit var viewModel: ContestViewModel
 
-    private var myContestList: ArrayList<String> = arrayListOf()
-    private var allContestList: ArrayList<String>? = null
+    private var myContestList: ArrayList<Contest> = arrayListOf()
+    private var allContestList: ArrayList<Contest>? = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +40,15 @@ class ContestFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initSessionAdapterAdapter()
-        myContestList.add("Play")
+     //   myContestList.add("Play")
 
+
+        viewModel.callSignUp("8")
+
+        viewModel.matchContestResult.observe(viewLifecycleOwner,EventObserver{
+            allContestList = it.contests as ArrayList<Contest>?
+            contestAdapter?.setItemList(allContestList)
+        })
 
 
         binding.rbGroup.setOnCheckedChangeListener { group, checkedId ->
