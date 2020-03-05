@@ -20,6 +20,25 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField 'String', 'ENVIRONMENT', '"RELEASE"'
+            buildConfigField 'String', 'baseUrl', baseurlProduction
+            buildConfigField 'String', 'apiKey', apiKey
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        stage {
+            signingConfig signingConfigs.debug
+            debuggable = true
+            buildConfigField 'String', 'ENVIRONMENT', '"STAGING"'
+            buildConfigField 'String', 'baseUrl', baseUrlStaging
+            buildConfigField 'String', 'apiKey', apiKey
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        prod {
+            signingConfig signingConfigs.debug
+            debuggable = true
+            buildConfigField 'String', 'ENVIRONMENT', '"PRODUCTION"'
+            buildConfigField 'String', 'baseUrl', baseurlProduction
+            buildConfigField 'String', 'apiKey', apiKey
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -60,9 +79,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.2.1'
     implementation 'androidx.navigation:navigation-ui:2.0.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
