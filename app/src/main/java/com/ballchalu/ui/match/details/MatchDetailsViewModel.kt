@@ -11,6 +11,7 @@ import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.match_details.Market
 import com.ccpp.shared.domain.match_details.MarketsItem
 import com.ccpp.shared.domain.match_details.MatchDetailsRes
+import com.ccpp.shared.domain.match_details.SessionsItem
 import com.ccpp.shared.network.repository.MatchDetailsRepository
 import com.ccpp.shared.util.ConstantsBase
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +43,18 @@ class MatchDetailsViewModel @Inject constructor(
         data?.let {
             _matchResult.postValue(Event(data))
             setMarketData(data.markets)
+            setSessionData(data.sessions)
         }
+    }
+
+    private val _sessionEvent = MutableLiveData<Event<List<SessionsItem>>>()
+    val sessionEvent: LiveData<Event<List<SessionsItem>>> = _sessionEvent
+
+    private fun setSessionData(sessions: List<SessionsItem>?) {
+        sessions?.filter { it.session?.status == ConstantsBase.suspend || it.session?.status == ConstantsBase.open }
+            ?.let {
+                _sessionEvent.postValue(Event(it))
+            }
     }
 
     private val _winnerMarketEvent = MutableLiveData<Event<Market>>()

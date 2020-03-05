@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class Session(
 
     @field:SerializedName("can_yes")
-    val canYes: Boolean? = null,
+    val canYes: Boolean = true,
 
     @field:SerializedName("heroic_title")
     val heroicTitle: String? = null,
@@ -22,7 +22,7 @@ data class Session(
     val type: String? = null,
 
     @field:SerializedName("can_no")
-    val canNo: Boolean? = null,
+    val canNo: Boolean = true,
 
     @field:SerializedName("id")
     val id: Int? = null,

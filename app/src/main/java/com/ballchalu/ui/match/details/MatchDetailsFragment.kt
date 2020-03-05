@@ -15,6 +15,7 @@ import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.match_details.Market
 import com.ccpp.shared.domain.match_details.Match
 import com.ccpp.shared.domain.match_details.Runner
+import com.ccpp.shared.domain.match_details.SessionsItem
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -44,11 +45,15 @@ class MatchDetailsFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initSessionAdapterAdapter()
-        initEvenOddAdapter()
+//        initEvenOddAdapter()
         initEndingDigitAdapterAdapter()
 
         viewModel.matchResult.observe(viewLifecycleOwner, EventObserver {
             setMatchData(it.match)
+        })
+
+        viewModel.sessionEvent.observe(viewLifecycleOwner, EventObserver {
+            setSessionData(it)
         })
 
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
@@ -60,12 +65,22 @@ class MatchDetailsFragment : BaseFragment() {
         })
 
         viewModel.evenOddMarketEvent.observe(viewLifecycleOwner, EventObserver {
+            setEvenOddData(it)
         })
 
         viewModel.endingDigitMarketEvent.observe(viewLifecycleOwner, EventObserver {
+            setEndingData(it)
         })
 
         viewModel.callMatchDetailsAsync()
+    }
+
+    private fun setEvenOddData(it: Market) {
+        binding.evenOdd.tvEvenOddType.text = it.betfairMarketType
+        binding.evenOdd.tvTeam1Back.text =
+            if (it.runners?.get(0)?.runner?.canBack == true) it.runners?.get(0)?.runner?.back else ""
+        binding.evenOdd.tvTeam2Back.text =
+            if (it.runners?.get(1)?.runner?.canBack == true) it.runners?.get(1)?.runner?.back else ""
     }
 
 
@@ -92,6 +107,15 @@ class MatchDetailsFragment : BaseFragment() {
         setBwlTeamBhaav(items2?.back, items2?.lay, items2?.canBack, items2?.canLay)
     }
 
+    private fun setSessionData(sessionList: List<SessionsItem>?) {
+        sessionAdapter?.setItemList(sessionList)
+    }
+
+    private fun setEndingData(market: Market) {
+        endingDigitAdapter?.setItemList(market)
+    }
+
+
     private fun initSessionAdapterAdapter() {
         sessionAdapter = SessionAdapter()
         binding.rvSession.adapter = sessionAdapter
@@ -102,19 +126,18 @@ class MatchDetailsFragment : BaseFragment() {
         binding.rvEndingDigit.adapter = endingDigitAdapter
     }
 
-    private fun initEvenOddAdapter() {
-        evenOddAdapter = EvenOddAdapter()
-        binding.rvEvenOdd.adapter = evenOddAdapter
-    }
+//    private fun initEvenOddAdapter() {
+//        evenOddAdapter = EvenOddAdapter()
+//        binding.rvEvenOdd.adapter = evenOddAdapter
+//    }
 
     private fun setBatTeamBhaav(back: String?, lay: String?, isBack: Boolean?, isLay: Boolean?) {
-        val a = if (isBack == true) back else ""
-        binding.tvTeam1Lay.text = a
-        binding.tvTeam1Lay.text = if (isLay == true) lay else ""
+        binding.tvTeam1Lay.text = if (isBack == true) back else ""
+        binding.tvTeam1Back.text = if (isLay == true) lay else ""
     }
 
     private fun setBwlTeamBhaav(back: String?, lay: String?, isBack: Boolean?, isLay: Boolean?) {
         binding.tvTeam2Lay.text = if (isBack == true) back else ""
-        binding.tvTeam2Lay.text = if (isLay == true) lay else ""
+        binding.tvTeam2Back.text = if (isLay == true) lay else ""
     }
 }

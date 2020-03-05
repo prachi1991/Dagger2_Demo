@@ -478,14 +478,17 @@
                     tools:itemCount="1"
                     tools:listitem="@layout/item_session_list" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvEvenOdd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/item_even_odd_list" />
+                <include
+                    android:id="@+id/evenOdd"
+                    layout="@layout/item_even_odd_list" />
+                <!--                <androidx.recyclerview.widget.RecyclerView-->
+                <!--                    android:id="@+id/rvEvenOdd"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:orientation="vertical"-->
+                <!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+                <!--                    tools:itemCount="1"-->
+                <!--                    tools:listitem="@layout/item_even_odd_list" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"

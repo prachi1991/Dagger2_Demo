@@ -33,7 +33,7 @@ internal interface ApiClient {
     fun callForgetPasswordAsync(@QueryMap emailId: String): Deferred<Response<ForgetPassRes>>
 
 
-    @GET("api/v1/matches/{matchId}/user_match_show.json")
+    @GET("api/v1/matches/{matchId}/user_match_show.json?play_status=in_play&event_type=cricket&session_type=simultaneous_open_session")
     fun callMatchDetailsAsync(@Path("matchId") matchId: Int): Deferred<Response<MatchDetailsRes>>
 
 

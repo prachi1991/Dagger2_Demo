@@ -17,7 +17,7 @@
     <string name="invalid_last_name">invalid Last Name</string>
 
     <string name="invalid_password_not_match">Password not matched</string>
-
+    <string name="generic">%1$s, %2$s</string>
 
     <string name="login_failed">"Login failed"</string>
     <string name="welcome_back">Welcome Back!</string>
@@ -75,4 +75,5 @@
     <string name="all_contest">All Contest</string>
     <string name="my_contest">My Contest</string>
     <string name="total_10_spot">Total 10 Spot</string>
+    <string name="no">No</string>
 </resources>
