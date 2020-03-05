@@ -24,7 +24,7 @@ class SignInViewModel @Inject constructor(private val loginRepository: LoginRepo
     val loginResult: LiveData<Event<LoginRes>> = _loginResult
 
     fun callLogin(username: String, password: String) {
-        if (loading.value?.peekContent() == false) return
+        if (loading.value?.getContentIfNotHandled() == false) return
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = loginRepository.getLoginCall(getMapQuery(username, password))) {

@@ -1,6 +1,7 @@
 package com.ccpp.shared.network
 
 import com.ccpp.shared.BuildConfig
+import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.util.ConstantsBase.REQUEST_TIMEOUT
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -15,7 +16,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-open class ApiService @Inject constructor() {
+open class ApiService @Inject constructor(private val sharedPref: SharedPreferenceStorage) {
 
     private val apiClient = Retrofit.Builder()
         .baseUrl(BuildConfig.baseUrl)
@@ -43,6 +44,7 @@ open class ApiService @Inject constructor() {
                 val request = original.newBuilder()
                     .addHeader("Api-Key", BuildConfig.apiKey)
                     .addHeader("Accept", "application/json")
+                    .addHeader("Authorization", sharedPref.token.toString())
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .url(url).build()
 
