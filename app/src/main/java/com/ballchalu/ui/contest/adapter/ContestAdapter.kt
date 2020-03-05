@@ -76,6 +76,12 @@ class ContestAdapter(private var onItemClickListener : OnItemClickListener?) : R
 
             }
 
+            val spotFilled = (contest?.spots)!!.toInt() - contest.availableSpots.toInt()
+            val spot = contest.spots
+            val div:Float  = spotFilled.toFloat() / spot.toFloat()
+            val percentage = div* 100
+            binding.progressBar.progress = percentage.toInt()
+
         }
     }
 
