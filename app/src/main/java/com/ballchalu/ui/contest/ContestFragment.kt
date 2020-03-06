@@ -53,7 +53,11 @@ class ContestFragment : BaseFragment() {
         viewModel.getAllMatchesContest("2")
 
         viewModel.matchContestResult.observe(viewLifecycleOwner,EventObserver{
-            allContestList = it.contests as ArrayList<Contest>?
+            it.contests?.forEach {
+                if(it.availableSpots > 0)
+                allContestList?.add(it)
+            }
+   //         allContestList = it.contests as ArrayList<Contest>?
             contestAdapter?.setItemList(allContestList)
         })
 
