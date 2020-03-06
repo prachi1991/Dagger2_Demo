@@ -39,7 +39,7 @@ class MatchDetailsFragment : BaseFragment() {
         }
 
         arguments?.let {
-            viewModel.matchId = it.getInt(ConstantsBase.KEY_MATCH_ID)
+            viewModel.matchId = it.getInt(ConstantsBase.KEY_PROVIDER_ID)
         }
 
         return binding.root
@@ -114,7 +114,7 @@ class MatchDetailsFragment : BaseFragment() {
     }
 
     private fun setEndingData(market: Market) {
-        endingDigitAdapter?.setItemList(market)
+        endingDigitAdapter?.setItemList(market.runners)
     }
 
 

@@ -113,7 +113,7 @@ class ContestFragment : BaseFragment() {
 
             override fun onPlayNowClicked(contestModel: Contest) {
                 val bundle = Bundle().apply {
-                    putInt(ConstantsBase.KEY_MATCH_ID, contestModel.match.id ?: 0)
+                    putInt(ConstantsBase.KEY_PROVIDER_ID, contestModel.match.providerId ?: 0)
                 }
                 findNavController().navigate(R.id.nav_home_match_details, bundle)
             }
