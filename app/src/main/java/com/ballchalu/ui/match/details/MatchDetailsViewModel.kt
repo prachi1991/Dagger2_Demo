@@ -79,7 +79,8 @@ class MatchDetailsViewModel @Inject constructor(
                         ) || marketsItem.market?.status?.equals(ConstantsBase.suspend, true) == true
                 -> {
                     marketsItem.market?.let {
-                        _winnerMarketEvent.postValue(Event(it))
+                        if (it.status.equals(ConstantsBase.open, true))
+                            _winnerMarketEvent.postValue(Event(it))
                     }
                 }
                 marketsItem.market?.heroicMarketType?.equals(
@@ -87,7 +88,8 @@ class MatchDetailsViewModel @Inject constructor(
                     true
                 ) == true -> {
                     marketsItem.market?.let {
-                        _evenOddMarketEvent.postValue(Event(it))
+                        if (it.status.equals(ConstantsBase.open, true))
+                            _evenOddMarketEvent.postValue(Event(it))
                     }
                 }
                 marketsItem.market?.heroicMarketType?.equals(

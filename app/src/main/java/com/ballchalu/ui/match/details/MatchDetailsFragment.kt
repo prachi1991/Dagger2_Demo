@@ -77,12 +77,15 @@ class MatchDetailsFragment : BaseFragment() {
         viewModel.callMatchDetailsAsync()
     }
 
-    private fun setEvenOddData(it: Market) {
-        binding.layoutEvenOdd.tvEvenOddType.text = it.betfairMarketType
+    private fun setEvenOddData(market: Market) {
+        binding.layoutEvenOdd.frameEvenOdd.visibility =
+            if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
+
+        binding.layoutEvenOdd.tvEvenOddType.text = market.betfairMarketType
         binding.layoutEvenOdd.tvTeam1Back.text =
-            if (it.runners?.get(0)?.runner?.canBack == true) it.runners?.get(0)?.runner?.back else ""
+            if (market.runners?.get(0)?.runner?.canBack == true) market.runners?.get(0)?.runner?.back else ""
         binding.layoutEvenOdd.tvTeam2Back.text =
-            if (it.runners?.get(1)?.runner?.canBack == true) it.runners?.get(1)?.runner?.back else ""
+            if (market.runners?.get(1)?.runner?.canBack == true) market.runners?.get(1)?.runner?.back else ""
     }
 
 
@@ -111,6 +114,8 @@ class MatchDetailsFragment : BaseFragment() {
 
     private fun setSessionData(sessionList: List<SessionsItem>?) {
         binding.llSessionSection.visibility =
+            if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
+        binding.rvSession.visibility =
             if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
         sessionAdapter?.setItemList(sessionList)
     }
