@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/backgroud_solid_corner_dark_grey"
+            android:background="@drawable/backgroud_solid_corner_secondary"
             android:orientation="vertical"
             android:padding="@dimen/_3sdp">
 
