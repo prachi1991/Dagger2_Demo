@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="model"
+            type="com.ccpp.shared.domain.match_details.Runner" />
     </data>
 
     <FrameLayout
@@ -42,7 +45,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@+id/tvEndingDigitTitle"
-                    android:text="0"
+                    android:text="@{model.betfairRunnerName}"
                     android:textColor="@color/text_light_green"
                     android:textSize="@dimen/_10ssp" />
 
@@ -60,7 +63,7 @@
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingRight="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_3sdp"
-                    android:text="1.2"
+                    android:text="@{model.back}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10ssp" />
 

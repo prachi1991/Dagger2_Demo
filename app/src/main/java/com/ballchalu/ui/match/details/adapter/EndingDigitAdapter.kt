@@ -30,6 +30,7 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
 
     fun setItemList(market: List<RunnersItem>?) {
         this.list = market
+        notifyDataSetChanged()
     }
 
 
@@ -38,7 +39,9 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
 
         fun setData(runnersItem: RunnersItem?, position: Int) {
             with(binding) {
-                binding.tvEndingDigitValue.text = position.toString()
+                runnersItem?.runner?.let {
+                    model = it
+                }
             }
 
         }

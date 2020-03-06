@@ -78,10 +78,10 @@ class MatchDetailsFragment : BaseFragment() {
     }
 
     private fun setEvenOddData(it: Market) {
-        binding.evenOdd.tvEvenOddType.text = it.betfairMarketType
-        binding.evenOdd.tvTeam1Back.text =
+        binding.layoutEvenOdd.tvEvenOddType.text = it.betfairMarketType
+        binding.layoutEvenOdd.tvTeam1Back.text =
             if (it.runners?.get(0)?.runner?.canBack == true) it.runners?.get(0)?.runner?.back else ""
-        binding.evenOdd.tvTeam2Back.text =
+        binding.layoutEvenOdd.tvTeam2Back.text =
             if (it.runners?.get(1)?.runner?.canBack == true) it.runners?.get(1)?.runner?.back else ""
     }
 
@@ -110,10 +110,15 @@ class MatchDetailsFragment : BaseFragment() {
     }
 
     private fun setSessionData(sessionList: List<SessionsItem>?) {
+        binding.llSessionSection.visibility =
+            if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
         sessionAdapter?.setItemList(sessionList)
     }
 
     private fun setEndingData(market: Market) {
+        binding.llEndingDigitSection.visibility =
+            if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
+        binding.tvEvenOddType.text = market.betfairMarketType
         endingDigitAdapter?.setItemList(market.runners)
     }
 

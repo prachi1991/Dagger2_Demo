@@ -442,6 +442,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llSessionSection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -478,7 +479,7 @@
                     tools:listitem="@layout/item_session_list" />
 
                 <include
-                    android:id="@+id/evenOdd"
+                    android:id="@+id/layoutEvenOdd"
                     layout="@layout/item_even_odd_list" />
                 <!--                <androidx.recyclerview.widget.RecyclerView-->
                 <!--                    android:id="@+id/rvEvenOdd"-->
@@ -490,6 +491,7 @@
                 <!--                    tools:listitem="@layout/item_even_odd_list" />-->
 
                 <LinearLayout
+                    android:id="@+id/llEndingDigitSection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
