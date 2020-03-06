@@ -12,7 +12,6 @@ import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ballchalu.ui.dialog.NotificationDialog
 import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.domain.contest.UserContest
 import com.ccpp.shared.util.viewModelProvider
@@ -52,9 +51,9 @@ class ContestFragment : BaseFragment() {
 
         viewModel.getAllMatchesContest("2")
 
-        viewModel.matchContestResult.observe(viewLifecycleOwner,EventObserver{
+        viewModel.matchContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             it.contests?.forEach {
-                if(it.availableSpots > 0)
+                if (it.availableSpots ?: 0 > 0)
                 allContestList?.add(it)
             }
    //         allContestList = it.contests as ArrayList<Contest>?

@@ -6,35 +6,35 @@ import com.google.gson.annotations.SerializedName
 data class Contest(
     @SerializedName("id")
     @Expose
-    val id: Int,
-    
+    val id: Int? = 0,
+
     @SerializedName("title")
     @Expose
     val title: String?,
-    
+
     @SerializedName("credit_coins")
     @Expose
-    val creditCoins: Int,
+    val creditCoins: Int? = 0,
 
     @SerializedName("fess")
     @Expose
-    val fess: Int,
+    val fess: Int? = 0,
 
     @SerializedName("spots")
     @Expose
-    val spots: Int,
+    val spots: Int? = 0,
 
     @SerializedName("winners")
     @Expose
-    val winners: Int,
+    val winners: Int? = 0,
 
     @SerializedName("price_pool")
     @Expose
-    val pricePool: Int,
+    val pricePool: Int? = 0,
 
     @SerializedName("available_spots")
     @Expose
-    val availableSpots: Int,
+    val availableSpots: Int? = 0,
 
     @SerializedName("match")
     @Expose
