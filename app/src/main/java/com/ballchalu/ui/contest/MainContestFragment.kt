@@ -1,4 +1,4 @@
-package com.ballchalu.ui.home
+package com.ballchalu.ui.contest
 
 import android.content.Context
 import android.os.Bundle
@@ -7,35 +7,35 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.ballchalu.R
-import com.ballchalu.ui.football.FootballFragment
-import com.ballchalu.ui.match_listing.MatchListingFragment
+import com.ballchalu.ui.contest.all_contest.ContestFragment
+import com.ballchalu.ui.contest.user_contest.UserContestFragment
 import com.ccpp.shared.domain.MatchListing
 import com.ccpp.shared.util.ConstantsBase
 import com.google.android.material.tabs.TabLayout
-import java.util.ArrayList
+import java.util.*
+import javax.inject.Inject
 
-class HomeFragment : Fragment() {
-
-    private lateinit var homeViewModel: HomeViewModel
+class MainContestFragment : Fragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
+
+    private var matchListing:MatchListing? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        val root = inflater.inflate(R.layout.fragment_main_contest, container, false)
 
         viewPager = root.findViewById(R.id.viewpager) as ViewPager
         setupViewPager(viewPager!!)
@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
         tabLayout!!.setupWithViewPager(viewPager)
 
         val headerView=(activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
-            .inflate(R.layout.custom_tab,null,false)
+            .inflate(R.layout.custom_contest_tab,null,false)
 
         val linearLayoutOne = headerView.findViewById(R.id.ll) as LinearLayout
         val linearLayout2 = headerView.findViewById(R.id.ll2) as LinearLayout
@@ -52,20 +52,40 @@ class HomeFragment : Fragment() {
         tabLayout!!.getTabAt(0)!!.customView = linearLayoutOne
         tabLayout!!.getTabAt(1)!!.customView = linearLayout2
 
+        val tvMatchName = root.findViewById<TextView>(R.id.tvMatchName)
+        tvMatchName.text = matchListing?.title
 
         return root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            matchListing = it.getSerializable(ConstantsBase.KEY_MATCH_ITEM) as MatchListing?
+        }
+    }
+
+
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(childFragmentManager)
-        adapter?.addFragment(MatchListingFragment(), "ONE")
-        adapter?.addFragment(FootballFragment(), "TWO")
+        adapter.addFragment(ContestFragment().also {
+            it.arguments = Bundle().apply {
+                putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
+            }
+        }, "ONE")
+        adapter.addFragment(UserContestFragment().also {
+            it.arguments = Bundle().apply {
+                putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
+            }
+        }, "TWO")
         viewPager.adapter = adapter
     }
 
     internal inner class ViewPagerAdapter(manager: FragmentManager) :FragmentPagerAdapter(manager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         private val mFragmentList = ArrayList<Fragment>()
         private val mFragmentTitleList = ArrayList<String>()
+
 
         override fun getItem(position: Int): Fragment {
             return mFragmentList[position]
