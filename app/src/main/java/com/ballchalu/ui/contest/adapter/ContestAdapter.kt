@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ballchalu.R
-import com.ballchalu.application.App
 import com.ballchalu.databinding.ItemAllContestBinding
 import com.ccpp.shared.domain.contest.Contest
+import com.ccpp.shared.util.ConstantsBase
 
 
 class ContestAdapter(private var onItemClickListener: OnItemClickListener?) :
@@ -16,7 +15,8 @@ class ContestAdapter(private var onItemClickListener: OnItemClickListener?) :
     private var isMyContest: Boolean = false
 
     interface OnItemClickListener {
-        fun onClick(contestModel: Contest?)
+        fun onBuyNowClicked(contestModel: Contest)
+        fun onPlayNowClicked(contestModel: Contest)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -53,23 +53,26 @@ class ContestAdapter(private var onItemClickListener: OnItemClickListener?) :
                 binding.contest = contest
                 if (contest?.isParticipated == false && !isMyContest) {
                     binding.tvPlayNow.visibility = View.VISIBLE
-                    binding.tvPlayNow.text = App.instance.resources.getString(R.string.buy_now)
+                    binding.tvPlayNow.text = ConstantsBase.buy_now_key
                 } else if (isMyContest) {
                     binding.tvPlayNow.visibility = View.VISIBLE
-                    binding.tvPlayNow.text = App.instance.resources.getString(R.string.play_now)
+                    binding.tvPlayNow.text = ConstantsBase.play_now_key
                 } else {
                     binding.tvPlayNow.visibility = View.GONE
                 }
             }
 
             binding.tvPlayNow.setOnClickListener {
-
-                if (!isMyContest && binding.tvPlayNow.text == App.instance.resources.getString(R.string.buy_now)) {
+                if (!isMyContest && binding.tvPlayNow.text == ConstantsBase.buy_now_key) {
                     binding.tvPlayNow.visibility = View.GONE
-                    onItemClickListener?.onClick(contest)
+                    contest?.let {
+                        onItemClickListener?.onBuyNowClicked(contest)
+                    }
 
-                } else {
-
+                } else if (binding.tvPlayNow.text == ConstantsBase.play_now_key) {
+                    contest?.let {
+                        onItemClickListener?.onPlayNowClicked(contest)
+                    }
                 }
 
             }
@@ -83,9 +86,8 @@ class ContestAdapter(private var onItemClickListener: OnItemClickListener?) :
     }
 
     fun clear() {
-        val size: Int = list!!.size
         list?.clear()
-        notifyItemRangeRemoved(0, size)
+        notifyDataSetChanged()
     }
 
 }

@@ -64,7 +64,7 @@
                 android:weightSum="2">
 
                 <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rBwlContest"
+                    android:id="@+id/rbAllContest"
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,7 +80,6 @@
 
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/rbAllContest"
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

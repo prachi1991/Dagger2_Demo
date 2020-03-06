@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
@@ -14,6 +15,7 @@ import com.ballchalu.ui.dialog.NotificationDialog
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.domain.contest.UserContest
+import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -46,36 +48,36 @@ class ContestFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initSessionAdapterAdapter()
-     //   myContestList.add("Play")
-       // notificationDialog = activity!!.let { NotificationDialog(it) }
+        //   myContestList.add("Play")
+        // notificationDialog = activity!!.let { NotificationDialog(it) }
 
-        viewModel.getAllMatchesContest("2")
+        viewModel.getAllMatchesContest("2") //match id
 
         viewModel.matchContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             it.contests?.forEach {
                 if (it.availableSpots ?: 0 > 0)
-                allContestList?.add(it)
+                    allContestList?.add(it)
             }
-   //         allContestList = it.contests as ArrayList<Contest>?
+            //         allContestList = it.contests as ArrayList<Contest>?
             contestAdapter?.setItemList(allContestList)
         })
 
-        viewModel.matchUserContestResult.observe(viewLifecycleOwner,EventObserver{
+        viewModel.matchUserContestResult.observe(viewLifecycleOwner, EventObserver {
             userContestList = it.contests as ArrayList<UserContest>?
             userContestList?.forEach {
                 myContestList?.add(it.contest!!)
             }
-            contestAdapter?.setItemList(myContestList,true)
+            contestAdapter?.setItemList(myContestList, true)
         })
 
-        viewModel.loading.observe(viewLifecycleOwner,EventObserver{
+        viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
             radioButtonClickable(!it)
         })
 
-        viewModel.createContestResult.observe(viewLifecycleOwner,EventObserver{
-         //   notificationDialog.showMesssage(true,"You Successfully By Contest")
-            Toast.makeText(context,"You Successfully By Contest",Toast.LENGTH_SHORT).show()
+        viewModel.createContestResult.observe(viewLifecycleOwner, EventObserver {
+            //   notificationDialog.showMesssage(true,"You Successfully By Contest")
+            Toast.makeText(context, "You Successfully By Contest", Toast.LENGTH_SHORT).show()
         })
 
 
@@ -84,11 +86,11 @@ class ContestFragment : BaseFragment() {
                 when (checkedId) {
                     R.id.rbAllContest -> {
                         contestAdapter?.clear()
-                        viewModel.getAllMatchesContest("2")
+                        viewModel.getAllMatchesContest("2") //matchId
                     }
                     R.id.rbMyContest -> {
                         contestAdapter?.clear()
-                        viewModel.getUserMatchesContest("2")
+                        viewModel.getUserMatchesContest("2") //matchId
                     }
                     else -> false
                 }
@@ -98,9 +100,16 @@ class ContestFragment : BaseFragment() {
     }
 
     private fun initSessionAdapterAdapter() {
-        contestAdapter = ContestAdapter(object : ContestAdapter.OnItemClickListener{
-            override fun onClick(contestModel: Contest?) {
+        contestAdapter = ContestAdapter(object : ContestAdapter.OnItemClickListener {
+            override fun onBuyNowClicked(contestModel: Contest) {
                 viewModel.createUserMatchContest(contestModel?.id.toString())
+            }
+
+            override fun onPlayNowClicked(contestModel: Contest) {
+                val bundle = Bundle().apply {
+                    putInt(ConstantsBase.buy_now_key, contestModel.match.id ?: 0)
+                }
+                findNavController().navigate(R.id.nav_home_match_details, bundle)
             }
         })
         binding.rvContest.adapter = contestAdapter

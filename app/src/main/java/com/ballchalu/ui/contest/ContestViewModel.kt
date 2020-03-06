@@ -7,9 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.domain.ForgetPassRes
-import com.ccpp.shared.domain.LoginRes
-import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.domain.contest.CreateContestRes
 import com.ccpp.shared.domain.contest.MatchContestRes
 import com.ccpp.shared.domain.contest.UserMatchContestRes
@@ -19,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ContestViewModel @Inject constructor(
-    val contestRepository: ContestRepository,
+    private val contestRepository: ContestRepository,
     val context: Context
 ) : BaseViewModel() {
 

@@ -11,6 +11,9 @@ object ConstantsBase {
     const val suspend = "SUSPEND"
     const val close = "CLOSE"
 
+    const val play_now_key = "Play Now"
+    const val buy_now_key = "Buy Now"
+
     const val status = "status"
     const val event = "event"
     const val score = "score"
