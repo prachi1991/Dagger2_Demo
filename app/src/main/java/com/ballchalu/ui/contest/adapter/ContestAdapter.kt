@@ -5,10 +5,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemAllContestBinding
+import com.ccpp.shared.domain.contest.Contest
+import com.ccpp.shared.util.ConstantsBase
 
 
-class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
-    private var list: List<String>? = null
+class ContestAdapter(private var onItemClickListener: OnItemClickListener?) :
+    RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
+    private var list: ArrayList<Contest>? = null
+    private var isMyContest: Boolean = false
+
+    interface OnItemClickListener {
+        fun onBuyNowClicked(contestModel: Contest)
+        fun onPlayNowClicked(contestModel: Contest)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemAllContestBinding.inflate(
@@ -24,26 +34,60 @@ class ContestAdapter : RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
         holder.setData(list?.get(position), position)
     }
 
-    fun setItemList(list: List<String>?) {
+    fun setItemList(list: ArrayList<Contest>?, status: Boolean = false) {
+        isMyContest = status
         this.list = list
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-        return list?.size ?: 2
+        return list?.size ?: 0
     }
 
 
     inner class ViewHolder(val binding: ItemAllContestBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(s: String?, position: Int) {
+        fun setData(contest: Contest?, position: Int) {
             with(binding) {
-                if (s?.isNotEmpty() == true) tvPlayNow.visibility = View.VISIBLE
-                else tvPlayNow.visibility = View.GONE
+                binding.contest = contest
+                if (contest?.isParticipated == false && !isMyContest) {
+                    binding.tvPlayNow.visibility = View.VISIBLE
+                    binding.tvPlayNow.text = ConstantsBase.buy_now_key
+                } else if (isMyContest) {
+                    binding.tvPlayNow.visibility = View.VISIBLE
+                    binding.tvPlayNow.text = ConstantsBase.play_now_key
+                } else {
+                    binding.tvPlayNow.visibility = View.GONE
+                }
             }
 
+            binding.tvPlayNow.setOnClickListener {
+                if (!isMyContest && binding.tvPlayNow.text == ConstantsBase.buy_now_key) {
+                    binding.tvPlayNow.visibility = View.GONE
+                    contest?.let {
+                        onItemClickListener?.onBuyNowClicked(contest)
+                    }
+
+                } else if (binding.tvPlayNow.text == ConstantsBase.play_now_key) {
+                    contest?.let {
+                        onItemClickListener?.onPlayNowClicked(contest)
+                    }
+                }
+
+            }
+
+            val spotFilled = contest?.availableSpots?.toInt()?.let { (contest.spots)?.minus(it) }
+            val spot = contest?.spots
+            val div: Float = spot?.toFloat()?.let { spotFilled?.toFloat()?.div(it) } ?: 0f
+            val percentage = div * 100
+            binding.progressBar.progress = percentage.toInt()
         }
+    }
+
+    fun clear() {
+        list?.clear()
+        notifyDataSetChanged()
     }
 
 }

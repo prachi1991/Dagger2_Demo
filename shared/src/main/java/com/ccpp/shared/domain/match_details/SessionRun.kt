@@ -7,20 +7,20 @@ import com.google.gson.annotations.SerializedName
 data class SessionRun(
 
     @field:SerializedName("no_run")
-    val noRun: Int? = null,
+    val noRun: String? = null,
 
     @field:SerializedName("yes_rate")
-    val yesRate: Double? = null,
+    val yesRate: String? = null,
 
     @field:SerializedName("session_id")
     val sessionId: Int? = null,
 
     @field:SerializedName("no_rate")
-    val noRate: Double? = null,
+    val noRate: String? = null,
 
     @field:SerializedName("id")
     val id: Int? = null,
 
     @field:SerializedName("yes_run")
-    val yesRun: Int? = null
+    val yesRun: String? = null
 )

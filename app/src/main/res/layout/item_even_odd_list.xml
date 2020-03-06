@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-
-    </data>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -42,7 +38,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@+id/tvMarketLabel"
-                    android:text="IND 1 Over Last Digit Even Odd"
                     android:textColor="@color/text_light_green"
                     android:textSize="@dimen/_10ssp" />
 
@@ -58,7 +53,6 @@
                 android:padding="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvMatchTeam1"
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,11 +72,11 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:background="@drawable/backgroud_solid_light_blue1"
+                    android:minWidth="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingRight="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_3sdp"
-                    android:text="1.2"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10ssp" />
 
@@ -97,7 +91,6 @@
                 android:padding="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvMatchTeam2"
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -116,11 +109,11 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:background="@drawable/backgroud_solid_light_blue1"
+                    android:minWidth="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingRight="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_3sdp"
-                    android:text="1.2"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10ssp" />
 

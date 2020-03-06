@@ -31,5 +31,5 @@ data class Score(
     val event: String? = null,
 
     @field:SerializedName("status")
-    val status: Any? = null
+    val status: String? = null
 )

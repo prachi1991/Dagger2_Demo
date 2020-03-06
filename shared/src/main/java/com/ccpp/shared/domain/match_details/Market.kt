@@ -22,7 +22,7 @@ data class Market(
     val id: Int? = null,
 
     @field:SerializedName("runners")
-    val runners: List<RunnersItem?>? = null,
+    val runners: List<RunnersItem>? = null,
 
     @field:SerializedName("status")
     val status: String? = null

@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="model"
+            type="com.ballchalu.ui.match.details.adapter.SessionAdapterData" />
     </data>
 
     <FrameLayout
@@ -49,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:text="40 Overs"
+                    android:text="@{model.getOvers}"
                     android:textColor="@color/text_light_green"
                     android:textSize="@dimen/_10ssp" />
 
@@ -92,11 +95,12 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_toEndOf="@id/tvYesLabel"
                         android:background="@drawable/backgroud_solid_dark_blue"
-                        android:paddingLeft="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:minWidth="@dimen/_35sdp"
                         android:paddingTop="@dimen/_3sdp"
-                        android:paddingRight="@dimen/_10sdp"
                         android:paddingBottom="@dimen/_3sdp"
-                        android:text="1.2"
+                        android:singleLine="true"
+                        android:text="@{model.yesValue}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_10ssp" />
 
@@ -107,7 +111,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="0"
+                        android:text="@{model.session.sessionRun.yesRate.toString()}"
                         android:textColor="@color/text_light_green"
                         android:textSize="@dimen/_10ssp" />
                 </RelativeLayout>
@@ -129,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:text="@string/yes"
+                        android:text="@string/no"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_10ssp" />
 
@@ -143,11 +147,12 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_toEndOf="@id/tvNoLabel"
                         android:background="@drawable/backgroud_solid_dark_blue"
-                        android:paddingLeft="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:minWidth="@dimen/_35sdp"
                         android:paddingTop="@dimen/_3sdp"
-                        android:paddingRight="@dimen/_10sdp"
                         android:paddingBottom="@dimen/_3sdp"
-                        android:text="1.2"
+                        android:singleLine="true"
+                        android:text="@{model.noValue}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_10ssp" />
 
@@ -158,7 +163,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="3"
+                        android:text="@{model.session.sessionRun.noRate.toString()}"
                         android:textColor="@color/text_light_green"
                         android:textSize="@dimen/_10ssp" />
                 </RelativeLayout>

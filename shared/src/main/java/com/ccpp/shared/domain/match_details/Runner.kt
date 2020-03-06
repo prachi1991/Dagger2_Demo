@@ -7,13 +7,13 @@ import com.google.gson.annotations.SerializedName
 data class Runner(
 
     @field:SerializedName("lay")
-    val lay: Any? = null,
+    val lay: String? = null,
 
     @field:SerializedName("can_back")
-    val canBack: Boolean? = null,
+    val canBack: Boolean = false,
 
     @field:SerializedName("back")
-    val back: Double? = null,
+    val back: String? = null,
 
     @field:SerializedName("id")
     val id: Int? = null,
@@ -25,7 +25,7 @@ data class Runner(
     val betfairRunnerName: String? = null,
 
     @field:SerializedName("can_lay")
-    val canLay: Boolean? = null,
+    val canLay: Boolean = false,
 
     @field:SerializedName("status")
     val status: String? = null
