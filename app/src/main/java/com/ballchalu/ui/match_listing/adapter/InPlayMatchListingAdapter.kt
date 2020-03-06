@@ -58,6 +58,11 @@ class InPlayMatchListingAdapter(val listener: OnItemClickListener?) :
                     txtMatchStatus.visibility = View.VISIBLE
                     txtMatchDate.visibility = View.GONE
                 }
+
+                if(matchListingItem?.match?.isJoin==true){
+                    tvJoined.text="Joined"
+                }
+
                 tvJoined.setOnClickListener {
                     matchListingItem?.let { it1 -> listener?.onMatchClicked(it1) }
                 }
