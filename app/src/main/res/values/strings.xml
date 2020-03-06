@@ -76,4 +76,6 @@
     <string name="my_contest">My Contest</string>
     <string name="total_10_spot">Total 10 Spot</string>
     <string name="no">No</string>
+    <string name="play_now">Play Now</string>
+    <string name="buy_now">Buy Now</string>
 </resources>

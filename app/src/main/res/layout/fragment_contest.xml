@@ -119,5 +119,17 @@
 
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorAccent"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
     </RelativeLayout>
 </layout>

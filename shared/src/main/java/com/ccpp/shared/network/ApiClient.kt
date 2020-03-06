@@ -5,6 +5,9 @@ import com.ccpp.shared.domain.LoginRes
 import com.ccpp.shared.domain.LoginResult
 import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.domain.match_details.MatchDetailsRes
+import com.ccpp.shared.domain.contest.CreateContestRes
+import com.ccpp.shared.domain.contest.MatchContestRes
+import com.ccpp.shared.domain.contest.UserMatchContestRes
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -37,5 +40,14 @@ internal interface ApiClient {
     fun callMatchDetailsAsync(@Path("matchId") matchId: Int): Deferred<Response<MatchDetailsRes>>
 
 
+
+    @GET("ballchalu/api/v1/contests")
+    fun callMatchContestAsync(@Query("match_id") match_id: String): Deferred<Response<MatchContestRes>>
+
+    @GET("ballchalu/api/v1/user_contests")
+    fun callUserMatchContestAsync(@Query("match_id") match_id: String): Deferred<Response<UserMatchContestRes>>
+
+    @POST("ballchalu/api/v1/contests/{match_id}/user_contests")
+    fun callCretateContestAsync(@Path("match_id") match_id: String): Deferred<Response<CreateContestRes>>
 
 }
