@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:background="@drawable/background_solid_corner_dark_grey_bc_coins"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/detail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/dark_grey"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        >
+
+        <ImageView
+            android:id="@+id/img_bc_coin"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_4sdp"
+            android:background="@drawable/shape_circle_secondary"
+            android:src="@drawable/bcm"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="10"
+            android:layout_toRightOf="@+id/img_bc_coin"
+            android:textColor="@color/text_color_bright_Accent"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/_5sdp"
+            fontPath="fonts/Play-Bold.ttf"
+            android:textSize="@dimen/_12ssp"/>
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:background="@color/white"
+           android:layout_centerInParent="true"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="For Only"
+            android:background="@drawable/backgroud_solid_secondary"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_5sdp"
+            fontPath="fonts/Play-Regular.ttf"/>
+
+        <ImageView
+            android:id="@+id/img_rs"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/_4sdp"
+            android:background="@drawable/shape_circle_secondary"
+            android:src="@drawable/ic_rupee"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="10/-"
+            android:layout_toLeftOf="@+id/img_rs"
+            android:textColor="@color/colorAccent"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/_5sdp"
+            fontPath="fonts/Play-Bold.ttf"
+            android:textSize="@dimen/_12ssp"/>
+            
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/detail_layout"
+        android:layout_width="match_parent"
+        android:paddingRight="@dimen/_10sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/dark_grey">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroud_solid_secondary"
+            android:text="Buy Now"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/menu_light_green"
+            android:layout_marginBottom="@dimen/_10sdp"
+            fontPath="fonts/Play-Bold.ttf"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+</layout>
