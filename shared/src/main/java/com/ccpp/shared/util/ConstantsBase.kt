@@ -6,13 +6,14 @@ object ConstantsBase {
     const val INTERNAL_ERROR = 500
 
 
-    const val key_matchId: String = "match_id"
+    const val KEY_MATCH_ID: String = "match_id"
     const val open = "OPEN"
     const val suspend = "SUSPEND"
     const val close = "CLOSE"
 
     const val play_now_key = "Play Now"
     const val buy_now_key = "Buy Now"
+
 
     const val status = "status"
     const val event = "event"

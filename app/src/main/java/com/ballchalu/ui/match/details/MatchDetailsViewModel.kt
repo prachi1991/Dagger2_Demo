@@ -25,13 +25,14 @@ class MatchDetailsViewModel @Inject constructor(
 ) :
     BaseViewModel() {
 
+    var matchId: Int = 0
     private val _matchResult = MutableLiveData<Event<MatchDetailsRes>>()
     val matchResult: LiveData<Event<MatchDetailsRes>> = _matchResult
 
     fun callMatchDetailsAsync() {
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = loginRepository.callMatchDetailsAsync(57)) {
+            when (val result = loginRepository.callMatchDetailsAsync(matchId)) {
                 is Results.Success -> handleSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }

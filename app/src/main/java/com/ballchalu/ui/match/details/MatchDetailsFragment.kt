@@ -9,19 +9,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
 import com.ballchalu.ui.match.details.adapter.EndingDigitAdapter
-import com.ballchalu.ui.match.details.adapter.EvenOddAdapter
 import com.ballchalu.ui.match.details.adapter.SessionAdapter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.match_details.Market
 import com.ccpp.shared.domain.match_details.Match
 import com.ccpp.shared.domain.match_details.Runner
 import com.ccpp.shared.domain.match_details.SessionsItem
+import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class MatchDetailsFragment : BaseFragment() {
+
     private var sessionAdapter: SessionAdapter? = null
-    private var evenOddAdapter: EvenOddAdapter? = null
     private var endingDigitAdapter: EndingDigitAdapter? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -38,6 +38,9 @@ class MatchDetailsFragment : BaseFragment() {
             lifecycleOwner = this@MatchDetailsFragment
         }
 
+        arguments?.let {
+            viewModel.matchId = it.getInt(ConstantsBase.KEY_MATCH_ID)
+        }
 
         return binding.root
     }
@@ -45,7 +48,6 @@ class MatchDetailsFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initSessionAdapterAdapter()
-//        initEvenOddAdapter()
         initEndingDigitAdapterAdapter()
 
         viewModel.matchResult.observe(viewLifecycleOwner, EventObserver {
