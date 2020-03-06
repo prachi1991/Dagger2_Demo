@@ -61,6 +61,8 @@ class InPlayMatchListingAdapter(val listener: OnItemClickListener?) :
 
                 if(matchListingItem?.match?.isJoin==true){
                     tvJoined.text="Joined"
+                }else{
+                    tvJoined.text="Join Now"
                 }
 
                 tvJoined.setOnClickListener {
