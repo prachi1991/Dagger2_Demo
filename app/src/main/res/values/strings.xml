@@ -75,6 +75,13 @@
     <string name="all_contest">All Contest</string>
     <string name="my_contest">My Contest</string>
     <string name="total_10_spot">Total 10 Spot</string>
+    <string name="in_play">In Play</string>
+    <string name="join_now">Join Now</string>
+    <string name="live">Live</string>
+    <string name="upcoming">Upcoming Matches</string>
+    <string name="cricket">Cricket</string>
+    <string name="football">Football</string>
+    <string name="coming_soon">Coming Soon</string>
     <string name="no">No</string>
     <string name="play_now">Play Now</string>
     <string name="buy_now">Buy Now</string>

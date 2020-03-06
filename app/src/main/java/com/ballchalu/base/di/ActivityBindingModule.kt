@@ -8,6 +8,7 @@ import com.ballchalu.ui.login.forget.ForgetPasswordModule
 import com.ballchalu.ui.login.signin.SignInModule
 import com.ballchalu.ui.login.signup.SignUpModule
 import com.ballchalu.ui.match.details.MatchDetailsModule
+import com.ballchalu.ui.match_listing.MatchListingModule
 import com.ballchalu.ui.navigation.NavigationActivity
 import com.ballchalu.ui.navigation.NavigationModule
 import com.ballchalu.ui.splash.SplashActivity
@@ -54,7 +55,8 @@ abstract class ActivityBindingModule {
             NavigationModule::class,
             MatchDetailsModule::class,
             ContestModule::class,
-            BcCoinsLedgersModule::class
+            BcCoinsLedgersModule::class,
+            MatchListingModule::class
         ]
     )
     internal abstract fun navigationActivity(): NavigationActivity

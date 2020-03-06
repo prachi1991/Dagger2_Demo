@@ -5,6 +5,7 @@ import com.ccpp.shared.core.base.BaseRepository
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.network.repository.ContestRepository
 import com.ccpp.shared.network.repository.LoginRepository
+import com.ccpp.shared.network.repository.MatchesRepository
 import com.ccpp.shared.network.repository.MatchDetailsRepository
 import com.ccpp.shared.network.repository.SplashRepository
 import dagger.Module
@@ -82,7 +83,16 @@ class NetworkModule {
         preferenceStorage: SharedPreferenceStorage,
         apiService: ApiService,
         baseRepository: BaseRepository
-    ): LoginRepository = LoginRepository(preferenceStorage, apiService, baseRepository)
+    ): LoginRepository = LoginRepository(
+        preferenceStorage, apiService, baseRepository)
+
+        @Provides
+        @Singleton
+        fun provideMatchesListingRepository(
+            preferenceStorage: SharedPreferenceStorage,
+            apiService: ApiService,
+            baseRepository: BaseRepository
+        ): MatchesRepository = MatchesRepository(preferenceStorage, apiService, baseRepository)
 
     @Provides
     @Singleton

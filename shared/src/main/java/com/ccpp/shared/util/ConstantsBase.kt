@@ -25,4 +25,8 @@ object ConstantsBase {
     const val MATCH_WINNER = "match_winner"
     const val ENDING_DIGIT = "ending_digit"
 
+    const val EVENT_TYPE = "cricket"
+    const val IN_PLAY = "inplay"
+    const val UPCOMING = "upcoming"
+
 }

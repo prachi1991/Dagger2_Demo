@@ -1,9 +1,6 @@
 package com.ccpp.shared.network
 
-import com.ccpp.shared.domain.ForgetPassRes
-import com.ccpp.shared.domain.LoginRes
-import com.ccpp.shared.domain.LoginResult
-import com.ccpp.shared.domain.SignUpReq
+import com.ccpp.shared.domain.*
 import com.ccpp.shared.domain.match_details.MatchDetailsRes
 import com.ccpp.shared.domain.contest.CreateContestRes
 import com.ccpp.shared.domain.contest.MatchContestRes
@@ -30,6 +27,9 @@ internal interface ApiClient {
 
     @POST("api/v1/sign_up")
     fun callSignUpAsync(@Body signUpReq: SignUpReq): Deferred<Response<LoginRes>>
+
+    @GET("api/v1/matches")
+    fun callMatchesListingAsync(@Query ("event_type") event_type: String,@Query ("play_status") play_status: String): Deferred<Response<MatchListingRes>>
 
 
     @GET("api/v1/passwords/forgot")
