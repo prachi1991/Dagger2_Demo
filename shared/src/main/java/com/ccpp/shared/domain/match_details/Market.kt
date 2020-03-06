@@ -25,5 +25,8 @@ data class Market(
     val runners: List<RunnersItem>? = null,
 
     @field:SerializedName("status")
-    val status: String? = null
+    val status: String? = null,
+
+    @SerializedName("tournament_id")
+    var tournamentId: Int? = null
 )

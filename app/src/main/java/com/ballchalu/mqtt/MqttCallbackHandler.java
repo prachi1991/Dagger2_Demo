@@ -50,6 +50,7 @@ public class MqttCallbackHandler implements MqttCallback {
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
 
+        Timber.e("Send Broadcast is called for heroic_commentary updates");
 
         //create arguments to format message arrived notifcation string
         String[] args = new String[2];
@@ -76,7 +77,6 @@ public class MqttCallbackHandler implements MqttCallback {
             Timber.e("Send Broadcast is called for score/odds updates");
 
         }
-
 
         context.sendBroadcast(refreshIntent);
 
