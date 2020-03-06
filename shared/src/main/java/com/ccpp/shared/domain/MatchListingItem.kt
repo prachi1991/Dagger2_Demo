@@ -1,9 +1,10 @@
 package com.ccpp.shared.domain
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MatchListingItem(
 
-	@field:SerializedName("match")
-	val match: MatchListing? = null
-)
+    @SerializedName("match")
+    val match: MatchListing? = null
+) : Serializable

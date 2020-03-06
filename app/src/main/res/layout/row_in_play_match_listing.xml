@@ -2,10 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,8 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/backgroud_solid_light_grey"
-                >
+                android:background="@drawable/backgroud_solid_light_grey">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtMatchName"
@@ -30,58 +25,53 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:text="@string/even"
+                    android:layout_marginTop="@dimen/_3sdp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    />
+                    tools:text="Demo Ind Vs Demo Aus" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtMatchStatus"
+                    fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_light_green"
-                    android:text="@string/live"
                     android:layout_below="@id/txtMatchName"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:textSize="@dimen/_12ssp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    fontPath="fonts/Play-Regular.ttf"
-                    android:visibility="gone"
-                    />
+                    android:text="@string/live"
+                    android:textColor="@color/text_light_green"
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="gone" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtMatchDate"
+                    fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_color_grey"
-                    tools:text="@string/live"
                     android:layout_below="@id/txtMatchName"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:textSize="@dimen/_12ssp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    fontPath="fonts/Play-Regular.ttf"
-                    />
+                    android:textColor="@color/text_color_grey"
+                    android:textSize="@dimen/_12ssp"
+                    tools:text="Feb 20 2020" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvJoined"
+                    fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_light_green"
-                    android:text="@string/join_now"
                     android:layout_below="@id/txtMatchName"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:textSize="@dimen/_12ssp"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    fontPath="fonts/Play-Regular.ttf"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    />
-
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="@string/join_now"
+                    android:textColor="@color/text_light_green"
+                    android:textSize="@dimen/_12ssp" />
 
 
             </RelativeLayout>
-
-
 
 
         </LinearLayout>

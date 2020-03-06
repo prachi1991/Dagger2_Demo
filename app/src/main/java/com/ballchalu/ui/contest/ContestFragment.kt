@@ -13,6 +13,7 @@ import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ballchalu.ui.dialog.NotificationDialog
 import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.domain.MatchListing
 import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.domain.contest.UserContest
 import com.ccpp.shared.util.ConstantsBase
@@ -41,6 +42,10 @@ class ContestFragment : BaseFragment() {
         binding = FragmentContestBinding.inflate(inflater).apply {
             lifecycleOwner = this@ContestFragment
         }
+        arguments?.let {
+            viewModel.matchItem = it.getSerializable(ConstantsBase.KEY_MATCH_ITEM) as MatchListing?
+        }
+        updateUI()
 
         return binding.root
     }
@@ -48,10 +53,8 @@ class ContestFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initSessionAdapterAdapter()
-        //   myContestList.add("Play")
-        // notificationDialog = activity!!.let { NotificationDialog(it) }
 
-        viewModel.getAllMatchesContest("2") //match id
+        viewModel.getAllMatchesContest() //match id
 
         viewModel.matchContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             it.contests?.forEach {
@@ -86,11 +89,11 @@ class ContestFragment : BaseFragment() {
                 when (checkedId) {
                     R.id.rbAllContest -> {
                         contestAdapter?.clear()
-                        viewModel.getAllMatchesContest("2") //matchId
+                        viewModel.getAllMatchesContest() //matchId
                     }
                     R.id.rbMyContest -> {
                         contestAdapter?.clear()
-                        viewModel.getUserMatchesContest("2") //matchId
+                        viewModel.getUserMatchesContest() //matchId
                     }
                     else -> false
                 }
@@ -99,6 +102,9 @@ class ContestFragment : BaseFragment() {
         contestAdapter?.setItemList(allContestList)
     }
 
+    private fun updateUI() {
+        binding.tvMatchName.text = viewModel.matchItem?.title
+    }
     private fun initSessionAdapterAdapter() {
         contestAdapter = ContestAdapter(object : ContestAdapter.OnItemClickListener {
             override fun onBuyNowClicked(contestModel: Contest) {

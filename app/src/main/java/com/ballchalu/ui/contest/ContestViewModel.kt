@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
+import com.ccpp.shared.domain.MatchListing
 import com.ccpp.shared.domain.contest.CreateContestRes
 import com.ccpp.shared.domain.contest.MatchContestRes
 import com.ccpp.shared.domain.contest.UserMatchContestRes
@@ -20,13 +21,15 @@ class ContestViewModel @Inject constructor(
     val context: Context
 ) : BaseViewModel() {
 
+    var matchItem: MatchListing? = null
     private val _matchContestResult = MutableLiveData<Event<MatchContestRes>>()
     val matchContestResult: LiveData<Event<MatchContestRes>> = _matchContestResult
 
-    fun getAllMatchesContest(Id: String) {
+    fun getAllMatchesContest() {
+        if (matchItem?.id == null) return
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = contestRepository.getMatchContest(Id)) {
+            when (val result = contestRepository.getMatchContest(matchItem?.id?.toString()!!)) {
                 is Results.Success -> handleSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
@@ -43,10 +46,11 @@ class ContestViewModel @Inject constructor(
     private val _matchUserContestResult = MutableLiveData<Event<UserMatchContestRes>>()
     val matchUserContestResult: LiveData<Event<UserMatchContestRes>> = _matchUserContestResult
 
-    fun getUserMatchesContest(Id: String) {
+    fun getUserMatchesContest() {
+        if (matchItem?.id == null) return
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = contestRepository.getUserMatchContest(Id)) {
+            when (val result = contestRepository.getUserMatchContest(matchItem?.id?.toString()!!)) {
                 is Results.Success -> handleUserContestSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }

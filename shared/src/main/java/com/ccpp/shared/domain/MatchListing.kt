@@ -1,6 +1,7 @@
 package com.ccpp.shared.domain
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MatchListing(
 
@@ -24,4 +25,4 @@ data class MatchListing(
 
 	@field:SerializedName("provider_name")
 	val providerName: String? = null
-)
+) : Serializable

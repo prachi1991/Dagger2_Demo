@@ -7,6 +7,7 @@ object ConstantsBase {
 
 
     const val KEY_MATCH_ID: String = "match_id"
+    const val KEY_MATCH_ITEM: String = "keyMatchList"
     const val open = "OPEN"
     const val suspend = "SUSPEND"
     const val close = "CLOSE"

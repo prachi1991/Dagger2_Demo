@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.ballchalu.R
 
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchListingBinding
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
 import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.domain.MatchListingItem
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
-class MatchListingFragment : BaseFragment() {
+class MatchListingFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -23,6 +27,7 @@ class MatchListingFragment : BaseFragment() {
     private lateinit var viewModel: MatchListingViewModel
 
     private var inPlayListAdapter: InPlayMatchListingAdapter? = null
+    private var upcomingListAdapter: InPlayMatchListingAdapter? = null
 
 
 
@@ -55,16 +60,16 @@ class MatchListingFragment : BaseFragment() {
             if(it.matches?.size!=0)
                 binding.llInplay.visibility=View.VISIBLE
 
-            inPlayListAdapter = InPlayMatchListingAdapter()
+            inPlayListAdapter = InPlayMatchListingAdapter(this)
             binding.rvInPlayMatchListing.adapter = inPlayListAdapter
             inPlayListAdapter?.setItemList(it.matches,ConstantsBase.IN_PLAY)
         })
         viewModel.upcomingListEvent.observe(viewLifecycleOwner,EventObserver{
             if(it.matches?.size!=0)
                 binding.llUpcoming.visibility=View.VISIBLE
-            inPlayListAdapter = InPlayMatchListingAdapter()
-            binding.rvUpcomingMatchListing.adapter = inPlayListAdapter
-            inPlayListAdapter?.setItemList(it.matches,ConstantsBase.UPCOMING)
+            upcomingListAdapter = InPlayMatchListingAdapter(this)
+            binding.rvUpcomingMatchListing.adapter = upcomingListAdapter
+            upcomingListAdapter?.setItemList(it.matches, ConstantsBase.UPCOMING)
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
@@ -72,6 +77,8 @@ class MatchListingFragment : BaseFragment() {
         })
 
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+
         })
 
 
@@ -84,5 +91,12 @@ class MatchListingFragment : BaseFragment() {
                 arguments = Bundle().apply {
                 }
             }
+    }
+
+    override fun onMatchClicked(matchListingItem: MatchListingItem) {
+        val bundle = Bundle().apply {
+            putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListingItem.match)
+        }
+        findNavController().navigate(R.id.nav_contest, bundle)
     }
 }

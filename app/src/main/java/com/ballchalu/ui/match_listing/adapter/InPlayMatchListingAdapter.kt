@@ -9,7 +9,8 @@ import com.ccpp.shared.domain.MatchListingItem
 import com.ccpp.shared.util.ConstantsBase
 
 
-class InPlayMatchListingAdapter : RecyclerView.Adapter<InPlayMatchListingAdapter.ViewHolder>() {
+class InPlayMatchListingAdapter(val listener: OnItemClickListener?) :
+    RecyclerView.Adapter<InPlayMatchListingAdapter.ViewHolder>() {
     private var list: List<MatchListingItem>? = null
     private var matchStatus: String = ""
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,23 +39,29 @@ class InPlayMatchListingAdapter : RecyclerView.Adapter<InPlayMatchListingAdapter
         return list?.size ?: 0
     }
 
-
+    interface OnItemClickListener {
+        fun onMatchClicked(matchListingItem: MatchListingItem)
+    }
     inner class ViewHolder(val binding: RowInPlayMatchListingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(s: MatchListingItem?, position: Int) {
+        fun setData(matchListingItem: MatchListingItem?, position: Int) {
             with(binding) {
-                binding.txtMatchName.text=s?.match?.title
+                txtMatchName.text = matchListingItem?.match?.title
 
                 if(matchStatus.equals(ConstantsBase.UPCOMING,true)){
-                    binding.txtMatchStatus.visibility=View.GONE
-                    binding.txtMatchDate.visibility=View.VISIBLE
-                    binding.txtMatchDate.text=s?.match?.startTime
+                    txtMatchStatus.visibility = View.GONE
+                    txtMatchDate.visibility = View.VISIBLE
+                    txtMatchDate.text = matchListingItem?.match?.startTime
                 }
                 else{
-                    binding.txtMatchStatus.visibility=View.VISIBLE
-                    binding.txtMatchDate.visibility=View.GONE
+                    txtMatchStatus.visibility = View.VISIBLE
+                    txtMatchDate.visibility = View.GONE
                 }
+                tvJoined.setOnClickListener {
+                    matchListingItem?.let { it1 -> listener?.onMatchClicked(it1) }
+                }
+
             }
 
         }
