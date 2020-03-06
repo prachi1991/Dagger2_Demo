@@ -75,6 +75,8 @@
     <string name="all_contest">All Contest</string>
     <string name="my_contest">My Contest</string>
     <string name="total_10_spot">Total 10 Spot</string>
+    <string name="dialogTitle">Logout</string>
+    <string name="dialogMessage">Are you sure you want to logout?</string>
     <string name="in_play">In Play</string>
     <string name="join_now">Join Now</string>
     <string name="live">Live</string>
