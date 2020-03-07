@@ -28,4 +28,9 @@
         android:name="com.ballchalu.ui.bc_coins.BcCoinsFragment"
         android:label="BcCoinsFragment" />
 
+    <fragment
+        android:id="@+id/nav_winners"
+        android:name="com.ballchalu.ui.winners.WinnersFragment"
+        android:label="WinnersFragment" />
+
 </navigation>

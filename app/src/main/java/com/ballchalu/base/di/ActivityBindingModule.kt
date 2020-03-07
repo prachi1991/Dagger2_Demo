@@ -14,6 +14,7 @@ import com.ballchalu.ui.navigation.NavigationActivity
 import com.ballchalu.ui.navigation.NavigationModule
 import com.ballchalu.ui.splash.SplashActivity
 import com.ballchalu.ui.splash.SplashModule
+import com.ballchalu.ui.winners.WinnerModule
 import com.ccpp.shared.core.di.ActivityScoped
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -58,7 +59,8 @@ abstract class ActivityBindingModule {
             ContestModule::class,
             BcCoinsLedgersModule::class,
             BcCoinModule::class,
-            MatchListingModule::class
+            MatchListingModule::class,
+            WinnerModule::class
         ]
     )
     internal abstract fun navigationActivity(): NavigationActivity
