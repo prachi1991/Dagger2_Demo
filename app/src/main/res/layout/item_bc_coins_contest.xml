@@ -19,7 +19,6 @@
         android:id="@+id/detail_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/dark_grey"
         android:paddingLeft="@dimen/_10sdp"
         android:paddingRight="@dimen/_10sdp"
         >
@@ -48,13 +47,14 @@
         <View
             android:layout_width="@dimen/_1sdp"
             android:layout_height="@dimen/_36sdp"
-            android:background="@color/white"
+            android:background="@color/dark_grey"
            android:layout_centerInParent="true"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="For Only"
+            android:textColor="@color/text_color_grey"
             android:background="@drawable/backgroud_solid_secondary"
             android:layout_centerInParent="true"
             android:padding="@dimen/_5sdp"
@@ -89,17 +89,17 @@
         android:layout_width="match_parent"
         android:paddingRight="@dimen/_10sdp"
         android:paddingLeft="@dimen/_10sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:background="@color/dark_grey">
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_10sdp"
+        >
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_30sdp"
             android:background="@drawable/backgroud_solid_secondary"
             android:text="Buy Now"
-            android:textSize="@dimen/_12ssp"
-            android:textColor="@color/menu_light_green"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/text_light_green"
             fontPath="fonts/Play-Bold.ttf"/>
 
     </RelativeLayout>

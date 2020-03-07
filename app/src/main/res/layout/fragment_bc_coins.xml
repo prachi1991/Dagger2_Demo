@@ -40,7 +40,7 @@
                         android:layout_height="@dimen/_36sdp"
                         android:src="@drawable/ic_avtar"
                         android:padding="@dimen/_4sdp"
-                        android:background="@drawable/shape_circle_secondary"
+                        android:background="@drawable/shape_circle_grey"
                         android:layout_gravity="center_vertical"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -81,7 +81,7 @@
                         android:layout_height="@dimen/_36sdp"
                         android:src="@drawable/bcm"
                         android:padding="@dimen/_4sdp"
-                        android:background="@drawable/shape_circle_secondary"
+                        android:background="@drawable/shape_circle_grey"
                         android:layout_gravity="center_vertical"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
