@@ -173,7 +173,7 @@ class MatchDetailsFragment : BaseFragment() {
                 bwlTeamRunId = items2.id
             }
 
-            if (items2.betfairRunnerName?.trim().equals(batTeamRunName.trim())) {
+            if (items2.betfairRunnerName?.trim().equals(bwlTeamRunName.trim())) {
                 setBwlTeamBhaav(items2.back, items2.lay, items2.canBack, items2.canLay)
                 bwlTeamRunId = items2.id
             } else {
@@ -252,6 +252,7 @@ class MatchDetailsFragment : BaseFragment() {
     private val scoreUpdate = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             intent.getStringExtra(ConstantsBase.PUB_NUB)?.let {
+                Timber.e(it)
                 try {
                     val oddJsonObject = JSONObject(it)
                     if (oddJsonObject.has(ConstantsBase.type)) {
@@ -280,20 +281,34 @@ class MatchDetailsFragment : BaseFragment() {
     private fun parseMarket(oddJsonObject: JSONObject) {
         if (!oddJsonObject.has(ConstantsBase.KEY_MARKET)) return
         val marketObject = oddJsonObject.getJSONObject(ConstantsBase.KEY_MARKET)
-        if (viewModel.matchId == marketObject.getInt(ConstantsBase.KEY_MARKET)) {
-            val market: MqttMarket =
+        if (viewModel.matchId == marketObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
+            val mqttMarket: MqttMarket =
                 GsonBuilder().create().fromJson(oddJsonObject.toString(), MqttMarket::class.java)
-            updateMarket(market, marketObject.getString(ConstantsBase.status))
+            if (mqttMarket.market?.heroicMarketType?.equals(ConstantsBase.EVEN_ODD, true) == true)
+                mqttMarket.market?.let { updateEvenOddData(it) }
+            else
+                updateMarket(mqttMarket, marketObject.getString(ConstantsBase.status))
         }
     }
 
+    private fun updateEvenOddData(market: Market) {
+        binding.layoutEvenOdd.frameEvenOdd.visibility =
+            if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
+        val marketStatus = market.status?.equals(ConstantsBase.open, true) == true
+        binding.layoutEvenOdd.tvEvenOddType.text = market.betfairMarketType
+        binding.layoutEvenOdd.tvTeam1Back.text =
+            if (market.runners?.get(0)?.canBack == true && marketStatus) market.runners?.get(0)?.B else ""
+        binding.layoutEvenOdd.tvTeam2Back.text =
+            if (market.runners?.get(1)?.canBack == true && marketStatus) market.runners?.get(1)?.L else ""
+    }
     private fun updateMarket(market: MqttMarket, status: String) {
 
         when {
             status.trim().equals(ConstantsBase.open, true) -> {
                 val run1 = market.market?.runners?.get(0)
                 val run2 = market.market?.runners?.get(1)
-                val run3 = market.market?.runners?.get(2)
+                val run3 =
+                    if (market.market?.runners?.size ?: 0 > 2) market.market?.runners?.get(2) else null
 
                 if (run1 == null || run2 == null || run1.id == 0 || run2.id == 0) return
 
@@ -316,8 +331,6 @@ class MatchDetailsFragment : BaseFragment() {
                 if (run3?.id != 0 && drawTeamRunId == run3?.id)
                     setDrawTeamBhaav(run3?.B, run3?.L, run3?.canBack, run3?.canLay)
 
-                setMarketStatus(false)
-
             }
             status.equals(ConstantsBase.suspend, ignoreCase = true) -> {
                 setMarketStatus(true)
@@ -333,6 +346,8 @@ class MatchDetailsFragment : BaseFragment() {
             setBatTeamBhaav("", "", isBack = true, isLay = true)
             setBwlTeamBhaav("", "", isBack = true, isLay = true)
             setDrawTeamBhaav("", "", isBack = true, isLay = true)
+        } else {
+
         }
     }
 

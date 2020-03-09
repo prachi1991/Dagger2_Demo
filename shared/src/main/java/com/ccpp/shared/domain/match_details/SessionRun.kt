@@ -9,13 +9,13 @@ data class SessionRun(
     @field:SerializedName("no_run")
     val noRun: String? = null,
 
-    @field:SerializedName("yes_rate")
+    @SerializedName("yes_rate")
     val yesRate: String? = null,
 
-    @field:SerializedName("session_id")
+    @SerializedName("session_id")
     val sessionId: Int? = null,
 
-    @field:SerializedName("no_rate")
+    @SerializedName("no_rate")
     val noRate: String? = null,
 
     @field:SerializedName("id")

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -52,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:text="@{model.getOvers}"
+                    android:text="@{model.title}"
                     android:textColor="@color/text_light_green"
                     android:textSize="@dimen/_10ssp" />
 
@@ -111,7 +112,8 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="@{model.session.sessionRun.yesRate.toString()}"
+                        android:text="@{model.yesRate}"
+                        tools:text="0"
                         android:textColor="@color/text_light_green"
                         android:textSize="@dimen/_10ssp" />
                 </RelativeLayout>
@@ -163,7 +165,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="@{model.session.sessionRun.noRate.toString()}"
+                        android:text="@{model.noRate}"
                         android:textColor="@color/text_light_green"
                         android:textSize="@dimen/_10ssp" />
                 </RelativeLayout>
