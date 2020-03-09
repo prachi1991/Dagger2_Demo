@@ -4,6 +4,7 @@ import com.ccpp.shared.BuildConfig
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.MatchListingReq
 import com.ccpp.shared.domain.SignUpReq
+import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.util.ConstantsBase.REQUEST_TIMEOUT
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
@@ -69,6 +70,8 @@ open class ApiService @Inject constructor(private val sharedPref: SharedPreferen
         apiClient.callLoginWithSocialAsync(token, socialMedia, emailId)
 
     fun callSignUpAsync(signUpReq: SignUpReq) = apiClient.callSignUpAsync(signUpReq)
+
+    fun callCretateBetAsync(betReq: CreateBetReq) = apiClient.callCretateBetAsync(betReq)
 
     fun callForgetPasswordAsync(email: String) = apiClient.callForgetPasswordAsync(email)
 

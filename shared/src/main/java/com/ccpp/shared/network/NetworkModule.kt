@@ -3,11 +3,7 @@ package com.ccpp.shared.network
 import com.ccpp.shared.BuildConfig
 import com.ccpp.shared.core.base.BaseRepository
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.network.repository.ContestRepository
-import com.ccpp.shared.network.repository.LoginRepository
-import com.ccpp.shared.network.repository.MatchesRepository
-import com.ccpp.shared.network.repository.MatchDetailsRepository
-import com.ccpp.shared.network.repository.SplashRepository
+import com.ccpp.shared.network.repository.*
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -122,6 +118,17 @@ class NetworkModule {
         baseRepository: BaseRepository
     ): ContestRepository =
         ContestRepository(
+            apiService,
+            baseRepository
+        )
+
+    @Provides
+    @Singleton
+    fun provideCreateBetRepository(
+        apiService: ApiService,
+        baseRepository: BaseRepository
+    ): CreateBetRepository =
+        CreateBetRepository(
             apiService,
             baseRepository
         )
