@@ -31,13 +31,9 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
         return list?.size ?: 0
     }
 
-    fun setItemList(market: List<RunnersItem>?) {
-        this.list = market
-        notifyDataSetChanged()
-    }
 
-    fun setItemList(market: List<RunnersItem>?, status: String?) {
-        this.list = market
+    fun setItemList(runnersItemList: List<RunnersItem>?, status: String?) {
+        this.list = runnersItemList
         this.isSuspend = status.equals(ConstantsBase.suspend, true)
         notifyDataSetChanged()
     }

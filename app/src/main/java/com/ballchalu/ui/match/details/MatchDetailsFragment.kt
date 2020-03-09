@@ -184,27 +184,6 @@ class MatchDetailsFragment : BaseFragment() {
             binding.tvBallTeamName.text = items2.betfairRunnerName
         }
         setMarketStatus(market?.status?.equals(ConstantsBase.suspend, true) == true)
-//            if (list.getMarket().getRunners().size() > 2) {
-//                llDraw.setVisibility(View.VISIBLE)
-//                val items3: Runner = list.getMarket().getRunners().get(2).getRunner()
-//                setDrawTeamBhaav(
-//                    items3.getBack(),
-//                    items3.getLay(),
-//                    items3.isCanBack(),
-//                    items3.isCanLay()
-//                )
-//                tvDrawName.setText(items3.getBetfairRunnerName())
-//                val drawTeamRunnerName: String = items3.getBetfairRunnerName()
-//                drawTeamRunnerId = items3.id
-//            } else llDraw.setVisibility(View.GONE)
-
-//            tvMarketType.setText(
-//                getString(
-//                    R.string.market_type,
-//                    list.getMarket().getBetfairMarketType()
-//                )
-//            )
-
 
     }
 
@@ -282,13 +261,30 @@ class MatchDetailsFragment : BaseFragment() {
         if (!oddJsonObject.has(ConstantsBase.KEY_MARKET)) return
         val marketObject = oddJsonObject.getJSONObject(ConstantsBase.KEY_MARKET)
         if (viewModel.matchId == marketObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
-            val mqttMarket: MqttMarket =
+            val market: Market? =
                 GsonBuilder().create().fromJson(oddJsonObject.toString(), MqttMarket::class.java)
-            if (mqttMarket.market?.heroicMarketType?.equals(ConstantsBase.EVEN_ODD, true) == true)
-                mqttMarket.market?.let { updateEvenOddData(it) }
-            else
-                updateMarket(mqttMarket, marketObject.getString(ConstantsBase.status))
+                    ?.market
+            when {
+                market?.heroicMarketType?.equals(
+                    ConstantsBase.EVEN_ODD,
+                    true
+                ) == true -> updateEvenOddData(market)
+                market?.heroicMarketType?.equals(
+                    ConstantsBase.ENDING_DIGIT,
+                    true
+                ) == true -> updateEndingDigitData(market)
+                else -> updateMarket(market, marketObject.getString(ConstantsBase.status))
+            }
         }
+    }
+
+    private fun updateEndingDigitData(market: Market) {
+        binding.llEndingDigitSection.visibility =
+            if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
+        market.runners?.forEach {
+            it.runner = Runner(back = it.B, canBack = it.canBack)
+        }
+        endingDigitAdapter?.setItemList(market.runners, market.status)
     }
 
     private fun updateEvenOddData(market: Market) {
@@ -301,14 +297,15 @@ class MatchDetailsFragment : BaseFragment() {
         binding.layoutEvenOdd.tvTeam2Back.text =
             if (market.runners?.get(1)?.canBack == true && marketStatus) market.runners?.get(1)?.L else ""
     }
-    private fun updateMarket(market: MqttMarket, status: String) {
+
+    private fun updateMarket(market: Market?, status: String) {
 
         when {
             status.trim().equals(ConstantsBase.open, true) -> {
-                val run1 = market.market?.runners?.get(0)
-                val run2 = market.market?.runners?.get(1)
+                val run1 = market?.runners?.get(0)
+                val run2 = market?.runners?.get(1)
                 val run3 =
-                    if (market.market?.runners?.size ?: 0 > 2) market.market?.runners?.get(2) else null
+                    if (market?.runners?.size ?: 0 > 2) market?.runners?.get(2) else null
 
                 if (run1 == null || run2 == null || run1.id == 0 || run2.id == 0) return
 
