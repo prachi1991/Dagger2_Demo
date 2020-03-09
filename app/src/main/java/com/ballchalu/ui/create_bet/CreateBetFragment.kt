@@ -63,6 +63,18 @@ class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickL
                 tvCount.setText("0")
             }
 
+            btnPlaceBet.setOnClickListener {
+                if(tvCount.text.isNullOrEmpty())
+                {
+                    Toast.makeText(context,"Please enter the amount",Toast.LENGTH_SHORT).show()
+                }else{
+                    if(tvCount.text.toString().toInt() < 1)
+                    {
+                        Toast.makeText(context,"Amount should be grater than zero",Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
             tvCount.onFocusChangeListener = OnFocusChangeListener { view, hasFocus ->
                 if (hasFocus) {
                    count = 0
@@ -135,7 +147,6 @@ class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickL
     }
 
     override fun onMatchClicked(matchListingItem: MatchListingItem) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

@@ -259,6 +259,7 @@
                 android:background="@color/dark_grey">
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_place_bet"
                     android:layout_weight="1"
                     android:layout_marginRight="@dimen/_2sdp"
                     android:background="@drawable/green_button_border"
