@@ -64,7 +64,6 @@
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingRight="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_3sdp"
-                    android:text="@{model.back}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10ssp" />
 

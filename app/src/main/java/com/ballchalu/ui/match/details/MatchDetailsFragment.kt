@@ -4,13 +4,17 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
 import com.ballchalu.mqtt.MqttMarket
@@ -20,6 +24,7 @@ import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.match_details.*
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.GsonBuilder
 import org.json.JSONException
 import org.json.JSONObject
@@ -28,6 +33,7 @@ import javax.inject.Inject
 
 class MatchDetailsFragment : BaseFragment() {
 
+    private var snackBar: Snackbar? = null
     private var sessionAdapter: SessionAdapter? = null
     private var endingDigitAdapter: EndingDigitAdapter? = null
     @Inject
@@ -35,6 +41,13 @@ class MatchDetailsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMatchDetailsBinding
     private lateinit var viewModel: MatchDetailsViewModel
+
+    private var batTeamRunId: Int? = 0
+    private var bwlTeamRunId: Int? = 0
+    private var drawTeamRunId: Int? = 0
+
+    private var batTeamRunName = ""
+    private var bwlTeamRunName = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,19 +61,21 @@ class MatchDetailsFragment : BaseFragment() {
         arguments?.let {
             viewModel.matchId = it.getInt(ConstantsBase.KEY_PROVIDER_ID)
         }
-
+        registerReceiver()
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        requireContext().registerReceiver(scoreUpdate, IntentFilter("Action_Pubnub"))
-        requireContext().registerReceiver(oddsReceiver, IntentFilter("Odds_Updates"))
+    private fun registerReceiver() {
+        requireContext().registerReceiver(
+            networkStateReceiver,
+            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        )
+        requireContext().registerReceiver(scoreUpdate, IntentFilter(ConstantsBase.ACTION_PUB_NUB))
+        requireContext().registerReceiver(oddsReceiver, IntentFilter(ConstantsBase.ODDS_UPDATES))
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroyView() {
+        super.onDestroyView()
         requireContext().unregisterReceiver(scoreUpdate)
         requireContext().unregisterReceiver(oddsReceiver)
     }
@@ -72,6 +87,11 @@ class MatchDetailsFragment : BaseFragment() {
 
         viewModel.matchResult.observe(viewLifecycleOwner, EventObserver {
             setMatchData(it.match)
+        })
+        viewModel.loading.observe(viewLifecycleOwner, EventObserver {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            if (binding.pullRefreshLayout.isRefreshing)
+                binding.pullRefreshLayout.isRefreshing = false
         })
 
         viewModel.sessionEvent.observe(viewLifecycleOwner, EventObserver {
@@ -95,17 +115,24 @@ class MatchDetailsFragment : BaseFragment() {
         })
 
         viewModel.callMatchDetailsAsync()
+        binding.pullRefreshLayout.setOnRefreshListener {
+            viewModel.callMatchDetailsAsync()
+        }
     }
 
     private fun setEvenOddData(market: Market) {
         binding.layoutEvenOdd.frameEvenOdd.visibility =
             if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
-
+        val marketStatus = market.status?.equals(ConstantsBase.open, true) == true
         binding.layoutEvenOdd.tvEvenOddType.text = market.betfairMarketType
         binding.layoutEvenOdd.tvTeam1Back.text =
-            if (market.runners?.get(0)?.runner?.canBack == true) market.runners?.get(0)?.runner?.back else ""
+            if (market.runners?.get(0)?.runner?.canBack == true && marketStatus) market.runners?.get(
+                0
+            )?.runner?.back else ""
         binding.layoutEvenOdd.tvTeam2Back.text =
-            if (market.runners?.get(1)?.runner?.canBack == true) market.runners?.get(1)?.runner?.back else ""
+            if (market.runners?.get(1)?.runner?.canBack == true && marketStatus) market.runners?.get(
+                1
+            )?.runner?.back else ""
     }
 
 
@@ -125,6 +152,8 @@ class MatchDetailsFragment : BaseFragment() {
         binding.tvBallTeamScore.text =
             if (score?.bwlteamdesc.isNullOrEmpty()) "Bowling..." else score?.bwlteamdesc
 
+        batTeamRunName = score?.batteamname.toString()
+        bwlTeamRunName = score?.bwlteamname.toString()
     }
 
     private fun setMarketData(market: Market?) {
@@ -134,6 +163,49 @@ class MatchDetailsFragment : BaseFragment() {
 
         setBatTeamBhaav(items1?.back, items1?.lay, items1?.canBack, items1?.canLay)
         setBwlTeamBhaav(items2?.back, items2?.lay, items2?.canBack, items2?.canLay)
+
+        if (items1 != null && items2 != null) {
+            if (items1.betfairRunnerName?.trim().equals(batTeamRunName.trim())) {
+                setBatTeamBhaav(items1.back, items1.lay, items1.canBack, items1.canLay)
+                batTeamRunId = items1.id
+            } else {
+                setBwlTeamBhaav(items2.back, items2.lay, items2.canBack, items2.canLay)
+                bwlTeamRunId = items2.id
+            }
+
+            if (items2.betfairRunnerName?.trim().equals(batTeamRunName.trim())) {
+                setBwlTeamBhaav(items2.back, items2.lay, items2.canBack, items2.canLay)
+                bwlTeamRunId = items2.id
+            } else {
+                setBatTeamBhaav(items1.back, items1.lay, items1.canBack, items1.canLay)
+                batTeamRunId = items1.id
+            }
+            binding.tvBatTeamName.text = items1.betfairRunnerName
+            binding.tvBallTeamName.text = items2.betfairRunnerName
+        }
+        setMarketStatus(market?.status?.equals(ConstantsBase.suspend, true) == true)
+//            if (list.getMarket().getRunners().size() > 2) {
+//                llDraw.setVisibility(View.VISIBLE)
+//                val items3: Runner = list.getMarket().getRunners().get(2).getRunner()
+//                setDrawTeamBhaav(
+//                    items3.getBack(),
+//                    items3.getLay(),
+//                    items3.isCanBack(),
+//                    items3.isCanLay()
+//                )
+//                tvDrawName.setText(items3.getBetfairRunnerName())
+//                val drawTeamRunnerName: String = items3.getBetfairRunnerName()
+//                drawTeamRunnerId = items3.id
+//            } else llDraw.setVisibility(View.GONE)
+
+//            tvMarketType.setText(
+//                getString(
+//                    R.string.market_type,
+//                    list.getMarket().getBetfairMarketType()
+//                )
+//            )
+
+
     }
 
     private fun setSessionData(sessionList: List<SessionsItem>?) {
@@ -148,7 +220,7 @@ class MatchDetailsFragment : BaseFragment() {
         binding.llEndingDigitSection.visibility =
             if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
         binding.tvEvenOddType.text = market.betfairMarketType
-        endingDigitAdapter?.setItemList(market.runners)
+        endingDigitAdapter?.setItemList(market.runners, market.status)
     }
 
 
@@ -165,6 +237,11 @@ class MatchDetailsFragment : BaseFragment() {
     private fun setBatTeamBhaav(back: String?, lay: String?, isBack: Boolean?, isLay: Boolean?) {
         binding.tvTeam1Lay.text = if (isBack == true) back else ""
         binding.tvTeam1Back.text = if (isLay == true) lay else ""
+    }
+
+    private fun setDrawTeamBhaav(back: String?, lay: String?, isBack: Boolean?, isLay: Boolean?) {
+//        binding.tvDrawBack.text = if (isBack == true) back else ""
+//        binding.tvDraw.text = if (isLay == true) lay else ""
     }
 
     private fun setBwlTeamBhaav(back: String?, lay: String?, isBack: Boolean?, isLay: Boolean?) {
@@ -186,17 +263,10 @@ class MatchDetailsFragment : BaseFragment() {
                                 }
                             }
                             type.equals(ConstantsBase.SESSION, ignoreCase = true) -> {
-                                //                            updateSession(oddJsonObject)
+//                                updateSession(oddJsonObject)
                             }
                             type.equals(ConstantsBase.ODD, ignoreCase = true) -> {
-                                if (!oddJsonObject.has(ConstantsBase.KEY_MARKET)) return
-                                val marketObject =
-                                    oddJsonObject.getJSONObject(ConstantsBase.KEY_MARKET)
-                                if (viewModel.matchId == marketObject.getInt(ConstantsBase.KEY_MARKET)) {
-                                    val market: MqttMarket = GsonBuilder().create()
-                                        .fromJson(oddJsonObject.toString(), MqttMarket::class.java)
-                                    //                                updateMarket(market, marketObject.getString(ConstantsBase.status))
-                                }
+                                parseMarket(oddJsonObject)
                             }
                         }
                     }
@@ -204,6 +274,65 @@ class MatchDetailsFragment : BaseFragment() {
                     Timber.e(e)
                 }
             }
+        }
+    }
+
+    private fun parseMarket(oddJsonObject: JSONObject) {
+        if (!oddJsonObject.has(ConstantsBase.KEY_MARKET)) return
+        val marketObject = oddJsonObject.getJSONObject(ConstantsBase.KEY_MARKET)
+        if (viewModel.matchId == marketObject.getInt(ConstantsBase.KEY_MARKET)) {
+            val market: MqttMarket =
+                GsonBuilder().create().fromJson(oddJsonObject.toString(), MqttMarket::class.java)
+            updateMarket(market, marketObject.getString(ConstantsBase.status))
+        }
+    }
+
+    private fun updateMarket(market: MqttMarket, status: String) {
+
+        when {
+            status.trim().equals(ConstantsBase.open, true) -> {
+                val run1 = market.market?.runners?.get(0)
+                val run2 = market.market?.runners?.get(1)
+                val run3 = market.market?.runners?.get(2)
+
+                if (run1 == null || run2 == null || run1.id == 0 || run2.id == 0) return
+
+                if (batTeamRunId == run1.id) setBatTeamBhaav(
+                    run1.B,
+                    run1.L,
+                    run1.canBack,
+                    run1.canLay
+                )
+                else setBwlTeamBhaav(run2.B, run2.L, run2.canBack, run2.canLay)
+
+                if (bwlTeamRunId == run2.id) setBwlTeamBhaav(
+                    run2.B,
+                    run2.L,
+                    run2.canBack,
+                    run2.canLay
+                )
+                else setBatTeamBhaav(run1.B, run1.L, run1.canBack, run1.canLay)
+
+                if (run3?.id != 0 && drawTeamRunId == run3?.id)
+                    setDrawTeamBhaav(run3?.B, run3?.L, run3?.canBack, run3?.canLay)
+
+                setMarketStatus(false)
+
+            }
+            status.equals(ConstantsBase.suspend, ignoreCase = true) -> {
+                setMarketStatus(true)
+            }
+            status.equals(ConstantsBase.close, ignoreCase = true) -> {
+                setMarketStatus(true)
+            }
+        }
+    }
+
+    private fun setMarketStatus(isSuspend: Boolean) {
+        if (isSuspend) {
+            setBatTeamBhaav("", "", isBack = true, isLay = true)
+            setBwlTeamBhaav("", "", isBack = true, isLay = true)
+            setDrawTeamBhaav("", "", isBack = true, isLay = true)
         }
     }
 
@@ -226,7 +355,7 @@ class MatchDetailsFragment : BaseFragment() {
     private fun updateEvent(oddJsonObject: JSONObject) {
         try {
             if (viewModel.matchId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
-                val jsonObject = oddJsonObject.getJSONObject("heroic_commentary")
+                val jsonObject = oddJsonObject.getJSONObject(ConstantsBase.HEROIC_COMMENTARY)
                 if (!TextUtils.isEmpty(jsonObject.getString(ConstantsBase.event)))
                     setEvents(jsonObject.getString(ConstantsBase.event).toLowerCase())
             }
@@ -245,6 +374,7 @@ class MatchDetailsFragment : BaseFragment() {
     private fun setEvents(event: String) {
         when (event) {
             ConstantsBase.WICKET -> {
+                binding.tvBetStatus.text = event
             }
             ConstantsBase.WICKET1 -> {
                 binding.tvBetStatus.text = " + 1"
@@ -356,6 +486,40 @@ class MatchDetailsFragment : BaseFragment() {
                 binding.tvBetStatus.text = event
 
             }
+        }
+    }
+
+    private fun showNetworkError() {
+        val cm =
+            activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        val isConnected = activeNetwork != null && activeNetwork.isConnected
+        if (!isConnected) {
+            snackBar = Snackbar.make(
+                binding.root,
+                resources.getString(R.string.no_connection),
+                Snackbar.LENGTH_INDEFINITE
+            )
+            snackBar?.setAction("Retry", View.OnClickListener { v: View? ->
+                snackBar?.dismiss()
+                showNetworkError()
+            })
+            snackBar?.setActionTextColor(Color.GREEN)
+            // Changing action button text color
+            val textView: TextView? = snackBar?.view?.findViewById(R.id.snackbar_text)
+            textView?.setTextColor(Color.WHITE)
+            snackBar?.show()
+        } else {
+            if (snackBar != null) { //                ((MyApplication) getApplication()).connectToClient();
+                if (batTeamRunId == 0) viewModel.callMatchDetailsAsync()
+                snackBar?.dismiss()
+            }
+        }
+    }
+
+    private val networkStateReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            showNetworkError()
         }
     }
 }

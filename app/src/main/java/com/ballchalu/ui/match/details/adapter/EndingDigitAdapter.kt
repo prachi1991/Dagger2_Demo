@@ -1,16 +1,17 @@
 package com.ballchalu.ui.match.details.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemEndingDigitListBinding
 import com.ccpp.shared.domain.match_details.Runner
 import com.ccpp.shared.domain.match_details.RunnersItem
+import com.ccpp.shared.util.ConstantsBase
 
 
 class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>() {
     private var list: List<RunnersItem>? = null
+    private var isSuspend: Boolean = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemEndingDigitListBinding.inflate(
@@ -35,6 +36,12 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
+    fun setItemList(market: List<RunnersItem>?, status: String?) {
+        this.list = market
+        this.isSuspend = status.equals(ConstantsBase.suspend, true)
+        notifyDataSetChanged()
+    }
+
 
     inner class ViewHolder(val binding: ItemEndingDigitListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -44,8 +51,8 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
                 runnersItem?.let {
                     model = it
                 }
-                tvTeam1Back.visibility =
-                    if (runnersItem?.canBack == true) View.VISIBLE else View.GONE
+                tvTeam1Back.text =
+                    if (runnersItem?.canBack == true && !isSuspend) runnersItem.back.toString() else ""
             }
 
         }

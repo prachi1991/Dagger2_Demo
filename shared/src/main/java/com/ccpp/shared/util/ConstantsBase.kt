@@ -1,6 +1,7 @@
 package com.ccpp.shared.util
 
 object ConstantsBase {
+    const val HEROIC_COMMENTARY = "heroic_commentary"
     const val SESSION = "session"
     const val ODD = "odds"
     const val STATUS_SUCCESS = 200
@@ -11,6 +12,8 @@ object ConstantsBase {
     const val KEY_MATCH_ID: String = "match_id"
     const val KEY_MARKET: String = "market"
 
+    const val ODDS_UPDATES: String = "Odds_Updates"
+    const val ACTION_PUB_NUB: String = "Action_Pubnub"
     const val PUB_NUB: String = "PubnubMsg"
     const val KEY_PROVIDER_ID: String = "providerId"
     const val KEY_MATCH_ITEM: String = "keyMatchList"

@@ -69,34 +69,24 @@ class MatchDetailsViewModel @Inject constructor(
 
 
     private fun setMarketData(marketList: List<MarketsItem>?) {
-        marketList?.forEachIndexed { index, marketsItem ->
+        marketList?.forEachIndexed { _, marketsItem ->
+            val market: Market? = marketsItem.market
             when {
-                (marketsItem.market?.heroicMarketType?.equals(
-                    ConstantsBase.MATCH_WINNER,
-                    true
-                ) == true
-                        && marketsItem.market?.status?.equals(ConstantsBase.open, true) == true
-                        ) || marketsItem.market?.status?.equals(ConstantsBase.suspend, true) == true
+                (market?.heroicMarketType?.equals(ConstantsBase.MATCH_WINNER, true) == true
+                        && (market.status?.equals(ConstantsBase.open, true) == true
+                        || market.status?.equals(ConstantsBase.suspend, true) == true))
                 -> {
-                    marketsItem.market?.let {
-                        if (it.status.equals(ConstantsBase.open, true))
-                            _winnerMarketEvent.postValue(Event(it))
+                    market.let {
+                        _winnerMarketEvent.postValue(Event(it))
                     }
                 }
-                marketsItem.market?.heroicMarketType?.equals(
-                    ConstantsBase.EVEN_ODD,
-                    true
-                ) == true -> {
-                    marketsItem.market?.let {
-                        if (it.status.equals(ConstantsBase.open, true))
-                            _evenOddMarketEvent.postValue(Event(it))
+                market?.heroicMarketType?.equals(ConstantsBase.EVEN_ODD, true) == true -> {
+                    market.let {
+                        _evenOddMarketEvent.postValue(Event(it))
                     }
                 }
-                marketsItem.market?.heroicMarketType?.equals(
-                    ConstantsBase.ENDING_DIGIT,
-                    true
-                ) == true -> {
-                    marketsItem.market?.let {
+                market?.heroicMarketType?.equals(ConstantsBase.ENDING_DIGIT, true) == true -> {
+                    market.let {
                         _endingDigitMarketEvent.postValue(Event(it))
                     }
                 }
