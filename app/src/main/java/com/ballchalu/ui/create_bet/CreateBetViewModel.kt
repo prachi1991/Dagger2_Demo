@@ -44,4 +44,21 @@ class CreateBetViewModel @Inject constructor(
         }
     }
 
+    fun betArray(): ArrayList<Int> {
+        val array = ArrayList<Int>()
+        array.add(0)
+        array.add(100)
+        array.add(500)
+        array.add(1000)
+        array.add(2000)
+        array.add(5000)
+        array.add(10000)
+        array.add(25000)
+        array.add(50000)
+        array.add(75000)
+        array.add(100000)
+
+        return array
+    }
+
 }
