@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:gravity="center"
+            android:background="@drawable/backgroud_solid_dark_grey"
+            android:orientation="vertical"
+            android:padding="@dimen/_3sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/backgroud_solid_light_grey">
+
+                <View
+                    android:id="@+id/viewStart"
+                    android:layout_width="@dimen/_2sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:background="@color/dark_grey"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtMatchName"
+                    fontPath="fonts/Play-Bold.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:textColor="@color/white"
+                    android:layout_toLeftOf="@+id/txtMatchDate"
+                    android:layout_toRightOf="@+id/viewStart"
+                    android:maxLines="2"
+                    android:textSize="@dimen/_12ssp"
+                    tools:text="Demo Ind Vs Demo Aus" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtMatchDate"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:text="@string/live"
+                    android:textColor="@color/text_light_green"
+                    android:textSize="@dimen/_12ssp" />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>
