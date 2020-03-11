@@ -27,6 +27,7 @@ class MatchDetailsViewModel @Inject constructor(
     BaseViewModel() {
 
     var matchId: Int = 0
+    var contestsId: Int = 0
     private val _matchResult = MutableLiveData<Event<MatchDetailsRes>>()
     val matchResult: LiveData<Event<MatchDetailsRes>> = _matchResult
 

@@ -66,6 +66,7 @@ class MatchDetailsFragment : BaseFragment() {
 
         arguments?.let {
             viewModel.matchId = it.getInt(ConstantsBase.KEY_PROVIDER_ID)
+            viewModel.contestsId = it.getInt(ConstantsBase.KEY_CONTESTS_ID)
         }
         registerReceiver()
 
