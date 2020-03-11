@@ -1,4 +1,4 @@
-package com.ballchalu.ui.contest
+package com.ballchalu.ui.contest.user_contest
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
+import com.ballchalu.ui.contest.ContestViewModel
 import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ballchalu.ui.dialog.NotificationDialog
 import com.ccpp.shared.core.result.EventObserver
@@ -20,7 +21,7 @@ import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
-class ContestFragment : BaseFragment() {
+class UserContestFragment : BaseFragment() {
     private var contestAdapter: ContestAdapter? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -28,9 +29,8 @@ class ContestFragment : BaseFragment() {
     private lateinit var binding: FragmentContestBinding
     private lateinit var viewModel: ContestViewModel
 
-    private var myContestList: ArrayList<Contest>? = arrayListOf()
+    private var myContestList: ArrayList<Contest>? = null
     private var userContestList: ArrayList<UserContest>? = arrayListOf()
-    private var allContestList: ArrayList<Contest>? = arrayListOf()
 
     lateinit var notificationDialog: NotificationDialog
 
@@ -40,32 +40,24 @@ class ContestFragment : BaseFragment() {
     ): View? {
         viewModel = viewModelProvider(viewModelFactory)
         binding = FragmentContestBinding.inflate(inflater).apply {
-            lifecycleOwner = this@ContestFragment
+            lifecycleOwner = this@UserContestFragment
+
+            myContestList = arrayListOf()
         }
         arguments?.let {
             viewModel.matchItem = it.getSerializable(ConstantsBase.KEY_MATCH_ITEM) as MatchListing?
         }
-        updateUI()
 
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initSessionAdapterAdapter()
-
-        viewModel.getAllMatchesContest() //match id
-
-        viewModel.matchContestResult.observe(viewLifecycleOwner, EventObserver { it ->
-            it.contests?.forEach {
-                if (it.availableSpots ?: 0 > 0)
-                    allContestList?.add(it)
-            }
-            //         allContestList = it.contests as ArrayList<Contest>?
-            contestAdapter?.setItemList(allContestList)
-        })
+        initSessionAdapterAdapter() //match id
 
         viewModel.matchUserContestResult.observe(viewLifecycleOwner, EventObserver {
+            contestAdapter?.clear()
+            myContestList?.clear()
             userContestList = it.contests as ArrayList<UserContest>?
             userContestList?.forEach {
                 myContestList?.add(it.contest!!)
@@ -75,7 +67,6 @@ class ContestFragment : BaseFragment() {
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-            radioButtonClickable(!it)
         })
 
         viewModel.createContestResult.observe(viewLifecycleOwner, EventObserver {
@@ -83,32 +74,17 @@ class ContestFragment : BaseFragment() {
             Toast.makeText(context, "You Successfully By Contest", Toast.LENGTH_SHORT).show()
         })
 
-
-        binding.rbGroup.setOnCheckedChangeListener { group, checkedId ->
-            run {
-                when (checkedId) {
-                    R.id.rbAllContest -> {
-                        contestAdapter?.clear()
-                        viewModel.getAllMatchesContest() //matchId
-                    }
-                    R.id.rbMyContest -> {
-                        contestAdapter?.clear()
-                        viewModel.getUserMatchesContest() //matchId
-                    }
-                    else -> false
-                }
-            }
-        }
-        contestAdapter?.setItemList(allContestList)
     }
 
-    private fun updateUI() {
-        binding.tvMatchName.text = viewModel.matchItem?.title
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUserMatchesContest()
     }
+
     private fun initSessionAdapterAdapter() {
         contestAdapter = ContestAdapter(object : ContestAdapter.OnItemClickListener {
             override fun onBuyNowClicked(contestModel: Contest) {
-                viewModel.createUserMatchContest(contestModel?.id.toString())
+
             }
 
             override fun onPlayNowClicked(contestModel: Contest) {
@@ -119,15 +95,6 @@ class ContestFragment : BaseFragment() {
             }
         })
         binding.rvContest.adapter = contestAdapter
-    }
-
-    private fun radioButtonClickable(it:Boolean)
-    {
-        binding.rbAllContest.isEnabled = it
-        binding.rbMyContest.isEnabled = it
-
-        binding.rbAllContest.isClickable = it
-        binding.rbMyContest.isClickable = it
     }
 
 }

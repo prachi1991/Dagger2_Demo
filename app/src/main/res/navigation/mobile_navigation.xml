@@ -16,11 +16,16 @@
         android:label="MatchDetailsFragment" />
     <fragment
         android:id="@+id/nav_contest"
-        android:name="com.ballchalu.ui.contest.ContestFragment"
-        android:label="ContestFragment" />
+        android:name="com.ballchalu.ui.contest.MainContestFragment"
+        android:label="MainContestFragment" />
     <fragment
         android:id="@+id/nav_coin_ledgers"
         android:name="com.ballchalu.ui.ledgers.BcCoinsLedgersFragment"
         android:label="BcCoinsLedgersFragment" />
+
+    <fragment
+        android:id="@+id/nav_bc_coins"
+        android:name="com.ballchalu.ui.bc_coins.BcCoinsFragment"
+        android:label="BcCoinsFragment" />
 
 </navigation>
