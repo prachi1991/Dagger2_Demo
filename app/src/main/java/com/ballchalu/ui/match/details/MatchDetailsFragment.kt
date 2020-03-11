@@ -211,7 +211,23 @@ class MatchDetailsFragment : BaseFragment() {
 
 
     private fun initSessionAdapterAdapter() {
-        sessionAdapter = SessionAdapter()
+        sessionAdapter = SessionAdapter(object : SessionAdapter.OnItemClickListener {
+            override fun onYesClicked(session: Session) {
+                Toast.makeText(
+                    activity,
+                    session.sessionRun?.yesRun.toString().plus("  " + session.sessionRun?.yesRate),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            override fun onNoClicked(session: Session) {
+                Toast.makeText(
+                    activity,
+                    session.sessionRun?.noRun.toString().plus("  " + session.sessionRun?.noRate),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
         binding.rvSession.adapter = sessionAdapter
     }
 

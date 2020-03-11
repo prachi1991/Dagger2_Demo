@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemSessionListBinding
+import com.ccpp.shared.domain.match_details.Session
 import com.ccpp.shared.domain.match_details.SessionsItem
 import java.util.*
 
 
-class SessionAdapter : RecyclerView.Adapter<SessionAdapter.ViewHolder>() {
+class SessionAdapter(val listener: OnItemClickListener?) :
+    RecyclerView.Adapter<SessionAdapter.ViewHolder>() {
     private var list: ArrayList<SessionsItem>? = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -64,9 +66,20 @@ class SessionAdapter : RecyclerView.Adapter<SessionAdapter.ViewHolder>() {
         fun setData(sessionsItem: SessionsItem?, position: Int) {
             with(binding) {
                 model = SessionAdapterData(sessionsItem?.session)
+                tvYesValue.setOnClickListener {
+                    sessionsItem?.session?.let { it1 -> listener?.onYesClicked(it1) }
+                }
+                tvNoValue.setOnClickListener {
+                    sessionsItem?.session?.let { it1 -> listener?.onNoClicked(it1) }
+                }
             }
 
         }
+    }
+
+    interface OnItemClickListener {
+        fun onYesClicked(session: Session)
+        fun onNoClicked(session: Session)
     }
 
 }
