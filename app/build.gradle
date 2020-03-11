@@ -21,18 +21,28 @@ android {
         release {
             minifyEnabled false
             buildConfigField 'String', 'ENVIRONMENT', '"RELEASE"'
+            buildConfigField 'String', 'mqttUrl', mqttArenaUrl
+            buildConfigField 'String', 'mqttUserName', mqttArenaUserName
+            buildConfigField 'String', 'mqttPassword', mqttArenaPassword
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         stage {
             signingConfig signingConfigs.debug
             debuggable = true
             buildConfigField 'String', 'ENVIRONMENT', '"STAGING"'
+            buildConfigField 'String', 'mqttUrl', mqttStageUrl
+            buildConfigField 'String', 'mqttUserName', mqttStageUserName
+            buildConfigField 'String', 'mqttPassword', mqttStagePassword
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         prod {
             signingConfig signingConfigs.debug
             debuggable = true
             buildConfigField 'String', 'ENVIRONMENT', '"PRODUCTION"'
+            buildConfigField 'String', 'mqttUrl', mqttProdUrl
+            buildConfigField 'String', 'mqttUserName', mqttProdUserName
+            buildConfigField 'String', 'mqttPassword', mqttProdPassword
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -125,4 +135,8 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:5.9.0'
     implementation 'com.beardedhen:androidbootstrap:2.3.1'
 
+    //mqtt
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }

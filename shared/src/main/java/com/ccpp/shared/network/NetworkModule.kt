@@ -4,6 +4,9 @@ import com.ccpp.shared.BuildConfig
 import com.ccpp.shared.core.base.BaseRepository
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.network.repository.*
+import com.ccpp.shared.util.ConstantsBase
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.ccpp.shared.network.repository.*
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -11,6 +14,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -25,32 +29,41 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(okHttp: OkHttpClient): Retrofit.Builder {
         return Retrofit.Builder()
-            .baseUrl("")
-            .client(okHttpClient)
+            .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
-            .build()
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
     }
 
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        interceptor: com.ccpp.shared.network.Interceptor
+        sharedPref: SharedPreferenceStorage,
+        loggingInterceptor: HttpLoggingInterceptor, interceptor: Interceptor
     ): OkHttpClient {
-        val client = OkHttpClient.Builder()
+        val httpClient = OkHttpClient().newBuilder()
+            .connectTimeout(ConstantsBase.REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
+            .readTimeout(ConstantsBase.REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
+            .writeTimeout(ConstantsBase.REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        if (BuildConfig.DEBUG)
+            httpClient.addInterceptor(loggingInterceptor)
+        httpClient.addInterceptor(Interceptor { chain: Interceptor.Chain ->
+            val original = chain.request()
+            val url = original.url.newBuilder()
+                .build()
+            val request = original.newBuilder()
+                .addHeader("Api-Key", BuildConfig.apiKey)
+                .addHeader("Accept", "application/json")
+                .addHeader("Authorization", "Bearer ${sharedPref.token.toString()}")
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .url(url).build()
 
-        client.followRedirects(true)
-            .followSslRedirects(true)
-            .retryOnConnectionFailure(true)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(interceptor)
-            .addInterceptor(loggingInterceptor)
-
-        return client.build()
+            chain.proceed(request)
+        })
+        return httpClient.build()
     }
 
     @Provides
@@ -80,15 +93,16 @@ class NetworkModule {
         apiService: ApiService,
         baseRepository: BaseRepository
     ): LoginRepository = LoginRepository(
-        preferenceStorage, apiService, baseRepository)
+        preferenceStorage, apiService, baseRepository
+    )
 
-        @Provides
-        @Singleton
-        fun provideMatchesListingRepository(
-            preferenceStorage: SharedPreferenceStorage,
-            apiService: ApiService,
-            baseRepository: BaseRepository
-        ): MatchesRepository = MatchesRepository(preferenceStorage, apiService, baseRepository)
+    @Provides
+    @Singleton
+    fun provideMatchesListingRepository(
+        preferenceStorage: SharedPreferenceStorage,
+        apiService: ApiService,
+        baseRepository: BaseRepository
+    ): MatchesRepository = MatchesRepository(preferenceStorage, apiService, baseRepository)
 
     @Provides
     @Singleton
@@ -132,7 +146,6 @@ class NetworkModule {
             apiService,
             baseRepository
         )
-
 
 
 }

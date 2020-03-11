@@ -10,10 +10,10 @@ data class Runner(
     val lay: String? = null,
 
     @field:SerializedName("can_back")
-    val canBack: Boolean = false,
+    var canBack: Boolean = false,
 
     @field:SerializedName("back")
-    val back: String? = null,
+    var back: String? = null,
 
     @field:SerializedName("id")
     val id: Int? = null,
