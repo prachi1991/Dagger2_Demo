@@ -17,18 +17,22 @@ import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
+import com.ballchalu.mqtt.MqttConnection
 import com.ballchalu.mqtt.MqttMarket
 import com.ballchalu.ui.match.details.adapter.EndingDigitAdapter
 import com.ballchalu.ui.match.details.adapter.SessionAdapter
+import com.ballchalu.utils.StringUtils
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.match_details.*
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 class MatchDetailsFragment : BaseFragment() {
@@ -38,6 +42,9 @@ class MatchDetailsFragment : BaseFragment() {
     private var endingDigitAdapter: EndingDigitAdapter? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var mqttConnection: MqttConnection
 
     private lateinit var binding: FragmentMatchDetailsBinding
     private lateinit var viewModel: MatchDetailsViewModel
@@ -157,7 +164,7 @@ class MatchDetailsFragment : BaseFragment() {
     }
 
     private fun setMarketData(market: Market?) {
-        binding.tvMarketType.text = market?.heroicMarketType
+        binding.tvMarketType.text = market?.betfairMarketType
         val items1: Runner? = market?.runners?.get(0)?.runner
         val items2: Runner? = market?.runners?.get(1)?.runner
 
@@ -243,7 +250,7 @@ class MatchDetailsFragment : BaseFragment() {
                                 }
                             }
                             type.equals(ConstantsBase.SESSION, ignoreCase = true) -> {
-//                                updateSession(oddJsonObject)
+                                updateSession(oddJsonObject)
                             }
                             type.equals(ConstantsBase.ODD, ignoreCase = true) -> {
                                 parseMarket(oddJsonObject)
@@ -252,6 +259,21 @@ class MatchDetailsFragment : BaseFragment() {
                     }
                 } catch (e: JSONException) {
                     Timber.e(e)
+                }
+            }
+        }
+    }
+    private val oddsReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            intent.getStringExtra(ConstantsBase.ODD)?.let {
+                try {
+                    val oddJsonObject = JSONObject(it)
+                    val type = oddJsonObject.getString(ConstantsBase.type)
+                    if (type.equals(ConstantsBase.HEROIC_COMMENTARY, ignoreCase = true)) {
+                        updateEvent(oddJsonObject)
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
                 }
             }
         }
@@ -278,13 +300,45 @@ class MatchDetailsFragment : BaseFragment() {
         }
     }
 
+    private fun updateSession(sessionObject: JSONObject) {
+        try {
+            val jsonObject: JSONObject = sessionObject.getJSONObject(ConstantsBase.SESSION)
+            if (viewModel.matchId == jsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
+                val sessionsItem: SessionsItem =
+                    Gson().fromJson(sessionObject.toString(), SessionsItem::class.java)
+
+                if (sessionsItem.session?.status != ConstantsBase.close) {
+                    var isAdded = false
+                    sessionAdapter?.getSessionsList()?.forEachIndexed { index, item ->
+                        if (sessionsItem.session?.id == item.session?.id) {
+                            isAdded = true
+                            sessionAdapter?.updateSession(sessionsItem, index)
+                            return
+                        }
+                    }
+                    if (!isAdded)
+                        sessionAdapter?.addSession(sessionsItem)
+
+                } else {
+                    sessionAdapter?.getSessionsList()?.forEach {
+                        if (sessionsItem.session?.id == it.session?.id) {
+                            sessionAdapter?.removeSessionItem(it)
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun updateEndingDigitData(market: Market) {
         binding.llEndingDigitSection.visibility =
             if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
         market.runners?.forEach {
             it.runner = Runner(back = it.B, canBack = it.canBack)
         }
-        endingDigitAdapter?.setItemList(market.runners, market.status)
+        endingDigitAdapter?.updateEndingDigit(market.runners, market.status)
     }
 
     private fun updateEvenOddData(market: Market) {
@@ -348,28 +402,17 @@ class MatchDetailsFragment : BaseFragment() {
         }
     }
 
-    private val oddsReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            intent.getStringExtra(ConstantsBase.ODD)?.let {
-                try {
-                    val oddJsonObject = JSONObject(it)
-                    val type = oddJsonObject.getString(ConstantsBase.type)
-                    if (type.equals("heroic_commentary", ignoreCase = true)) {
-                        updateEvent(oddJsonObject)
-                    }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            }
-        }
-    }
 
     private fun updateEvent(oddJsonObject: JSONObject) {
         try {
             if (viewModel.matchId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
                 val jsonObject = oddJsonObject.getJSONObject(ConstantsBase.HEROIC_COMMENTARY)
                 if (!TextUtils.isEmpty(jsonObject.getString(ConstantsBase.event)))
-                    setEvents(jsonObject.getString(ConstantsBase.event).toLowerCase())
+                    StringUtils.setEvents(
+                        jsonObject.getString(ConstantsBase.event).toLowerCase(
+                            Locale.ENGLISH
+                        ), binding.tvBetStatus
+                    )
             }
         } catch (e: JSONException) {
             Timber.e(e)
@@ -383,123 +426,6 @@ class MatchDetailsFragment : BaseFragment() {
         updateScore(score)
     }
 
-    private fun setEvents(event: String) {
-        when (event) {
-            ConstantsBase.WICKET -> {
-                binding.tvBetStatus.text = event
-            }
-            ConstantsBase.WICKET1 -> {
-                binding.tvBetStatus.text = " + 1"
-            }
-            ConstantsBase.WICKET2 -> {
-
-                binding.tvBetStatus.text = " + 2"
-            }
-            ConstantsBase.WICKET3 -> {
-
-                binding.tvBetStatus.text = " + 3"
-            }
-            ConstantsBase.WIDE_WICKET -> {
-                binding.tvBetStatus.text = "Wide" + "\n" + "Wicket"
-            }
-            ConstantsBase.BALL_START -> {
-                binding.tvBetStatus.text = event
-            }
-            ConstantsBase.THIRD_UMPIRE -> {
-
-                binding.tvBetStatus.text = event
-            }
-            ConstantsBase.PLAYER_INJURED -> {
-                binding.tvBetStatus.text = "Player" + "\n" + "Injured"
-
-            }
-            ConstantsBase.DOT -> {
-                binding.tvBetStatus.text = "Dot"
-
-            }
-            ConstantsBase.RUN1 -> {
-                binding.tvBetStatus.text = "1"
-
-            }
-            ConstantsBase.RUN2 -> {
-                binding.tvBetStatus.text = "2"
-
-            }
-            ConstantsBase.RUN3 -> {
-                binding.tvBetStatus.text = "3"
-            }
-            ConstantsBase.RUN5 -> {
-                binding.tvBetStatus.text = "5"
-            }
-            ConstantsBase.FOUR -> {
-
-                binding.tvBetStatus.text = event
-            }
-            ConstantsBase.SIX -> {
-
-                binding.tvBetStatus.text = event
-            }
-            ConstantsBase.FREE_HIT -> {
-
-                binding.tvBetStatus.text = event
-            }
-            ConstantsBase.NOT_OUT -> {
-
-                binding.tvBetStatus.text = event
-            }
-            ConstantsBase.WIDE -> {
-
-                binding.tvBetStatus.text = event
-            }
-            ConstantsBase.WIDE1 -> {
-
-                binding.tvBetStatus.text = "+ 1"
-            }
-            ConstantsBase.WIDE2 -> {
-
-                binding.tvBetStatus.text = "+ 2"
-            }
-            ConstantsBase.WIDE3 -> {
-
-                binding.tvBetStatus.text = "+ 3"
-            }
-            ConstantsBase.WIDE4 -> {
-
-                binding.tvBetStatus.text = "+ Wd"
-            }
-            ConstantsBase.NO_BALL -> {
-                binding.tvBetStatus.text = event
-            }
-            ConstantsBase.NO_BALL1 -> {
-
-                binding.tvBetStatus.text = "+ 1"
-            }
-            ConstantsBase.NO_BALL2 -> {
-
-                binding.tvBetStatus.text = "+ 2"
-            }
-            ConstantsBase.NO_BALL3 -> {
-
-                binding.tvBetStatus.text = "+ 3"
-            }
-            ConstantsBase.NO_BALL4 -> {
-
-                binding.tvBetStatus.text = "+ Nb"
-            }
-            ConstantsBase.NO_BALL5 -> {
-                binding.tvBetStatus.text = "+ 5"
-            }
-            ConstantsBase.NO_BALL6 -> {
-
-                binding.tvBetStatus.text = "+ Nb"
-
-            }
-            else -> {
-                binding.tvBetStatus.text = event
-
-            }
-        }
-    }
 
     private fun showNetworkError() {
         val cm =
@@ -512,18 +438,19 @@ class MatchDetailsFragment : BaseFragment() {
                 resources.getString(R.string.no_connection),
                 Snackbar.LENGTH_INDEFINITE
             )
-            snackBar?.setAction("Retry", View.OnClickListener { v: View? ->
+            snackBar?.setAction("Retry") { v: View? ->
                 snackBar?.dismiss()
                 showNetworkError()
-            })
+            }
             snackBar?.setActionTextColor(Color.GREEN)
             // Changing action button text color
             val textView: TextView? = snackBar?.view?.findViewById(R.id.snackbar_text)
             textView?.setTextColor(Color.WHITE)
             snackBar?.show()
         } else {
-            if (snackBar != null) { //                ((MyApplication) getApplication()).connectToClient();
+            if (snackBar != null) {
                 if (batTeamRunId == 0) viewModel.callMatchDetailsAsync()
+                mqttConnection.connectToClient()
                 snackBar?.dismiss()
             }
         }

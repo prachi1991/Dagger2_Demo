@@ -1,6 +1,5 @@
 package com.ballchalu.application
 
-import android.provider.Settings
 import com.ballchalu.BuildConfig
 import com.ballchalu.R
 import com.ballchalu.base.di.DaggerAppComponent
@@ -12,12 +11,12 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
 import timber.log.Timber
 import timber.log.Timber.DebugTree
+import javax.inject.Inject
 
 
 class App : DaggerApplication() {
-
-    @JvmField
-    public var androidId: String = ""
+    @Inject
+    lateinit var mqttConnection: MqttConnection
 
     override fun onCreate() {
         super.onCreate()
@@ -34,8 +33,7 @@ class App : DaggerApplication() {
                 )
                 .build()
         )
-        androidId = Settings.Secure.ANDROID_ID
-        MqttConnection.connectToClient()
+        mqttConnection.connectToClient()
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }

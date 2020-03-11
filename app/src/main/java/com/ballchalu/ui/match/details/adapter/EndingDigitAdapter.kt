@@ -10,7 +10,7 @@ import com.ccpp.shared.util.ConstantsBase
 
 
 class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>() {
-    private var list: List<RunnersItem>? = null
+    private var list: ArrayList<RunnersItem>? = arrayListOf()
     private var isSuspend: Boolean = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -33,8 +33,26 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
 
 
     fun setItemList(runnersItemList: List<RunnersItem>?, status: String?) {
-        this.list = runnersItemList
+        this.list?.clear()
+        runnersItemList?.let { this.list?.addAll(it) }
         this.isSuspend = status.equals(ConstantsBase.suspend, true)
+        notifyDataSetChanged()
+    }
+
+    fun updateEndingDigit(
+        runnersList: List<RunnersItem>?,
+        status: String?
+    ) {
+        this.isSuspend = status.equals(ConstantsBase.suspend, true)
+        runnersList?.forEach { runnersItem ->
+            list?.forEach {
+                if (it.runner?.id == runnersItem.id) {
+                    it.runner?.canBack = runnersItem.canBack
+                    it.runner?.back = runnersItem.B
+                    it.runner?.betfairRunnerName = it.runner?.betfairRunnerName
+                }
+            }
+        }
         notifyDataSetChanged()
     }
 
@@ -48,7 +66,7 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
                     model = it
                 }
                 tvTeam1Back.text =
-                    if (runnersItem?.canBack == true && !isSuspend) runnersItem.back.toString() else ""
+                    if (runnersItem?.canBack == true && !isSuspend) runnersItem.back ?: "" else ""
             }
 
         }
