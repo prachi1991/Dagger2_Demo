@@ -52,7 +52,7 @@ internal interface ApiClient {
     @POST("ballchalu/api/v1/contests/{match_id}/user_contests")
     fun callCretateContestAsync(@Path("match_id") match_id: String): Deferred<Response<CreateContestRes>>
 
-    @POST("api/v1/matches/create_bet")
-    fun callCretateBetAsync(@Body betReq: CreateBetReq): Deferred<Response<CreateBetRes>>
+    @POST("http://heroic.ballchalu.in/ballchalu/api/v1/user_contests/{contestsId}/bet_slips")
+    fun callCretateBetAsync(@Body betReq: CreateBetReq,@Path("contestsId") contestsId: String): Deferred<Response<CreateBetRes>>
 
 }

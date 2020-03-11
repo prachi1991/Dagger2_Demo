@@ -61,6 +61,7 @@ class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickL
 
             btnClear.setOnClickListener {
                 tvCount.setText("0")
+                count = 0
             }
 
             btnPlaceBet.setOnClickListener {
@@ -71,8 +72,14 @@ class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickL
                     if(tvCount.text.toString().toInt() < 1)
                     {
                         Toast.makeText(context,"Amount should be grater than zero",Toast.LENGTH_SHORT).show()
+                    }else{
+                        viewModel.callCreateBet(tvCount.text.toString())
                     }
                 }
+            }
+
+            imgClose.setOnClickListener {
+                requireActivity().supportFragmentManager.popBackStack()
             }
 
             tvCount.onFocusChangeListener = OnFocusChangeListener { view, hasFocus ->
@@ -141,6 +148,14 @@ class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickL
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
 
+        })
+
+        viewModel.createBetObserver.observe(viewLifecycleOwner, EventObserver{
+            Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, EventObserver {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
 

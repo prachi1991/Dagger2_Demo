@@ -8,6 +8,7 @@ import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.match_details.Market
 import com.ccpp.shared.domain.match_details.MarketsItem
 import com.ccpp.shared.domain.match_details.MatchDetailsRes
@@ -93,6 +94,14 @@ class MatchDetailsViewModel @Inject constructor(
             }
 
         }
+    }
+
+    fun callCreateBetFragment(oddsType:String)
+    {
+        val createBetReq = CreateBetReq()
+        createBetReq.matchId = matchId.toString()
+        createBetReq.oddsType = oddsType
+
     }
 
 }

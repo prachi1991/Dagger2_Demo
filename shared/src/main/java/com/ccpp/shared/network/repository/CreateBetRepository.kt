@@ -15,7 +15,7 @@ class CreateBetRepository @Inject constructor(
     private val baseRepository: BaseRepository
 ) {
 
-    suspend fun callCretateBetAsync(betReq: CreateBetReq): Results<CreateBetRes> =
+    suspend fun callCretateBetAsync(betReq: CreateBetReq) =
         baseRepository.safeApiCall(
             call = {
                 service.callCretateBetAsync(betReq).await()

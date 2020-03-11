@@ -36,7 +36,7 @@ open class ApiService @Inject constructor(
 
     fun callSignUpAsync(signUpReq: SignUpReq) = apiClient.callSignUpAsync(signUpReq)
 
-    fun callCretateBetAsync(betReq: CreateBetReq) = apiClient.callCretateBetAsync(betReq)
+    fun callCretateBetAsync(betReq: CreateBetReq) = apiClient.callCretateBetAsync(betReq,betReq.contestsId.toString())
 
     fun callForgetPasswordAsync(email: String) = apiClient.callForgetPasswordAsync(email)
 
