@@ -74,6 +74,7 @@ class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickL
                         Toast.makeText(context,"Amount should be grater than zero",Toast.LENGTH_SHORT).show()
                     }else{
                         viewModel.callCreateBet(tvCount.text.toString())
+                       // viewModel.callCreateSessionBet(tvCount.text.toString())
                     }
                 }
             }
@@ -151,6 +152,10 @@ class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickL
         })
 
         viewModel.createBetObserver.observe(viewLifecycleOwner, EventObserver{
+            Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.createSessionBetObserver.observe(viewLifecycleOwner, EventObserver{
             Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
         })
 

@@ -11,6 +11,8 @@ import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.MatchListingRes
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateBetRes
+import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
+import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
 import com.ccpp.shared.network.Sessions
 import com.ccpp.shared.network.repository.CreateBetRepository
 import com.ccpp.shared.network.repository.MatchesRepository
@@ -97,6 +99,36 @@ class CreateBetViewModel @Inject constructor(
 
     private fun handleCreateBetSuccess(result:CreateBetRes) {
         _createBetObserver.postValue(Event(result))
+    }
+
+
+    private val _createSessionBetObserver = MutableLiveData<Event<CreateSessionBetRes>>()
+    val createSessionBetObserver: LiveData<Event<CreateSessionBetRes>> = _createSessionBetObserver
+
+    fun callCreateSessionBet(stack:String) {
+        loading.postValue(Event(true))
+        val createSeesionBetReq = CreateSessionBetReq()
+        createSeesionBetReq.accessToken = sharedPref.token
+        createSeesionBetReq.matchId = "90"
+        createSeesionBetReq.contestsId = "58"
+        createSeesionBetReq.coinsDebited = stack
+        createSeesionBetReq.oddValue = "2"
+        createSeesionBetReq.sessionId = "211"
+        createSeesionBetReq.sessionRunId = "2771"
+        createSeesionBetReq.sessionBetType = "YES"
+        createSeesionBetReq.runs = "3"
+
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val result = createBetRepository.callCretateSessionBetAsync(createSeesionBetReq)) {
+                is Results.Success -> handleCreateSessionBetSuccess(result.data)
+                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+            }
+            loading.postValue(Event(false))
+        }
+    }
+
+    private fun handleCreateSessionBetSuccess(result:CreateSessionBetRes) {
+        _createSessionBetObserver.postValue(Event(result))
     }
 
 

@@ -7,6 +7,7 @@ import com.ccpp.shared.domain.LoginRes
 import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateBetRes
+import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.network.ApiService
 import javax.inject.Inject
 
@@ -19,6 +20,14 @@ class CreateBetRepository @Inject constructor(
         baseRepository.safeApiCall(
             call = {
                 service.callCretateBetAsync(betReq).await()
+            },
+            errorMessage = "Error occurred"
+        )
+
+    suspend fun callCretateSessionBetAsync(betReq: CreateSessionBetReq) =
+        baseRepository.safeApiCall(
+            call = {
+                service.callCretateSessionBetAsync(betReq).await()
             },
             errorMessage = "Error occurred"
         )
