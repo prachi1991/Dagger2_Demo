@@ -28,7 +28,7 @@
         android:name="com.ballchalu.ui.bc_coins.BcCoinsFragment"
         android:label="BcCoinsFragment" />
 
-    <fragment
+    <dialog
         android:id="@+id/nav_create_bet"
         android:name="com.ballchalu.ui.create_bet.CreateBetFragment"
         android:label="CreateBetFragment" />

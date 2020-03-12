@@ -53,11 +53,9 @@ class MatchDetailsFragment : BaseFragment() {
         viewModel = viewModelProvider(viewModelFactory)
         binding = FragmentMatchDetailsBinding.inflate(inflater).apply {
             lifecycleOwner = this@MatchDetailsFragment
+            model = viewModel
 
 
-            tvTeam1Lay.setOnClickListener {
-                findNavController().navigate(R.id.nav_create_bet)
-            }
         }
 
         arguments?.let {
@@ -187,6 +185,11 @@ class MatchDetailsFragment : BaseFragment() {
         binding.pullRefreshLayout.setOnRefreshListener {
             viewModel.callMatchDetailsAsync()
         }
+
+        viewModel.openBetScreenEvent.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(R.id.nav_create_bet)
+        })
+
     }
 
     private fun setEvenOddData(market: Market) {

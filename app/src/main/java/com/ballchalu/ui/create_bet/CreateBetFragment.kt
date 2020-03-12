@@ -1,7 +1,8 @@
 package com.ballchalu.ui.create_bet
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
@@ -10,22 +11,23 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.ballchalu.base.BaseFragment
+import com.ballchalu.R
 import com.ballchalu.databinding.FragmentCreateBetBinding
 import com.ballchalu.ui.create_bet.adapter.InPlayBetMatchListAdapter
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
-import com.ballchalu.utils.DecimalDigitsInputFilter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListingItem
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
+import dagger.android.support.DaggerAppCompatDialogFragment
 import javax.inject.Inject
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickListener {
+class CreateBetFragment : DaggerAppCompatDialogFragment(),
+    InPlayMatchListingAdapter.OnItemClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -80,8 +82,9 @@ class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickL
             }
 
             imgClose.setOnClickListener {
-                requireActivity().supportFragmentManager.popBackStack()
+                dismiss()
             }
+
 
             tvCount.onFocusChangeListener = OnFocusChangeListener { view, hasFocus ->
                 if (hasFocus) {
@@ -167,6 +170,16 @@ class CreateBetFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemClickL
     }
 
     override fun onMatchClicked(matchListingItem: MatchListingItem) {
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.FILL_PARENT,
+            ViewGroup.LayoutParams.FILL_PARENT
+        );
     }
 
 }
