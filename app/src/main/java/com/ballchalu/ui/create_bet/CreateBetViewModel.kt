@@ -1,6 +1,5 @@
 package com.ballchalu.ui.create_bet
 
-import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -13,7 +12,6 @@ import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateBetRes
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
-import com.ccpp.shared.network.Sessions
 import com.ccpp.shared.network.repository.CreateBetRepository
 import com.ccpp.shared.network.repository.MatchesRepository
 import com.ccpp.shared.util.ConstantsBase
@@ -25,71 +23,64 @@ class CreateBetViewModel @Inject constructor(
     private val matchesRepository: MatchesRepository,
     private val createBetRepository: CreateBetRepository,
     private val sharedPref: SharedPreferenceStorage
-): BaseViewModel()
-{
+) : BaseViewModel() {
+    var createBetReq: CreateBetReq? = null
+    val createSesionBetReq: CreateSessionBetReq? = null
+
+
     private val _matchListingObserver = MutableLiveData<Event<MatchListingRes>>()
     val inPlayListEvent: LiveData<Event<MatchListingRes>> = _matchListingObserver
 
-    private val _upcomingmatchListingObserver = MutableLiveData<Event<MatchListingRes>>()
-    val upcomingListEvent: LiveData<Event<MatchListingRes>> = _upcomingmatchListingObserver
+    private val _upcomingMatchListEvent = MutableLiveData<Event<MatchListingRes>>()
+    val upcomingMatchListEvent: LiveData<Event<MatchListingRes>> = _upcomingMatchListEvent
 
-    fun callMatchListing(event_type: String,play_status: String) {
+    fun callMatchListing(event_type: String, play_status: String) {
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = matchesRepository.getMatchesListing(event_type,play_status)) {
-                is Results.Success -> handleSuccess(result.data,play_status)
+            when (val result = matchesRepository.getMatchesListing(event_type, play_status)) {
+                is Results.Success -> handleSuccess(result.data, play_status)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
             loading.postValue(Event(false))
         }
     }
 
-    private fun handleSuccess(data: MatchListingRes, playStatus: String
+    private fun handleSuccess(
+        data: MatchListingRes, playStatus: String
     ) {
-        if(playStatus== ConstantsBase.IN_PLAY) {
+        if (playStatus == ConstantsBase.IN_PLAY) {
             _matchListingObserver.postValue(Event(data))
-        }
-        else if(playStatus== ConstantsBase.UPCOMING) {
-            _upcomingmatchListingObserver.postValue(Event(data))
+        } else if (playStatus == ConstantsBase.UPCOMING) {
+            _upcomingMatchListEvent.postValue(Event(data))
         }
     }
 
     fun betArray(): ArrayList<Int> {
-        val array = ArrayList<Int>()
-        array.add(0)
-        array.add(100)
-        array.add(500)
-        array.add(1000)
-        array.add(2000)
-        array.add(5000)
-        array.add(10000)
-        array.add(25000)
-        array.add(50000)
-        array.add(75000)
-        array.add(100000)
-
-        return array
+        return ArrayList<Int>().apply {
+            add(0)
+            add(100)
+            add(500)
+            add(1000)
+            add(2000)
+            add(5000)
+            add(10000)
+            add(25000)
+            add(50000)
+            add(75000)
+            add(100000)
+        }
     }
 
 
     private val _createBetObserver = MutableLiveData<Event<CreateBetRes>>()
     val createBetObserver: LiveData<Event<CreateBetRes>> = _createBetObserver
 
-    fun callCreateBet(stack:String) {
+    fun callCreateBet(stack: String) {
+        if (createBetReq == null) return
         loading.postValue(Event(true))
-        val createBetReq = CreateBetReq()
-        createBetReq.accessToken = sharedPref.token
-        createBetReq.matchId = "90"
-        createBetReq.oddsType = "LAGAI"
-        createBetReq.runnerId = "194"
-        createBetReq.oddsVal = "1.59"
-        createBetReq.marketId = "84"
-        createBetReq.heroicMarketType = "match_winner"
-        createBetReq.stack = stack
-        createBetReq.contestsId = "58"
 
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = createBetRepository.callCretateBetAsync(createBetReq)) {
+            when (val result = createBetRepository.callCreateBetAsync(createBetReq!!)) {
                 is Results.Success -> handleCreateBetSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
@@ -97,29 +88,19 @@ class CreateBetViewModel @Inject constructor(
         }
     }
 
-    private fun handleCreateBetSuccess(result:CreateBetRes) {
+    private fun handleCreateBetSuccess(result: CreateBetRes) {
         _createBetObserver.postValue(Event(result))
     }
-
 
     private val _createSessionBetObserver = MutableLiveData<Event<CreateSessionBetRes>>()
     val createSessionBetObserver: LiveData<Event<CreateSessionBetRes>> = _createSessionBetObserver
 
-    fun callCreateSessionBet(stack:String) {
+    fun callCreateSessionBet(stack: String) {
         loading.postValue(Event(true))
-        val createSeesionBetReq = CreateSessionBetReq()
-        createSeesionBetReq.accessToken = sharedPref.token
-        createSeesionBetReq.matchId = "90"
-        createSeesionBetReq.contestsId = "58"
-        createSeesionBetReq.coinsDebited = stack
-        createSeesionBetReq.oddValue = "2"
-        createSeesionBetReq.sessionId = "211"
-        createSeesionBetReq.sessionRunId = "2771"
-        createSeesionBetReq.sessionBetType = "YES"
-        createSeesionBetReq.runs = "3"
-
+        if (createSesionBetReq == null) return
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = createBetRepository.callCretateSessionBetAsync(createSeesionBetReq)) {
+            when (val result =
+                createBetRepository.callCretateSessionBetAsync(createSesionBetReq)) {
                 is Results.Success -> handleCreateSessionBetSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
@@ -127,7 +108,7 @@ class CreateBetViewModel @Inject constructor(
         }
     }
 
-    private fun handleCreateSessionBetSuccess(result:CreateSessionBetRes) {
+    private fun handleCreateSessionBetSuccess(result: CreateSessionBetRes) {
         _createSessionBetObserver.postValue(Event(result))
     }
 

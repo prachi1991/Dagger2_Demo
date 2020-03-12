@@ -28,5 +28,7 @@ data class Runner(
     var canLay: Boolean = false,
 
     @field:SerializedName("status")
-    var status: String? = null
+    var status: String? = null,
+
+    var marketId: Int? = 0
 )

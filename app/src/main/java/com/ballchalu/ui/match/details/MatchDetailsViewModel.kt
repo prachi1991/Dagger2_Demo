@@ -6,17 +6,14 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
 import com.ballchalu.mqtt.MqttMarket
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.domain.match_details.*
 import com.ccpp.shared.domain.create_bet.CreateBetReq
-import com.ccpp.shared.domain.match_details.Market
-import com.ccpp.shared.domain.match_details.MarketsItem
-import com.ccpp.shared.domain.match_details.MatchDetailsRes
-import com.ccpp.shared.domain.match_details.SessionsItem
+import com.ccpp.shared.domain.match_details.*
 import com.ccpp.shared.network.repository.MatchDetailsRepository
 import com.ccpp.shared.util.ConstantsBase
 import com.google.gson.Gson
@@ -35,6 +32,8 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
+    var evenMarket: RunnersItem? = RunnersItem()
+    var oddMarket: RunnersItem? = RunnersItem()
     var bwlTeamRunner: Runner? = null
     var batTeamRunner: Runner? = null
     var batTeamRunId: Int? = 0
@@ -45,11 +44,12 @@ class MatchDetailsViewModel @Inject constructor(
     var bwlTeamRunName = ""
 
     var matchId: Int = 0
+    var contestsId: Int = 0
+
     //____________________________________variables__________________________//
 
     private val _matchResult = MutableLiveData<Event<MatchDetailsRes?>>()
     val matchResult: LiveData<Event<MatchDetailsRes?>> = _matchResult
-    var contestsId: Int = 0
 
     fun callMatchDetailsAsync() {
         loading.postValue(Event(true))
@@ -122,8 +122,8 @@ class MatchDetailsViewModel @Inject constructor(
 
     private fun setMarketData(market: Market?) {
         _winnerMarketEvent.postValue(Event(market))
-        val items1: Runner? = market?.runners?.get(0)?.runner
-        val items2: Runner? = market?.runners?.get(1)?.runner
+        val items1: Runner? = market?.runners?.get(0)?.runner.apply { this?.marketId = market?.id }
+        val items2: Runner? = market?.runners?.get(1)?.runner.apply { this?.marketId = market?.id }
 
         if (market?.status?.equals(ConstantsBase.open, true) == true) {
             if (items1 != null && items2 != null) {
@@ -272,8 +272,8 @@ class MatchDetailsViewModel @Inject constructor(
     private fun updateMarket(market: Market?) {
         when (market?.status?.trim()) {
             ConstantsBase.open -> {
-                val run1: RunnersItem? = market.runners?.get(0)
-                val run2: RunnersItem? = market.runners?.get(1)
+                val run1: RunnersItem? = market.runners?.get(0).apply { this?.marketId = market.id }
+                val run2: RunnersItem? = market.runners?.get(1).apply { this?.marketId = market.id }
                 val run3: RunnersItem? = when {
                     market.runners?.size ?: 0 > 2 -> market.runners?.get(2)
                     else -> null
@@ -303,34 +303,133 @@ class MatchDetailsViewModel @Inject constructor(
             back = runnersItem.B,
             canBack = runnersItem.canBack,
             lay = runnersItem.L,
-            canLay = runnersItem.canLay
+            canLay = runnersItem.canLay,
+            marketId = runnersItem.marketId
         )
     }
 
-    private val _openBetScreenEvent = MutableLiveData<Event<Runner?>>()
-    val openBetScreenEvent: LiveData<Event<Runner?>> = _openBetScreenEvent
+    private val _openBetScreenEvent = MutableLiveData<Event<CreateBetReq?>>()
+    val openBetScreenEvent: LiveData<Event<CreateBetReq?>> = _openBetScreenEvent
 
     fun onTeam1BackClicked() {
-        _openBetScreenEvent.value = Event(batTeamRunner)
+        _openBetScreenEvent.value = Event(
+            CreateBetReq(
+                matchId = matchId.toString(),
+                oddsType = ConstantsBase.LAGAI,
+                runnerId = batTeamRunner?.id,
+                oddsVal = batTeamRunner?.back,
+                marketId = batTeamRunner?.marketId,
+                heroicMarketType = ConstantsBase.MATCH_WINNER,
+                contestsId = contestsId,
+                evenTypeTitle = batTeamRunName
+            )
+        )
     }
 
     fun onTeam1LayClicked() {
-        _openBetScreenEvent.value = Event(batTeamRunner)
+        _openBetScreenEvent.value = Event(
+            CreateBetReq(
+                matchId = matchId.toString(),
+                oddsType = ConstantsBase.KHAI,
+                runnerId = batTeamRunner?.id,
+                oddsVal = batTeamRunner?.lay,
+                marketId = batTeamRunner?.marketId,
+                heroicMarketType = ConstantsBase.MATCH_WINNER,
+                contestsId = contestsId,
+                evenTypeTitle = batTeamRunName
+            )
+        )
     }
 
     fun onTeam2BackClicked() {
-        _openBetScreenEvent.value = Event(bwlTeamRunner)
+        _openBetScreenEvent.value = Event(
+            CreateBetReq(
+                matchId = matchId.toString(),
+                oddsType = ConstantsBase.LAGAI,
+                runnerId = bwlTeamRunner?.id,
+                oddsVal = bwlTeamRunner?.back,
+                marketId = bwlTeamRunner?.marketId,
+                heroicMarketType = ConstantsBase.MATCH_WINNER,
+                contestsId = contestsId,
+                evenTypeTitle = bwlTeamRunName
+            )
+        )
     }
 
     fun onTeam2LayClicked() {
-        _openBetScreenEvent.value = Event(bwlTeamRunner)
+        _openBetScreenEvent.value = Event(
+            CreateBetReq(
+                matchId = matchId.toString(),
+                oddsType = ConstantsBase.KHAI,
+                runnerId = bwlTeamRunner?.id,
+                oddsVal = bwlTeamRunner?.lay,
+                marketId = bwlTeamRunner?.marketId,
+                heroicMarketType = ConstantsBase.MATCH_WINNER,
+                contestsId = contestsId,
+                evenTypeTitle = bwlTeamRunName
+            )
+        )
     }
-    fun callCreateBetFragment(oddsType:String)
-    {
-        val createBetReq = CreateBetReq()
-        createBetReq.matchId = matchId.toString()
-        createBetReq.oddsType = oddsType
 
+    fun onSessionBetClicked(session: Session) {
+//        _openBetScreenEvent.value = Event(
+//            CreateBetReq(
+//                matchId = matchId.toString(),
+//                oddsType = ConstantsBase.KHAI,
+//                runnerId = bwlTeamRunner?.id,
+//                oddsVal = bwlTeamRunner?.lay,
+//                marketId = bwlTeamRunner?.marketId,
+//                heroicMarketType = ConstantsBase.MATCH_WINNER,
+//                contestsId = contestsId,
+//                evenTypeTitle = bwlTeamRunName
+//            )
+//        )
+
+    }
+
+    fun onEndingDigitClicked(runner: Runner?) {
+        _openBetScreenEvent.value = Event(
+            CreateBetReq(
+                matchId = matchId.toString(),
+                oddsType = ConstantsBase.KHAI,
+                runnerId = runner?.id,
+                oddsVal = runner?.back,
+                marketId = runner?.marketId,
+                heroicMarketType = ConstantsBase.ENDING_DIGIT,
+                contestsId = contestsId,
+                evenTypeTitle = runner?.betfairRunnerName
+            )
+        )
+    }
+
+    fun onOddBackClicked() {
+        _openBetScreenEvent.value = Event(
+            CreateBetReq(
+                matchId = matchId.toString(),
+                oddsType = ConstantsBase.KHAI,
+                runnerId = oddMarket?.id,
+                oddsVal = oddMarket?.B,
+                marketId = oddMarket?.marketId,
+                heroicMarketType = ConstantsBase.EVEN_ODD,
+                contestsId = contestsId,
+                evenTypeTitle = context.resources.getString(R.string.odd)
+            )
+        )
+    }
+
+    fun onEvenBackClicked() {
+        _openBetScreenEvent.value = Event(
+            CreateBetReq(
+                matchId = matchId.toString(),
+                oddsType = ConstantsBase.KHAI,
+                runnerId = evenMarket?.id,
+                oddsVal = evenMarket?.B,
+                marketId = evenMarket?.marketId,
+                heroicMarketType = ConstantsBase.EVEN_ODD,
+                contestsId = contestsId,
+                evenTypeTitle = context.resources.getString(R.string.even)
+            )
+        )
     }
 
 }

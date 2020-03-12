@@ -20,5 +20,8 @@ data class RunnersItem(
     @SerializedName("can_lay")
     var canLay: Boolean = false,
     @SerializedName("sid")
-    var sid: String? = null
+    var sid: String? = null,
+
+
+    var marketId: Int? = null
 )

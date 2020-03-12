@@ -4,11 +4,6 @@ import com.ccpp.shared.BuildConfig
 import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
-import com.ccpp.shared.util.ConstantsBase.REQUEST_TIMEOUT
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -37,9 +32,11 @@ open class ApiService @Inject constructor(
 
     fun callSignUpAsync(signUpReq: SignUpReq) = apiClient.callSignUpAsync(signUpReq)
 
-    fun callCretateBetAsync(betReq: CreateBetReq) = apiClient.callCretateBetAsync(betReq,betReq.contestsId.toString())
+    fun callCreateBetAsync(betReq: CreateBetReq) =
+        apiClient.callCretateBetAsync(betReq, betReq.contestsId.toString())
 
-    fun callCretateSessionBetAsync(betReq: CreateSessionBetReq) = apiClient.callCretateSessionBetAsync(betReq,betReq.contestsId.toString())
+    fun callCreateSessionBetAsync(betReq: CreateSessionBetReq) =
+        apiClient.callCretateSessionBetAsync(betReq, betReq.contestsId.toString())
 
     fun callForgetPasswordAsync(email: String) = apiClient.callForgetPasswordAsync(email)
 

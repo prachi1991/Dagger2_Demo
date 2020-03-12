@@ -89,4 +89,9 @@
     <string name="buy_now">Buy Now</string>
     <string name="contest">Contest</string>
     <string name="no_connection">"No Internet Connection "</string>
+    <string name="place_bet">Place Bet</string>
+    <string name="clear_bet">Clear Bet</string>
+    <string name="return_bet">Return |</string>
+    <string name="_0">0</string>
+    <string name="market_divider">Market |</string>
 </resources>

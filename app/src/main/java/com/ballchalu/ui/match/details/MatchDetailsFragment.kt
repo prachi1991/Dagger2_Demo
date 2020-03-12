@@ -165,20 +165,29 @@ class MatchDetailsFragment : BaseFragment() {
             binding.llEndingDigitSection.visibility =
                 if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
             market.runners?.forEach {
-                it.runner = Runner(back = it.B, canBack = it.canBack)
+                it.runner = Runner(back = it.B, canBack = it.canBack, marketId = market.id)
             }
             endingDigitAdapter?.updateEndingDigit(market.runners, market.status)
         })
 
         viewModel.updateEvenOddDataEvent.observe(viewLifecycleOwner, EventObserver { market ->
-            binding.layoutEvenOdd.frameEvenOdd.visibility =
+            binding.frameEvenOdd.visibility =
                 if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
             val marketStatus = market.status?.equals(ConstantsBase.open, true) == true
-            binding.layoutEvenOdd.tvEvenOddType.text = market.betfairMarketType
-            binding.layoutEvenOdd.tvTeam1Back.text =
-                if (market.runners?.get(0)?.canBack == true && marketStatus) market.runners?.get(0)?.B else ""
-            binding.layoutEvenOdd.tvTeam2Back.text =
-                if (market.runners?.get(1)?.canBack == true && marketStatus) market.runners?.get(1)?.L else ""
+            binding.tvEvenOddType.text = market.betfairMarketType
+
+            market.runners?.get(0)?.let {
+                it.marketId = market.id
+                binding.tvOddEvenBack1.text =
+                    if (it.canBack && marketStatus) it.B else ""
+                viewModel.evenMarket = it
+            }
+            market.runners?.get(1)?.let {
+                it.marketId = market.id
+                binding.tvOddEvenBack2.text =
+                    if (it.canBack && marketStatus) it.L else ""
+                viewModel.evenMarket = it
+            }
         })
 
         viewModel.callMatchDetailsAsync()
@@ -187,35 +196,46 @@ class MatchDetailsFragment : BaseFragment() {
         }
 
         viewModel.openBetScreenEvent.observe(viewLifecycleOwner, EventObserver {
-            findNavController().navigate(R.id.nav_create_bet)
+            val bundle = Bundle().apply {
+                putParcelable(ConstantsBase.KEY_CREATE_BET_REQ, it)
+            }
+            findNavController().navigate(R.id.nav_create_bet, bundle)
         })
 
     }
 
     private fun setEvenOddData(market: Market) {
-        binding.layoutEvenOdd.frameEvenOdd.visibility =
+        binding.frameEvenOdd.visibility =
             if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
         val marketStatus = market.status?.equals(ConstantsBase.open, true) == true
-        binding.layoutEvenOdd.tvEvenOddType.text = market.betfairMarketType
-        binding.layoutEvenOdd.tvTeam1Back.text =
-            if (market.runners?.get(0)?.runner?.canBack == true && marketStatus) market.runners?.get(
-                0
-            )?.runner?.back else ""
-        binding.layoutEvenOdd.tvTeam2Back.text =
-            if (market.runners?.get(1)?.runner?.canBack == true && marketStatus) market.runners?.get(
-                1
-            )?.runner?.back else ""
+        binding.tvEvenOddType.text = market.betfairMarketType
+        market.runners?.get(0)?.runner?.let {
+            binding.tvOddEvenBack1.text =
+                if (it.canBack && marketStatus) it.back else ""
+
+            viewModel.evenMarket.let { item ->
+                item?.B = it.back
+                item?.canBack = it.canBack
+                item?.marketId = market.id
+            }
+        }
+        market.runners?.get(1)?.runner?.let {
+            binding.tvOddEvenBack2.text =
+                if (it.canBack && marketStatus) it.back else ""
+
+            viewModel.oddMarket.let { item ->
+                item?.B = it.back
+                item?.canBack = it.canBack
+                item?.marketId = market.id
+            }
+        }
     }
 
 
     private fun initSessionAdapterAdapter() {
         sessionAdapter = SessionAdapter(object : SessionAdapter.OnItemClickListener {
             override fun onYesClicked(session: Session) {
-                Toast.makeText(
-                    activity,
-                    session.sessionRun?.yesRun.toString().plus("  " + session.sessionRun?.yesRate),
-                    Toast.LENGTH_SHORT
-                ).show()
+                viewModel.onSessionBetClicked(session)
             }
 
             override fun onNoClicked(session: Session) {
@@ -224,6 +244,7 @@ class MatchDetailsFragment : BaseFragment() {
                     session.sessionRun?.noRun.toString().plus("  " + session.sessionRun?.noRate),
                     Toast.LENGTH_SHORT
                 ).show()
+                viewModel.onSessionBetClicked(session)
             }
         })
         binding.rvSession.adapter = sessionAdapter
@@ -237,6 +258,7 @@ class MatchDetailsFragment : BaseFragment() {
                     runner.back.plus("  " + runner.betfairRunnerName),
                     Toast.LENGTH_SHORT
                 ).show()
+                viewModel.onEndingDigitClicked(runner)
             }
         })
         binding.rvEndingDigit.adapter = endingDigitAdapter

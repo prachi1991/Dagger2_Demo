@@ -1,6 +1,9 @@
 package com.ccpp.shared.util
 
 object ConstantsBase {
+    const val KEY_CREATE_BET_REQ = "create_bet_request_key"
+    const val BHAAV_TYPE_BACK = "bhaav_type_back"
+    const val BHAAV_TYPE_LAY = "bhaav_type_lay"
     const val HEROIC_COMMENTARY = "heroic_commentary"
     const val SESSION = "session"
     const val ODD = "odds"
@@ -11,6 +14,9 @@ object ConstantsBase {
 
     const val KEY_MATCH_ID: String = "match_id"
     const val KEY_MARKET: String = "market"
+
+    const val LAGAI: String = "LAGAI"
+    const val KHAI: String = "KHAI"
 
     const val ODDS_UPDATES: String = "Odds_Updates"
     const val ACTION_PUB_NUB: String = "Action_Pubnub"

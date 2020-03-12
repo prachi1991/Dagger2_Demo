@@ -9,7 +9,6 @@ import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.R
 import com.ballchalu.databinding.FragmentCreateBetBinding
@@ -17,15 +16,12 @@ import com.ballchalu.ui.create_bet.adapter.InPlayBetMatchListAdapter
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListingItem
+import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import dagger.android.support.DaggerAppCompatDialogFragment
 import javax.inject.Inject
 
-
-/**
- * A simple [Fragment] subclass.
- */
 class CreateBetFragment : DaggerAppCompatDialogFragment(),
     InPlayMatchListingAdapter.OnItemClickListener {
 
@@ -50,33 +46,34 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
             lifecycleOwner = this@CreateBetFragment
 
             minusLayout.setOnClickListener {
-                if(count>0)
-                count --
+                if (count > 0)
+                    count--
                 updateCountText()
             }
 
             plusLayout.setOnClickListener {
-                if(count<10)
-                    count ++
+                if (count < 10)
+                    count++
                 updateCountText()
             }
 
-            btnClear.setOnClickListener {
+            btnClearBet.setOnClickListener {
                 tvCount.setText("0")
                 count = 0
             }
 
             btnPlaceBet.setOnClickListener {
-                if(tvCount.text.isNullOrEmpty())
-                {
-                    Toast.makeText(context,"Please enter the amount",Toast.LENGTH_SHORT).show()
-                }else{
-                    if(tvCount.text.toString().toInt() < 1)
-                    {
-                        Toast.makeText(context,"Amount should be grater than zero",Toast.LENGTH_SHORT).show()
-                    }else{
+                if (tvCount.text.isNullOrEmpty()) {
+                    Toast.makeText(context, "Please enter the amount", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (tvCount.text.toString().toInt() < 1) {
+                        Toast.makeText(
+                            context,
+                            "Amount should be grater than zero",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
                         viewModel.callCreateBet(tvCount.text.toString())
-                       // viewModel.callCreateSessionBet(tvCount.text.toString())
                     }
                 }
             }
@@ -88,34 +85,26 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
 
             tvCount.onFocusChangeListener = OnFocusChangeListener { view, hasFocus ->
                 if (hasFocus) {
-                   count = 0
+                    count = 0
                 } else {
 
                 }
             }
 
             tvCount.doOnTextChanged { text, start, count, after ->
-                if(!text.isNullOrEmpty())
-                updateRateCount()
+                if (!text.isNullOrEmpty())
+                    updateRateCount()
                 else
                     tvReturnRate.setText("0")
             }
 
         }
+        arguments?.let {
+            viewModel.createBetReq = it.getParcelable(ConstantsBase.KEY_CREATE_BET_REQ)
+            updateUI(viewModel.createBetReq)
+        }
+
         return binding.root
-    }
-
-    fun updateCountText()
-    {
-        binding.tvCount.clearFocus()
-        val list = viewModel.betArray()
-        if(count in 1..10)
-        binding.tvCount.setText(list[count].toString())
-    }
-
-    fun updateRateCount()
-    {
-        binding.tvReturnRate.text = String.format("%.2f",(binding.tvCount.text.toString().toDouble() * binding.bettingRate.text.toString().toDouble()))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -123,27 +112,50 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         getMatchesListing()
     }
 
+
+    private fun updateCountText() {
+        binding.tvCount.clearFocus()
+        val list = viewModel.betArray()
+        if (count in 1..10)
+            binding.tvCount.setText(list[count].toString())
+    }
+
+    private fun updateRateCount() {
+        binding.tvReturnRate.text = String.format(
+            "%.2f",
+            (binding.tvCount.text.toString().toDouble() * binding.tvOddValue.text.toString().toDouble())
+        )
+    }
+
+    private fun updateUI(createBetReq: CreateBetReq?) {
+
+        binding.tvOddValue.text = createBetReq?.oddsVal
+        binding.tvLagaiKhaiLabel.text = createBetReq?.oddsType
+        binding.tvMarketType.text = createBetReq?.heroicMarketType
+        binding.tvTitle.text = createBetReq?.evenTypeTitle
+    }
+
     private fun getMatchesListing() {
         viewModel.callMatchListing(ConstantsBase.EVENT_TYPE, ConstantsBase.IN_PLAY)
         viewModel.callMatchListing(ConstantsBase.EVENT_TYPE, ConstantsBase.UPCOMING)
 
-        binding.llInplay.visibility=View.GONE
-        binding.llUpcoming.visibility=View.GONE
+        binding.llInplay.visibility = View.GONE
+        binding.llUpcoming.visibility = View.GONE
 
 
-        viewModel.inPlayListEvent.observe(viewLifecycleOwner, EventObserver{
+        viewModel.inPlayListEvent.observe(viewLifecycleOwner, EventObserver {
 
-            if(it.matches?.size!=0)
-                binding.llInplay.visibility=View.VISIBLE
+            if (it.matches?.size != 0)
+                binding.llInplay.visibility = View.VISIBLE
 
             inPlayListAdapter = InPlayBetMatchListAdapter()
             binding.rvInPlayMatchListing.adapter = inPlayListAdapter
             inPlayListAdapter?.setItemList(it.matches, ConstantsBase.IN_PLAY)
         })
 
-        viewModel.upcomingListEvent.observe(viewLifecycleOwner, EventObserver{
-            if(it.matches?.size!=0)
-                binding.llUpcoming.visibility=View.VISIBLE
+        viewModel.upcomingMatchListEvent.observe(viewLifecycleOwner, EventObserver {
+            if (it.matches?.size != 0)
+                binding.llUpcoming.visibility = View.VISIBLE
             upcomingListAdapter = InPlayMatchListingAdapter(this)
             binding.rvUpcomingMatchListing.adapter = upcomingListAdapter
             upcomingListAdapter?.setItemList(it.matches, ConstantsBase.UPCOMING)
@@ -154,12 +166,12 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
 
         })
 
-        viewModel.createBetObserver.observe(viewLifecycleOwner, EventObserver{
-            Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+        viewModel.createBetObserver.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
 
-        viewModel.createSessionBetObserver.observe(viewLifecycleOwner, EventObserver{
-            Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+        viewModel.createSessionBetObserver.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
@@ -177,8 +189,8 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.FILL_PARENT,
-            ViewGroup.LayoutParams.FILL_PARENT
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
         );
     }
 

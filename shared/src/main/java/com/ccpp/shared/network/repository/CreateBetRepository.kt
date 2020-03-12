@@ -1,12 +1,7 @@
 package com.ccpp.shared.network.repository
 
 import com.ccpp.shared.core.base.BaseRepository
-import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.domain.LoginRes
-import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.domain.create_bet.CreateBetReq
-import com.ccpp.shared.domain.create_bet.CreateBetRes
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.network.ApiService
 import javax.inject.Inject
@@ -16,10 +11,10 @@ class CreateBetRepository @Inject constructor(
     private val baseRepository: BaseRepository
 ) {
 
-    suspend fun callCretateBetAsync(betReq: CreateBetReq) =
+    suspend fun callCreateBetAsync(betReq: CreateBetReq) =
         baseRepository.safeApiCall(
             call = {
-                service.callCretateBetAsync(betReq).await()
+                service.callCreateBetAsync(betReq).await()
             },
             errorMessage = "Error occurred"
         )
@@ -27,7 +22,7 @@ class CreateBetRepository @Inject constructor(
     suspend fun callCretateSessionBetAsync(betReq: CreateSessionBetReq) =
         baseRepository.safeApiCall(
             call = {
-                service.callCretateSessionBetAsync(betReq).await()
+                service.callCreateSessionBetAsync(betReq).await()
             },
             errorMessage = "Error occurred"
         )

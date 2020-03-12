@@ -1,46 +1,41 @@
 package com.ccpp.shared.domain.create_bet
 
-import com.google.gson.annotations.Expose
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-class CreateBetReq (
+@Parcelize
+data class CreateBetReq(
 
     @SerializedName("access_token")
-    @Expose
     var accessToken: String? = null,
 
     @SerializedName("match_id")
-    @Expose
     var matchId: String? = null,
 
     @SerializedName("odds_type")
-    @Expose
     var oddsType: String? = null,
 
     @SerializedName("runner_id")
-    @Expose
-    var runnerId: String? = null,
+    var runnerId: Int? = 0,
 
     @SerializedName("odds_val")
-    @Expose
     var oddsVal: String? = null,
 
     @SerializedName("market_id")
-    @Expose
-    var marketId: String? = null,
+    var marketId: Int? = null,
 
     @SerializedName("heroic_market_type")
-    @Expose
     var heroicMarketType: String? = null,
 
     @SerializedName("stack")
-    @Expose
     var stack: String? = null,
 
     @SerializedName("contestsId")
-    @Expose
-    var contestsId: String? = null
-){
+    var contestsId: Int? = 0,
+
+    var evenTypeTitle: String? = ""
+) : Parcelable {
 
 
 }
