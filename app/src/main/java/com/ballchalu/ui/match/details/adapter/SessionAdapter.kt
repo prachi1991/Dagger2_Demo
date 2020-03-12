@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemSessionListBinding
 import com.ccpp.shared.domain.match_details.Session
 import com.ccpp.shared.domain.match_details.SessionsItem
+import com.ccpp.shared.util.ConstantsBase
 import java.util.*
 
 
@@ -67,10 +68,16 @@ class SessionAdapter(val listener: OnItemClickListener?) :
             with(binding) {
                 model = SessionAdapterData(sessionsItem?.session)
                 tvYesValue.setOnClickListener {
-                    sessionsItem?.session?.let { it1 -> listener?.onYesClicked(it1) }
+                    sessionsItem?.session?.let { it1 ->
+                        if (it1.status?.equals(ConstantsBase.open, true) == true)
+                            listener?.onYesClicked(it1)
+                    }
                 }
                 tvNoValue.setOnClickListener {
-                    sessionsItem?.session?.let { it1 -> listener?.onNoClicked(it1) }
+                    sessionsItem?.session?.let { it1 ->
+                        if (it1.status?.equals(ConstantsBase.open, true) == true)
+                            listener?.onNoClicked(it1)
+                    }
                 }
             }
 

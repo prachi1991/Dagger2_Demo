@@ -21,7 +21,10 @@ import com.ballchalu.ui.match.details.adapter.EndingDigitAdapter
 import com.ballchalu.ui.match.details.adapter.SessionAdapter
 import com.ballchalu.utils.StringUtils
 import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.domain.match_details.*
+import com.ccpp.shared.domain.match_details.Market
+import com.ccpp.shared.domain.match_details.Runner
+import com.ccpp.shared.domain.match_details.Session
+import com.ccpp.shared.domain.match_details.SessionsItem
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -84,8 +87,10 @@ class MatchDetailsFragment : BaseFragment() {
         initSessionAdapterAdapter()
         initEndingDigitAdapterAdapter()
 
-        viewModel.matchResult.observe(viewLifecycleOwner, EventObserver {
-            setMatchData(it.match)
+        viewModel.matchResult.observe(viewLifecycleOwner, EventObserver { response ->
+            binding.tvMatchTeam1.text = response?.match?.team1
+            binding.tvMatchTeam2.text = response?.match?.team2
+            binding.tvBetStatus.text = response?.match?.heroicCommentary?.event ?: ""
         })
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
@@ -93,24 +98,33 @@ class MatchDetailsFragment : BaseFragment() {
                 binding.pullRefreshLayout.isRefreshing = false
         })
 
-        viewModel.sessionEvent.observe(viewLifecycleOwner, EventObserver {
-            setSessionData(it)
+        viewModel.sessionEvent.observe(viewLifecycleOwner, EventObserver { sessionList ->
+            binding.llSessionSection.visibility =
+                if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
+            binding.rvSession.visibility =
+                if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
+            sessionAdapter?.setItemList(sessionList)
         })
 
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
         })
 
-        viewModel.winnerMarketEvent.observe(viewLifecycleOwner, EventObserver {
-            setMarketData(it)
+        viewModel.winnerMarketEvent.observe(viewLifecycleOwner, EventObserver { market ->
+            binding.tvMarketType.text = market?.betfairMarketType
+            binding.tvBatTeamName.text = market?.runners?.get(0)?.runner?.betfairRunnerName
+            binding.tvBallTeamName.text = market?.runners?.get(1)?.runner?.betfairRunnerName
         })
 
         viewModel.evenOddMarketEvent.observe(viewLifecycleOwner, EventObserver {
             setEvenOddData(it)
         })
 
-        viewModel.endingDigitMarketEvent.observe(viewLifecycleOwner, EventObserver {
-            setEndingData(it)
+        viewModel.endingDigitMarketEvent.observe(viewLifecycleOwner, EventObserver { market ->
+            binding.llEndingDigitSection.visibility =
+                if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
+            binding.tvEvenOddType.text = market.betfairMarketType
+            endingDigitAdapter?.setItemList(market.runners, market.status)
         })
 
         viewModel.betStatusEvent.observe(viewLifecycleOwner, EventObserver {
@@ -129,12 +143,16 @@ class MatchDetailsFragment : BaseFragment() {
                 if (score?.bwlteamdesc.isNullOrEmpty()) "Bowling..." else score?.bwlteamdesc
         })
 
-        viewModel.batTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver {
-            setBatTeamBhaav(it)
+        viewModel.batTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver { runners ->
+            binding.tvTeam1Lay.text = if (runners?.canBack == true) runners.back else ""
+            binding.tvTeam1Back.text = if (runners?.canLay == true) runners.lay else ""
+            viewModel.batTeamRunner = runners
         })
 
-        viewModel.bwlTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver {
-            setBwlTeamBhaav(it)
+        viewModel.bwlTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver { runners ->
+            binding.tvTeam2Lay.text = if (runners?.canBack == true) runners.back else ""
+            binding.tvTeam2Back.text = if (runners?.canLay == true) runners.lay else ""
+            viewModel.bwlTeamRunner = runners
         })
 
         viewModel.updateEndingDigitDataEvent.observe(viewLifecycleOwner, EventObserver { market ->
@@ -179,34 +197,6 @@ class MatchDetailsFragment : BaseFragment() {
     }
 
 
-    private fun setMatchData(match: Match?) {
-        binding.tvMatchTeam1.text = match?.team1
-        binding.tvMatchTeam2.text = match?.team2
-        binding.tvBetStatus.text = match?.heroicCommentary?.event ?: ""
-    }
-
-    private fun setMarketData(market: Market?) {
-        binding.tvMarketType.text = market?.betfairMarketType
-        binding.tvBatTeamName.text = market?.runners?.get(0)?.runner?.betfairRunnerName
-        binding.tvBallTeamName.text = market?.runners?.get(1)?.runner?.betfairRunnerName
-    }
-
-    private fun setSessionData(sessionList: List<SessionsItem>?) {
-        binding.llSessionSection.visibility =
-            if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
-        binding.rvSession.visibility =
-            if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
-        sessionAdapter?.setItemList(sessionList)
-    }
-
-    private fun setEndingData(market: Market) {
-        binding.llEndingDigitSection.visibility =
-            if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
-        binding.tvEvenOddType.text = market.betfairMarketType
-        endingDigitAdapter?.setItemList(market.runners, market.status)
-    }
-
-
     private fun initSessionAdapterAdapter() {
         sessionAdapter = SessionAdapter(object : SessionAdapter.OnItemClickListener {
             override fun onYesClicked(session: Session) {
@@ -229,27 +219,17 @@ class MatchDetailsFragment : BaseFragment() {
     }
 
     private fun initEndingDigitAdapterAdapter() {
-        endingDigitAdapter = EndingDigitAdapter()
+        endingDigitAdapter = EndingDigitAdapter(object : EndingDigitAdapter.OnItemClickListener {
+            override fun onBackClicked(runner: Runner) {
+                Toast.makeText(
+                    activity,
+                    runner.back.plus("  " + runner.betfairRunnerName),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
         binding.rvEndingDigit.adapter = endingDigitAdapter
     }
-
-    private fun setBatTeamBhaav(runners: Runner?) {
-        binding.tvTeam1Lay.text = if (runners?.canBack == true) runners.back else ""
-        binding.tvTeam1Back.text = if (runners?.canLay == true) runners.lay else ""
-        viewModel.batTeamRunner = runners
-    }
-
-    private fun setDrawTeamBhaav(back: String?, lay: String?, isBack: Boolean?, isLay: Boolean?) {
-//        binding.tvDrawBack.text = if (isBack == true) back else ""
-//        binding.tvDraw.text = if (isLay == true) lay else ""
-    }
-
-    private fun setBwlTeamBhaav(runners: Runner?) {
-        binding.tvTeam2Lay.text = if (runners?.canBack == true) runners.back else ""
-        binding.tvTeam2Back.text = if (runners?.canLay == true) runners.lay else ""
-        viewModel.bwlTeamRunner = runners
-    }
-
 
     private fun updateSession(sessionsItem: SessionsItem) {
         try {

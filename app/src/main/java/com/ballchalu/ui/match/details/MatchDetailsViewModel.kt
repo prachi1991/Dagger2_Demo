@@ -42,8 +42,8 @@ class MatchDetailsViewModel @Inject constructor(
     var matchId: Int = 0
     //____________________________________variables__________________________//
 
-    private val _matchResult = MutableLiveData<Event<MatchDetailsRes>>()
-    val matchResult: LiveData<Event<MatchDetailsRes>> = _matchResult
+    private val _matchResult = MutableLiveData<Event<MatchDetailsRes?>>()
+    val matchResult: LiveData<Event<MatchDetailsRes?>> = _matchResult
 
     fun callMatchDetailsAsync() {
         loading.postValue(Event(true))
@@ -67,8 +67,8 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
-    private val _sessionEvent = MutableLiveData<Event<List<SessionsItem>>>()
-    val sessionEvent: LiveData<Event<List<SessionsItem>>> = _sessionEvent
+    private val _sessionEvent = MutableLiveData<Event<List<SessionsItem>?>>()
+    val sessionEvent: LiveData<Event<List<SessionsItem>?>> = _sessionEvent
 
     private fun setSessionData(sessions: List<SessionsItem>?) {
         sessions?.filter { it.session?.status == ConstantsBase.suspend || it.session?.status == ConstantsBase.open }
@@ -260,8 +260,8 @@ class MatchDetailsViewModel @Inject constructor(
     private val _batTeamBhaavEvent = MutableLiveData<Event<Runner?>>()
     val batTeamBhaavEvent: LiveData<Event<Runner?>> = _batTeamBhaavEvent
 
-    private val _bwlTeamBhaavEvent = MutableLiveData<Event<Runner>>()
-    val bwlTeamBhaavEvent: LiveData<Event<Runner>> = _bwlTeamBhaavEvent
+    private val _bwlTeamBhaavEvent = MutableLiveData<Event<Runner?>>()
+    val bwlTeamBhaavEvent: LiveData<Event<Runner?>> = _bwlTeamBhaavEvent
 
     private fun updateMarket(market: Market?) {
         when (market?.status?.trim()) {
@@ -299,5 +299,24 @@ class MatchDetailsViewModel @Inject constructor(
             lay = runnersItem.L,
             canLay = runnersItem.canLay
         )
+    }
+
+    private val _openBetScreenEvent = MutableLiveData<Event<Runner?>>()
+    val openBetScreenEvent: LiveData<Event<Runner?>> = _openBetScreenEvent
+
+    fun onTeam1BackClicked() {
+        _openBetScreenEvent.value = Event(batTeamRunner)
+    }
+
+    fun onTeam1LayClicked() {
+        _openBetScreenEvent.value = Event(batTeamRunner)
+    }
+
+    fun onTeam2BackClicked() {
+        _openBetScreenEvent.value = Event(bwlTeamRunner)
+    }
+
+    fun onTeam2LayClicked() {
+        _openBetScreenEvent.value = Event(bwlTeamRunner)
     }
 }

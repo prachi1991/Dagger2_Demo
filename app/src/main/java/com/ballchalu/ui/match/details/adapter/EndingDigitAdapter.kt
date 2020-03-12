@@ -9,7 +9,8 @@ import com.ccpp.shared.domain.match_details.RunnersItem
 import com.ccpp.shared.util.ConstantsBase
 
 
-class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>() {
+class EndingDigitAdapter(val listener: OnItemClickListener?) :
+    RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>() {
     private var list: ArrayList<RunnersItem>? = arrayListOf()
     private var isSuspend: Boolean = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -60,16 +61,24 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
     inner class ViewHolder(val binding: ItemEndingDigitListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(runnersItem: Runner?, position: Int) {
+        fun setData(runner: Runner?, position: Int) {
             with(binding) {
-                runnersItem?.let {
+                runner?.let {
                     model = it
                 }
                 tvTeam1Back.text =
-                    if (runnersItem?.canBack == true && !isSuspend) runnersItem.back ?: "" else ""
+                    if (runner?.canBack == true && !isSuspend) runner.back ?: "" else ""
+
+                tvTeam1Back.setOnClickListener {
+                    if (!isSuspend)
+                        runner?.let { it1 -> listener?.onBackClicked(it1) }
+                }
             }
 
         }
     }
 
+    interface OnItemClickListener {
+        fun onBackClicked(runner: Runner)
+    }
 }
