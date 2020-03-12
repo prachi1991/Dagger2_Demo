@@ -40,4 +40,7 @@ data class UserMyBet(
     @Expose
     var sessionId: String? = null
 
-    )
+    ){
+
+
+}
