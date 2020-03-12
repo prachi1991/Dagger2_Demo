@@ -19,6 +19,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
 import com.ballchalu.mqtt.MqttMarket
+import com.ballchalu.ui.create_bet.CreateBetFragment
 import com.ballchalu.ui.match.details.adapter.EndingDigitAdapter
 import com.ballchalu.ui.match.details.adapter.SessionAdapter
 import com.ccpp.shared.core.result.EventObserver
@@ -60,7 +61,11 @@ class MatchDetailsFragment : BaseFragment() {
 
 
             tvTeam1Lay.setOnClickListener {
-                findNavController().navigate(R.id.nav_create_bet)
+               // findNavController().navigate(R.id.nav_create_bet)
+                requireActivity().run {
+                    CreateBetFragment().show(supportFragmentManager,CreateBetFragment::class.java.simpleName)
+                }
+
             }
         }
 

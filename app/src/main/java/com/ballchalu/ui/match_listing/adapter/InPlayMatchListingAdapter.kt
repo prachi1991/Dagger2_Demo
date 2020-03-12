@@ -65,7 +65,7 @@ class InPlayMatchListingAdapter(val listener: OnItemClickListener?) :
                     tvJoined.text="Join Now"
                 }
 
-                tvJoined.setOnClickListener {
+                root.setOnClickListener {
                     matchListingItem?.let { it1 -> listener?.onMatchClicked(it1) }
                 }
 
