@@ -147,5 +147,16 @@ class NetworkModule {
             baseRepository
         )
 
+    @Provides
+    @Singleton
+    fun provideMyBetsRepository(
+        apiService: ApiService,
+        baseRepository: BaseRepository
+    ): MyBetsRepository =
+        MyBetsRepository(
+            apiService,
+            baseRepository
+        )
+
 
 }

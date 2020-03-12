@@ -55,12 +55,19 @@ class MatchDetailsFragment : BaseFragment() {
             lifecycleOwner = this@MatchDetailsFragment
             model = viewModel
 
+            tvMyBets.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, viewModel.contestsMatchId ?: 0)
+                }
+                findNavController().navigate(R.id.nav_my_bet, bundle)
+            }
 
         }
 
         arguments?.let {
             viewModel.matchId = it.getInt(ConstantsBase.KEY_PROVIDER_ID)
             viewModel.contestsId = it.getInt(ConstantsBase.KEY_CONTESTS_ID)
+            viewModel.contestsMatchId = it.getInt(ConstantsBase.KEY_CONTESTS_MATCH_ID)
         }
         registerReceiver()
 
@@ -180,10 +187,6 @@ class MatchDetailsFragment : BaseFragment() {
             binding.layoutEvenOdd.tvTeam2Back.text =
                 if (market.runners?.get(1)?.canBack == true && marketStatus) market.runners?.get(1)?.L else ""
         })
-
-        binding.tvMyBets.setOnClickListener {
-
-        }
 
         viewModel.callMatchDetailsAsync()
         binding.pullRefreshLayout.setOnRefreshListener {

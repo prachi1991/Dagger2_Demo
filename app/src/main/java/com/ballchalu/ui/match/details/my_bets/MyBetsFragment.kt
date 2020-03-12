@@ -1,15 +1,15 @@
 package com.ballchalu.ui.match.details.my_bets
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-
-import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMyBetsBinding
+import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -27,11 +27,24 @@ class MyBetsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        fragmentViewModel = viewModelProvider(viewModelFactory)
         binding = FragmentMyBetsBinding.inflate(inflater, container, false).apply {
 
+            fragmentViewModel.callMyBetsDetailsAsync()
+
+            fragmentViewModel.myBetResult.observe(viewLifecycleOwner,EventObserver{
+
+            })
+
         }
+
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fragmentViewModel = viewModelProvider(viewModelFactory)
+        arguments?.let {
+            fragmentViewModel.matchId = it.getInt(ConstantsBase.KEY_CONTESTS_MATCH_ID)
+        }
+    }
 }

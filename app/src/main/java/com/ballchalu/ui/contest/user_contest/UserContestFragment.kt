@@ -85,6 +85,7 @@ class UserContestFragment : BaseFragment() {
                 val bundle = Bundle().apply {
                     putInt(ConstantsBase.KEY_PROVIDER_ID, contestModel.contest?.match?.providerId ?: 0)
                     putInt(ConstantsBase.KEY_CONTESTS_ID, contestModel.id ?: 0)
+                    putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, contestModel.contest?.id ?: 0)
                  //   Toast.makeText(context,contestModel.id.toString(),Toast.LENGTH_SHORT).show()
                 }
                 findNavController().navigate(R.id.nav_home_match_details, bundle)
