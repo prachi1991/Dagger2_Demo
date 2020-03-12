@@ -1,59 +1,78 @@
 package com.ballchalu.mqtt
 
+import android.content.Context
 import android.content.Intent
-import com.ballchalu.BuildConfig
-import com.ballchalu.application.App
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.ballchalu.utils.network.NetworkUtil
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import timber.log.Timber
 import java.text.MessageFormat
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object MqttConnection {
+@Singleton
+class MqttConnection @Inject constructor(
+    val context: Context,
+    val mqttAndroidClient: MqttAndroidClient?,
+    private val mqttConnectOptions: MqttConnectOptions?
+) : LifecycleObserver {
     private var client: MqttAndroidClient? = null
-    const val topic = "arenas/global"
-    const val mqttAction = "mqtt_connection_state"
+    private var appStatus = true
 
     fun connectToClient() {
-        if (NetworkUtil.getConnectivityStatus(App.instance) == 0) return
-        val conOpt = MqttConnectOptions()
-        val clientId = App.instance.androidId
-        val port = 1883
-        val uri: String
-        uri = "${BuildConfig.mqttUrl}:$port"
-        client = MqttAndroidClient(App.instance, uri, clientId)
-        val clientHandle = uri + clientId
-        val username = BuildConfig.mqttUserName
-        val password = BuildConfig.mqttPassword
-        val actionArgs = arrayOfNulls<String>(1)
-        actionArgs[0] = clientId
-        conOpt.isCleanSession = false
-        conOpt.userName = username
-        conOpt.password = password.toCharArray()
-        client?.setCallback(MqttCallbackHandler(App.instance, clientHandle))
-        client?.setTraceCallback(MqttTraceCallback())
+        if (NetworkUtil.getConnectivityStatus(context) == 0) return
+        if (appStatus)
+            createConnection()
+    }
+
+    private fun createConnection() {
         try {
-            client?.connect(conOpt, null, object : IMqttActionListener {
+            mqttAndroidClient?.connect(mqttConnectOptions, null, object : IMqttActionListener {
                 override fun onSuccess(mqttToken: IMqttToken) {
                     Timber.e("Client connected")
                     val message = MqttMessage("Hello, I am Android Mqtt Client.".toByteArray())
                     message.qos = 2
                     message.isRetained = false
                     try {
-                        client?.subscribe(topic, 0)
-                        App.instance.sendBroadcast(Intent(mqttAction))
+                        mqttAndroidClient.subscribe(Companion.topic, 0)
+                        context.sendBroadcast(Intent(Companion.mqttAction))
                     } catch (e: MqttException) {
                         Timber.e(e)
                     }
                 }
 
                 override fun onFailure(arg0: IMqttToken, arg1: Throwable) {
-                    Timber.i(MessageFormat.format("Client connection failed: {0}", arg1.message))
+                    Timber.i(
+                        MessageFormat.format(
+                            "mqttAndroidClient connection failed: {0}",
+                            arg1.message
+                        )
+                    )
                     connectToClient()
                 }
             })
         } catch (e: MqttException) {
             Timber.e(e)
         }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onAppBackgrounded() {
+        Timber.e("App in background")
+        appStatus = false
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onAppForegrounded() {
+        Timber.e("App in foreground")
+        appStatus = true
+    }
+
+    companion object {
+        const val topic = "arenas/global"
+        const val mqttAction = "mqtt_connection_state"
     }
 }

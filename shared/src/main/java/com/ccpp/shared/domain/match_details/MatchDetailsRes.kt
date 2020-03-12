@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
 data class MatchDetailsRes(
 //
     @field:SerializedName("markets")
-    val markets: List<MarketsItem>? = null,
+    var markets: List<MarketsItem>? = null,
 
     @field:SerializedName("sessions")
-    val sessions: List<SessionsItem>? = null,
+    var sessions: List<SessionsItem>? = null,
 
     @field:SerializedName("match")
-    val match: Match? = null
+    var match: Match? = null
 )

@@ -4,6 +4,11 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class CreateBetReq (
+
+    @SerializedName("access_token")
+    @Expose
+    var accessToken: String? = null,
+
     @SerializedName("match_id")
     @Expose
     var matchId: String? = null,
@@ -30,7 +35,11 @@ class CreateBetReq (
 
     @SerializedName("stack")
     @Expose
-    var stack: String? = null
+    var stack: String? = null,
+
+    @SerializedName("contestsId")
+    @Expose
+    var contestsId: String? = null
 ){
 
 

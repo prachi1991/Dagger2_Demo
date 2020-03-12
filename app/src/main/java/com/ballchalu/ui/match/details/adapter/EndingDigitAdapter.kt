@@ -9,8 +9,9 @@ import com.ccpp.shared.domain.match_details.RunnersItem
 import com.ccpp.shared.util.ConstantsBase
 
 
-class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>() {
-    private var list: List<RunnersItem>? = null
+class EndingDigitAdapter(val listener: OnItemClickListener?) :
+    RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>() {
+    private var list: ArrayList<RunnersItem>? = arrayListOf()
     private var isSuspend: Boolean = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -33,8 +34,26 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
 
 
     fun setItemList(runnersItemList: List<RunnersItem>?, status: String?) {
-        this.list = runnersItemList
+        this.list?.clear()
+        runnersItemList?.let { this.list?.addAll(it) }
         this.isSuspend = status.equals(ConstantsBase.suspend, true)
+        notifyDataSetChanged()
+    }
+
+    fun updateEndingDigit(
+        runnersList: List<RunnersItem>?,
+        status: String?
+    ) {
+        this.isSuspend = status.equals(ConstantsBase.suspend, true)
+        runnersList?.forEach { runnersItem ->
+            list?.forEach {
+                if (it.runner?.id == runnersItem.id) {
+                    it.runner?.canBack = runnersItem.canBack
+                    it.runner?.back = runnersItem.B
+                    it.runner?.betfairRunnerName = it.runner?.betfairRunnerName
+                }
+            }
+        }
         notifyDataSetChanged()
     }
 
@@ -42,16 +61,24 @@ class EndingDigitAdapter : RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>()
     inner class ViewHolder(val binding: ItemEndingDigitListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(runnersItem: Runner?, position: Int) {
+        fun setData(runner: Runner?, position: Int) {
             with(binding) {
-                runnersItem?.let {
+                runner?.let {
                     model = it
                 }
                 tvTeam1Back.text =
-                    if (runnersItem?.canBack == true && !isSuspend) runnersItem.back.toString() else ""
+                    if (runner?.canBack == true && !isSuspend) runner.back ?: "" else ""
+
+                tvTeam1Back.setOnClickListener {
+                    if (!isSuspend)
+                        runner?.let { it1 -> listener?.onBackClicked(it1) }
+                }
             }
 
         }
     }
 
+    interface OnItemClickListener {
+        fun onBackClicked(runner: Runner)
+    }
 }

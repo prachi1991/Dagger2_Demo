@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="model"
+            type="com.ballchalu.ui.match.details.MatchDetailsViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -357,6 +360,7 @@
                                 android:gravity="center"
                                 android:minWidth="@dimen/_35sdp"
                                 android:paddingTop="@dimen/_3sdp"
+                                android:onClick="@{view -> model.onTeam1BackClicked()}"
                                 android:paddingBottom="@dimen/_3sdp"
                                 android:singleLine="true"
                                 android:textColor="@color/white"
@@ -374,6 +378,7 @@
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:background="@drawable/backgroud_solid_light_blue1"
                                 android:gravity="center"
+                                android:onClick="@{view -> model.onTeam1LayClicked()}"
                                 android:minWidth="@dimen/_35sdp"
                                 android:paddingTop="@dimen/_3sdp"
                                 android:paddingBottom="@dimen/_3sdp"
@@ -413,6 +418,7 @@
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_toStartOf="@id/tvTeam2Back"
                                 android:background="@drawable/backgroud_solid_dark_blue"
+                                android:onClick="@{view -> model.onTeam2BackClicked()}"
                                 android:gravity="center"
                                 android:minWidth="@dimen/_35sdp"
                                 android:paddingTop="@dimen/_3sdp"
@@ -431,6 +437,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="@dimen/_5sdp"
+                                android:onClick="@{view -> model.onTeam2LayClicked()}"
                                 android:background="@drawable/backgroud_solid_light_blue1"
                                 android:gravity="center"
                                 android:minWidth="@dimen/_35sdp"

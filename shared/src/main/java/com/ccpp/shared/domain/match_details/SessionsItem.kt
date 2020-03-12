@@ -7,5 +7,5 @@ import com.google.gson.annotations.SerializedName
 data class SessionsItem(
 
     @field:SerializedName("session")
-    val session: Session? = null
+    var session: Session? = null
 )
