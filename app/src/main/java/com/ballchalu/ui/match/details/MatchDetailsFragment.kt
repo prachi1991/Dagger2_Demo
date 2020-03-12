@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
@@ -52,12 +53,19 @@ class MatchDetailsFragment : BaseFragment() {
         viewModel = viewModelProvider(viewModelFactory)
         binding = FragmentMatchDetailsBinding.inflate(inflater).apply {
             lifecycleOwner = this@MatchDetailsFragment
+
+
+            tvTeam1Lay.setOnClickListener {
+                findNavController().navigate(R.id.nav_create_bet)
+            }
         }
 
         arguments?.let {
             viewModel.matchId = it.getInt(ConstantsBase.KEY_PROVIDER_ID)
+            viewModel.contestsId = it.getInt(ConstantsBase.KEY_CONTESTS_ID)
         }
         registerReceiver()
+
         return binding.root
     }
 

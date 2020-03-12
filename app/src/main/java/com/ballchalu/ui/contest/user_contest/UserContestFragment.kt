@@ -11,7 +11,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.ContestViewModel
-import com.ballchalu.ui.contest.adapter.ContestAdapter
+import com.ballchalu.ui.contest.user_contest.adapter.UserContestAdapter
 import com.ballchalu.ui.dialog.NotificationDialog
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListing
@@ -22,7 +22,7 @@ import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class UserContestFragment : BaseFragment() {
-    private var contestAdapter: ContestAdapter? = null
+    private var contestAdapter: UserContestAdapter? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -59,10 +59,7 @@ class UserContestFragment : BaseFragment() {
             contestAdapter?.clear()
             myContestList?.clear()
             userContestList = it.contests as ArrayList<UserContest>?
-            userContestList?.forEach {
-                myContestList?.add(it.contest!!)
-            }
-            contestAdapter?.setItemList(myContestList, true)
+            contestAdapter?.setItemList(userContestList, true)
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
@@ -82,14 +79,13 @@ class UserContestFragment : BaseFragment() {
     }
 
     private fun initSessionAdapterAdapter() {
-        contestAdapter = ContestAdapter(object : ContestAdapter.OnItemClickListener {
-            override fun onBuyNowClicked(contestModel: Contest) {
+        contestAdapter = UserContestAdapter(object : UserContestAdapter.OnItemClickListener {
 
-            }
-
-            override fun onPlayNowClicked(contestModel: Contest) {
+            override fun onPlayNowClicked(contestModel: UserContest) {
                 val bundle = Bundle().apply {
-                    putInt(ConstantsBase.KEY_PROVIDER_ID, contestModel.match.providerId ?: 0)
+                    putInt(ConstantsBase.KEY_PROVIDER_ID, contestModel.contest?.match?.providerId ?: 0)
+                    putInt(ConstantsBase.KEY_CONTESTS_ID, contestModel.id ?: 0)
+                 //   Toast.makeText(context,contestModel.id.toString(),Toast.LENGTH_SHORT).show()
                 }
                 findNavController().navigate(R.id.nav_home_match_details, bundle)
             }
