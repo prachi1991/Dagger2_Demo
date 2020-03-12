@@ -114,6 +114,10 @@ class MatchDetailsFragment : BaseFragment() {
             setEndingData(it)
         })
 
+        binding.tvMyBets.setOnClickListener {
+
+        }
+
         viewModel.callMatchDetailsAsync()
         binding.pullRefreshLayout.setOnRefreshListener {
             viewModel.callMatchDetailsAsync()
