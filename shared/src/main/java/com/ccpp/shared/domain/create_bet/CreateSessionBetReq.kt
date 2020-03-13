@@ -1,37 +1,40 @@
 package com.ccpp.shared.domain.create_bet
 
-import com.google.gson.annotations.Expose
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 data class CreateSessionBetReq (
     @SerializedName("access_token")
-    @Expose
     var accessToken: String? = null,
-    @SerializedName("match_id")
-    @Expose
-    var matchId: String? = null,
-    @SerializedName("runs")
-    @Expose
-    var runs: String? = null,
-    @SerializedName("session_bet_type")
-    @Expose
-    var sessionBetType: String? = null,
-    @SerializedName("session_id")
-    @Expose
-    var sessionId: String? = null,
-    @SerializedName("session_run_id")
-    @Expose
-    var sessionRunId: String? = null,
-    @SerializedName("odd_value")
-    @Expose
-    var oddValue: String? = null,
-    @SerializedName("coins_debited")
-    @Expose
-    var coinsDebited: String? = null,
-    @SerializedName("contestsId")
-    @Expose
-    var contestsId: String? = null
 
-)
+    @SerializedName("match_id")
+    var matchId: String? = null,
+
+    @SerializedName("runs")
+    var runs: String? = null,
+
+    @SerializedName("session_bet_type")
+    var sessionBetType: String? = null,
+
+    @SerializedName("session_id")
+    var sessionId: Int? = null,
+
+    @SerializedName("session_run_id")
+    var sessionRunId: Int? = null,
+
+    @SerializedName("heroic_market_type")
+    var heroicMarketType: String? = null,
+
+    @SerializedName("odd_value")
+    var oddValue: String? = null,
+
+    @SerializedName("coins_debited")
+    var coinsDebited: String? = null,
+
+    @SerializedName("contestsId")
+    var contestsId: Int? = null,
+
+    var evenTypeTitle: String? = ""
+) : Parcelable

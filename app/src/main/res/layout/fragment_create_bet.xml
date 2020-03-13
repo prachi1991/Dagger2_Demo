@@ -26,25 +26,27 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/black"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_10sdp">
+                    android:background="@color/black">
 
                     <TextView
                         fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
                         android:text="Place your Bet"
                         android:textSize="@dimen/_12ssp" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_close"
-                        android:layout_width="@dimen/_12sdp"
-                        android:layout_height="@dimen/_12sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginRight="@dimen/_8sdp"
-                        android:scaleType="centerInside"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="@dimen/_10sdp"
                         android:src="@drawable/ic_close" />
                 </RelativeLayout>
 
@@ -83,19 +85,20 @@
                             fontPath="fonts/Play-Bold.ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="Lagai"
                             android:textAllCaps="true"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp" />
+                            android:textSize="@dimen/_12ssp"
+                            android:visibility="gone"
+                            tools:text="Lagai" />
 
                         <TextView
                             android:id="@+id/tvOddValue"
                             fontPath="fonts/Play-Bold.ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="1.95"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_16ssp" />
+                            android:textSize="@dimen/_16ssp"
+                            tools:text="1.95" />
 
                     </LinearLayout>
 
@@ -114,7 +117,7 @@
                     android:padding="@dimen/_8sdp">
 
                     <TextView
-                        fontPath="@fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -129,9 +132,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        tools:text="even_odd"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        tools:text="even_odd" />
 
 
                 </RelativeLayout>
@@ -217,14 +220,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/dark_grey"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:background="@color/dark_grey"
                     android:padding="@dimen/_8sdp">
 
                     <TextView
                         android:id="@+id/returnLabel"
-                        fontPath="@fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/return_bet"
@@ -233,7 +236,7 @@
 
                     <TextView
                         android:id="@+id/tvReturnRate"
-                        fontPath="@fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="@dimen/_3sdp"
@@ -260,7 +263,7 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnPlaceBet"
-                        fontPath="@fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_2sdp"
@@ -271,7 +274,7 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnClearBet"
-                        fontPath="@fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Regular.ttf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_2sdp"

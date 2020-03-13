@@ -12,7 +12,9 @@ import com.ballchalu.mqtt.MqttMarket
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.domain.create_bet.BetDetailsBundle
 import com.ccpp.shared.domain.create_bet.CreateBetReq
+import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.match_details.*
 import com.ccpp.shared.network.repository.MatchDetailsRepository
 import com.ccpp.shared.util.ConstantsBase
@@ -157,7 +159,7 @@ class MatchDetailsViewModel @Inject constructor(
 
     val oddsReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            intent.getStringExtra(ConstantsBase.ODD)?.let {
+            intent.getStringExtra(ConstantsBase.ODDS)?.let {
                 try {
                     val oddJsonObject = JSONObject(it)
                     val type = oddJsonObject.getString(ConstantsBase.type)
@@ -203,7 +205,7 @@ class MatchDetailsViewModel @Inject constructor(
                             type.equals(ConstantsBase.SESSION, ignoreCase = true) -> {
                                 updateSession(oddJsonObject)
                             }
-                            type.equals(ConstantsBase.ODD, ignoreCase = true) -> {
+                            type.equals(ConstantsBase.ODDS, ignoreCase = true) -> {
                                 parseMarket(oddJsonObject)
                             }
                         }
@@ -308,126 +310,89 @@ class MatchDetailsViewModel @Inject constructor(
         )
     }
 
-    private val _openBetScreenEvent = MutableLiveData<Event<CreateBetReq?>>()
-    val openBetScreenEvent: LiveData<Event<CreateBetReq?>> = _openBetScreenEvent
+    private val _openBetScreenEvent = MutableLiveData<Event<BetDetailsBundle?>>()
+    val openBetScreenEvent: LiveData<Event<BetDetailsBundle?>> = _openBetScreenEvent
 
-    fun onTeam1BackClicked() {
+    fun onMatchWinnerClicked(isLay: Boolean, isTeam1: Boolean) {
+        val runner = if (isTeam1) batTeamRunner else bwlTeamRunner
         _openBetScreenEvent.value = Event(
-            CreateBetReq(
-                matchId = matchId.toString(),
-                oddsType = ConstantsBase.LAGAI,
-                runnerId = batTeamRunner?.id,
-                oddsVal = batTeamRunner?.back,
-                marketId = batTeamRunner?.marketId,
-                heroicMarketType = ConstantsBase.MATCH_WINNER,
-                contestsId = contestsId,
-                evenTypeTitle = batTeamRunName
+            BetDetailsBundle(
+                betReq =
+                CreateBetReq(
+                    matchId = matchId.toString(),
+                    oddsType = if (isLay) ConstantsBase.KHAI else ConstantsBase.LAGAI,
+                    runnerId = runner?.id,
+                    oddsVal = if (isLay) runner?.lay else runner?.back,
+                    marketId = runner?.marketId,
+                    heroicMarketType = ConstantsBase.MATCH_WINNER,
+                    contestsId = contestsId,
+                    evenTypeTitle = if (isTeam1) batTeamRunName else bwlTeamRunName
+                )
             )
         )
     }
 
-    fun onTeam1LayClicked() {
+    fun onSessionBetClicked(
+        session: Session,
+        run: String?,
+        isLagai: Boolean,
+        yesNoType: String
+    ) {
         _openBetScreenEvent.value = Event(
-            CreateBetReq(
-                matchId = matchId.toString(),
-                oddsType = ConstantsBase.KHAI,
-                runnerId = batTeamRunner?.id,
-                oddsVal = batTeamRunner?.lay,
-                marketId = batTeamRunner?.marketId,
-                heroicMarketType = ConstantsBase.MATCH_WINNER,
-                contestsId = contestsId,
-                evenTypeTitle = batTeamRunName
+            BetDetailsBundle(
+                betSessionReq =
+                CreateSessionBetReq(
+                    matchId = matchId.toString(),
+                    runs = if (isLagai) session.sessionRun?.yesRate else session.sessionRun?.noRate,
+                    sessionBetType = if (isLagai) ConstantsBase.YES else ConstantsBase.NO,
+                    sessionId = session.id,
+                    heroicMarketType = session.title,
+                    sessionRunId = session.sessionRun?.id,
+                    oddValue = if (isLagai) session.sessionRun?.yesRate else session.sessionRun?.noRate,
+                    contestsId = contestsId,
+                    evenTypeTitle = context.resources.getString(
+                        R.string.rate_odd_even_type,
+                        run ?: "",
+                        yesNoType
+                    )
+                )
             )
         )
-    }
-
-    fun onTeam2BackClicked() {
-        _openBetScreenEvent.value = Event(
-            CreateBetReq(
-                matchId = matchId.toString(),
-                oddsType = ConstantsBase.LAGAI,
-                runnerId = bwlTeamRunner?.id,
-                oddsVal = bwlTeamRunner?.back,
-                marketId = bwlTeamRunner?.marketId,
-                heroicMarketType = ConstantsBase.MATCH_WINNER,
-                contestsId = contestsId,
-                evenTypeTitle = bwlTeamRunName
-            )
-        )
-    }
-
-    fun onTeam2LayClicked() {
-        _openBetScreenEvent.value = Event(
-            CreateBetReq(
-                matchId = matchId.toString(),
-                oddsType = ConstantsBase.KHAI,
-                runnerId = bwlTeamRunner?.id,
-                oddsVal = bwlTeamRunner?.lay,
-                marketId = bwlTeamRunner?.marketId,
-                heroicMarketType = ConstantsBase.MATCH_WINNER,
-                contestsId = contestsId,
-                evenTypeTitle = bwlTeamRunName
-            )
-        )
-    }
-
-    fun onSessionBetClicked(session: Session) {
-//        _openBetScreenEvent.value = Event(
-//            CreateBetReq(
-//                matchId = matchId.toString(),
-//                oddsType = ConstantsBase.KHAI,
-//                runnerId = bwlTeamRunner?.id,
-//                oddsVal = bwlTeamRunner?.lay,
-//                marketId = bwlTeamRunner?.marketId,
-//                heroicMarketType = ConstantsBase.MATCH_WINNER,
-//                contestsId = contestsId,
-//                evenTypeTitle = bwlTeamRunName
-//            )
-//        )
-
     }
 
     fun onEndingDigitClicked(runner: Runner?) {
         _openBetScreenEvent.value = Event(
-            CreateBetReq(
-                matchId = matchId.toString(),
-                oddsType = ConstantsBase.KHAI,
-                runnerId = runner?.id,
-                oddsVal = runner?.back,
-                marketId = runner?.marketId,
-                heroicMarketType = ConstantsBase.ENDING_DIGIT,
-                contestsId = contestsId,
-                evenTypeTitle = runner?.betfairRunnerName
+            BetDetailsBundle(
+                betReq =
+                CreateBetReq(
+                    matchId = matchId.toString(),
+                    oddsType = ConstantsBase.LAGAI,
+                    runnerId = runner?.id,
+                    oddsVal = runner?.back,
+                    marketId = runner?.marketId,
+                    heroicMarketType = ConstantsBase.ENDING_DIGIT,
+                    contestsId = contestsId,
+                    evenTypeTitle = runner?.betfairRunnerName
+                )
             )
         )
     }
 
-    fun onOddBackClicked() {
+    fun onEvenOddClicked(isEvenType: Boolean) {
+        val market = if (isEvenType) evenMarket else oddMarket
         _openBetScreenEvent.value = Event(
-            CreateBetReq(
-                matchId = matchId.toString(),
-                oddsType = ConstantsBase.KHAI,
-                runnerId = oddMarket?.id,
-                oddsVal = oddMarket?.B,
-                marketId = oddMarket?.marketId,
-                heroicMarketType = ConstantsBase.EVEN_ODD,
-                contestsId = contestsId,
-                evenTypeTitle = context.resources.getString(R.string.odd)
-            )
-        )
-    }
-
-    fun onEvenBackClicked() {
-        _openBetScreenEvent.value = Event(
-            CreateBetReq(
-                matchId = matchId.toString(),
-                oddsType = ConstantsBase.KHAI,
-                runnerId = evenMarket?.id,
-                oddsVal = evenMarket?.B,
-                marketId = evenMarket?.marketId,
-                heroicMarketType = ConstantsBase.EVEN_ODD,
-                contestsId = contestsId,
-                evenTypeTitle = context.resources.getString(R.string.even)
+            BetDetailsBundle(
+                betReq =
+                CreateBetReq(
+                    matchId = matchId.toString(),
+                    oddsType = ConstantsBase.LAGAI,
+                    runnerId = market?.id,
+                    oddsVal = market?.B,
+                    marketId = market?.marketId,
+                    heroicMarketType = ConstantsBase.EVEN_ODD,
+                    contestsId = contestsId,
+                    evenTypeTitle = if (isEvenType) ConstantsBase.EVEN else ConstantsBase.ODD
+                )
             )
         )
     }

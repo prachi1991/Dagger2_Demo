@@ -1,6 +1,7 @@
 package com.ccpp.shared.domain.create_bet
 
 import android.os.Parcelable
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -31,9 +32,11 @@ data class CreateBetReq(
     @SerializedName("stack")
     var stack: String? = null,
 
+    @Expose
     @SerializedName("contestsId")
     var contestsId: Int? = 0,
 
+    @Expose
     var evenTypeTitle: String? = ""
 ) : Parcelable {
 

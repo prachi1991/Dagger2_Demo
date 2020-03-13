@@ -1,7 +1,6 @@
 package com.ccpp.shared.network
 
 import com.ccpp.shared.domain.*
-import com.ccpp.shared.domain.match_details.MatchDetailsRes
 import com.ccpp.shared.domain.contest.CreateContestRes
 import com.ccpp.shared.domain.contest.MatchContestRes
 import com.ccpp.shared.domain.contest.UserMatchContestRes
@@ -9,6 +8,7 @@ import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateBetRes
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
+import com.ccpp.shared.domain.match_details.MatchDetailsRes
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -52,12 +52,12 @@ internal interface ApiClient {
     fun callUserMatchContestAsync(@Query("match_id") match_id: String): Deferred<Response<UserMatchContestRes>>
 
     @POST("ballchalu/api/v1/contests/{match_id}/user_contests")
-    fun callCretateContestAsync(@Path("match_id") match_id: String): Deferred<Response<CreateContestRes>>
+    fun callCreateContestAsync(@Path("match_id") match_id: String): Deferred<Response<CreateContestRes>>
 
     @POST("ballchalu/api/v1/user_contests/{contestsId}/bet_slips")
-    fun callCretateBetAsync(@Body betReq: CreateBetReq,@Path("contestsId") contestsId: String): Deferred<Response<CreateBetRes>>
+    fun callCreateBetAsync(@Body betReq: CreateBetReq, @Path("contestsId") contestsId: String): Deferred<Response<CreateBetRes>>
 
     @POST("ballchalu/api/v1/user_contests/{contestsId}/session_bet_slips")
-    fun callCretateSessionBetAsync(@Body betReq: CreateSessionBetReq,@Path("contestsId") contestsId: String): Deferred<Response<CreateSessionBetRes>>
+    fun callCreateSessionBetAsync(@Body betReq: CreateSessionBetReq, @Path("contestsId") contestsId: String): Deferred<Response<CreateSessionBetRes>>
 
 }

@@ -33,10 +33,10 @@ open class ApiService @Inject constructor(
     fun callSignUpAsync(signUpReq: SignUpReq) = apiClient.callSignUpAsync(signUpReq)
 
     fun callCreateBetAsync(betReq: CreateBetReq) =
-        apiClient.callCretateBetAsync(betReq, betReq.contestsId.toString())
+        apiClient.callCreateBetAsync(betReq, betReq.contestsId.toString())
 
     fun callCreateSessionBetAsync(betReq: CreateSessionBetReq) =
-        apiClient.callCretateSessionBetAsync(betReq, betReq.contestsId.toString())
+        apiClient.callCreateSessionBetAsync(betReq, betReq.contestsId.toString())
 
     fun callForgetPasswordAsync(email: String) = apiClient.callForgetPasswordAsync(email)
 
@@ -46,7 +46,7 @@ open class ApiService @Inject constructor(
 
     fun callUserMatchContestAsync(matchId: String) = apiClient.callUserMatchContestAsync(matchId)
 
-    fun callCretateContestAsync(matchId: String) = apiClient.callCretateContestAsync(matchId)
+    fun callCretateContestAsync(matchId: String) = apiClient.callCreateContestAsync(matchId)
 
     fun callMatchesListingAsync(event_type: String,play_status: String) = apiClient.callMatchesListingAsync(event_type,play_status)
 }

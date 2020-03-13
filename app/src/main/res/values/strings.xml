@@ -94,4 +94,7 @@
     <string name="return_bet">Return |</string>
     <string name="_0">0</string>
     <string name="market_divider">Market |</string>
+    <string name="rate_odd_even_type">%s(%s)</string>
+    <string name="please_enter_amount">Please enter the amount</string>
+    <string name="amount_should_be_greater">Amount should be grater than zero</string>
 </resources>

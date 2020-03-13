@@ -1,8 +1,11 @@
 package com.ballchalu.ui.create_bet
 
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
@@ -22,10 +25,11 @@ import javax.inject.Inject
 class CreateBetViewModel @Inject constructor(
     private val matchesRepository: MatchesRepository,
     private val createBetRepository: CreateBetRepository,
-    private val sharedPref: SharedPreferenceStorage
+    private val sharedPref: SharedPreferenceStorage,
+    private val context: Context
 ) : BaseViewModel() {
     var createBetReq: CreateBetReq? = null
-    val createSesionBetReq: CreateSessionBetReq? = null
+    var createSessionBetReq: CreateSessionBetReq? = null
 
 
     private val _matchListingObserver = MutableLiveData<Event<MatchListingRes>>()
@@ -77,6 +81,8 @@ class CreateBetViewModel @Inject constructor(
 
     fun callCreateBet(stack: String) {
         if (createBetReq == null) return
+        createBetReq?.accessToken = sharedPref.token
+        createBetReq?.stack = stack
         loading.postValue(Event(true))
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -97,10 +103,13 @@ class CreateBetViewModel @Inject constructor(
 
     fun callCreateSessionBet(stack: String) {
         loading.postValue(Event(true))
-        if (createSesionBetReq == null) return
+        if (createSessionBetReq == null) return
+        createSessionBetReq?.accessToken = sharedPref.token
+        createSessionBetReq?.coinsDebited = stack
+
         viewModelScope.launch(Dispatchers.IO) {
             when (val result =
-                createBetRepository.callCretateSessionBetAsync(createSesionBetReq)) {
+                createBetRepository.callCretateSessionBetAsync(createSessionBetReq!!)) {
                 is Results.Success -> handleCreateSessionBetSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
@@ -110,6 +119,28 @@ class CreateBetViewModel @Inject constructor(
 
     private fun handleCreateSessionBetSuccess(result: CreateSessionBetRes) {
         _createSessionBetObserver.postValue(Event(result))
+    }
+
+    fun placeBet(betAmount: String?) {
+        if (betAmount.isNullOrEmpty()) {
+            Toast.makeText(
+                context,
+                context.getString(R.string.please_enter_amount),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            if (betAmount.toString().toInt() < 1) {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.amount_should_be_greater),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                createBetReq?.let { callCreateBet(betAmount) }
+                createSessionBetReq?.let { callCreateSessionBet(betAmount) }
+
+            }
+        }
     }
 
 

@@ -235,16 +235,20 @@ class MatchDetailsFragment : BaseFragment() {
     private fun initSessionAdapterAdapter() {
         sessionAdapter = SessionAdapter(object : SessionAdapter.OnItemClickListener {
             override fun onYesClicked(session: Session) {
-                viewModel.onSessionBetClicked(session)
+                viewModel.onSessionBetClicked(
+                    session,
+                    session.sessionRun?.yesRun,
+                    true,
+                    ConstantsBase.YES
+                )
             }
-
             override fun onNoClicked(session: Session) {
-                Toast.makeText(
-                    activity,
-                    session.sessionRun?.noRun.toString().plus("  " + session.sessionRun?.noRate),
-                    Toast.LENGTH_SHORT
-                ).show()
-                viewModel.onSessionBetClicked(session)
+                viewModel.onSessionBetClicked(
+                    session,
+                    session.sessionRun?.noRun,
+                    false,
+                    ConstantsBase.NO
+                )
             }
         })
         binding.rvSession.adapter = sessionAdapter
@@ -253,11 +257,6 @@ class MatchDetailsFragment : BaseFragment() {
     private fun initEndingDigitAdapterAdapter() {
         endingDigitAdapter = EndingDigitAdapter(object : EndingDigitAdapter.OnItemClickListener {
             override fun onBackClicked(runner: Runner) {
-                Toast.makeText(
-                    activity,
-                    runner.back.plus("  " + runner.betfairRunnerName),
-                    Toast.LENGTH_SHORT
-                ).show()
                 viewModel.onEndingDigitClicked(runner)
             }
         })

@@ -6,7 +6,7 @@ object ConstantsBase {
     const val BHAAV_TYPE_LAY = "bhaav_type_lay"
     const val HEROIC_COMMENTARY = "heroic_commentary"
     const val SESSION = "session"
-    const val ODD = "odds"
+    const val ODDS = "odds"
     const val STATUS_SUCCESS = 200
     const val REQUEST_TIMEOUT = 60
     const val INTERNAL_ERROR = 500
@@ -31,11 +31,17 @@ object ConstantsBase {
     const val play_now_key = "Play Now"
     const val buy_now_key = "Buy Now"
 
+    const val YES = "YES"
+    const val NO = "NO"
+
 
     const val status = "status"
     const val event = "event"
     const val score = "score"
     const val type = "type"
+
+    const val EVEN = "Even"
+    const val ODD = "Odd"
 
 
     const val EVEN_ODD = "even_odd"
@@ -45,6 +51,9 @@ object ConstantsBase {
     const val EVENT_TYPE = "cricket"
     const val IN_PLAY = "inplay"
     const val UPCOMING = "upcoming"
+
+    //Bet screen
+    const val SUCCESS = "success"
 
 
     //Events

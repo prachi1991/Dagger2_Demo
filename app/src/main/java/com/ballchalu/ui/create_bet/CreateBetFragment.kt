@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
@@ -16,7 +17,9 @@ import com.ballchalu.ui.create_bet.adapter.InPlayBetMatchListAdapter
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListingItem
+import com.ccpp.shared.domain.create_bet.BetDetailsBundle
 import com.ccpp.shared.domain.create_bet.CreateBetReq
+import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import dagger.android.support.DaggerAppCompatDialogFragment
@@ -63,23 +66,11 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
             }
 
             btnPlaceBet.setOnClickListener {
-                if (tvCount.text.isNullOrEmpty()) {
-                    Toast.makeText(context, "Please enter the amount", Toast.LENGTH_SHORT).show()
-                } else {
-                    if (tvCount.text.toString().toInt() < 1) {
-                        Toast.makeText(
-                            context,
-                            "Amount should be grater than zero",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        viewModel.callCreateBet(tvCount.text.toString())
-                    }
-                }
+                viewModel.placeBet(tvCount.text.toString())
             }
 
             imgClose.setOnClickListener {
-                dismiss()
+                dialog?.dismiss()
             }
 
 
@@ -95,13 +86,21 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
                 if (!text.isNullOrEmpty())
                     updateRateCount()
                 else
-                    tvReturnRate.setText("0")
+                    tvReturnRate.text = "0"
             }
 
         }
-        arguments?.let {
-            viewModel.createBetReq = it.getParcelable(ConstantsBase.KEY_CREATE_BET_REQ)
-            updateUI(viewModel.createBetReq)
+        arguments?.let { bundle ->
+            val betDetailsBundle =
+                bundle.getParcelable<BetDetailsBundle>(ConstantsBase.KEY_CREATE_BET_REQ)
+            betDetailsBundle?.betReq?.let {
+                viewModel.createBetReq = it
+            }
+            betDetailsBundle?.betSessionReq?.let {
+                viewModel.createSessionBetReq = it
+            }
+            updateUI(viewModel.createBetReq, viewModel.createSessionBetReq)
+
         }
 
         return binding.root
@@ -127,12 +126,18 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         )
     }
 
-    private fun updateUI(createBetReq: CreateBetReq?) {
+    private fun updateUI(createBetReq: CreateBetReq?, createSessionBetReq: CreateSessionBetReq?) {
 
-        binding.tvOddValue.text = createBetReq?.oddsVal
-        binding.tvLagaiKhaiLabel.text = createBetReq?.oddsType
-        binding.tvMarketType.text = createBetReq?.heroicMarketType
-        binding.tvTitle.text = createBetReq?.evenTypeTitle
+        binding.tvOddValue.text = createBetReq?.oddsVal ?: createSessionBetReq?.oddValue ?: ""
+        createBetReq?.oddsType?.let {
+            binding.tvLagaiKhaiLabel.text = it
+            binding.tvLagaiKhaiLabel.visibility = VISIBLE
+
+        }
+        binding.tvMarketType.text =
+            createBetReq?.heroicMarketType ?: createSessionBetReq?.heroicMarketType ?: ""
+        binding.tvTitle.text =
+            createBetReq?.evenTypeTitle ?: createSessionBetReq?.evenTypeTitle ?: ""
     }
 
     private fun getMatchesListing() {
@@ -167,6 +172,8 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         })
 
         viewModel.createBetObserver.observe(viewLifecycleOwner, EventObserver {
+            if (it.status.equals(ConstantsBase.SUCCESS, true))
+                dialog?.dismiss()
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
 
