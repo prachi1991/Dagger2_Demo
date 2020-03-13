@@ -1,8 +1,6 @@
 package com.ccpp.shared.network.repository
 
 import com.ccpp.shared.core.base.BaseRepository
-import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.network.ApiService
 import javax.inject.Inject
 
@@ -27,7 +25,7 @@ class ContestRepository @Inject constructor(
 
     suspend fun createUserMatchContest(matchId: String) = baseRepository.safeApiCall(
         call = {
-            service.callCretateContestAsync(matchId).await()
+            service.callCreateContestAsync(matchId).await()
         },
         errorMessage = "Error occurred"
     )

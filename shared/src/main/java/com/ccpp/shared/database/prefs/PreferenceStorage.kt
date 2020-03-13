@@ -7,6 +7,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import androidx.annotation.WorkerThread
 import androidx.core.content.edit
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -22,6 +23,7 @@ interface PreferenceStorage {
 /**
  * [PreferenceStorage] impl backed by [android.content.SharedPreferences].
  */
+@Singleton
 class SharedPreferenceStorage @Inject constructor(context: Context) :
     PreferenceStorage {
 

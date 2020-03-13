@@ -9,6 +9,7 @@ import com.ccpp.shared.domain.create_bet.CreateBetRes
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
 import com.ccpp.shared.domain.match_details.MatchDetailsRes
+import com.ccpp.shared.domain.position.PositionRes
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -39,12 +40,15 @@ internal interface ApiClient {
     @GET("api/v1/passwords/forgot")
     fun callForgetPasswordAsync(@QueryMap emailId: String): Deferred<Response<ForgetPassRes>>
 
-
+    //Match detail screen api
     @GET("api/v1/matches/{matchId}/user_match_show.json?play_status=in_play&event_type=cricket&session_type=simultaneous_open_session")
     fun callMatchDetailsAsync(@Path("matchId") matchId: Int): Deferred<Response<MatchDetailsRes>>
 
+    @GET("ballchalu/api/v1/user_contests/{contestId}/positions")
+    fun callPositionDetailsAsync(@Path("contestId") contestId: Int): Deferred<Response<PositionRes>>
 
 
+    //Contest screen api
     @GET("ballchalu/api/v1/contests")
     fun callMatchContestAsync(@Query("match_id") match_id: String): Deferred<Response<MatchContestRes>>
 
@@ -54,6 +58,8 @@ internal interface ApiClient {
     @POST("ballchalu/api/v1/contests/{match_id}/user_contests")
     fun callCreateContestAsync(@Path("match_id") match_id: String): Deferred<Response<CreateContestRes>>
 
+
+    //Bet drawer screen api
     @POST("ballchalu/api/v1/user_contests/{contestsId}/bet_slips")
     fun callCreateBetAsync(@Body betReq: CreateBetReq, @Path("contestsId") contestsId: String): Deferred<Response<CreateBetRes>>
 

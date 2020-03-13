@@ -16,6 +16,7 @@ import com.ccpp.shared.domain.create_bet.BetDetailsBundle
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.match_details.*
+import com.ccpp.shared.domain.position.PositionRes
 import com.ccpp.shared.network.repository.MatchDetailsRepository
 import com.ccpp.shared.util.ConstantsBase
 import com.google.gson.Gson
@@ -29,7 +30,7 @@ import java.util.*
 import javax.inject.Inject
 
 class MatchDetailsViewModel @Inject constructor(
-    private val sharedPreferenceStorage: SharedPreferenceStorage,
+    private val sharePref: SharedPreferenceStorage,
     private val loginRepository: MatchDetailsRepository,
     private val context: Context
 ) :
@@ -64,7 +65,23 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
+    fun callPositionDetailsAsync(contestId: Int) {
+        loading.postValue(Event(true))
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val result = loginRepository.callPositionDetailsAsync(contestId)) {
+                is Results.Success -> handlePositionSuccess(result.data)
+                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+            }
+            loading.postValue(Event(false))
+        }
+    }
+
+    private fun handlePositionSuccess(data: PositionRes) {
+//        failure.postValue(Event(data.positions.toString()))
+    }
+
     private fun handleSuccess(data: MatchDetailsRes?) {
+        callPositionDetailsAsync(contestsId)
         data?.let {
             _matchResult.postValue(Event(data))
             batTeamRunName = it.match?.score?.batteamname ?: ""
