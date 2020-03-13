@@ -39,13 +39,13 @@ class CreateBetViewModel @Inject constructor(
     val upcomingMatchListEvent: LiveData<Event<MatchListingRes>> = _upcomingMatchListEvent
 
     fun callMatchListing(event_type: String, play_status: String) {
-        loading.postValue(Event(true))
+//        loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = matchesRepository.getMatchesListing(event_type, play_status)) {
                 is Results.Success -> handleSuccess(result.data, play_status)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
-            loading.postValue(Event(false))
+//            loading.postValue(Event(false))
         }
     }
 
@@ -79,7 +79,7 @@ class CreateBetViewModel @Inject constructor(
     private val _createBetObserver = MutableLiveData<Event<CreateBetRes>>()
     val createBetObserver: LiveData<Event<CreateBetRes>> = _createBetObserver
 
-    fun callCreateBet(stack: String) {
+    private fun callCreateBet(stack: String) {
         if (createBetReq == null) return
         createBetReq?.accessToken = sharedPref.token
         createBetReq?.stack = stack
@@ -101,7 +101,7 @@ class CreateBetViewModel @Inject constructor(
     private val _createSessionBetObserver = MutableLiveData<Event<CreateSessionBetRes>>()
     val createSessionBetObserver: LiveData<Event<CreateSessionBetRes>> = _createSessionBetObserver
 
-    fun callCreateSessionBet(stack: String) {
+    private fun callCreateSessionBet(stack: String) {
         loading.postValue(Event(true))
         if (createSessionBetReq == null) return
         createSessionBetReq?.accessToken = sharedPref.token

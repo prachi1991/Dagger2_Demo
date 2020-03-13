@@ -178,6 +178,8 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         })
 
         viewModel.createSessionBetObserver.observe(viewLifecycleOwner, EventObserver {
+            if (it.status.equals(ConstantsBase.SUCCESS, true))
+                dialog?.dismiss()
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
 

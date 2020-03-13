@@ -343,7 +343,7 @@ class MatchDetailsViewModel @Inject constructor(
                 betSessionReq =
                 CreateSessionBetReq(
                     matchId = matchId.toString(),
-                    runs = if (isLagai) session.sessionRun?.yesRate else session.sessionRun?.noRate,
+                    runs = if (isLagai) session.sessionRun?.yesRun else session.sessionRun?.noRun,
                     sessionBetType = if (isLagai) ConstantsBase.YES else ConstantsBase.NO,
                     sessionId = session.id,
                     heroicMarketType = session.title,
