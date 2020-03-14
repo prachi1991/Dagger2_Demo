@@ -6,7 +6,6 @@ import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.network.repository.*
 import com.ccpp.shared.util.ConstantsBase
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.ccpp.shared.network.repository.*
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -23,34 +22,20 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideSessions(): Sessions {
-        return Sessions()
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG)
+                HttpLoggingInterceptor.Level.BODY
+            else HttpLoggingInterceptor.Level.NONE
+        }
     }
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttp: OkHttpClient): Retrofit.Builder {
-        return Retrofit.Builder()
-            .client(okHttp)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    }
-
-    @Provides
-    @Singleton
-    fun provideOkHttpClient(
-        sharedPref: SharedPreferenceStorage,
-        loggingInterceptor: HttpLoggingInterceptor, interceptor: Interceptor
-    ): OkHttpClient {
-        val httpClient = OkHttpClient().newBuilder()
-            .connectTimeout(ConstantsBase.REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
-            .readTimeout(ConstantsBase.REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
-            .writeTimeout(ConstantsBase.REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        if (BuildConfig.DEBUG)
-            httpClient.addInterceptor(loggingInterceptor)
-        httpClient.addInterceptor(Interceptor { chain: Interceptor.Chain ->
+    fun provideInterceptor(
+        sharedPref: SharedPreferenceStorage
+    ): Interceptor {
+        return Interceptor { chain: Interceptor.Chain ->
             val original = chain.request()
             val url = original.url.newBuilder()
                 .build()
@@ -62,28 +47,32 @@ class NetworkModule {
                 .url(url).build()
 
             chain.proceed(request)
-        })
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor, interceptor: Interceptor
+    ): OkHttpClient {
+        val httpClient = OkHttpClient().newBuilder()
+            .connectTimeout(ConstantsBase.REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
+            .readTimeout(ConstantsBase.REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
+            .writeTimeout(ConstantsBase.REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
+        httpClient.addInterceptor(loggingInterceptor)
+        httpClient.addInterceptor(interceptor)
         return httpClient.build()
     }
 
-    @Provides
-    @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().setLevel(
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-        )
-    }
-
-    /*@Provides
-    @Singleton
-    fun provideAuthorizationInterceptor(sessions: Sessions): Interceptor {
-        return AuthorizationInterceptor(sessions)
-    }*/
 
     @Provides
     @Singleton
-    fun provideInterceptor(): Interceptor {
-        return Interceptor()
+    fun provideRetrofit(okHttp: OkHttpClient): Retrofit.Builder {
+        return Retrofit.Builder()
+            .client(okHttp)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
     }
 
     @Provides

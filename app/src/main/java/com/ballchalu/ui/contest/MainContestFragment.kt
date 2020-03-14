@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.ballchalu.R
+import com.ballchalu.base.BaseFragment
 import com.ballchalu.ui.contest.all_contest.ContestFragment
 import com.ballchalu.ui.contest.user_contest.UserContestFragment
 import com.ccpp.shared.domain.MatchListing
@@ -21,7 +22,7 @@ import com.google.android.material.tabs.TabLayout
 import java.util.*
 import javax.inject.Inject
 
-class MainContestFragment : Fragment() {
+class MainContestFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 

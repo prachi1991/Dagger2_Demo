@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -51,16 +52,31 @@
 
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRunnerPosition"
+                    fontPath="fonts/Play-Regular.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_toStartOf="@+id/tvTeam1Back"
+                    android:text="@{model.runnerPosition.toString()}"
+                    android:textColor="@{model.color}"
+                    tools:text="100"
+                    android:textSize="@dimen/_10ssp" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTeam1Back"
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:gravity="center"
-                    android:minWidth="@dimen/_35sdp"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:background="@drawable/backgroud_solid_light_blue1"
+                    android:gravity="center"
+                    android:minWidth="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_5sdp"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingRight="@dimen/_5sdp"

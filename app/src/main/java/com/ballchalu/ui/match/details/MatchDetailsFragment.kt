@@ -127,6 +127,7 @@ class MatchDetailsFragment : BaseFragment() {
         })
 
         viewModel.endingDigitMarketEvent.observe(viewLifecycleOwner, EventObserver { market ->
+            binding.tvEndingDigitTitle.text = market.betfairMarketType
             binding.llEndingDigitSection.visibility =
                 if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
             binding.tvEvenOddType.text = market.betfairMarketType
@@ -190,6 +191,18 @@ class MatchDetailsFragment : BaseFragment() {
             }
         })
 
+        viewModel.positionMatchWinnerObserver.observe(viewLifecycleOwner, EventObserver {
+
+        })
+
+        viewModel.positionEvenOddObserver.observe(viewLifecycleOwner, EventObserver {
+
+        })
+
+        viewModel.positionEndingDigitObserver.observe(viewLifecycleOwner, EventObserver {
+            endingDigitAdapter?.setPositionList(it)
+        })
+
         viewModel.callMatchDetailsAsync()
         binding.pullRefreshLayout.setOnRefreshListener {
             viewModel.callMatchDetailsAsync()
@@ -242,6 +255,7 @@ class MatchDetailsFragment : BaseFragment() {
                     ConstantsBase.YES
                 )
             }
+
             override fun onNoClicked(session: Session) {
                 viewModel.onSessionBetClicked(
                     session,

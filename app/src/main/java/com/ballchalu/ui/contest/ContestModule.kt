@@ -24,6 +24,10 @@ internal abstract class ContestModule {
     @ContributesAndroidInjector
     internal abstract fun contributeUserContestFragment(): UserContestFragment
 
+    @FragmentScoped
+    @ContributesAndroidInjector
+    internal abstract fun contributeMainContestFragment(): MainContestFragment
+
     @Binds
     @IntoMap
     @ViewModelKey(ContestViewModel::class)

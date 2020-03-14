@@ -16,6 +16,7 @@ import com.ccpp.shared.domain.create_bet.BetDetailsBundle
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.match_details.*
+import com.ccpp.shared.domain.position.PositionMarketItem
 import com.ccpp.shared.domain.position.PositionRes
 import com.ccpp.shared.network.repository.MatchDetailsRepository
 import com.ccpp.shared.util.ConstantsBase
@@ -65,7 +66,9 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
-    fun callPositionDetailsAsync(contestId: Int) {
+    //---------------------position section Start------------------------//
+
+    private fun callPositionDetailsAsync(contestId: Int) {
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = loginRepository.callPositionDetailsAsync(contestId)) {
@@ -76,9 +79,34 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
+    private val _positionMatchWinnerObserver = MutableLiveData<Event<PositionMarketItem?>>()
+    val positionMatchWinnerObserver: LiveData<Event<PositionMarketItem?>> =
+        _positionMatchWinnerObserver
+
+    private val _positionEvenOddObserver = MutableLiveData<Event<PositionMarketItem?>>()
+    val positionEvenOddObserver: LiveData<Event<PositionMarketItem?>> = _positionEvenOddObserver
+
+    private val _positionEndingDigitObserver = MutableLiveData<Event<PositionMarketItem?>>()
+    val positionEndingDigitObserver: LiveData<Event<PositionMarketItem?>> =
+        _positionEndingDigitObserver
+
     private fun handlePositionSuccess(data: PositionRes) {
-//        failure.postValue(Event(data.positions.toString()))
+        data.positions?.marketPosition?.forEach {
+            when (it.heroicMarketType) {
+                ConstantsBase.MATCH_WINNER -> {
+                    _positionMatchWinnerObserver.postValue(Event(it))
+                }
+                ConstantsBase.EVEN_ODD -> {
+                    _positionEvenOddObserver.postValue(Event(it))
+                }
+                ConstantsBase.ENDING_DIGIT -> {
+                    _positionEndingDigitObserver.postValue(Event(it))
+                }
+            }
+        }
+
     }
+    //---------------------position section End------------------------//
 
     private fun handleSuccess(data: MatchDetailsRes?) {
         callPositionDetailsAsync(contestsId)

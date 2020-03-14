@@ -1,6 +1,7 @@
 package com.ccpp.shared.domain.match_details
 
 
+import android.graphics.Color
 import com.google.gson.annotations.SerializedName
 
 
@@ -30,5 +31,9 @@ data class Runner(
     @field:SerializedName("status")
     var status: String? = null,
 
-    var marketId: Int? = 0
-)
+    var marketId: Int? = 0,
+    var runnerPosition: Int? = null
+
+) {
+    fun color(): Int = if (runnerPosition ?: 0 < 0) Color.RED else Color.GREEN
+}

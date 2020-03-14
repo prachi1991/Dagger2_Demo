@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemEndingDigitListBinding
 import com.ccpp.shared.domain.match_details.Runner
 import com.ccpp.shared.domain.match_details.RunnersItem
+import com.ccpp.shared.domain.position.PositionMarketItem
 import com.ccpp.shared.util.ConstantsBase
 
 
 class EndingDigitAdapter(val listener: OnItemClickListener?) :
     RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>() {
+    private var positionMarketItem: PositionMarketItem? = null
     private var list: ArrayList<RunnersItem>? = arrayListOf()
     private var isSuspend: Boolean = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -51,6 +53,19 @@ class EndingDigitAdapter(val listener: OnItemClickListener?) :
                     it.runner?.canBack = runnersItem.canBack
                     it.runner?.back = runnersItem.B
                     it.runner?.betfairRunnerName = it.runner?.betfairRunnerName
+                }
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+    fun setPositionList(positionMarketItem: PositionMarketItem?) {
+        this.positionMarketItem = positionMarketItem
+        list?.forEach { runnerItem ->
+            positionMarketItem?.runners?.forEachIndexed { _, item ->
+                if (runnerItem.runner?.id ?: 0 == item?.runnerId) {
+                    runnerItem.runner?.runnerPosition = item.runnerPosition
+                    return@forEachIndexed
                 }
             }
         }
