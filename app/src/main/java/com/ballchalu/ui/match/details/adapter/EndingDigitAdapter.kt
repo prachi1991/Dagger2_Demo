@@ -12,6 +12,7 @@ import com.ccpp.shared.util.ConstantsBase
 
 class EndingDigitAdapter(val listener: OnItemClickListener?) :
     RecyclerView.Adapter<EndingDigitAdapter.ViewHolder>() {
+    private var marketId: Int? = null
     private var positionMarketItem: PositionMarketItem? = null
     private var list: ArrayList<RunnersItem>? = arrayListOf()
     private var isSuspend: Boolean = false
@@ -35,8 +36,13 @@ class EndingDigitAdapter(val listener: OnItemClickListener?) :
     }
 
 
-    fun setItemList(runnersItemList: List<RunnersItem>?, status: String?) {
+    fun setItemList(
+        runnersItemList: List<RunnersItem>?,
+        status: String?,
+        marketId: Int?
+    ) {
         this.list?.clear()
+        this.marketId = marketId
         runnersItemList?.let { this.list?.addAll(it) }
         this.isSuspend = status.equals(ConstantsBase.suspend, true)
         notifyDataSetChanged()
@@ -52,6 +58,7 @@ class EndingDigitAdapter(val listener: OnItemClickListener?) :
                 if (it.runner?.id == runnersItem.id) {
                     it.runner?.canBack = runnersItem.canBack
                     it.runner?.back = runnersItem.B
+                    it.runner?.marketId = runnersItem.marketId
                     it.runner?.betfairRunnerName = it.runner?.betfairRunnerName
                 }
             }
@@ -80,6 +87,7 @@ class EndingDigitAdapter(val listener: OnItemClickListener?) :
             with(binding) {
                 runner?.let {
                     model = it
+                    it.marketId = marketId
                 }
                 tvTeam1Back.text =
                     if (runner?.canBack == true && !isSuspend) runner.back ?: "" else ""

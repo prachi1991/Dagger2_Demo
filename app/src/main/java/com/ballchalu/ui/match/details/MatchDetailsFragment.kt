@@ -26,6 +26,7 @@ import com.ccpp.shared.domain.match_details.Market
 import com.ccpp.shared.domain.match_details.Runner
 import com.ccpp.shared.domain.match_details.Session
 import com.ccpp.shared.domain.match_details.SessionsItem
+import com.ccpp.shared.util.ColorUtils
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -131,7 +132,7 @@ class MatchDetailsFragment : BaseFragment() {
             binding.llEndingDigitSection.visibility =
                 if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
             binding.tvEvenOddType.text = market.betfairMarketType
-            endingDigitAdapter?.setItemList(market.runners, market.status)
+            endingDigitAdapter?.setItemList(market.runners, market.status, market.id)
         })
 
         viewModel.betStatusEvent.observe(viewLifecycleOwner, EventObserver {
@@ -192,10 +193,45 @@ class MatchDetailsFragment : BaseFragment() {
         })
 
         viewModel.positionMatchWinnerObserver.observe(viewLifecycleOwner, EventObserver {
-
-        })
+            binding.tvMatchWinnerPosition1.apply {
+                text = it?.batTeamRunner?.runnerPosition.toString()
+                setTextColor(
+                    ColorUtils.getPositionColor(it?.batTeamRunner?.runnerPosition ?: 0)
+                )
+            }
+            binding.tvMatchWinnerPosition2.apply {
+                text = it?.bwlTeamRunner?.runnerPosition.toString()
+                setTextColor(
+                    ColorUtils.getPositionColor(it?.bwlTeamRunner?.runnerPosition ?: 0)
+                )
+            }
+        }
+        )
 
         viewModel.positionEvenOddObserver.observe(viewLifecycleOwner, EventObserver {
+            binding.tvEvenPosition.apply {
+                text = it?.even?.runnerPosition.toString()
+                setTextColor(
+                    ColorUtils.getPositionColor(it?.even?.runnerPosition ?: 0)
+                )
+            }
+            binding.tvOddPosition.apply {
+                text = it?.odd?.runnerPosition.toString()
+                setTextColor(
+                    ColorUtils.getPositionColor(it?.odd?.runnerPosition ?: 0)
+                )
+            }
+        })
+
+        viewModel.positionSessionObserver.observe(viewLifecycleOwner, EventObserver {
+            binding.tvSessionPosition.text = it
+            try {
+                binding.tvSessionPosition.setTextColor(
+                    ColorUtils.getPositionColor(it?.toDouble() ?: 0.0)
+                )
+            } catch (e: NumberFormatException) {
+                Timber.e(e)
+            }
 
         })
 
@@ -227,6 +263,7 @@ class MatchDetailsFragment : BaseFragment() {
                 if (it.canBack && marketStatus) it.back else ""
 
             viewModel.evenMarket.let { item ->
+                item?.id = it.id
                 item?.B = it.back
                 item?.canBack = it.canBack
                 item?.marketId = market.id
@@ -237,6 +274,7 @@ class MatchDetailsFragment : BaseFragment() {
                 if (it.canBack && marketStatus) it.back else ""
 
             viewModel.oddMarket.let { item ->
+                item?.id = it.id
                 item?.B = it.back
                 item?.canBack = it.canBack
                 item?.marketId = market.id

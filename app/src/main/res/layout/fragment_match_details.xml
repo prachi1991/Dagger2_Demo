@@ -349,6 +349,19 @@
 
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvMatchWinnerPosition1"
+                                fontPath="fonts/Play-Regular.ttf"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_15sdp"
+                                android:layout_toStartOf="@+id/tvTeam1Lay"
+                                android:gravity="center"
+                                android:textColor="@color/green"
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="100" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tvTeam1Lay"
                                 fontPath="fonts/Play-Regular.ttf"
                                 android:layout_width="wrap_content"
@@ -359,8 +372,8 @@
                                 android:background="@drawable/backgroud_solid_dark_blue"
                                 android:gravity="center"
                                 android:minWidth="@dimen/_35sdp"
-                                android:paddingTop="@dimen/_3sdp"
                                 android:onClick="@{view -> model.onMatchWinnerClicked(false,true)}"
+                                android:paddingTop="@dimen/_3sdp"
                                 android:paddingBottom="@dimen/_3sdp"
                                 android:singleLine="true"
                                 android:textColor="@color/white"
@@ -378,8 +391,8 @@
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:background="@drawable/backgroud_solid_light_blue1"
                                 android:gravity="center"
-                                android:onClick="@{view -> model.onMatchWinnerClicked(true,true)}"
                                 android:minWidth="@dimen/_35sdp"
+                                android:onClick="@{view -> model.onMatchWinnerClicked(true,true)}"
                                 android:paddingTop="@dimen/_3sdp"
                                 android:paddingBottom="@dimen/_3sdp"
                                 android:singleLine="true"
@@ -408,6 +421,18 @@
                                 android:textSize="@dimen/_10ssp"
                                 tools:text="IND_DEMO2" />
 
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvMatchWinnerPosition2"
+                                fontPath="fonts/Play-Regular.ttf"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_15sdp"
+                                android:layout_toStartOf="@+id/tvTeam2Lay"
+                                android:gravity="center"
+                                android:textColor="@color/green"
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="100" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tvTeam2Lay"
@@ -415,12 +440,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_toStartOf="@id/tvTeam2Back"
                                 android:background="@drawable/backgroud_solid_dark_blue"
-                                android:onClick="@{view -> model.onMatchWinnerClicked(false,false)}"
                                 android:gravity="center"
                                 android:minWidth="@dimen/_35sdp"
+                                android:onClick="@{view -> model.onMatchWinnerClicked(false,false)}"
                                 android:paddingTop="@dimen/_3sdp"
                                 android:paddingBottom="@dimen/_3sdp"
                                 android:singleLine="true"
@@ -437,10 +462,10 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="@dimen/_5sdp"
-                                android:onClick="@{view -> model.onMatchWinnerClicked(true,false)}"
                                 android:background="@drawable/backgroud_solid_light_blue1"
                                 android:gravity="center"
                                 android:minWidth="@dimen/_35sdp"
+                                android:onClick="@{view -> model.onMatchWinnerClicked(true,false)}"
                                 android:paddingTop="@dimen/_3sdp"
                                 android:paddingBottom="@dimen/_3sdp"
                                 android:singleLine="true"
@@ -480,6 +505,18 @@
                                 android:text="@string/session"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_10ssp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvSessionPosition"
+                                fontPath="fonts/Play-Regular.ttf"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:gravity="center"
+                                android:textColor="@color/green"
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="100" />
                         </RelativeLayout>
                     </LinearLayout>
 
@@ -550,6 +587,18 @@
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_10ssp" />
 
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvEvenPosition"
+                                fontPath="fonts/Play-Regular.ttf"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_15sdp"
+                                android:layout_toStartOf="@+id/tvOddEvenBack1"
+                                android:gravity="center"
+                                android:textColor="@color/green"
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="100" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tvOddEvenBack1"
@@ -589,6 +638,19 @@
                                 android:text="@string/odd"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_10ssp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvOddPosition"
+                                fontPath="fonts/Play-Regular.ttf"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_15sdp"
+                                android:layout_toStartOf="@+id/tvOddEvenBack2"
+                                android:gravity="center"
+                                android:textColor="@color/green"
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="100" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tvOddEvenBack2"
@@ -650,9 +712,9 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_toEndOf="@+id/tvEndingDigitLabel"
-                                tools:text="IND 1 Over Ending Digit"
                                 android:textColor="@color/text_light_green"
-                                android:textSize="@dimen/_10ssp" />
+                                android:textSize="@dimen/_10ssp"
+                                tools:text="IND 1 Over Ending Digit" />
 
                         </RelativeLayout>
 

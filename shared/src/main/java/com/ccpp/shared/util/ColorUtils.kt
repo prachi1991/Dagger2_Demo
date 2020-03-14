@@ -1,5 +1,7 @@
 package com.ccpp.shared.util
 
+import android.graphics.Color
+
 object ColorUtils {
 
     fun parseHexColor(colorString: String): Int {
@@ -15,5 +17,13 @@ object ColorUtils {
             return color.toInt()
         }
         throw IllegalArgumentException("Unknown color")
+    }
+
+    fun getPositionColor(value: Int): Int {
+        return if (value < 0) Color.RED else Color.GREEN
+    }
+
+    fun getPositionColor(value: Double): Int {
+        return if (value < 0) Color.RED else Color.GREEN
     }
 }

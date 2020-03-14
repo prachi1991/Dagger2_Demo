@@ -1,7 +1,7 @@
 package com.ccpp.shared.domain.match_details
 
 
-import android.graphics.Color
+import com.ccpp.shared.util.ColorUtils
 import com.google.gson.annotations.SerializedName
 
 
@@ -35,5 +35,5 @@ data class Runner(
     var runnerPosition: Int? = null
 
 ) {
-    fun color(): Int = if (runnerPosition ?: 0 < 0) Color.RED else Color.GREEN
+    fun color(): Int = ColorUtils.getPositionColor(runnerPosition ?: 0)
 }

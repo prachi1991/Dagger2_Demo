@@ -79,28 +79,68 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
-    private val _positionMatchWinnerObserver = MutableLiveData<Event<PositionMarketItem?>>()
-    val positionMatchWinnerObserver: LiveData<Event<PositionMarketItem?>> =
+    private val _positionMatchWinnerObserver = MutableLiveData<Event<MatchWinnerPosition?>>()
+    val positionMatchWinnerObserver: LiveData<Event<MatchWinnerPosition?>> =
         _positionMatchWinnerObserver
 
-    private val _positionEvenOddObserver = MutableLiveData<Event<PositionMarketItem?>>()
-    val positionEvenOddObserver: LiveData<Event<PositionMarketItem?>> = _positionEvenOddObserver
+    private val _positionEvenOddObserver = MutableLiveData<Event<EvenOddPosition?>>()
+    val positionEvenOddObserver: LiveData<Event<EvenOddPosition?>> = _positionEvenOddObserver
 
     private val _positionEndingDigitObserver = MutableLiveData<Event<PositionMarketItem?>>()
     val positionEndingDigitObserver: LiveData<Event<PositionMarketItem?>> =
         _positionEndingDigitObserver
 
+
+    private val _positionSessionObserver = MutableLiveData<Event<String?>>()
+    val positionSessionObserver: LiveData<Event<String?>> = _positionSessionObserver
+
+
     private fun handlePositionSuccess(data: PositionRes) {
-        data.positions?.marketPosition?.forEach {
-            when (it.heroicMarketType) {
+        _positionSessionObserver.postValue(Event(data.positions?.sessionPosition))
+        data.positions?.marketPosition?.forEach { positionMarketItem ->
+            when (positionMarketItem.heroicMarketType) {
                 ConstantsBase.MATCH_WINNER -> {
-                    _positionMatchWinnerObserver.postValue(Event(it))
+                    positionMarketItem.runners?.forEach {
+                        when (it?.runnerId) {
+                            batTeamRunner?.id -> {
+                                batTeamRunner?.runnerPosition = it?.runnerPosition
+                            }
+                            bwlTeamRunner?.id -> {
+                                bwlTeamRunner?.runnerPosition = it?.runnerPosition
+                            }
+                        }
+                    }
+                    _positionMatchWinnerObserver.postValue(
+                        Event(
+                            MatchWinnerPosition(
+                                batTeamRunner,
+                                bwlTeamRunner
+                            )
+                        )
+                    )
                 }
                 ConstantsBase.EVEN_ODD -> {
-                    _positionEvenOddObserver.postValue(Event(it))
+                    positionMarketItem.runners?.forEach {
+                        when (it?.runnerId) {
+                            evenMarket?.id -> {
+                                evenMarket?.runnerPosition = it?.runnerPosition
+                            }
+                            oddMarket?.id -> {
+                                oddMarket?.runnerPosition = it?.runnerPosition
+                            }
+                        }
+                    }
+                    _positionEvenOddObserver.postValue(
+                        Event(
+                            EvenOddPosition(
+                                evenMarket,
+                                oddMarket
+                            )
+                        )
+                    )
                 }
                 ConstantsBase.ENDING_DIGIT -> {
-                    _positionEndingDigitObserver.postValue(Event(it))
+                    _positionEndingDigitObserver.postValue(Event(positionMarketItem))
                 }
             }
         }

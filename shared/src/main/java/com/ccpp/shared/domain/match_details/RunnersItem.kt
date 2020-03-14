@@ -1,6 +1,7 @@
 package com.ccpp.shared.domain.match_details
 
 
+import com.ccpp.shared.util.ColorUtils
 import com.google.gson.annotations.SerializedName
 
 
@@ -14,7 +15,7 @@ data class RunnersItem(
     @SerializedName("can_back")
     var canBack: Boolean = false,
     @SerializedName("id")
-    var id: Int = 0,
+    var id: Int? = 0,
     @SerializedName("l")
     var L: String? = "",
     @SerializedName("can_lay")
@@ -23,5 +24,9 @@ data class RunnersItem(
     var sid: String? = null,
 
 
-    var marketId: Int? = null
-)
+    var marketId: Int? = null,
+    var runnerPosition: Int? = null
+
+) {
+    fun color(): Int = ColorUtils.getPositionColor(runnerPosition ?: 0)
+}

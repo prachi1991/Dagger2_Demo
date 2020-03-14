@@ -110,6 +110,7 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tablayout"
                 android:layout_width="wrap_content"
+                app:tabIndicatorHeight="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:tabMode="auto" />
