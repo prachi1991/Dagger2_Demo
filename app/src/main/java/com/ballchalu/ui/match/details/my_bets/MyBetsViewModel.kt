@@ -6,22 +6,31 @@ import androidx.lifecycle.viewModelScope
 import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.domain.contest.CreateContestRes
-import com.ccpp.shared.domain.match_details.MatchDetailsRes
 import com.ccpp.shared.domain.my_bets.MyBetsRes
+import com.ccpp.shared.domain.my_bets.UserMyBet
 import com.ccpp.shared.network.repository.MyBetsRepository
+import com.ccpp.shared.util.ConstantsBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 class MyBetsViewModel @Inject constructor(
     private val myBetsRepository: MyBetsRepository
-):BaseViewModel()
-{
+) : BaseViewModel() {
     var matchId: Int = 0
 
-    private val _myBetResult = MutableLiveData<Event<MyBetsRes?>>()
-    val myBetResult: LiveData<Event<MyBetsRes?>> = _myBetResult
+    private val _betMatchWinnerObserver = MutableLiveData<Event<ArrayList<UserMyBet>?>>()
+    val betMatchWinnerObserver: LiveData<Event<ArrayList<UserMyBet>?>> = _betMatchWinnerObserver
+
+    private val _betSessionObserver = MutableLiveData<Event<ArrayList<UserMyBet>?>>()
+    val betSessionObserver: LiveData<Event<ArrayList<UserMyBet>?>> = _betSessionObserver
+
+    private val _betEvenOddObserver = MutableLiveData<Event<ArrayList<UserMyBet>?>>()
+    val betEvenOddObserver: LiveData<Event<ArrayList<UserMyBet>?>> = _betEvenOddObserver
+
+    private val _betEndingDigitObserver = MutableLiveData<Event<ArrayList<UserMyBet>?>>()
+    val betEndingDigitObserver: LiveData<Event<ArrayList<UserMyBet>?>> = _betEndingDigitObserver
 
     fun callMyBetsDetailsAsync() {
         loading.postValue(Event(true))
@@ -35,6 +44,22 @@ class MyBetsViewModel @Inject constructor(
     }
 
     private fun handleSuccess(data: MyBetsRes?) {
-        _myBetResult.postValue(Event(data))
+        val betMatchWinnerArrayList = arrayListOf<UserMyBet>()
+        val betSessionArrayList = arrayListOf<UserMyBet>()
+        val betEvenOddArrayList = arrayListOf<UserMyBet>()
+        val betEndingDigitArrayList = arrayListOf<UserMyBet>()
+        data?.userBets?.forEach {
+            when (it.userBet?.heroicMarketType?.trim()?.toLowerCase(Locale.US)) {
+                ConstantsBase.MATCH_WINNER -> betMatchWinnerArrayList.add(it.userBet!!)
+                ConstantsBase.SESSION -> betSessionArrayList.add(it.userBet!!)
+                ConstantsBase.EVEN_ODD -> betEvenOddArrayList.add(it.userBet!!)
+                ConstantsBase.ENDING_DIGIT -> betEndingDigitArrayList.add(it.userBet!!)
+            }
+        }
+        _betMatchWinnerObserver.postValue(Event(betMatchWinnerArrayList))
+        _betSessionObserver.postValue(Event(betSessionArrayList))
+        _betEvenOddObserver.postValue(Event(betEvenOddArrayList))
+        _betEndingDigitObserver.postValue(Event(betEndingDigitArrayList))
     }
+
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
 import com.ballchalu.mqtt.MqttMarket
+import com.ballchalu.ui.match.details.my_bets.MyBetsFragment
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
@@ -36,6 +37,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
+    val myBetFragment: MyBetsFragment by lazy { MyBetsFragment() }
     var evenMarket: RunnersItem? = RunnersItem()
     var oddMarket: RunnersItem? = RunnersItem()
     var bwlTeamRunner: Runner? = null

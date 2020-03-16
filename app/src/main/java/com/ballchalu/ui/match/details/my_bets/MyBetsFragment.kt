@@ -1,77 +1,67 @@
 package com.ballchalu.ui.match.details.my_bets
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMyBetsBinding
+import com.ballchalu.ui.match.details.my_bets.adapter.MyBetsMatchWinnerAdapter
 import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.domain.my_bets.UserBet
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
 /**
- * A simple [Fragment] subclass.
+ * A simple [MyBetsFragment] subclass.
  */
 class MyBetsFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var binding: FragmentMyBetsBinding
-    private lateinit var fragmentViewModel: MyBetsViewModel
-
-    var matchWinnerMarket:ArrayList<UserBet> = arrayListOf()
-    var sessionMarket:ArrayList<UserBet> = arrayListOf()
-    var evenOddMarket:ArrayList<UserBet> = arrayListOf()
+    private lateinit var viewModel: MyBetsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        viewModel = viewModelProvider(viewModelFactory)
         binding = FragmentMyBetsBinding.inflate(inflater, container, false).apply {
 
-            fragmentViewModel.callMyBetsDetailsAsync()
-
-            fragmentViewModel.myBetResult.observe(viewLifecycleOwner,EventObserver{
-
-                it?.userBets?.forEach {
-                    if(it.userBet?.heroicMarketType == "match_winner")
-                    {
-                        matchWinnerMarket.add(it)
-                    }else if(it.userBet?.heroicMarketType == "even_odd")
-                    {
-                        evenOddMarket.add(it)
-                    }else if(it.userBet?.heroicMarketType.isNullOrEmpty() && !it.userBet?.sessionId.isNullOrEmpty())
-                    {
-                        sessionMarket.add(it)
-                    }
-                }
-
-                arraylistSize()
-            })
-
         }
-
+        arguments?.let {
+            viewModel.matchId = it.getInt(ConstantsBase.KEY_CONTESTS_MATCH_ID)
+        }
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fragmentViewModel = viewModelProvider(viewModelFactory)
-        arguments?.let {
-            fragmentViewModel.matchId = it.getInt(ConstantsBase.KEY_CONTESTS_MATCH_ID)
-        }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.betMatchWinnerObserver.observe(viewLifecycleOwner, EventObserver {
+            val adapter = MyBetsMatchWinnerAdapter(ConstantsBase.MATCH_WINNER)
+            adapter.setItemList(it)
+            binding.rvWinnerMarker.adapter = adapter
+        })
+        viewModel.betSessionObserver.observe(viewLifecycleOwner, EventObserver {
+            val adapter = MyBetsMatchWinnerAdapter(ConstantsBase.SESSION)
+            adapter.setItemList(it)
+            binding.rvSessionMarket.adapter = adapter
+        })
+        viewModel.betEvenOddObserver.observe(viewLifecycleOwner, EventObserver {
+            //            val adapter = MyBetsMatchWinnerAdapter()
+//            adapter.setItemList(it)
+//            binding.rvMatchWinnerMarket.adapter = adapter
+        })
+        viewModel.betEndingDigitObserver.observe(viewLifecycleOwner, EventObserver {
+            //            val adapter = MyBetsMatchWinnerAdapter()
+//            adapter.setItemList(it)
+//            binding.rvMatchWinnerMarket.adapter = adapter
+        })
+        viewModel.callMyBetsDetailsAsync()
+
+
     }
 
-    fun arraylistSize()
-    {
-        Log.d("matchWinnerMarket",matchWinnerMarket.size.toString())
-        Log.d("evenOddMarket",evenOddMarket.size.toString())
-        Log.d("sessionMarket",sessionMarket.size.toString())
-    }
+
 }

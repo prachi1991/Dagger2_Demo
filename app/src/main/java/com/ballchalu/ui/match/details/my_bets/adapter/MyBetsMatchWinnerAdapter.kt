@@ -1,42 +1,40 @@
 package com.ballchalu.ui.match.details.my_bets.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ballchalu.databinding.ItemAllContestBinding
-import com.ccpp.shared.domain.contest.Contest
+import com.ballchalu.databinding.ItemMyBetMatchWinnerBinding
+import com.ballchalu.databinding.ItemMyBetSessionBinding
 import com.ccpp.shared.domain.contest.UserContest
-import com.ccpp.shared.domain.my_bets.UserBet
+import com.ccpp.shared.domain.my_bets.UserMyBet
 import com.ccpp.shared.util.ConstantsBase
 
+class MyBetsMatchWinnerAdapter(var type: String) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var list: ArrayList<UserMyBet>? = null
 
-class MyBetsMatchWinnerAdapter(private var onItemClickListener: OnItemClickListener?) :
-    RecyclerView.Adapter<MyBetsMatchWinnerAdapter.ViewHolder>() {
-    private var list: ArrayList<UserBet>? = null
-    private var isMyContest: Boolean = false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return when (type) {
+            ConstantsBase.MATCH_WINNER ->
+                MatchWinnerHolder(ItemMyBetMatchWinnerBinding.inflate(inflater, parent, false))
+            ConstantsBase.SESSION ->
+                SessionHolder(ItemMyBetSessionBinding.inflate(inflater, parent, false))
+            ConstantsBase.EVEN_ODD ->
+                MatchWinnerHolder(ItemMyBetMatchWinnerBinding.inflate(inflater, parent, false))
+            else ->
+                MatchWinnerHolder(ItemMyBetMatchWinnerBinding.inflate(inflater, parent, false))
 
-    interface OnItemClickListener {
-        fun onPlayNowClicked(contestModel: UserContest)
+        }
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            ItemAllContestBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is MatchWinnerHolder) holder.setData(list?.get(position))
+        if (holder is SessionHolder) holder.setData(list?.get(position))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        holder.setData(list?.get(position), position)
-    }
-
-    fun setItemList(list: ArrayList<UserBet>?, status: Boolean = false) {
-        isMyContest = status
+    fun setItemList(list: ArrayList<UserMyBet>?) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -46,20 +44,27 @@ class MyBetsMatchWinnerAdapter(private var onItemClickListener: OnItemClickListe
     }
 
 
-    inner class ViewHolder(val binding: ItemAllContestBinding) :
+    inner class MatchWinnerHolder(val binding: ItemMyBetMatchWinnerBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        fun setData(userBet: UserBet?, position: Int) {
-            with(binding) {
-              //  binding.contest = userContest?.contest
-
-            }
+        fun setData(userMyBet: UserMyBet?) {
+            binding.model = userMyBet
         }
     }
+
+    inner class SessionHolder(val binding: ItemMyBetSessionBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun setData(userMyBet: UserMyBet?) {
+            binding.model = userMyBet
+        }
+    }
+
 
     fun clear() {
         list?.clear()
         notifyDataSetChanged()
     }
 
+    interface OnItemClickListener {
+        fun onPlayNowClicked(contestModel: UserContest)
+    }
 }

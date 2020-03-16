@@ -5,7 +5,6 @@ object ConstantsBase {
     const val BHAAV_TYPE_BACK = "bhaav_type_back"
     const val BHAAV_TYPE_LAY = "bhaav_type_lay"
     const val HEROIC_COMMENTARY = "heroic_commentary"
-    const val SESSION = "session"
     const val ODDS = "odds"
     const val STATUS_SUCCESS = 200
     const val REQUEST_TIMEOUT = 60
@@ -29,6 +28,9 @@ object ConstantsBase {
     const val suspend = "SUSPEND"
     const val close = "CLOSE"
 
+    const val LAY = "lay"
+    const val BACK = "back"
+
     const val play_now_key = "Play Now"
     const val buy_now_key = "Buy Now"
 
@@ -45,6 +47,7 @@ object ConstantsBase {
     const val ODD = "Odd"
 
 
+    const val SESSION = "session"
     const val EVEN_ODD = "even_odd"
     const val MATCH_WINNER = "match_winner"
     const val ENDING_DIGIT = "ending_digit"

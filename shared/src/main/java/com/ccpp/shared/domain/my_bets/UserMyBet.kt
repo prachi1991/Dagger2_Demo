@@ -1,8 +1,10 @@
 package com.ccpp.shared.domain.my_bets
 
+import com.ccpp.shared.util.ConstantsBase
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 
 data class UserMyBet(
@@ -40,7 +42,17 @@ data class UserMyBet(
     @Expose
     var sessionId: String? = null
 
-    ){
+) {
 
+    fun getMatchWinnerMode(): String =
+        if (actions.equals(ConstantsBase.BACK, true)) ConstantsBase.LAGAI else ConstantsBase.KHAI
 
+    fun getSessionMode(): String {
+        return if (actions.equals(ConstantsBase.BACK, true)) ConstantsBase.YES.toLowerCase(
+            Locale.US
+        )
+        else ConstantsBase.NO.toLowerCase(
+            Locale.US
+        )
+    }
 }

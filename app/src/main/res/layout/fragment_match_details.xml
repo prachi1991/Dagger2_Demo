@@ -185,550 +185,567 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/backgroud_solid_dark_grey"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/_5sdp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvTabAll"
-                            fontPath="fonts/Play-Regular.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:text="@string/all"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:background="@color/white" />
-
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvTabMarket"
-                            fontPath="fonts/Play-Regular.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/market"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:background="@color/white" />
-
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvTabSession"
-                            fontPath="fonts/Play-Regular.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/session"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:background="@color/white" />
-
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvTabEvenOdd"
-                            fontPath="fonts/Play-Regular.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/even_odd"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:background="@color/white" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvTabEnding"
-                            fontPath="fonts/Play-Regular.ttf"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ending_digit"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:background="@color/white" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/backgroud_solid_dark_grey"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_3sdp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/backgroud_round_header_background"
-                            android:padding="@dimen/_5sdp">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvMarketLabel"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
-                                android:text="Market |"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvMarketType"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:layout_toEndOf="@+id/tvMarketLabel"
-                                android:textColor="@color/text_light_green"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="Match Winner" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:textColor="@color/text_light_green"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="0" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="@dimen/_3sdp"
-                            android:background="@drawable/backgroud_solid_light_grey"
-                            android:padding="@dimen/_5sdp">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvMatchTeam1"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="IND_DEMO1" />
-
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvMatchWinnerPosition1"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_15sdp"
-                                android:layout_toStartOf="@+id/tvTeam1Lay"
-                                android:gravity="center"
-                                android:textColor="@color/green"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="100" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvTeam1Lay"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:layout_toStartOf="@id/tvTeam1Back"
-                                android:background="@drawable/backgroud_solid_dark_blue"
-                                android:gravity="center"
-                                android:minWidth="@dimen/_35sdp"
-                                android:onClick="@{view -> model.onMatchWinnerClicked(false,true)}"
-                                android:paddingTop="@dimen/_3sdp"
-                                android:paddingBottom="@dimen/_3sdp"
-                                android:singleLine="true"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="1.2" />
-
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvTeam1Back"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@drawable/backgroud_solid_light_blue1"
-                                android:gravity="center"
-                                android:minWidth="@dimen/_35sdp"
-                                android:onClick="@{view -> model.onMatchWinnerClicked(true,true)}"
-                                android:paddingTop="@dimen/_3sdp"
-                                android:paddingBottom="@dimen/_3sdp"
-                                android:singleLine="true"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="1.2" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="@dimen/_3sdp"
-                            android:background="@drawable/backgroud_solid_light_grey"
-                            android:padding="@dimen/_5sdp">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvMatchTeam2"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="IND_DEMO2" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvMatchWinnerPosition2"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_15sdp"
-                                android:layout_toStartOf="@+id/tvTeam2Lay"
-                                android:gravity="center"
-                                android:textColor="@color/green"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="100" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvTeam2Lay"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:layout_toStartOf="@id/tvTeam2Back"
-                                android:background="@drawable/backgroud_solid_dark_blue"
-                                android:gravity="center"
-                                android:minWidth="@dimen/_35sdp"
-                                android:onClick="@{view -> model.onMatchWinnerClicked(false,false)}"
-                                android:paddingTop="@dimen/_3sdp"
-                                android:paddingBottom="@dimen/_3sdp"
-                                android:singleLine="true"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="1.2" />
-
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvTeam2Back"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@drawable/backgroud_solid_light_blue1"
-                                android:gravity="center"
-                                android:minWidth="@dimen/_35sdp"
-                                android:onClick="@{view -> model.onMatchWinnerClicked(true,false)}"
-                                android:paddingTop="@dimen/_3sdp"
-                                android:paddingBottom="@dimen/_3sdp"
-                                android:singleLine="true"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="1.2" />
-
-                        </RelativeLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llSessionSection"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/backgroud_solid_dark_grey"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_3sdp"
-                        android:visibility="gone"
-                        tools:visibility="visible">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/backgroud_round_header_background"
-                            android:padding="@dimen/_5sdp">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvSessionLabel"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:text="@string/session"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvSessionPosition"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:gravity="center"
-                                android:textColor="@color/green"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="100" />
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvSession"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:itemCount="1"
-                        tools:listitem="@layout/item_session_list"
-                        tools:visibility="visible" />
-
-                    <LinearLayout
-                        android:id="@+id/frameEvenOdd"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:background="@drawable/backgroud_solid_dark_grey"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_3sdp">
+                        android:layout_marginTop="@dimen/_10sdp">
 
                         <LinearLayout
+                            android:id="@+id/llMatchContainer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/backgroud_round_header_background"
-                            android:padding="@dimen/_5sdp">
+                            android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:text="@string/market_divider"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
+                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_5sdp">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvEvenOddType"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvTabAll"
+                                    fontPath="fonts/Play-Regular.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:text="@string/all"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/white" />
+
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvTabMarket"
+                                    fontPath="fonts/Play-Regular.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/market"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/white" />
+
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvTabSession"
+                                    fontPath="fonts/Play-Regular.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/session"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/white" />
+
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvTabEvenOdd"
+                                    fontPath="fonts/Play-Regular.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/even_odd"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/white" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvTabEnding"
+                                    fontPath="fonts/Play-Regular.ttf"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/ending_digit"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/white" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:textColor="@color/text_light_green"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="IND 1 Over Ending Digit" />
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_3sdp">
 
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/backgroud_round_header_background"
+                                    android:padding="@dimen/_5sdp">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvMarketLabel"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:text="Market |"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvMarketType"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toEndOf="@+id/tvMarketLabel"
+                                        android:textColor="@color/text_light_green"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="Match Winner" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:textColor="@color/text_light_green"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="0" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:background="@drawable/backgroud_solid_light_grey"
+                                    android:padding="@dimen/_5sdp">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvMatchTeam1"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="IND_DEMO1" />
+
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvMatchWinnerPosition1"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_15sdp"
+                                        android:layout_toStartOf="@+id/tvTeam1Lay"
+                                        android:gravity="center"
+                                        android:textColor="@color/green"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="100" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvTeam1Lay"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toStartOf="@id/tvTeam1Back"
+                                        android:background="@drawable/backgroud_solid_dark_blue"
+                                        android:gravity="center"
+                                        android:minWidth="@dimen/_35sdp"
+                                        android:onClick="@{view -> model.onMatchWinnerClicked(false,true)}"
+                                        android:paddingTop="@dimen/_3sdp"
+                                        android:paddingBottom="@dimen/_3sdp"
+                                        android:singleLine="true"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="1.2" />
+
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvTeam1Back"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:background="@drawable/backgroud_solid_light_blue1"
+                                        android:gravity="center"
+                                        android:minWidth="@dimen/_35sdp"
+                                        android:onClick="@{view -> model.onMatchWinnerClicked(true,true)}"
+                                        android:paddingTop="@dimen/_3sdp"
+                                        android:paddingBottom="@dimen/_3sdp"
+                                        android:singleLine="true"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="1.2" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:background="@drawable/backgroud_solid_light_grey"
+                                    android:padding="@dimen/_5sdp">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvMatchTeam2"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="IND_DEMO2" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvMatchWinnerPosition2"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_15sdp"
+                                        android:layout_toStartOf="@+id/tvTeam2Lay"
+                                        android:gravity="center"
+                                        android:textColor="@color/green"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="100" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvTeam2Lay"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toStartOf="@id/tvTeam2Back"
+                                        android:background="@drawable/backgroud_solid_dark_blue"
+                                        android:gravity="center"
+                                        android:minWidth="@dimen/_35sdp"
+                                        android:onClick="@{view -> model.onMatchWinnerClicked(false,false)}"
+                                        android:paddingTop="@dimen/_3sdp"
+                                        android:paddingBottom="@dimen/_3sdp"
+                                        android:singleLine="true"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="1.2" />
+
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvTeam2Back"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:background="@drawable/backgroud_solid_light_blue1"
+                                        android:gravity="center"
+                                        android:minWidth="@dimen/_35sdp"
+                                        android:onClick="@{view -> model.onMatchWinnerClicked(true,false)}"
+                                        android:paddingTop="@dimen/_3sdp"
+                                        android:paddingBottom="@dimen/_3sdp"
+                                        android:singleLine="true"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="1.2" />
+
+                                </RelativeLayout>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llSessionSection"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_3sdp"
+                                android:visibility="gone"
+                                tools:visibility="visible">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/backgroud_round_header_background"
+                                    android:padding="@dimen/_5sdp">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvSessionLabel"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:text="@string/session"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvSessionPosition"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:gravity="center"
+                                        android:textColor="@color/green"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="100" />
+                                </RelativeLayout>
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvSession"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:itemCount="1"
+                                tools:listitem="@layout/item_session_list"
+                                tools:visibility="visible" />
+
+                            <LinearLayout
+                                android:id="@+id/frameEvenOdd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_3sdp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/backgroud_round_header_background"
+                                    android:padding="@dimen/_5sdp">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:text="@string/market_divider"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvEvenOddType"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:textColor="@color/text_light_green"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="IND 1 Over Ending Digit" />
+
+
+                                </LinearLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:background="@drawable/backgroud_solid_light_grey"
+                                    android:padding="@dimen/_5sdp">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvEvenOddTitle1"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:text="@string/even"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvEvenPosition"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_15sdp"
+                                        android:layout_toStartOf="@+id/tvOddEvenBack1"
+                                        android:gravity="center"
+                                        android:textColor="@color/green"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="100" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvOddEvenBack1"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:background="@drawable/backgroud_solid_light_blue1"
+                                        android:minWidth="@dimen/_35sdp"
+                                        android:onClick="@{view ->  model.onEvenOddClicked(true)}"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingTop="@dimen/_3sdp"
+                                        android:paddingRight="@dimen/_5sdp"
+                                        android:paddingBottom="@dimen/_3sdp"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:background="@drawable/backgroud_solid_light_grey"
+                                    android:padding="@dimen/_5sdp">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvEvenOddTitle2"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:text="@string/odd"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvOddPosition"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="@dimen/_15sdp"
+                                        android:layout_toStartOf="@+id/tvOddEvenBack2"
+                                        android:gravity="center"
+                                        android:textColor="@color/green"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="100" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvOddEvenBack2"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:background="@drawable/backgroud_solid_light_blue1"
+                                        android:minWidth="@dimen/_35sdp"
+                                        android:onClick="@{view ->  model.onEvenOddClicked(false)}"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingTop="@dimen/_3sdp"
+                                        android:paddingRight="@dimen/_5sdp"
+                                        android:paddingBottom="@dimen/_3sdp"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </RelativeLayout>
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/llEndingDigitSection"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_3sdp"
+                                android:visibility="gone"
+                                tools:visibility="visible">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/backgroud_round_header_background"
+                                    android:padding="@dimen/_5sdp">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvEndingDigitLabel"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:text="@string/market_divider"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvEndingDigitTitle"
+                                        fontPath="fonts/Play-Regular.ttf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toEndOf="@+id/tvEndingDigitLabel"
+                                        android:textColor="@color/text_light_green"
+                                        android:textSize="@dimen/_10ssp"
+                                        tools:text="IND 1 Over Ending Digit" />
+
+                                </RelativeLayout>
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvEndingDigit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    tools:itemCount="1"
+                                    tools:listitem="@layout/item_ending_digit_list" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
-                        <RelativeLayout
+                        <FrameLayout
+                            android:id="@+id/llMyBetContainer"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="@dimen/_3sdp"
-                            android:background="@drawable/backgroud_solid_light_grey"
-                            android:padding="@dimen/_5sdp">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvEvenOddTitle1"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:text="@string/even"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvEvenPosition"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_15sdp"
-                                android:layout_toStartOf="@+id/tvOddEvenBack1"
-                                android:gravity="center"
-                                android:textColor="@color/green"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="100" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvOddEvenBack1"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@drawable/backgroud_solid_light_blue1"
-                                android:minWidth="@dimen/_35sdp"
-                                android:onClick="@{view ->  model.onEvenOddClicked(true)}"
-                                android:paddingLeft="@dimen/_5sdp"
-                                android:paddingTop="@dimen/_3sdp"
-                                android:paddingRight="@dimen/_5sdp"
-                                android:paddingBottom="@dimen/_3sdp"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="@dimen/_3sdp"
-                            android:background="@drawable/backgroud_solid_light_grey"
-                            android:padding="@dimen/_5sdp">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvEvenOddTitle2"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:text="@string/odd"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvOddPosition"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_15sdp"
-                                android:layout_toStartOf="@+id/tvOddEvenBack2"
-                                android:gravity="center"
-                                android:textColor="@color/green"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="100" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvOddEvenBack2"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:background="@drawable/backgroud_solid_light_blue1"
-                                android:minWidth="@dimen/_35sdp"
-                                android:onClick="@{view ->  model.onEvenOddClicked(false)}"
-                                android:paddingLeft="@dimen/_5sdp"
-                                android:paddingTop="@dimen/_3sdp"
-                                android:paddingRight="@dimen/_5sdp"
-                                android:paddingBottom="@dimen/_3sdp"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                        </RelativeLayout>
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:id="@+id/llEndingDigitSection"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/backgroud_solid_dark_grey"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_3sdp"
-                        android:visibility="gone"
-                        tools:visibility="visible">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/backgroud_round_header_background"
-                            android:padding="@dimen/_5sdp">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvEndingDigitLabel"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:text="@string/market_divider"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvEndingDigitTitle"
-                                fontPath="fonts/Play-Regular.ttf"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:layout_toEndOf="@+id/tvEndingDigitLabel"
-                                android:textColor="@color/text_light_green"
-                                android:textSize="@dimen/_10ssp"
-                                tools:text="IND 1 Over Ending Digit" />
-
-                        </RelativeLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvEndingDigit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:itemCount="1"
-                            tools:listitem="@layout/item_ending_digit_list" />
-
-                    </LinearLayout>
-
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <ProgressBar

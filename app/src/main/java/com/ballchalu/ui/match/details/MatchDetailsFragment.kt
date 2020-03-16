@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
@@ -21,6 +20,7 @@ import com.ballchalu.mqtt.MqttConnection
 import com.ballchalu.ui.create_bet.CreateBetFragment
 import com.ballchalu.ui.match.details.adapter.EndingDigitAdapter
 import com.ballchalu.ui.match.details.adapter.SessionAdapter
+import com.ballchalu.ui.match.details.my_bets.MyBetsFragment
 import com.ballchalu.utils.StringUtils
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.create_bet.CreateBetRes
@@ -60,10 +60,16 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             model = viewModel
 
             tvMyBets.setOnClickListener {
-                val bundle = Bundle().apply {
-                    putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, viewModel.contestsMatchId ?: 0)
+                if (childFragmentManager.findFragmentByTag(MyBetsFragment::class.java.simpleName) == null) {
+                    val bundle = Bundle().apply {
+                        putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, viewModel.contestsMatchId ?: 0)
+                    }
+                    viewModel.myBetFragment.arguments = bundle
+                    childFragmentManager.beginTransaction()
+                        .add(R.id.llMyBetContainer, viewModel.myBetFragment)
+                        .addToBackStack(MyBetsFragment::class.java.simpleName)
+                        .commitAllowingStateLoss()
                 }
-                findNavController().navigate(R.id.nav_my_bet, bundle)
             }
 
         }
@@ -173,14 +179,16 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             viewModel.bwlTeamRunner = runners
         })
 
-        viewModel.updateEndingDigitDataEvent.observe(viewLifecycleOwner, EventObserver { market ->
-            binding.llEndingDigitSection.visibility =
-                if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
-            market.runners?.forEach {
-                it.runner = Runner(back = it.B, canBack = it.canBack, marketId = market.id)
-            }
-            endingDigitAdapter?.updateEndingDigit(market.runners, market.status)
-        })
+        viewModel.updateEndingDigitDataEvent.observe(
+            viewLifecycleOwner,
+            EventObserver { market ->
+                binding.llEndingDigitSection.visibility =
+                    if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
+                market.runners?.forEach {
+                    it.runner = Runner(back = it.B, canBack = it.canBack, marketId = market.id)
+                }
+                endingDigitAdapter?.updateEndingDigit(market.runners, market.status)
+            })
 
         viewModel.updateEvenOddDataEvent.observe(viewLifecycleOwner, EventObserver { market ->
             binding.frameEvenOdd.visibility =
@@ -318,11 +326,12 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
     }
 
     private fun initEndingDigitAdapterAdapter() {
-        endingDigitAdapter = EndingDigitAdapter(object : EndingDigitAdapter.OnItemClickListener {
-            override fun onBackClicked(runner: Runner) {
-                viewModel.onEndingDigitClicked(runner)
-            }
-        })
+        endingDigitAdapter =
+            EndingDigitAdapter(object : EndingDigitAdapter.OnItemClickListener {
+                override fun onBackClicked(runner: Runner) {
+                    viewModel.onEndingDigitClicked(runner)
+                }
+            })
         binding.rvEndingDigit.adapter = endingDigitAdapter
     }
 
