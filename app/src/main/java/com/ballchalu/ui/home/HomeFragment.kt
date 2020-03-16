@@ -6,21 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.ballchalu.R
 import com.ballchalu.ui.football.FootballFragment
 import com.ballchalu.ui.match_listing.MatchListingFragment
-import com.ccpp.shared.domain.MatchListing
-import com.ccpp.shared.util.ConstantsBase
 import com.google.android.material.tabs.TabLayout
-import java.util.ArrayList
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -58,8 +53,8 @@ class HomeFragment : Fragment() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(childFragmentManager)
-        adapter?.addFragment(MatchListingFragment(), "ONE")
-        adapter?.addFragment(FootballFragment(), "TWO")
+        adapter.addFragment(MatchListingFragment(), "ONE")
+        adapter.addFragment(FootballFragment(), "TWO")
         viewPager.adapter = adapter
     }
 

@@ -28,7 +28,7 @@ class EndingDigitAdapter(val listener: OnItemClickListener?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.setData(list?.get(position)?.runner, position)
+        holder.setData(list?.get(position)?.runner)
     }
 
     override fun getItemCount(): Int {
@@ -83,7 +83,7 @@ class EndingDigitAdapter(val listener: OnItemClickListener?) :
     inner class ViewHolder(val binding: ItemEndingDigitListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(runner: Runner?, position: Int) {
+        fun setData(runner: Runner?) {
             with(binding) {
                 runner?.let {
                     model = it

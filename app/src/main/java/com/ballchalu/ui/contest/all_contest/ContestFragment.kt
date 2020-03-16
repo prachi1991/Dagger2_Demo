@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.ContestViewModel
@@ -16,7 +13,6 @@ import com.ballchalu.ui.dialog.NotificationDialog
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListing
 import com.ccpp.shared.domain.contest.Contest
-import com.ccpp.shared.domain.contest.UserContest
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
@@ -78,7 +74,7 @@ class ContestFragment : BaseFragment() {
     private fun initSessionAdapterAdapter() {
         contestAdapter = ContestAdapter(object : ContestAdapter.OnItemClickListener {
             override fun onBuyNowClicked(contestModel: Contest) {
-                viewModel.createUserMatchContest(contestModel?.id.toString())
+                viewModel.createUserMatchContest(contestModel.id.toString())
             }
 
             override fun onPlayNowClicked(contestModel: Contest) {

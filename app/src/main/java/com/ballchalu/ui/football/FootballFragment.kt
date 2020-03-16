@@ -1,11 +1,10 @@
 package com.ballchalu.ui.football
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.ballchalu.R
 
 class FootballFragment : Fragment() {
@@ -20,7 +19,7 @@ class FootballFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             FootballFragment().apply {
             }
     }
