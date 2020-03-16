@@ -1,8 +1,7 @@
 package com.ccpp.shared.domain.create_bet
 
-import com.ccpp.shared.domain.match_details.Runner
+import com.ccpp.shared.domain.position.PositionRunnersItem
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 
 
@@ -17,5 +16,5 @@ data class MarketPosition(
 
     @SerializedName("runners")
     @Expose
-    var runners: List<Runner>? = null
+    var runners: List<PositionRunnersItem>? = null
 )

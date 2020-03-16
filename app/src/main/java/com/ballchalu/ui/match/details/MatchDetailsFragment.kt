@@ -13,15 +13,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
 import com.ballchalu.mqtt.MqttConnection
+import com.ballchalu.ui.create_bet.CreateBetFragment
 import com.ballchalu.ui.match.details.adapter.EndingDigitAdapter
 import com.ballchalu.ui.match.details.adapter.SessionAdapter
 import com.ballchalu.utils.StringUtils
 import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.domain.create_bet.CreateBetRes
+import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
 import com.ccpp.shared.domain.match_details.Market
 import com.ccpp.shared.domain.match_details.Runner
 import com.ccpp.shared.domain.match_details.Session
@@ -33,7 +35,7 @@ import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import javax.inject.Inject
 
-class MatchDetailsFragment : BaseFragment() {
+class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSuccessListener {
 
     private var snackBar: Snackbar? = null
     private var sessionAdapter: SessionAdapter? = null
@@ -216,15 +218,7 @@ class MatchDetailsFragment : BaseFragment() {
         })
 
         viewModel.positionSessionObserver.observe(viewLifecycleOwner, EventObserver {
-            binding.tvSessionPosition.text = it
-            try {
-                binding.tvSessionPosition.setTextColor(
-                    ColorUtils.getPositionColor(it?.toDouble() ?: 0.0)
-                )
-            } catch (e: NumberFormatException) {
-                Timber.e(e)
-            }
-
+            updateSessionPosition(it)
         })
 
         viewModel.positionEndingDigitObserver.observe(viewLifecycleOwner, EventObserver {
@@ -237,10 +231,16 @@ class MatchDetailsFragment : BaseFragment() {
         }
 
         viewModel.openBetScreenEvent.observe(viewLifecycleOwner, EventObserver {
-            val bundle = Bundle().apply {
-                putParcelable(ConstantsBase.KEY_CREATE_BET_REQ, it)
+            //            findNavController().navigate(R.id.nav_create_bet, bundle)
+            val createBetFragment = CreateBetFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(ConstantsBase.KEY_CREATE_BET_REQ, it)
+                }
+                listener = this@MatchDetailsFragment
             }
-            findNavController().navigate(R.id.nav_create_bet, bundle)
+            val ft = childFragmentManager.beginTransaction()
+            ft.addToBackStack(createBetFragment.tag)
+            createBetFragment.show(ft, createBetFragment.tag)
         })
 
     }
@@ -296,6 +296,17 @@ class MatchDetailsFragment : BaseFragment() {
             }
         })
         binding.rvSession.adapter = sessionAdapter
+    }
+
+    private fun updateSessionPosition(it: String?) {
+        binding.tvSessionPosition.text = it.toString()
+        try {
+            binding.tvSessionPosition.setTextColor(
+                ColorUtils.getPositionColor(it?.toDouble() ?: 0.0)
+            )
+        } catch (e: NumberFormatException) {
+            Timber.e(e)
+        }
     }
 
     private fun initEndingDigitAdapterAdapter() {
@@ -366,5 +377,13 @@ class MatchDetailsFragment : BaseFragment() {
         override fun onReceive(context: Context, intent: Intent) {
             showNetworkError()
         }
+    }
+
+    override fun onBetSuccess(it: CreateBetRes) {
+        viewModel.handleMarketPositionList(it.marketPosition)
+    }
+
+    override fun onSessionBetSuccess(createSessionBetRes: CreateSessionBetRes?) {
+        updateSessionPosition(createSessionBetRes?.sessionPosition.toString())
     }
 }

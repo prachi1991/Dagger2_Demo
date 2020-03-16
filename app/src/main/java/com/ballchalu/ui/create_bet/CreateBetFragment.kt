@@ -17,9 +17,7 @@ import com.ballchalu.ui.create_bet.adapter.InPlayBetMatchListAdapter
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListingItem
-import com.ccpp.shared.domain.create_bet.BetDetailsBundle
-import com.ccpp.shared.domain.create_bet.CreateBetReq
-import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
+import com.ccpp.shared.domain.create_bet.*
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import dagger.android.support.DaggerAppCompatDialogFragment
@@ -37,6 +35,8 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
     var count = 0
     private var inPlayListAdapter: InPlayBetMatchListAdapter? = null
     private var upcomingListAdapter: InPlayMatchListingAdapter? = null
+
+    internal var listener: OnBetResponseSuccessListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -172,12 +172,14 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         })
 
         viewModel.createBetObserver.observe(viewLifecycleOwner, EventObserver {
+            listener?.onBetSuccess(it)
             if (it.status.equals(ConstantsBase.SUCCESS, true))
                 dialog?.dismiss()
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
 
         viewModel.createSessionBetObserver.observe(viewLifecycleOwner, EventObserver {
+            listener?.onSessionBetSuccess(it)
             if (it.status.equals(ConstantsBase.SUCCESS, true))
                 dialog?.dismiss()
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
@@ -203,4 +205,8 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         );
     }
 
+    interface OnBetResponseSuccessListener {
+        fun onBetSuccess(createBetRes: CreateBetRes)
+        fun onSessionBetSuccess(createSessionBetRes: CreateSessionBetRes?)
+    }
 }

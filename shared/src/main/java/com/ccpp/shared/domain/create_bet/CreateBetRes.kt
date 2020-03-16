@@ -1,6 +1,7 @@
 package com.ccpp.shared.domain.create_bet
 
 import com.ccpp.shared.domain.contest.UserContest
+import com.ccpp.shared.domain.position.PositionMarketItem
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -12,7 +13,7 @@ data class CreateBetRes(
 
     @SerializedName("market_position")
     @Expose
-    var marketPosition: List<MarketPosition>? = null,
+    var marketPosition: List<PositionMarketItem>? = null,
 
     @SerializedName("status")
     @Expose

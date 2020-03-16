@@ -17,7 +17,7 @@ import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.match_details.*
 import com.ccpp.shared.domain.position.PositionMarketItem
-import com.ccpp.shared.domain.position.PositionRes
+import com.ccpp.shared.domain.position.Positions
 import com.ccpp.shared.network.repository.MatchDetailsRepository
 import com.ccpp.shared.util.ConstantsBase
 import com.google.gson.Gson
@@ -72,7 +72,7 @@ class MatchDetailsViewModel @Inject constructor(
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = loginRepository.callPositionDetailsAsync(contestId)) {
-                is Results.Success -> handlePositionSuccess(result.data)
+                is Results.Success -> handlePositionSuccess(result.data.positions)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
             loading.postValue(Event(false))
@@ -95,9 +95,13 @@ class MatchDetailsViewModel @Inject constructor(
     val positionSessionObserver: LiveData<Event<String?>> = _positionSessionObserver
 
 
-    private fun handlePositionSuccess(data: PositionRes) {
-        _positionSessionObserver.postValue(Event(data.positions?.sessionPosition))
-        data.positions?.marketPosition?.forEach { positionMarketItem ->
+    fun handlePositionSuccess(data: Positions?) {
+        _positionSessionObserver.postValue(Event(data?.sessionPosition))
+        handleMarketPositionList(data?.marketPosition)
+    }
+
+    fun handleMarketPositionList(marketPosition: List<PositionMarketItem>?) {
+        marketPosition?.forEach { positionMarketItem ->
             when (positionMarketItem.heroicMarketType) {
                 ConstantsBase.MATCH_WINNER -> {
                     positionMarketItem.runners?.forEach {
@@ -144,6 +148,7 @@ class MatchDetailsViewModel @Inject constructor(
                 }
             }
         }
+
 
     }
     //---------------------position section End------------------------//
