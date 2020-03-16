@@ -88,6 +88,7 @@
     <string name="play_now">Play Now</string>
     <string name="buy_now">Buy Now</string>
     <string name="contest">Contest</string>
+    <string name="prize">Prize -</string>
     <string name="no_connection">"No Internet Connection "</string>
     <string name="place_bet">Place Bet</string>
     <string name="clear_bet">Clear Bet</string>

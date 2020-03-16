@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+    </data>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_70sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:layout_marginLeft="@dimen/_10sdp"
+    android:layout_marginRight="@dimen/_10sdp"
+    tools:ignore="MissingPrefix"
+    app:cardElevation="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_8sdp"
+    app:cardBackgroundColor="@color/colorSecondary"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1st"
+        fontPath="fonts/Play-Regular.ttf"
+        android:background="@drawable/backgroud_solid_primary"
+        android:textColor="@color/text_light_green"
+        android:textSize="@dimen/_12ssp"
+        android:paddingBottom="@dimen/_2sdp"
+        android:paddingTop="@dimen/_2sdp"
+        android:paddingLeft="@dimen/_5sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_centerVertical="true"
+         />
+
+   <androidx.appcompat.widget.AppCompatImageView
+       android:id="@+id/ic_avtar"
+       android:layout_toRightOf="@+id/position"
+       android:layout_width="@dimen/_36sdp"
+       android:layout_height="@dimen/_36sdp"
+       android:layout_marginLeft="-5dp"
+       app:srcCompat="@drawable/ic_man_2"
+       android:layout_centerVertical="true"/>
+
+    <LinearLayout
+        android:layout_toRightOf="@+id/ic_avtar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="jhon wick"
+            android:textColor="@color/white"
+            fontPath="fonts/Play-Regular.ttf"
+            android:textSize="@dimen/_12ssp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2,45,000/-"
+            android:textColor="@color/text_color_grey"
+            fontPath="fonts/Play-Regular.ttf"
+            android:textSize="@dimen/_12ssp"/>
+
+    </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+
+</layout>

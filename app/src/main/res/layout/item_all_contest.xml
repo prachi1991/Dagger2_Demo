@@ -29,7 +29,7 @@
                 android:layout_height="@dimen/_25sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    fontPath="fonts/Play-Regular.ttf"
+                    fontPath="fonts/Play-Bold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
@@ -69,9 +69,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Price -"
+                    android:text="@string/prize"
                     android:textAllCaps="true"
                     android:textColor="@color/text_color_grey"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="@dimen/_8ssp"
+                    android:autoSizeMaxTextSize="@dimen/_10ssp"
+                    android:autoSizeStepGranularity="@dimen/_1ssp"
                     android:textSize="@dimen/_10ssp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -84,6 +88,10 @@
                     android:gravity="center"
                     android:text="@{contest.getPrice()}"
                     android:textColor="@color/white"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="@dimen/_12ssp"
+                    android:autoSizeMaxTextSize="@dimen/_14ssp"
+                    android:autoSizeStepGranularity="@dimen/_1ssp"
                     android:textSize="@dimen/_14ssp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -107,7 +115,11 @@
                     android:text="Entry -"
                     android:textAllCaps="true"
                     android:textColor="@color/text_color_grey"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_10ssp"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="@dimen/_8ssp"
+                    android:autoSizeMaxTextSize="@dimen/_10ssp"
+                    android:autoSizeStepGranularity="@dimen/_1ssp"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvEntryValue"
@@ -119,7 +131,11 @@
                     android:gravity="center"
                     android:text="@{contest.getEntery()}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_14ssp"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="@dimen/_12ssp"
+                    android:autoSizeMaxTextSize="@dimen/_14ssp"
+                    android:autoSizeStepGranularity="@dimen/_1ssp"/>
             </LinearLayout>
 
             <LinearLayout
