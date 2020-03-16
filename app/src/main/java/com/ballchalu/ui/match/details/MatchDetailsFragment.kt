@@ -58,12 +58,19 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             lifecycleOwner = this@MatchDetailsFragment
             model = viewModel
 
+            tvMyBets.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, viewModel.contestsMatchId ?: 0)
+                }
+                findNavController().navigate(R.id.nav_my_bet, bundle)
+            }
 
         }
 
         arguments?.let {
             viewModel.matchId = it.getInt(ConstantsBase.KEY_PROVIDER_ID)
             viewModel.contestsId = it.getInt(ConstantsBase.KEY_CONTESTS_ID)
+            viewModel.contestsMatchId = it.getInt(ConstantsBase.KEY_CONTESTS_MATCH_ID)
         }
         registerReceiver()
 

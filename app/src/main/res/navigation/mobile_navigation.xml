@@ -33,4 +33,9 @@
         android:name="com.ballchalu.ui.create_bet.CreateBetFragment"
         android:label="CreateBetFragment" />
 
+    <fragment
+        android:id="@+id/nav_my_bet"
+        android:name="com.ballchalu.ui.match.details.my_bets.MyBetsFragment"
+        android:label="MyBetsFragment" />
+
 </navigation>

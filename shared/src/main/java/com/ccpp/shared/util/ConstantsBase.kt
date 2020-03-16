@@ -23,6 +23,7 @@ object ConstantsBase {
     const val PUB_NUB: String = "PubnubMsg"
     const val KEY_PROVIDER_ID: String = "providerId"
     const val KEY_CONTESTS_ID: String = "contestsId"
+    const val KEY_CONTESTS_MATCH_ID: String = "contestsMatchId"
     const val KEY_MATCH_ITEM: String = "keyMatchList"
     const val open = "OPEN"
     const val suspend = "SUSPEND"

@@ -10,6 +10,7 @@ import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
 import com.ccpp.shared.domain.match_details.MatchDetailsRes
 import com.ccpp.shared.domain.position.PositionRes
+import com.ccpp.shared.domain.my_bets.MyBetsRes
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -65,5 +66,8 @@ internal interface ApiClient {
 
     @POST("ballchalu/api/v1/user_contests/{contestsId}/session_bet_slips")
     fun callCreateSessionBetAsync(@Body betReq: CreateSessionBetReq, @Path("contestsId") contestsId: String): Deferred<Response<CreateSessionBetRes>>
+
+    @GET("ballchalu/api/v1/contests/{contestsId}/user_bets")
+    fun callMyBetAsync(@Path("contestsId") contestsId: String): Deferred<Response<MyBetsRes>>
 
 }

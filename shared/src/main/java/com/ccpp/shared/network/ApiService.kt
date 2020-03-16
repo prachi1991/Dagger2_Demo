@@ -50,6 +50,8 @@ open class ApiService @Inject constructor(
 
     fun callPositionDetailsAsync(contestId: Int) = apiClient.callPositionDetailsAsync(contestId)
 
+    fun callMyBetAsync(matchId: String) = apiClient.callMyBetAsync(matchId)
+
     fun callMatchesListingAsync(event_type: String,play_status: String) = apiClient.callMatchesListingAsync(event_type,play_status)
 
 }

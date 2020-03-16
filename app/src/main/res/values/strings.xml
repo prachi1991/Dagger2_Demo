@@ -97,4 +97,5 @@
     <string name="rate_odd_even_type">%s(%s)</string>
     <string name="please_enter_amount">Please enter the amount</string>
     <string name="amount_should_be_greater">Amount should be grater than zero</string>
+    <string name="match_winner_market">Match Winner Market</string>
 </resources>

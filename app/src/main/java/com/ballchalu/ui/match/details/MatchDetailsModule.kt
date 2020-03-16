@@ -1,6 +1,8 @@
 package com.ballchalu.ui.match.details
 
 import androidx.lifecycle.ViewModel
+import com.ballchalu.ui.match.details.my_bets.MyBetsFragment
+import com.ballchalu.ui.match.details.my_bets.MyBetsViewModel
 import com.ccpp.shared.core.di.FragmentScoped
 import com.ccpp.shared.core.di.ViewModelKey
 import dagger.Binds
@@ -22,6 +24,15 @@ internal abstract class MatchDetailsModule {
     @IntoMap
     @ViewModelKey(MatchDetailsViewModel::class)
     internal abstract fun bindViewModel(viewModel: MatchDetailsViewModel): ViewModel
+
+    @FragmentScoped
+    @ContributesAndroidInjector
+    internal abstract fun contributeMyBetsFragment(): MyBetsFragment
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MyBetsViewModel::class)
+    internal abstract fun bindMyBetsViewModel(viewModel: MyBetsViewModel): ViewModel
 
 
 }

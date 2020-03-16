@@ -54,6 +54,8 @@ class MatchDetailsViewModel @Inject constructor(
 
     private val _matchResult = MutableLiveData<Event<MatchDetailsRes?>>()
     val matchResult: LiveData<Event<MatchDetailsRes?>> = _matchResult
+    var contestsId: Int = 0
+    var contestsMatchId: Int = 0
 
     fun callMatchDetailsAsync() {
         loading.postValue(Event(true))
