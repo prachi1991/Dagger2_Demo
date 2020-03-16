@@ -88,7 +88,6 @@
     <string name="play_now">Play Now</string>
     <string name="buy_now">Buy Now</string>
     <string name="contest">Contest</string>
-    <string name="prize">Prize -</string>
     <string name="no_connection">"No Internet Connection "</string>
     <string name="place_bet">Place Bet</string>
     <string name="clear_bet">Clear Bet</string>
@@ -99,4 +98,12 @@
     <string name="please_enter_amount">Please enter the amount</string>
     <string name="amount_should_be_greater">Amount should be grater than zero</string>
     <string name="match_winner_market">Match Winner Market</string>
+    <string name="how_to_play">How To Play</string>
+    <string name="price">Price -</string>
+    <string name="entry">Entry -</string>
+    <string name="total_winners">Total Winners -</string>
+    <string name="credit">Credit -</string>
+    <string name="spots_left">Spots Left</string>
+    <string name="how_to_play_header_1">Lorem Ipsum is simply dummy text of the printing and typesetting industry?</string>
+    <string name="how_to_play_desc_1">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy.\n It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy.</string>
 </resources>

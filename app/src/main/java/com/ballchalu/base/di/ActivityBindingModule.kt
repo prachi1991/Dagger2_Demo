@@ -3,6 +3,7 @@ package com.ballchalu.base.di
 import com.ballchalu.ui.bc_coins.BcCoinModule
 import com.ballchalu.ui.contest.ContestModule
 import com.ballchalu.ui.create_bet.CreateBetModule
+import com.ballchalu.ui.how_to_play.HowToPlayModule
 import com.ballchalu.ui.ledgers.BcCoinsLedgersModule
 import com.ballchalu.ui.login.LoginModule
 import com.ballchalu.ui.login.container.LoginActivity
@@ -63,6 +64,7 @@ abstract class ActivityBindingModule {
             MatchListingModule::class,
             CreateBetModule::class,
             WinnerModule::class
+            HowToPlayModule::class
         ]
     )
     internal abstract fun navigationActivity(): NavigationActivity

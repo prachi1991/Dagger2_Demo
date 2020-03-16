@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/top_corner_border"
+        android:paddingLeft="@dimen/_5sdp"
+        android:paddingRight="@dimen/_5sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_arrow"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_point" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_question"
+            fontPath="fonts/Play-Regular.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_toRightOf="@+id/img_arrow"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/how_to_play_header_1"
+            android:textColor="@color/menu_light_green"
+            android:textSize="@dimen/_12ssp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@color/black">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/corner_border"
+        android:padding="@dimen/_20sdp"
+        android:src="@drawable/buy_coins" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        android:padding="@dimen/_5sdp"
+        fontPath="fonts/Play-Regular.ttf"
+        android:text="@string/how_to_play_desc_1"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</layout>
