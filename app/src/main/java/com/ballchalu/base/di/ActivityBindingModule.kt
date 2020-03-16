@@ -63,7 +63,7 @@ abstract class ActivityBindingModule {
             BcCoinModule::class,
             MatchListingModule::class,
             CreateBetModule::class,
-            WinnerModule::class
+            WinnerModule::class,
             HowToPlayModule::class
         ]
     )

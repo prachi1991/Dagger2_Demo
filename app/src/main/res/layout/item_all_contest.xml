@@ -72,10 +72,6 @@
                     android:text="@string/prize"
                     android:textAllCaps="true"
                     android:textColor="@color/text_color_grey"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMinTextSize="@dimen/_8ssp"
-                    android:autoSizeMaxTextSize="@dimen/_10ssp"
-                    android:autoSizeStepGranularity="@dimen/_1ssp"
                     android:textSize="@dimen/_10ssp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -88,10 +84,6 @@
                     android:gravity="center"
                     android:text="@{contest.getPrice()}"
                     android:textColor="@color/white"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMinTextSize="@dimen/_12ssp"
-                    android:autoSizeMaxTextSize="@dimen/_14ssp"
-                    android:autoSizeStepGranularity="@dimen/_1ssp"
                     android:textSize="@dimen/_14ssp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -115,11 +107,7 @@
                     android:text="@string/entry"
                     android:textAllCaps="true"
                     android:textColor="@color/text_color_grey"
-                    android:textSize="@dimen/_10ssp"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMinTextSize="@dimen/_8ssp"
-                    android:autoSizeMaxTextSize="@dimen/_10ssp"
-                    android:autoSizeStepGranularity="@dimen/_1ssp"/>
+                    android:textSize="@dimen/_10ssp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvEntryValue"
@@ -131,11 +119,7 @@
                     android:gravity="center"
                     android:text="@{contest.getEntery()}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_14ssp"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMinTextSize="@dimen/_12ssp"
-                    android:autoSizeMaxTextSize="@dimen/_14ssp"
-                    android:autoSizeStepGranularity="@dimen/_1ssp"/>
+                    android:textSize="@dimen/_14ssp" />
             </LinearLayout>
 
             <LinearLayout
