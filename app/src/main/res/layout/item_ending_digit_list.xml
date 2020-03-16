@@ -60,7 +60,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:layout_toStartOf="@+id/tvTeam1Back"
-                    android:text="@{model.runnerPosition.toString()}"
+                    android:text="@{model.runner}"
                     android:textColor="@{model.color}"
                     tools:text="100"
                     android:textSize="@dimen/_10ssp" />

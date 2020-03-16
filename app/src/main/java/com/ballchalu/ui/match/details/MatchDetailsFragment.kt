@@ -194,32 +194,24 @@ class MatchDetailsFragment : BaseFragment() {
 
         viewModel.positionMatchWinnerObserver.observe(viewLifecycleOwner, EventObserver {
             binding.tvMatchWinnerPosition1.apply {
-                text = it?.batTeamRunner?.runnerPosition.toString()
-                setTextColor(
-                    ColorUtils.getPositionColor(it?.batTeamRunner?.runnerPosition ?: 0)
-                )
+                text = it?.batTeamRunner?.runner()
+                setTextColor(it?.batTeamRunner?.color() ?: Color.GREEN)
             }
             binding.tvMatchWinnerPosition2.apply {
-                text = it?.bwlTeamRunner?.runnerPosition.toString()
-                setTextColor(
-                    ColorUtils.getPositionColor(it?.bwlTeamRunner?.runnerPosition ?: 0)
-                )
+                text = it?.bwlTeamRunner?.runner()
+                setTextColor(it?.bwlTeamRunner?.color() ?: Color.GREEN)
             }
         }
         )
 
         viewModel.positionEvenOddObserver.observe(viewLifecycleOwner, EventObserver {
             binding.tvEvenPosition.apply {
-                text = it?.even?.runnerPosition.toString()
-                setTextColor(
-                    ColorUtils.getPositionColor(it?.even?.runnerPosition ?: 0)
-                )
+                text = it?.even?.runner()
+                setTextColor(it?.even?.color() ?: Color.GREEN)
             }
             binding.tvOddPosition.apply {
-                text = it?.odd?.runnerPosition.toString()
-                setTextColor(
-                    ColorUtils.getPositionColor(it?.odd?.runnerPosition ?: 0)
-                )
+                text = it?.odd?.runner()
+                setTextColor(it?.odd?.color() ?: Color.GREEN)
             }
         })
 
