@@ -51,9 +51,10 @@ class MyBetsViewModel @Inject constructor(
         data?.userBets?.forEach {
             when (it.userBet?.heroicMarketType?.trim()?.toLowerCase(Locale.US)) {
                 ConstantsBase.MATCH_WINNER -> betMatchWinnerArrayList.add(it.userBet!!)
-                ConstantsBase.SESSION -> betSessionArrayList.add(it.userBet!!)
                 ConstantsBase.EVEN_ODD -> betEvenOddArrayList.add(it.userBet!!)
                 ConstantsBase.ENDING_DIGIT -> betEndingDigitArrayList.add(it.userBet!!)
+                null -> if (it.userBet?.sessionId != null) betSessionArrayList.add(it.userBet!!)
+
             }
         }
         _betMatchWinnerObserver.postValue(Event(betMatchWinnerArrayList))

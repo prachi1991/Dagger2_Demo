@@ -10,43 +10,102 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/_16sdp"
+        android:background="@color/color_window_background"
         tools:context=".ui.match.details.my_bets.MyBetsFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp">
 
             <TextView
                 fontPath="fonts/Play-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/backgroud_solid_primary_dark2dp"
-                android:paddingLeft="@dimen/_5sdp"
+                android:background="@drawable/backgroud_solid_corner_light_grey"
+                android:paddingStart="@dimen/_10sdp"
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
                 android:text="@string/match_winner_market"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.ballchalu.utils.NonScrollRecyclerView
                 android:id="@+id/rvWinnerMarker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                tools:itemCount="1"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="ite" />
+                tools:listitem="@layout/item_my_bet_match_winner" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <TextView
+                fontPath="fonts/Play-Bold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/backgroud_solid_corner_light_grey"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="@string/session"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.ballchalu.utils.NonScrollRecyclerView
                 android:id="@+id/rvSessionMarket"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="ite" />
+                tools:itemCount="1"
+                tools:listitem="@layout/item_my_bet_session" />
+
+            <TextView
+                fontPath="fonts/Play-Bold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/backgroud_solid_corner_light_grey"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="@string/even_odd"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.ballchalu.utils.NonScrollRecyclerView
+                android:id="@+id/rvEvenOddMarket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_my_bet_even_odd" />
+
+            <TextView
+                fontPath="fonts/Play-Bold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/backgroud_solid_corner_light_grey"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="@string/ending_digit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.ballchalu.utils.NonScrollRecyclerView
+                android:id="@+id/rvEndingDigitMarket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_my_bet_ending_digit" />
 
         </LinearLayout>
 

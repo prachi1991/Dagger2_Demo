@@ -66,10 +66,22 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
                     }
                     viewModel.myBetFragment.arguments = bundle
                     childFragmentManager.beginTransaction()
-                        .add(R.id.llMyBetContainer, viewModel.myBetFragment)
-                        .addToBackStack(MyBetsFragment::class.java.simpleName)
+                        .add(
+                            R.id.llMyBetContainer,
+                            viewModel.myBetFragment,
+                            MyBetsFragment::class.java.simpleName
+                        )
+//                        .addToBackStack(MyBetsFragment::class.java.simpleName)
                         .commitAllowingStateLoss()
+                    llMatchContainer.visibility = View.GONE
                 }
+            }
+            tvContest.setOnClickListener {
+                childFragmentManager.run {
+                    beginTransaction().remove(viewModel.myBetFragment).commitAllowingStateLoss()
+                }
+                llMatchContainer.visibility = View.VISIBLE
+
             }
 
         }

@@ -29,9 +29,9 @@
                 android:background="@drawable/backgroud_solid_primary_dark2dp"
                 android:gravity="center"
                 android:padding="@dimen/_8sdp"
-                android:text="@{String.format(@string/rate_s, model.odds.toString())}"
+                android:text="@{String.format(@string/session_s, model.sessionTitle)}"
                 android:textSize="@dimen/_12ssp"
-                tools:text="Session" />
+                tools:text="Session -dfgvd" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:background="@drawable/backgroud_solid_primary_dark2dp"
                     android:gravity="center"
                     android:padding="@dimen/_8sdp"
-                    android:text="@{String.format(@string/run_s, model.odds.toString())}"
+                    android:text="@{String.format(@string/run_s, model.runs.toString())}"
                     android:textSize="@dimen/_12ssp"
                     tools:text="@string/run_s" />
 
@@ -63,7 +63,7 @@
                     android:background="@drawable/backgroud_solid_primary_dark2dp"
                     android:gravity="center"
                     android:padding="@dimen/_8sdp"
-                    android:text="@{String.format(@string/rate_s, model.odds.toString())}"
+                    android:text="@{String.format(@string/rate_s, model.getSessionRate)}"
                     android:textSize="@dimen/_12ssp"
                     tools:text="@string/rate_s" />
             </LinearLayout>
@@ -95,7 +95,7 @@
                     android:background="@drawable/backgroud_solid_primary_dark2dp"
                     android:gravity="center"
                     android:padding="@dimen/_8sdp"
-                    android:text="@{String.format(@string/mode_s, model.getSessionMode)}"
+                    android:text="@{String.format(@string/mode_s, model.action.toString())}"
                     android:textSize="@dimen/_12ssp"
                     tools:text="@string/mode_s" />
             </LinearLayout>

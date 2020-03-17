@@ -49,14 +49,14 @@ class MyBetsFragment : BaseFragment() {
             binding.rvSessionMarket.adapter = adapter
         })
         viewModel.betEvenOddObserver.observe(viewLifecycleOwner, EventObserver {
-            //            val adapter = MyBetsMatchWinnerAdapter()
-//            adapter.setItemList(it)
-//            binding.rvMatchWinnerMarket.adapter = adapter
+            val adapter = MyBetsMatchWinnerAdapter(ConstantsBase.EVEN_ODD)
+            adapter.setItemList(it)
+            binding.rvEvenOddMarket.adapter = adapter
         })
         viewModel.betEndingDigitObserver.observe(viewLifecycleOwner, EventObserver {
-            //            val adapter = MyBetsMatchWinnerAdapter()
-//            adapter.setItemList(it)
-//            binding.rvMatchWinnerMarket.adapter = adapter
+            val adapter = MyBetsMatchWinnerAdapter(ConstantsBase.ENDING_DIGIT)
+            adapter.setItemList(it)
+            binding.rvEndingDigitMarket.adapter = adapter
         })
         viewModel.callMyBetsDetailsAsync()
 

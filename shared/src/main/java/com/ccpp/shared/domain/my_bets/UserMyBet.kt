@@ -1,9 +1,12 @@
 package com.ccpp.shared.domain.my_bets
 
 import com.ccpp.shared.util.ConstantsBase
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParseException
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
+import timber.log.Timber
 import java.util.*
 
 
@@ -40,8 +43,9 @@ data class UserMyBet(
     var action: String? = null,
     @SerializedName("session_id")
     @Expose
-    var sessionId: String? = null
+    var sessionId: String? = null,
 
+    var infoModel: Info? = null
 ) {
 
     fun getMatchWinnerMode(): String =
@@ -55,4 +59,30 @@ data class UserMyBet(
             Locale.US
         )
     }
+
+    private fun getInfoModelObject(): Info? {
+        return try {
+            if (infoModel == null)
+                this.infoModel = GsonBuilder().create().fromJson(info, Info::class.java)
+            this.infoModel
+        } catch (e: JsonParseException) {
+            Timber.e(e)
+            null
+        }
+    }
+
+    fun getBetFairRunnerName(): String =
+        getInfoModelObject()?.market?.runners?.get(0)?.runner?.betfairRunnerName ?: ""
+
+
+    fun getSessionTitle(): String =
+        getInfoModelObject()?.session?.heroicTitle ?: ""
+
+    fun getSessionRate(): String {
+        return if (actions.equals(ConstantsBase.YES, true))
+            getInfoModelObject()?.session?.sessionRun?.yesRate ?: ""
+        else
+            getInfoModelObject()?.session?.sessionRun?.noRate ?: ""
+    }
+
 }

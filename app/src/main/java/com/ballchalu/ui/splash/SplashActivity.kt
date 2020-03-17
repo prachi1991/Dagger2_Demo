@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.lifecycle.ViewModelProvider
+import com.ballchalu.BuildConfig
+import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivitySplashBinding
 import com.ballchalu.ui.login.container.LoginActivity
@@ -25,6 +27,12 @@ class SplashActivity : BaseActivity() {
         viewModel = viewModelProvider(viewModelFactory)
         binding = ActivitySplashBinding.inflate(layoutInflater).apply {
             lifecycleOwner = this@SplashActivity
+            tvBuildVersion.text = resources.getString(
+                R.string.build,
+                BuildConfig.VERSION_CODE,
+                BuildConfig.ENVIRONMENT
+            )
+
         }
         setContentView(binding.root)
         viewModel.loggedInEvent.observe(this, EventObserver {
@@ -38,7 +46,7 @@ class SplashActivity : BaseActivity() {
 
         })
 
-        val secondsDelayed = 10
+        val secondsDelayed = 3000
         Handler().postDelayed({
             viewModel.checkLogin()
 

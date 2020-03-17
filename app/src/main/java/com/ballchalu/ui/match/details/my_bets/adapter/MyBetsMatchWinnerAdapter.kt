@@ -3,6 +3,8 @@ package com.ballchalu.ui.match.details.my_bets.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ballchalu.databinding.ItemMyBetEndingDigitBinding
+import com.ballchalu.databinding.ItemMyBetEvenOddBinding
 import com.ballchalu.databinding.ItemMyBetMatchWinnerBinding
 import com.ballchalu.databinding.ItemMyBetSessionBinding
 import com.ccpp.shared.domain.contest.UserContest
@@ -21,15 +23,16 @@ class MyBetsMatchWinnerAdapter(var type: String) :
             ConstantsBase.SESSION ->
                 SessionHolder(ItemMyBetSessionBinding.inflate(inflater, parent, false))
             ConstantsBase.EVEN_ODD ->
-                MatchWinnerHolder(ItemMyBetMatchWinnerBinding.inflate(inflater, parent, false))
+                EvenOddHolder(ItemMyBetEvenOddBinding.inflate(inflater, parent, false))
             else ->
-                MatchWinnerHolder(ItemMyBetMatchWinnerBinding.inflate(inflater, parent, false))
+                EndingDigitHolder(ItemMyBetEndingDigitBinding.inflate(inflater, parent, false))
 
         }
 
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
         if (holder is MatchWinnerHolder) holder.setData(list?.get(position))
         if (holder is SessionHolder) holder.setData(list?.get(position))
     }
@@ -48,10 +51,25 @@ class MyBetsMatchWinnerAdapter(var type: String) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(userMyBet: UserMyBet?) {
             binding.model = userMyBet
+
         }
     }
 
     inner class SessionHolder(val binding: ItemMyBetSessionBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun setData(userMyBet: UserMyBet?) {
+            binding.model = userMyBet
+        }
+    }
+
+    inner class EvenOddHolder(val binding: ItemMyBetEvenOddBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun setData(userMyBet: UserMyBet?) {
+            binding.model = userMyBet
+        }
+    }
+
+    inner class EndingDigitHolder(val binding: ItemMyBetEndingDigitBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(userMyBet: UserMyBet?) {
             binding.model = userMyBet
