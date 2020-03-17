@@ -3,10 +3,12 @@ package com.ballchalu.ui.match.details.my_bets.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ballchalu.R
 import com.ballchalu.databinding.ItemMyBetEndingDigitBinding
 import com.ballchalu.databinding.ItemMyBetEvenOddBinding
 import com.ballchalu.databinding.ItemMyBetMatchWinnerBinding
 import com.ballchalu.databinding.ItemMyBetSessionBinding
+import com.ballchalu.utils.StringUtils
 import com.ccpp.shared.domain.contest.UserContest
 import com.ccpp.shared.domain.my_bets.UserMyBet
 import com.ccpp.shared.util.ConstantsBase
@@ -35,6 +37,8 @@ class MyBetsMatchWinnerAdapter(var type: String) :
 
         if (holder is MatchWinnerHolder) holder.setData(list?.get(position))
         if (holder is SessionHolder) holder.setData(list?.get(position))
+        if (holder is EvenOddHolder) holder.setData(list?.get(position))
+        if (holder is EndingDigitHolder) holder.setData(list?.get(position))
     }
 
     fun setItemList(list: ArrayList<UserMyBet>?) {
@@ -51,7 +55,17 @@ class MyBetsMatchWinnerAdapter(var type: String) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(userMyBet: UserMyBet?) {
             binding.model = userMyBet
+            userMyBet?.getInfoModelObject()?.market?.runners?.forEach {
+                if (userMyBet.runnerId == it?.runner?.id.toString()) {
+                    binding.tvRunnerName.text = StringUtils.getString(
+                        R.string.runner_s,
+                        it?.runner?.betfairRunnerName ?: " "
+                    )
+                    binding.tvRate.text =
+                        StringUtils.getString(R.string.rate_s, it?.runner?.back ?: "")
+                }
 
+            }
         }
     }
 
@@ -66,6 +80,17 @@ class MyBetsMatchWinnerAdapter(var type: String) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(userMyBet: UserMyBet?) {
             binding.model = userMyBet
+            userMyBet?.getInfoModelObject()?.market?.runners?.forEach {
+                if (userMyBet.runnerId == it?.runner?.id.toString()) {
+                    binding.tvRuns.text = StringUtils.getString(
+                        R.string.runner_s,
+                        it?.runner?.betfairRunnerName ?: " "
+                    )
+                    binding.tvRate.text =
+                        StringUtils.getString(R.string.rate_s, it?.runner?.back ?: "")
+                }
+
+            }
         }
     }
 
@@ -73,6 +98,17 @@ class MyBetsMatchWinnerAdapter(var type: String) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(userMyBet: UserMyBet?) {
             binding.model = userMyBet
+            userMyBet?.getInfoModelObject()?.market?.runners?.forEach {
+                if (userMyBet.runnerId == it?.runner?.id.toString()) {
+                    binding.tvRuns.text = StringUtils.getString(
+                        R.string.runner_s,
+                        it?.runner?.betfairRunnerName ?: " "
+                    )
+                    binding.tvRate.text =
+                        StringUtils.getString(R.string.rate_s, it?.runner?.back ?: "")
+                }
+
+            }
         }
     }
 

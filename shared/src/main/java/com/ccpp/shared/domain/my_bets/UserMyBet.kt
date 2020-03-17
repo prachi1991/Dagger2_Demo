@@ -60,7 +60,7 @@ data class UserMyBet(
         )
     }
 
-    private fun getInfoModelObject(): Info? {
+    fun getInfoModelObject(): Info? {
         return try {
             if (infoModel == null)
                 this.infoModel = GsonBuilder().create().fromJson(info, Info::class.java)
@@ -84,5 +84,6 @@ data class UserMyBet(
         else
             getInfoModelObject()?.session?.sessionRun?.noRate ?: ""
     }
+
 
 }

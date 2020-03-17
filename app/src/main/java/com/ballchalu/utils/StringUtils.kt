@@ -1,9 +1,14 @@
 package com.ballchalu.utils
 
 import android.widget.TextView
+import com.ballchalu.application.App
 import com.ccpp.shared.util.ConstantsBase
 
 object StringUtils {
+
+    fun getString(id: Int, arg: String): String? {
+        return App.instance.resources.getString(id, arg)
+    }
 
     fun setEvents(event: String, textView: TextView) {
         when (event) {

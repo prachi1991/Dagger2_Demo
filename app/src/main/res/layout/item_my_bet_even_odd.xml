@@ -17,21 +17,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/backgroud_solid_dark_grey"
             android:orientation="vertical"
             android:padding="@dimen/_2sdp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvSessionName"
+                android:id="@+id/tvEvenOddTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_1sdp"
                 android:background="@drawable/backgroud_solid_primary_dark2dp"
                 android:gravity="center"
                 android:padding="@dimen/_8sdp"
-                android:text="@{String.format(@string/rate_s, model.odds.toString())}"
+                android:text="@{String.format(@string/market_name_s, model.infoModel.market.betfairMarketType.toString())}"
                 android:textSize="@dimen/_12ssp"
-                tools:text="Session" />
+                tools:text="Market Name" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,9 +51,9 @@
                     android:background="@drawable/backgroud_solid_primary_dark2dp"
                     android:gravity="center"
                     android:padding="@dimen/_8sdp"
-                    android:text="@{String.format(@string/runner_s, model.odds.toString())}"
+                    android:text="@string/runner_empty"
                     android:textSize="@dimen/_12ssp"
-                    tools:text="@string/run_s" />
+                    tools:text="@string/runner_s" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvRate"
