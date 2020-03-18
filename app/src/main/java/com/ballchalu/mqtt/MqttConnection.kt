@@ -30,7 +30,7 @@ class MqttConnection @Inject constructor(
 
     private fun createConnection() {
         try {
-            mqttAndroidClient?.connect(mqttConnectOptions, null, object : IMqttActionListener {
+            mqttAndroidClient?.connect(mqttConnectOptions, context, object : IMqttActionListener {
                 override fun onSuccess(mqttToken: IMqttToken) {
                     Timber.e("Client connected")
                     val message = MqttMessage("Hello, I am Android Mqtt Client.".toByteArray())
@@ -54,7 +54,7 @@ class MqttConnection @Inject constructor(
                     connectToClient()
                 }
             })
-        } catch (e: MqttException) {
+        } catch (e: Exception) {
             Timber.e(e)
         }
     }

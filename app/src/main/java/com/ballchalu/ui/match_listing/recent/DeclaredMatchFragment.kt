@@ -42,6 +42,9 @@ class DeclaredMatchFragment : BaseFragment(), DeclaredAdapter.OnItemClickListene
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        binding?.pullRefreshLayout?.setOnRefreshListener {
+            getMatchesListing()
+        }
         getMatchesListing()
     }
 
@@ -58,6 +61,7 @@ class DeclaredMatchFragment : BaseFragment(), DeclaredAdapter.OnItemClickListene
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
+            if (!it) binding.pullRefreshLayout.isRefreshing = false
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
