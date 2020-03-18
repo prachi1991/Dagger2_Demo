@@ -65,58 +65,6 @@
                 android:baselineAligned="false"
                 android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:layout_marginEnd="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:background="@drawable/backgroud_solid_light_grey"
-                    android:padding="@dimen/_5sdp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvYesLabel"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:text="@string/yes"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_10ssp" />
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvYesValue"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_toEndOf="@id/tvYesLabel"
-                        android:background="@drawable/backgroud_solid_dark_blue"
-                        android:gravity="center"
-                        android:minWidth="@dimen/_35sdp"
-                        android:paddingTop="@dimen/_3sdp"
-                        android:paddingBottom="@dimen/_3sdp"
-                        android:singleLine="true"
-                        android:text="@{model.yesValue}"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_10ssp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="@{model.yesRate}"
-                        tools:text="0"
-                        android:textColor="@color/text_light_green"
-                        android:textSize="@dimen/_10ssp" />
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -170,6 +118,60 @@
                         android:textColor="@color/text_light_green"
                         android:textSize="@dimen/_10ssp" />
                 </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/backgroud_solid_light_grey"
+                    android:padding="@dimen/_5sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvYesLabel"
+                        fontPath="fonts/Play-Regular.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:text="@string/yes"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvYesValue"
+                        fontPath="fonts/Play-Regular.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/tvYesLabel"
+                        android:background="@drawable/backgroud_solid_dark_blue"
+                        android:gravity="center"
+                        android:minWidth="@dimen/_35sdp"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:paddingBottom="@dimen/_3sdp"
+                        android:singleLine="true"
+                        android:text="@{model.yesValue}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        fontPath="fonts/Play-Regular.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="@{model.yesRate}"
+                        android:textColor="@color/text_light_green"
+                        android:textSize="@dimen/_10ssp"
+                        tools:text="0" />
+                </RelativeLayout>
+
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
