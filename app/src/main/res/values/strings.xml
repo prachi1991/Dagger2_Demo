@@ -116,4 +116,6 @@
     <string name="run_s">Run - %s</string>
     <string name="build">Build Version %d %s</string>
     <string name="runner_empty">Runner -</string>
+    <string name="declared">Declared</string>
+    <string name="nav_declared_match">Declared Match</string>
 </resources>

@@ -9,6 +9,10 @@
         android:title="@string/menu_home" />
 
     <item
+        android:id="@+id/nav_declared"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_declared_match" />
+    <item
         android:id="@+id/nav_chat_room"
         android:icon="@drawable/ic_circle"
         android:title="@string/nav_chat_room" />

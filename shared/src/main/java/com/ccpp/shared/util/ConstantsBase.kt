@@ -55,6 +55,7 @@ object ConstantsBase {
     const val EVENT_TYPE = "cricket"
     const val IN_PLAY = "inplay"
     const val UPCOMING = "upcoming"
+    const val DECLARED = "recent"
 
     //Bet screen
     const val SUCCESS = "success"

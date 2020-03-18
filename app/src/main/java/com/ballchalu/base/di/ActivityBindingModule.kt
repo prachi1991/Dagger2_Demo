@@ -12,6 +12,7 @@ import com.ballchalu.ui.login.signin.SignInModule
 import com.ballchalu.ui.login.signup.SignUpModule
 import com.ballchalu.ui.match.details.MatchDetailsModule
 import com.ballchalu.ui.match_listing.MatchListingModule
+import com.ballchalu.ui.match_listing.recent.DeclaredMatchModule
 import com.ballchalu.ui.navigation.NavigationActivity
 import com.ballchalu.ui.navigation.NavigationModule
 import com.ballchalu.ui.splash.SplashActivity
@@ -64,6 +65,7 @@ abstract class ActivityBindingModule {
             MatchListingModule::class,
             CreateBetModule::class,
             WinnerModule::class,
+            DeclaredMatchModule::class,
             HowToPlayModule::class
         ]
     )

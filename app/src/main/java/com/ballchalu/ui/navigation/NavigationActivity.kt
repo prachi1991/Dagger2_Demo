@@ -42,11 +42,8 @@ class NavigationActivity : BaseActivity() {
 
         binding.navView.apply {
             menu.findItem(R.id.nav_logout).apply {
-
                 setOnMenuItemClickListener {
-
                     openLogoutDialog()
-
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
                     true
                 }
@@ -61,6 +58,13 @@ class NavigationActivity : BaseActivity() {
             menu.findItem(R.id.nav_bc_coins).apply {
                 setOnMenuItemClickListener {
                     navController.navigate(R.id.nav_bc_coins)
+                    toggleDrawer()
+                    true
+                }
+            }
+            menu.findItem(R.id.nav_declared).apply {
+                setOnMenuItemClickListener {
+                    navController.navigate(R.id.nav_declared)
                     toggleDrawer()
                     true
                 }
