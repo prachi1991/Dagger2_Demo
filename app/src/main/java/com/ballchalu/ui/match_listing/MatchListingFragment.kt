@@ -44,6 +44,9 @@ class MatchListingFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemCli
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        binding.pullRefreshLayout.setOnRefreshListener {
+            getMatchesListing()
+        }
         getMatchesListing()
     }
 
@@ -73,6 +76,7 @@ class MatchListingFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemCli
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
+            if (!it) binding.pullRefreshLayout.isRefreshing = false
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
