@@ -1,21 +1,15 @@
 package com.ballchalu.ui.winners
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-
-import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
-import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.databinding.FragmentWinnersBinding
-import com.ballchalu.ui.contest.ContestViewModel
-import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ballchalu.ui.winners.adapter.WinnersAdapter
-import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -24,7 +18,7 @@ import javax.inject.Inject
  */
 class WinnersFragment : BaseFragment() {
 
-    private lateinit var binding:FragmentWinnersBinding
+    private lateinit var binding: FragmentWinnersBinding
 
     private var winnAdapter: WinnersAdapter? = null
     @Inject

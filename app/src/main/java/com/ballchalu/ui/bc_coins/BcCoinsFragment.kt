@@ -1,19 +1,14 @@
 package com.ballchalu.ui.bc_coins
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-
-import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentBcCoinsBinding
-import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.bc_coins.adapter.BcCoinAdapter
-import com.ballchalu.ui.contest.ContestViewModel
-import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 

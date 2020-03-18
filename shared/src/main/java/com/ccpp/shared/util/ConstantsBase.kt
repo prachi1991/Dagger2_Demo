@@ -46,6 +46,9 @@ object ConstantsBase {
     const val EVEN = "Even"
     const val ODD = "Odd"
 
+    //Contest
+    const val WINNER = "Winner"
+
 
     const val SESSION = "session"
     const val EVEN_ODD = "even_odd"
@@ -56,6 +59,7 @@ object ConstantsBase {
     const val IN_PLAY = "inplay"
     const val UPCOMING = "upcoming"
     const val DECLARED = "recent"
+    const val KEY_DECLARED = "is_declared"
 
     //Bet screen
     const val SUCCESS = "success"

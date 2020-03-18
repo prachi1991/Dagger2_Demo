@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentDeclaredMatchBinding
 import com.ballchalu.ui.match_listing.adapter.DeclaredAdapter
@@ -66,5 +68,10 @@ class DeclaredMatchFragment : BaseFragment(), DeclaredAdapter.OnItemClickListene
     }
 
     override fun onMatchClicked(matchListing: MatchListing) {
+        val bundle = Bundle().apply {
+            putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
+            putBoolean(ConstantsBase.KEY_DECLARED, true)
+        }
+        findNavController().navigate(R.id.nav_contest, bundle)
     }
 }

@@ -9,8 +9,6 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONObject;
 
-import timber.log.Timber;
-
 /**
  * Handles call backs from the MQTT Client
  */
@@ -50,7 +48,6 @@ public class MqttCallbackHandler implements MqttCallback {
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-        Timber.e("Send Broadcast is called for heroic_commentary updates");
 
         //create arguments to format message arrived notifcation string
         String[] args = new String[2];
@@ -69,12 +66,10 @@ public class MqttCallbackHandler implements MqttCallback {
 
             refreshIntent.setAction("Odds_Updates");
             refreshIntent.putExtra("odds", args[0]);
-            Timber.e("Send Broadcast is called for heroic_commentary updates");
 
         } else {
             refreshIntent.setAction("Action_Pubnub");
             refreshIntent.putExtra("PubnubMsg", args[0]);
-            Timber.e("Send Broadcast is called for score/odds updates");
 
         }
 

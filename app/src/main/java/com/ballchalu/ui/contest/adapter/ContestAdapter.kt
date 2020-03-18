@@ -9,9 +9,12 @@ import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.util.ConstantsBase
 
 
-class ContestAdapter(private var onItemClickListener: OnItemClickListener?) :
+class ContestAdapter(
+    private var onItemClickListener: OnItemClickListener?,
+    private var declared: Boolean? = false
+) :
     RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
-    private var list: ArrayList<Contest>? = null
+    private var list: List<Contest>? = null
     private var isMyContest: Boolean = false
 
     interface OnItemClickListener {
@@ -34,7 +37,7 @@ class ContestAdapter(private var onItemClickListener: OnItemClickListener?) :
         holder.setData(list?.get(position), position)
     }
 
-    fun setItemList(list: ArrayList<Contest>?, status: Boolean = false) {
+    fun setItemList(list: List<Contest>?, status: Boolean = false) {
         isMyContest = status
         this.list = list
         notifyDataSetChanged()
@@ -50,43 +53,47 @@ class ContestAdapter(private var onItemClickListener: OnItemClickListener?) :
 
         fun setData(contest: Contest?, position: Int) {
             with(binding) {
-                binding.contest = contest
-                if (contest?.isParticipated == false && !isMyContest) {
-                    binding.tvPlayNow.visibility = View.VISIBLE
-                    binding.tvPlayNow.text = ConstantsBase.buy_now_key
-                } else if (isMyContest) {
-                    binding.tvPlayNow.visibility = View.VISIBLE
-                    binding.tvPlayNow.text = ConstantsBase.play_now_key
-                } else {
-                    binding.tvPlayNow.visibility = View.GONE
-                }
-            }
-
-            binding.tvPlayNow.setOnClickListener {
-                if (!isMyContest && binding.tvPlayNow.text == ConstantsBase.buy_now_key) {
-                    binding.tvPlayNow.visibility = View.GONE
-                    contest?.let {
-                        onItemClickListener?.onBuyNowClicked(contest)
+                this.contest = contest
+                if (declared == false) {
+                    if (contest?.isParticipated == false && !isMyContest) {
+                        tvPlayNow.visibility = View.VISIBLE
+                        tvPlayNow.text = ConstantsBase.buy_now_key
+                    } else if (isMyContest) {
+                        tvPlayNow.visibility = View.VISIBLE
+                        tvPlayNow.text = ConstantsBase.play_now_key
+                    } else {
+                        tvPlayNow.visibility = View.GONE
                     }
 
-                } else if (binding.tvPlayNow.text == ConstantsBase.play_now_key) {
-                    contest?.let {
-                        onItemClickListener?.onPlayNowClicked(contest)
+                    tvPlayNow.setOnClickListener {
+                        if (!isMyContest && tvPlayNow.text == ConstantsBase.buy_now_key) {
+                            tvPlayNow.visibility = View.GONE
+                            contest?.let {
+                                onItemClickListener?.onBuyNowClicked(contest)
+                            }
+
+                        } else if (binding.tvPlayNow.text == ConstantsBase.play_now_key) {
+                            contest?.let {
+                                onItemClickListener?.onPlayNowClicked(contest)
+                            }
+                        }
                     }
-                }
+                } else
+                    tvPlayNow.visibility = View.GONE
 
+
+                val spotFilled =
+                    contest?.availableSpots?.toInt()?.let { (contest.spots)?.minus(it) }
+                val spot = contest?.spots
+                val div: Float = spot?.toFloat()?.let { spotFilled?.toFloat()?.div(it) } ?: 0f
+                val percentage = div * 100
+                progressBar.progress = percentage.toInt()
             }
-
-            val spotFilled = contest?.availableSpots?.toInt()?.let { (contest.spots)?.minus(it) }
-            val spot = contest?.spots
-            val div: Float = spot?.toFloat()?.let { spotFilled?.toFloat()?.div(it) } ?: 0f
-            val percentage = div * 100
-            binding.progressBar.progress = percentage.toInt()
         }
     }
 
     fun clear() {
-        list?.clear()
+        list = null
         notifyDataSetChanged()
     }
 

@@ -9,7 +9,6 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.ContestViewModel
 import com.ballchalu.ui.contest.adapter.ContestAdapter
-import com.ballchalu.ui.dialog.NotificationDialog
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListing
 import com.ccpp.shared.domain.contest.Contest
@@ -27,8 +26,6 @@ class ContestFragment : BaseFragment() {
 
     private var allContestList: ArrayList<Contest>? = null
 
-    lateinit var notificationDialog: NotificationDialog
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +37,7 @@ class ContestFragment : BaseFragment() {
         }
         arguments?.let {
             viewModel.matchItem = it.getSerializable(ConstantsBase.KEY_MATCH_ITEM) as MatchListing?
+            viewModel.isDeclared = it.getBoolean(ConstantsBase.KEY_DECLARED, false)
         }
 
         return binding.root
@@ -51,12 +49,17 @@ class ContestFragment : BaseFragment() {
 
         viewModel.matchContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             contestAdapter?.clear()
-            allContestList?.clear()
-            it.contests?.forEach {
-                if (it.availableSpots ?: 0 > 0)
-                    allContestList?.add(it)
+
+            if (viewModel.isDeclared)
+                contestAdapter?.setItemList(it.contests)
+            else {
+                allContestList?.clear()
+                it.contests?.forEach {
+                    if (it.availableSpots ?: 0 > 0)
+                        allContestList?.add(it)
+                }
+                contestAdapter?.setItemList(allContestList)
             }
-            contestAdapter?.setItemList(allContestList)
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
@@ -80,7 +83,7 @@ class ContestFragment : BaseFragment() {
             override fun onPlayNowClicked(contestModel: Contest) {
 
             }
-        })
+        }, viewModel.isDeclared)
         binding.rvContest.adapter = contestAdapter
     }
 

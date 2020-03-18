@@ -3,6 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,9 +27,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
                     android:layout_toLeftOf="@+id/tvTime"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:text="IND_Demo1 VS PAK_DEMO2"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10ssp" />
@@ -50,56 +51,6 @@
                     android:textSize="@dimen/_10ssp" />
             </RelativeLayout>
 
-            <RadioGroup
-                android:id="@+id/rbGroup"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2">
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbAllContest"
-                    fontPath="fonts/Play-Regular.ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:button="@null"
-                    android:checked="true"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingRight="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:text="@string/all_contest"
-                    android:textColor="@color/selector_white_grey"
-                    android:textSize="@dimen/_10ssp" />
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    fontPath="fonts/Play-Regular.ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:button="@null"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:text="|"
-                    android:textColor="@color/selector_white_grey"
-                    android:textSize="@dimen/_10ssp" />
-
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbMyContest"
-                    fontPath="fonts/Play-Regular.ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingRight="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:text="@string/my_contest"
-                    android:textColor="@color/selector_white_grey"
-                    android:textSize="@dimen/_10ssp" />
-            </RadioGroup>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,32 +58,22 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/backgroud_solid_primary">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tablayout"
-                android:layout_width="wrap_content"
-                app:tabIndicatorHeight="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:tabMode="auto" />
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tablayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="auto" />
 
             </LinearLayout>
 
-
-            <LinearLayout
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:context=".ui.home.HomeFragment"
-                android:orientation="vertical"
-                >
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewpager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    />
-
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -149,7 +90,6 @@
             tools:visibility="visible" />
 
     </RelativeLayout>
-
 
 
 </layout>

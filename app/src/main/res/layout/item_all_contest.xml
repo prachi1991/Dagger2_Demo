@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="contest"
             type="com.ccpp.shared.domain.contest.Contest" />
@@ -24,9 +25,9 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
                 android:layout_margin="@dimen/_3sdp"
-                android:background="@drawable/backgroud_solid_dark_grey"
-                android:layout_height="@dimen/_25sdp">
+                android:background="@drawable/backgroud_solid_dark_grey">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     fontPath="fonts/Play-Bold.ttf"

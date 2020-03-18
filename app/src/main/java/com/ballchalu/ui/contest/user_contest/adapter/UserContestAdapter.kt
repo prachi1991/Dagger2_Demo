@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemAllContestBinding
-import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.domain.contest.UserContest
 import com.ccpp.shared.util.ConstantsBase
 
 
-class UserContestAdapter(private var onItemClickListener: OnItemClickListener?) :
+class UserContestAdapter(
+    private var onItemClickListener: OnItemClickListener?,
+    private var isDeclared: Boolean
+) :
     RecyclerView.Adapter<UserContestAdapter.ViewHolder>() {
     private var list: ArrayList<UserContest>? = null
     private var isMyContest: Boolean = false
@@ -50,32 +52,34 @@ class UserContestAdapter(private var onItemClickListener: OnItemClickListener?) 
 
         fun setData(userContest: UserContest?, position: Int) {
             with(binding) {
-                binding.contest = userContest?.contest
-                if (userContest?.contest?.isParticipated == false && !isMyContest) {
-                    binding.tvPlayNow.visibility = View.VISIBLE
-                    binding.tvPlayNow.text = ConstantsBase.buy_now_key
-                } else if (isMyContest) {
-                    binding.tvPlayNow.visibility = View.VISIBLE
-                    binding.tvPlayNow.text = ConstantsBase.play_now_key
+                this.contest = userContest?.contest
+                if (userContest?.contest?.isParticipated == false && !isMyContest && !isDeclared) {
+                    tvPlayNow.visibility = View.VISIBLE
+                    tvPlayNow.text = ConstantsBase.buy_now_key
+                } else if (isMyContest && !isDeclared) {
+                    tvPlayNow.visibility = View.VISIBLE
+                    tvPlayNow.text = ConstantsBase.play_now_key
+                } else if (isDeclared) {
+                    tvPlayNow.text = ConstantsBase.WINNER
+                    tvPlayNow.visibility = View.VISIBLE
                 } else {
-                    binding.tvPlayNow.visibility = View.GONE
+                    tvPlayNow.visibility = View.GONE
                 }
-            }
 
-            binding.tvPlayNow.setOnClickListener {
-                if (binding.tvPlayNow.text == ConstantsBase.play_now_key) {
+                tvPlayNow.setOnClickListener {
                     userContest?.contest?.let {
                         onItemClickListener?.onPlayNowClicked(userContest)
                     }
                 }
 
+                val spotFilled = userContest?.contest?.availableSpots?.let {
+                    (userContest.contest?.spots)?.minus(it)
+                }
+                val spot = userContest?.contest?.spots
+                val div: Float = spot?.toFloat()?.let { spotFilled?.toFloat()?.div(it) } ?: 0f
+                val percentage = div * 100
+                progressBar.progress = percentage.toInt()
             }
-
-            val spotFilled = userContest?.contest?.availableSpots?.toInt()?.let { (userContest.contest!!.spots)?.minus(it) }
-            val spot = userContest?.contest?.spots
-            val div: Float = spot?.toFloat()?.let { spotFilled?.toFloat()?.div(it) } ?: 0f
-            val percentage = div * 100
-            binding.progressBar.progress = percentage.toInt()
         }
     }
 
