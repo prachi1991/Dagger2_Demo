@@ -147,5 +147,16 @@ class NetworkModule {
             baseRepository
         )
 
+    @Provides
+    @Singleton
+    fun provideWinnerRepository(
+        apiService: ApiService,
+        baseRepository: BaseRepository
+    ): WinnerRepository =
+        WinnerRepository(
+            apiService,
+            baseRepository
+        )
+
 
 }

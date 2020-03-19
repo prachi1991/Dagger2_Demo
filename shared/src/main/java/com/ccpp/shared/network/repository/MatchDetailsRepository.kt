@@ -15,10 +15,10 @@ class MatchDetailsRepository @Inject constructor(
 ) {
 
 
-    suspend fun callMatchDetailsAsync(matchId: Int): Results<MatchDetailsRes> =
+    suspend fun callMatchDetailsAsync(providerId: Int): Results<MatchDetailsRes> =
         baseRepository.safeApiCall(
             call = {
-                service.callMatchDetailsAsync(matchId).await()
+                service.callMatchDetailsAsync(providerId).await()
             },
             errorMessage = "Error occurred"
         )

@@ -1,19 +1,15 @@
 package com.ballchalu.ui.winners.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ballchalu.databinding.ItemAllContestBinding
 import com.ballchalu.databinding.ItemWinnersBinding
-import com.ccpp.shared.domain.contest.Contest
-import com.ccpp.shared.domain.winner.WinnerRes
-import com.ccpp.shared.util.ConstantsBase
+import com.ccpp.shared.domain.winner.RanksItem
 
 
-class WinnersAdapter(val arrayList: ArrayList<WinnerRes>) :
+class WinnersAdapter :
     RecyclerView.Adapter<WinnersAdapter.ViewHolder>() {
-
+    private var arrayList: ArrayList<RanksItem> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemWinnersBinding.inflate(
@@ -25,28 +21,31 @@ class WinnersAdapter(val arrayList: ArrayList<WinnerRes>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.setData(position,arrayList[position])
+        arrayList[position].let { holder.setData(it) }
     }
 
-
+    fun setItemList(arrayList: List<RanksItem>) {
+        this.arrayList.addAll(arrayList)
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int {
-        return arrayList.size?:0
+        return arrayList.size ?: 0
     }
 
 
     inner class ViewHolder(val binding: ItemWinnersBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(position: Int,arrayList: WinnerRes) {
-            binding.position.text = arrayList.position.toString()
-            binding.name.text = arrayList.winnerName.toString()
-            binding.price.text = arrayList.winnerPrice.toString()
+        fun setData(item: RanksItem) {
+            binding.position.text = item.rank.toString()
+            binding.name.text = item.userName.toString()
+            binding.price.text = item.wonCoins.toString()
         }
     }
 
     fun clear() {
-//        list?.clear()
-//        notifyDataSetChanged()
+        arrayList?.clear()
+        notifyDataSetChanged()
     }
 
 }

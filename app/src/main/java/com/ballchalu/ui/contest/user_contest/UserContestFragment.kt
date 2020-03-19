@@ -82,6 +82,7 @@ class UserContestFragment : BaseFragment() {
                     )
                     putInt(ConstantsBase.KEY_CONTESTS_ID, contestModel.id ?: 0)
                     putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, contestModel.contest?.id ?: 0)
+                    putInt(ConstantsBase.KEY_MATCH_ID, contestModel.contest?.match?.id ?: 0)
                     putBoolean(ConstantsBase.KEY_DECLARED, viewModel.isDeclared)
                 }
                 findNavController().navigate(R.id.nav_home_match_details, bundle)

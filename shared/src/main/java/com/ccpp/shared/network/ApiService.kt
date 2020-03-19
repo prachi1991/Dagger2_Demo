@@ -40,7 +40,8 @@ open class ApiService @Inject constructor(
 
     fun callForgetPasswordAsync(email: String) = apiClient.callForgetPasswordAsync(email)
 
-    fun callMatchDetailsAsync(matchId: Int) = matchDetailsApiClient.callMatchDetailsAsync(matchId)
+    fun callMatchDetailsAsync(providerId: Int) =
+        matchDetailsApiClient.callMatchDetailsAsync(providerId)
 
     fun callMatchContestAsync(matchId: String) = apiClient.callMatchContestAsync(matchId)
 
@@ -50,8 +51,11 @@ open class ApiService @Inject constructor(
 
     fun callPositionDetailsAsync(contestId: Int) = apiClient.callPositionDetailsAsync(contestId)
 
-    fun callMyBetAsync(matchId: String) = apiClient.callMyBetAsync(matchId)
+    fun callMyBetAsync(providerId: String) = apiClient.callMyBetAsync(providerId)
 
     fun callMatchesListingAsync(event_type: String,play_status: String) = apiClient.callMatchesListingAsync(event_type,play_status)
+
+    fun callWinnerListingAsync(matchId: Int, contestId: Int, page: Int) =
+        apiClient.callWinnerListingAsync(contestId, matchId, page)
 
 }

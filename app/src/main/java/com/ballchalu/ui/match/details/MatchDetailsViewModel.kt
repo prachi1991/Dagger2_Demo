@@ -3,6 +3,7 @@ package com.ballchalu.ui.match.details
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
 import com.ballchalu.mqtt.MqttMarket
 import com.ballchalu.ui.match.details.my_bets.MyBetsFragment
+import com.ballchalu.ui.winners.WinnersFragment
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
@@ -37,7 +39,22 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
-    val myBetFragment: MyBetsFragment by lazy { MyBetsFragment() }
+    val myBetFragment: MyBetsFragment by lazy {
+        MyBetsFragment().apply {
+            arguments = Bundle().apply {
+                putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, contestsMatchId)
+            }
+        }
+    }
+    val winnersFragment: WinnersFragment by lazy {
+        WinnersFragment().apply {
+            arguments = Bundle().apply {
+                putInt(ConstantsBase.KEY_MATCH_ID, matchId)
+                putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, contestsMatchId)
+            }
+        }
+    }
+
     var evenMarket: RunnersItem? = RunnersItem()
     var oddMarket: RunnersItem? = RunnersItem()
     var bwlTeamRunner: Runner? = null
@@ -49,9 +66,11 @@ class MatchDetailsViewModel @Inject constructor(
     var batTeamRunName = ""
     var bwlTeamRunName = ""
 
+    var providerId: Int = 0
     var matchId: Int = 0
     var contestsId: Int = 0
     var contestsMatchId: Int = 0
+    var isDeclared: Boolean = false
 
     //____________________________________variables__________________________//
 
@@ -61,7 +80,7 @@ class MatchDetailsViewModel @Inject constructor(
     fun callMatchDetailsAsync() {
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = loginRepository.callMatchDetailsAsync(matchId)) {
+            when (val result = loginRepository.callMatchDetailsAsync(providerId)) {
                 is Results.Success -> handleSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }

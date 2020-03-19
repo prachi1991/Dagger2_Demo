@@ -31,7 +31,7 @@ class MyBetsFragment : BaseFragment() {
 
         }
         arguments?.let {
-            viewModel.matchId = it.getInt(ConstantsBase.KEY_CONTESTS_MATCH_ID)
+            viewModel.providerId = it.getInt(ConstantsBase.KEY_CONTESTS_MATCH_ID)
         }
         return binding.root
     }

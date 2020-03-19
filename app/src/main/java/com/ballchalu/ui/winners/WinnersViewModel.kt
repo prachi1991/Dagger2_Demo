@@ -1,25 +1,38 @@
 package com.ballchalu.ui.winners
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.ballchalu.base.BaseViewModel
+import com.ccpp.shared.core.result.Event
+import com.ccpp.shared.core.result.Results
+import com.ccpp.shared.domain.winner.RanksItem
 import com.ccpp.shared.domain.winner.WinnerRes
+import com.ccpp.shared.network.repository.WinnerRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class WinnersViewModel @Inject constructor(
+class WinnersViewModel @Inject constructor(val repository: WinnerRepository) : BaseViewModel() {
 
-): BaseViewModel()
-{
+    private val _winnerListObserver = MutableLiveData<Event<List<RanksItem>?>>()
+    val winnerListObserver: LiveData<Event<List<RanksItem>?>> = _winnerListObserver
+    var matchId: Int = 0
+    var contestId: Int = 0
+    var page: Int = 0
 
-    fun winnerList():ArrayList<WinnerRes>
-    {
-        val arrayList:ArrayList<WinnerRes> = arrayListOf()
-
-        arrayList.add(WinnerRes("1st","Jhon Wick","2,75,000"))
-        arrayList.add(WinnerRes("2nd","Gram Cracker","1,00,000"))
-        arrayList.add(WinnerRes("3rd","Pat Agonia","75,000"))
-        arrayList.add(WinnerRes("4th","Matt Innae","50,000"))
-        arrayList.add(WinnerRes("5th","Sam Parker","10,000"))
-
-        return arrayList
+    fun calWinnerAsync() {
+        loading.postValue(Event(true))
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val result = repository.callWinnerListing(matchId, contestId, page)) {
+                is Results.Success -> handleSuccess(result.data)
+                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+            }
+            loading.postValue(Event(false))
+        }
     }
 
+    private fun handleSuccess(data: WinnerRes) {
+        _winnerListObserver.postValue(Event(data.ranks))
+    }
 }

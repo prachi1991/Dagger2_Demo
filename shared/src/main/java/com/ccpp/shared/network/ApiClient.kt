@@ -9,8 +9,9 @@ import com.ccpp.shared.domain.create_bet.CreateBetRes
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
 import com.ccpp.shared.domain.match_details.MatchDetailsRes
-import com.ccpp.shared.domain.position.PositionRes
 import com.ccpp.shared.domain.my_bets.MyBetsRes
+import com.ccpp.shared.domain.position.PositionRes
+import com.ccpp.shared.domain.winner.WinnerRes
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -35,15 +36,15 @@ internal interface ApiClient {
     fun callSignUpAsync(@Body signUpReq: SignUpReq): Deferred<Response<LoginRes>>
 
     @GET("api/v1/matches")
-    fun callMatchesListingAsync(@Query ("event_type") event_type: String,@Query ("play_status") play_status: String): Deferred<Response<MatchListingRes>>
+    fun callMatchesListingAsync(@Query("event_type") event_type: String, @Query("play_status") play_status: String): Deferred<Response<MatchListingRes>>
 
 
     @GET("api/v1/passwords/forgot")
     fun callForgetPasswordAsync(@QueryMap emailId: String): Deferred<Response<ForgetPassRes>>
 
     //Match detail screen api
-    @GET("api/v1/matches/{matchId}/user_match_show.json?play_status=in_play&event_type=cricket&session_type=simultaneous_open_session")
-    fun callMatchDetailsAsync(@Path("matchId") matchId: Int): Deferred<Response<MatchDetailsRes>>
+    @GET("api/v1/matches/{providerId}/user_match_show.json?play_status=in_play&event_type=cricket&session_type=simultaneous_open_session")
+    fun callMatchDetailsAsync(@Path("providerId") providerId: Int): Deferred<Response<MatchDetailsRes>>
 
     @GET("ballchalu/api/v1/user_contests/{contestId}/positions")
     fun callPositionDetailsAsync(@Path("contestId") contestId: Int): Deferred<Response<PositionRes>>
@@ -69,5 +70,12 @@ internal interface ApiClient {
 
     @GET("ballchalu/api/v1/contests/{contestsId}/user_bets")
     fun callMyBetAsync(@Path("contestsId") contestsId: String): Deferred<Response<MyBetsRes>>
+
+    @GET("ballchalu/api/v1/contests/{contestId}/top_runners")
+    fun callWinnerListingAsync(
+        @Path("contestId") contestId: Int, @Query("match_id") match_id: Int, @Query(
+            "page"
+        ) page: Int
+    ): Deferred<Response<WinnerRes>>
 
 }

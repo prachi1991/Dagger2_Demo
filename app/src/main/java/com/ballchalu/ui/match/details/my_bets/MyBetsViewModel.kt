@@ -18,7 +18,7 @@ import javax.inject.Inject
 class MyBetsViewModel @Inject constructor(
     private val myBetsRepository: MyBetsRepository
 ) : BaseViewModel() {
-    var matchId: Int = 0
+    var providerId: Int = 0
 
     private val _betMatchWinnerObserver = MutableLiveData<Event<ArrayList<UserMyBet>?>>()
     val betMatchWinnerObserver: LiveData<Event<ArrayList<UserMyBet>?>> = _betMatchWinnerObserver
@@ -35,7 +35,7 @@ class MyBetsViewModel @Inject constructor(
     fun callMyBetsDetailsAsync() {
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = myBetsRepository.callMyBetAsync(matchId.toString())) {
+            when (val result = myBetsRepository.callMyBetAsync(providerId.toString())) {
                 is Results.Success -> handleSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
