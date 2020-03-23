@@ -27,6 +27,8 @@ open class ApiService @Inject constructor(
     fun callLoginAsync(query: HashMap<String, String>) =
         apiClient.callLoginAsync(query)
 
+    fun callUserAsync() = apiClient.callUserAsync()
+
     fun callLoginWithSocialAsync(token: String, socialMedia: String, emailId: String) =
         apiClient.callLoginWithSocialAsync(token, socialMedia, emailId)
 

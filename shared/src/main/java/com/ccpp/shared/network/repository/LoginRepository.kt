@@ -5,6 +5,7 @@ import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.LoginRes
 import com.ccpp.shared.domain.SignUpReq
+import com.ccpp.shared.domain.user.UserRes
 import com.ccpp.shared.network.ApiService
 import javax.inject.Inject
 
@@ -26,6 +27,14 @@ class LoginRepository @Inject constructor(
                 sharedPref.token = it.data.access_token
             return it
         }
+
+    suspend fun getUserDetails(): Results<UserRes> =
+        baseRepository.safeApiCall(
+            call = {
+                service.callUserAsync().await()
+            },
+            errorMessage = "Error occurred"
+        )
 
     suspend fun getLoginWithSocial(token: String, socialMedia: String, emailId: String) =
         baseRepository.safeApiCall(

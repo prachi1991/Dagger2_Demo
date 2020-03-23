@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -14,11 +15,15 @@ import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityNavigationBinding
 import com.ballchalu.ui.login.container.LoginActivity
 import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.domain.user.UserRes
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class NavigationActivity : BaseActivity() {
     private lateinit var viewModel: NavigationViewModel
+    @Inject
+    lateinit var sharePref: SharedPreferenceStorage
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var navController: NavController
@@ -39,7 +44,6 @@ class NavigationActivity : BaseActivity() {
     private fun initNavigationDrawer() {
         navController = findNavController(R.id.nav_host_fragment)
         binding.navView.setupWithNavController(navController)
-
         binding.navView.apply {
             menu.findItem(R.id.nav_logout).apply {
                 setOnMenuItemClickListener {
@@ -71,6 +75,13 @@ class NavigationActivity : BaseActivity() {
             }
         }
 
+    }
+
+    private fun setHeaderUi(userRes: UserRes) {
+        val headerView = binding.navView.getHeaderView(0)
+        headerView.findViewById<TextView>(R.id.tvNavEmail).text = userRes.user?.email
+        headerView.findViewById<TextView>(R.id.tvMoneyValue).text =
+            userRes.user?.bc_coins?.toString()
     }
 
     private fun openLogoutDialog() {
@@ -114,6 +125,10 @@ class NavigationActivity : BaseActivity() {
             startActivity(intent)
             finish()
         })
+        viewModel.userDetails.observe(this, EventObserver {
+            setHeaderUi(it)
+        })
+        viewModel.callUserDetails()
     }
 
     private fun toggleDrawer() {
