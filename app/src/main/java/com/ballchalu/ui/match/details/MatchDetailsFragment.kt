@@ -410,7 +410,8 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
     private fun showNetworkError() {
         val cm =
-            activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            activity?.getSystemService(Context.CONNECTIVITY_SERVICE)
+        if (cm !is ConnectivityManager) return
         val activeNetwork = cm.activeNetworkInfo
         val isConnected = activeNetwork != null && activeNetwork.isConnected
         if (!isConnected) {
@@ -449,5 +450,10 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
     override fun onSessionBetSuccess(createSessionBetRes: CreateSessionBetRes?) {
         updateSessionPosition(createSessionBetRes?.sessionPosition.toString())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mqttConnection.connectToClient()
     }
 }
