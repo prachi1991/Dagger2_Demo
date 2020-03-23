@@ -367,7 +367,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvSessionPosition.setTextColor(
                 ColorUtils.getPositionColor(it?.toDouble() ?: 0.0)
             )
-        } catch (e: NumberFormatException) {
+        } catch (e: Exception) {
             Timber.e(e)
         }
     }
