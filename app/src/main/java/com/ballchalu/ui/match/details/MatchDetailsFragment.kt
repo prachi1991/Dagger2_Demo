@@ -185,12 +185,16 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         viewModel.batTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver { runners ->
             binding.tvTeam1Lay.text = if (runners?.canBack == true) runners.back else ""
             binding.tvTeam1Back.text = if (runners?.canLay == true) runners.lay else ""
+            binding.tvTeam1Lay.isClickable = (runners?.canBack == true)
+            binding.tvTeam1Back.isClickable = (runners?.canLay == true)
             viewModel.batTeamRunner = runners
         })
 
         viewModel.bwlTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver { runners ->
             binding.tvTeam2Lay.text = if (runners?.canBack == true) runners.back else ""
             binding.tvTeam2Back.text = if (runners?.canLay == true) runners.lay else ""
+            binding.tvTeam2Lay.isClickable = (runners?.canBack == true)
+            binding.tvTeam2Back.isClickable = (runners?.canLay == true)
             viewModel.bwlTeamRunner = runners
         })
 
@@ -213,14 +217,14 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
             market.runners?.get(0)?.let {
                 it.marketId = market.id
-                binding.tvOddEvenBack1.text =
-                    if (it.canBack && marketStatus) it.B else ""
+                binding.tvOddEvenBack1.text = if (it.canBack && marketStatus) it.B else ""
+                binding.tvOddEvenBack1.isClickable = (it.canBack && marketStatus)
                 viewModel.evenMarket = it
             }
             market.runners?.get(1)?.let {
                 it.marketId = market.id
-                binding.tvOddEvenBack2.text =
-                    if (it.canBack && marketStatus) it.L else ""
+                binding.tvOddEvenBack2.text = if (it.canBack && marketStatus) it.L else ""
+                binding.tvOddEvenBack2.isClickable = (it.canBack && marketStatus)
                 viewModel.evenMarket = it
             }
         })
@@ -310,8 +314,8 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         val marketStatus = market.status?.equals(ConstantsBase.open, true) == true
         binding.tvEvenOddType.text = market.betfairMarketType
         market.runners?.get(0)?.runner?.let {
-            binding.tvOddEvenBack1.text =
-                if (it.canBack && marketStatus) it.back else ""
+            binding.tvOddEvenBack1.text = if (it.canBack && marketStatus) it.back else ""
+            binding.tvOddEvenBack1.isClickable = (it.canBack && marketStatus)
 
             viewModel.evenMarket.let { item ->
                 item?.id = it.id
@@ -321,8 +325,8 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             }
         }
         market.runners?.get(1)?.runner?.let {
-            binding.tvOddEvenBack2.text =
-                if (it.canBack && marketStatus) it.back else ""
+            binding.tvOddEvenBack2.text = if (it.canBack && marketStatus) it.back else ""
+            binding.tvOddEvenBack2.isClickable = (it.canBack && marketStatus)
 
             viewModel.oddMarket.let { item ->
                 item?.id = it.id

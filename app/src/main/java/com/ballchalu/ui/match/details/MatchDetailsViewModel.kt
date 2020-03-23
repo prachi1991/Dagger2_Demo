@@ -427,6 +427,8 @@ class MatchDetailsViewModel @Inject constructor(
 
     fun onMatchWinnerClicked(isLay: Boolean, isTeam1: Boolean) {
         val runner = if (isTeam1) batTeamRunner else bwlTeamRunner
+        val oddValue = if (isLay) runner?.lay else runner?.back
+        if (oddValue.isNullOrEmpty()) return
         _openBetScreenEvent.value = Event(
             BetDetailsBundle(
                 betReq =
@@ -434,7 +436,7 @@ class MatchDetailsViewModel @Inject constructor(
                     matchId = matchId.toString(),
                     oddsType = if (isLay) ConstantsBase.KHAI else ConstantsBase.LAGAI,
                     runnerId = runner?.id,
-                    oddsVal = if (isLay) runner?.lay else runner?.back,
+                    oddsVal = oddValue,
                     marketId = runner?.marketId,
                     heroicMarketType = ConstantsBase.MATCH_WINNER,
                     contestsId = contestsId,
@@ -450,6 +452,8 @@ class MatchDetailsViewModel @Inject constructor(
         isLagai: Boolean,
         yesNoType: String
     ) {
+        val oddVal = if (isLagai) session.sessionRun?.yesRate else session.sessionRun?.noRate
+        if (oddVal.isNullOrEmpty()) return
         _openBetScreenEvent.value = Event(
             BetDetailsBundle(
                 betSessionReq =
@@ -473,6 +477,7 @@ class MatchDetailsViewModel @Inject constructor(
     }
 
     fun onEndingDigitClicked(runner: Runner?) {
+        if (runner?.canBack == false) return
         _openBetScreenEvent.value = Event(
             BetDetailsBundle(
                 betReq =
@@ -492,6 +497,7 @@ class MatchDetailsViewModel @Inject constructor(
 
     fun onEvenOddClicked(isEvenType: Boolean) {
         val market = if (isEvenType) evenMarket else oddMarket
+        if (market?.canBack == false) return
         _openBetScreenEvent.value = Event(
             BetDetailsBundle(
                 betReq =

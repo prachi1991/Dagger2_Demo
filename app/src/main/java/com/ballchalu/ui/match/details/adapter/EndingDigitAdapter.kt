@@ -92,6 +92,8 @@ class EndingDigitAdapter(val listener: OnItemClickListener?) :
                 tvTeam1Back.text =
                     if (runner?.canBack == true && !isSuspend) runner.back ?: "" else ""
 
+                tvTeam1Back.isClickable = (runner?.canBack == true && !isSuspend)
+
                 tvTeam1Back.setOnClickListener {
                     if (!isSuspend)
                         runner?.let { it1 -> listener?.onBackClicked(it1) }
