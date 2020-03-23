@@ -19,7 +19,6 @@ class MqttConnection @Inject constructor(
     val mqttAndroidClient: MqttAndroidClient?,
     private val mqttConnectOptions: MqttConnectOptions?
 ) : LifecycleObserver {
-    private var client: MqttAndroidClient? = null
     private var appStatus = true
 
     fun connectToClient() {
@@ -37,8 +36,8 @@ class MqttConnection @Inject constructor(
                     message.qos = 2
                     message.isRetained = false
                     try {
-                        mqttAndroidClient.subscribe(Companion.topic, 0)
-                        context.sendBroadcast(Intent(Companion.mqttAction))
+                        mqttAndroidClient.subscribe(topic, 0)
+                        context.sendBroadcast(Intent(mqttAction))
                     } catch (e: MqttException) {
                         Timber.e(e)
                     }
