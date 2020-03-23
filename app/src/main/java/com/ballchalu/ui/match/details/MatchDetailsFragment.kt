@@ -231,11 +231,11 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
         viewModel.positionMatchWinnerObserver.observe(viewLifecycleOwner, EventObserver {
             binding.tvMatchWinnerPosition1.apply {
-                text = it?.batTeamRunner?.runner()
+                text = it?.batTeamRunner?.runner() ?: ""
                 setTextColor(it?.batTeamRunner?.color() ?: Color.GREEN)
             }
             binding.tvMatchWinnerPosition2.apply {
-                text = it?.bwlTeamRunner?.runner()
+                text = it?.bwlTeamRunner?.runner() ?: ""
                 setTextColor(it?.bwlTeamRunner?.color() ?: Color.GREEN)
             }
         }

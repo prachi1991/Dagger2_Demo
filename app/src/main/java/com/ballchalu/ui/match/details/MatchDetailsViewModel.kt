@@ -441,7 +441,7 @@ class MatchDetailsViewModel @Inject constructor(
                     marketId = runner?.marketId,
                     heroicMarketType = ConstantsBase.MATCH_WINNER,
                     contestsId = contestsId,
-                    evenTypeTitle = if (isTeam1) batTeamRunName else bwlTeamRunName
+                    evenTypeTitle = runner?.betfairRunnerName
                 )
             )
         )
