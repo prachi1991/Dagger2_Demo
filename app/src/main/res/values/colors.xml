@@ -36,5 +36,7 @@
 
     <color name="light_blue1">#3e4765</color>
 
+    <color name="light_white_color">#888888</color>
+
 
 </resources>

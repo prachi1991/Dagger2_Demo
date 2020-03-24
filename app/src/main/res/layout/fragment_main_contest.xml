@@ -32,7 +32,7 @@
                     android:maxLines="1"
                     android:text="IND_Demo1 VS PAK_DEMO2"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_12ssp" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -48,7 +48,7 @@
                     android:gravity="center_vertical"
                     android:text="00:00:00"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_12ssp" />
             </RelativeLayout>
 
             <LinearLayout

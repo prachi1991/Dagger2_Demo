@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -20,7 +23,7 @@ import com.ccpp.shared.util.ConstantsBase
 import java.util.*
 import javax.inject.Inject
 
-class MainContestFragment : BaseFragment() {
+class MainContestFragment : BaseFragment(), ContestCountListener {
     private var binding: FragmentMainContestBinding? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -34,7 +37,14 @@ class MainContestFragment : BaseFragment() {
         binding = FragmentMainContestBinding.inflate(inflater, container, false)
 
         setupViewPager()
+        initTabLayout()
 
+        binding?.tvMatchName?.text = matchListing?.title
+
+        return binding?.root
+    }
+
+    fun initTabLayout() {
         val headerView =
             (activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
                 .inflate(R.layout.custom_contest_tab, null, false)
@@ -45,11 +55,7 @@ class MainContestFragment : BaseFragment() {
         binding?.tablayout?.getTabAt(0)?.customView = linearLayoutOne
         binding?.tablayout?.getTabAt(1)?.customView = linearLayout2
 
-        binding?.tvMatchName?.text = matchListing?.title
-
-        return binding?.root
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,12 +72,14 @@ class MainContestFragment : BaseFragment() {
         binding?.tablayout?.setupWithViewPager(binding?.viewpager)
         val adapter = ViewPagerAdapter(childFragmentManager)
         adapter.addFragment(ContestFragment().also {
+            it.setListeners(this)
             it.arguments = Bundle().apply {
                 putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
                 putBoolean(ConstantsBase.KEY_DECLARED, isDeclared)
             }
         }, "ONE")
         adapter.addFragment(UserContestFragment().also {
+            it.setListeners(this)
             it.arguments = Bundle().apply {
                 putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
                 putBoolean(ConstantsBase.KEY_DECLARED, isDeclared)
@@ -102,6 +110,14 @@ class MainContestFragment : BaseFragment() {
         override fun getPageTitle(position: Int): CharSequence {
             return mFragmentTitleList[position]
         }
+    }
+
+    override fun onAllContest(count: Int) {
+        binding?.tablayout?.get(0)?.findViewById<TextView>(R.id.tvCountAll)?.text = count.toString()
+    }
+
+    override fun onUserContest(count: Int) {
+        binding?.tablayout?.get(0)?.findViewById<TextView>(R.id.tvCountMy)?.text = count.toString()
     }
 
 }

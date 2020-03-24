@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
+import com.ballchalu.ui.contest.ContestCountListener
 import com.ballchalu.ui.contest.ContestViewModel
 import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ccpp.shared.core.result.EventObserver
@@ -17,6 +18,7 @@ import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class ContestFragment : BaseFragment() {
+    private var listener: ContestCountListener? = null
     private var contestAdapter: ContestAdapter? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -49,7 +51,7 @@ class ContestFragment : BaseFragment() {
 
         viewModel.matchContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             contestAdapter?.clear()
-
+            it.contests?.size?.let { it1 -> listener?.onAllContest(it1) }
             if (viewModel.isDeclared)
                 contestAdapter?.setItemList(it.contests)
             else {
@@ -85,6 +87,10 @@ class ContestFragment : BaseFragment() {
             }
         }, viewModel.isDeclared)
         binding.rvContest.adapter = contestAdapter
+    }
+
+    fun setListeners(onCountListener: ContestCountListener) {
+        this.listener = onCountListener
     }
 
 }

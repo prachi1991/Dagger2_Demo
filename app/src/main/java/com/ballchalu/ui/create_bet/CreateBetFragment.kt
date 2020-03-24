@@ -1,5 +1,6 @@
 package com.ballchalu.ui.create_bet
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -8,11 +9,11 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.R
-import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.FragmentCreateBetBinding
 import com.ballchalu.ui.create_bet.adapter.InPlayBetMatchListAdapter
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
@@ -67,7 +68,6 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
             }
 
             btnPlaceBet.setOnClickListener {
-                (activity as BaseActivity).hideSoftKeyBoard()
                 viewModel.placeBet(tvCount.text.toString())
             }
 
@@ -210,5 +210,11 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
     interface OnBetResponseSuccessListener {
         fun onBetSuccess(createBetRes: CreateBetRes)
         fun onSessionBetSuccess(createSessionBetRes: CreateSessionBetRes?)
+    }
+
+    fun hideKeyboard() {
+        val imm =
+            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.hideSoftInputFromWindow(dialog?.currentFocus?.windowToken, 0)
     }
 }

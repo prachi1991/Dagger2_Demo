@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
+import com.ballchalu.ui.contest.ContestCountListener
 import com.ballchalu.ui.contest.ContestViewModel
+import com.ballchalu.ui.contest.MainContestFragment
 import com.ballchalu.ui.contest.user_contest.adapter.UserContestAdapter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListing
@@ -20,6 +22,7 @@ import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class UserContestFragment : BaseFragment() {
+    private var listener: ContestCountListener? = null
     private var contestAdapter: UserContestAdapter? = null
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -53,6 +56,7 @@ class UserContestFragment : BaseFragment() {
 
         viewModel.matchUserContestResult.observe(viewLifecycleOwner, EventObserver {
             contestAdapter?.clear()
+            it.contests?.size?.let { it1 -> listener?.onUserContest(it1) }
             userContestList = it.contests as ArrayList<UserContest>?
             contestAdapter?.setItemList(userContestList, true)
         })
@@ -64,6 +68,7 @@ class UserContestFragment : BaseFragment() {
         viewModel.createContestResult.observe(viewLifecycleOwner, EventObserver {
             Toast.makeText(context, "You Successfully Buy Contest", Toast.LENGTH_SHORT).show()
         })
+        viewModel.getUserMatchesContest()
 
     }
 
@@ -89,6 +94,10 @@ class UserContestFragment : BaseFragment() {
             }
         }, viewModel.isDeclared)
         binding.rvContest.adapter = contestAdapter
+    }
+
+    fun setListeners(onCountListener: ContestCountListener) {
+        this.listener = onCountListener
     }
 
 }
