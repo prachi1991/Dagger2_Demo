@@ -45,7 +45,7 @@ open class ApiService @Inject constructor(
     fun callMatchDetailsAsync(providerId: Int) =
         matchDetailsApiClient.callMatchDetailsAsync(providerId)
 
-    fun callMatchContestAsync(matchId: String) = apiClient.callMatchContestAsync(matchId)
+    fun callBcCoinsLedgersAsync(page: Int) = apiClient.callBcCoinsLedgersAsync(page)
 
     fun callUserMatchContestAsync(matchId: String) = apiClient.callUserMatchContestAsync(matchId)
 

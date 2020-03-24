@@ -1,6 +1,7 @@
 package com.ccpp.shared.network
 
 import com.ccpp.shared.domain.*
+import com.ccpp.shared.domain.bccoins.BcCoinLedgersRes
 import com.ccpp.shared.domain.contest.CreateContestRes
 import com.ccpp.shared.domain.contest.MatchContestRes
 import com.ccpp.shared.domain.contest.UserMatchContestRes
@@ -74,6 +75,9 @@ internal interface ApiClient {
 
     @GET("api/v1/users")
     fun callUserAsync(): Deferred<Response<UserRes>>
+
+    @GET("ballchalu/api/v1/bc_coins_ledgers")
+    fun callBcCoinsLedgersAsync(@Query("page") page: Int): Deferred<Response<BcCoinLedgersRes>>
 
     @GET("ballchalu/api/v1/contests/{contestId}/top_runners")
     fun callWinnerListingAsync(
