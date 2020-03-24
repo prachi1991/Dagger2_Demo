@@ -187,7 +187,9 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvTeam1Back.text = if (runners?.canLay == true) runners.lay else ""
             binding.tvTeam1Lay.isClickable = (runners?.canBack == true)
             binding.tvTeam1Back.isClickable = (runners?.canLay == true)
-            viewModel.batTeamRunner = runners
+            runners?.betfairRunnerName?.let {
+                viewModel.batTeamRunner = runners
+            }
         })
 
         viewModel.bwlTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver { runners ->

@@ -25,7 +25,9 @@ data class RunnersItem(
 
 
     var marketId: Int? = null,
-    var runnerPosition: Int? = null
+    var runnerPosition: Int? = null,
+    var betfairRunnerName: String? = null,
+    var betfairSelectionId: String? = null
 
 ) {
     fun color(): Int = ColorUtils.getPositionColor(runnerPosition ?: 0)
