@@ -56,7 +56,7 @@ object ConstantsBase {
     const val ENDING_DIGIT = "ending_digit"
 
     const val EVENT_TYPE = "cricket"
-    const val IN_PLAY = "inplay"
+    const val IN_PLAY = "in_play"
     const val UPCOMING = "upcoming"
     const val DECLARED = "recent"
     const val KEY_DECLARED = "is_declared"
