@@ -39,6 +39,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
+    var title: String? = null
     val myBetFragment: MyBetsFragment by lazy {
         MyBetsFragment().apply {
             arguments = Bundle().apply {

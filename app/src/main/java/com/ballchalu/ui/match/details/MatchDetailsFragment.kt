@@ -58,7 +58,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         binding = FragmentMatchDetailsBinding.inflate(inflater).apply {
             lifecycleOwner = this@MatchDetailsFragment
             model = viewModel
-
+            tvContest.text = viewModel.title
         }
         if (viewModel.isDeclared)
             setWinnerListener()
@@ -94,6 +94,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             viewModel.contestsId = it.getInt(ConstantsBase.KEY_CONTESTS_ID)
             viewModel.contestsMatchId = it.getInt(ConstantsBase.KEY_CONTESTS_MATCH_ID)
             viewModel.matchId = it.getInt(ConstantsBase.KEY_MATCH_ID)
+            viewModel.title = it.getString(ConstantsBase.KEY_TITLE)
             viewModel.isDeclared = it.getBoolean(ConstantsBase.KEY_DECLARED)
         }
     }

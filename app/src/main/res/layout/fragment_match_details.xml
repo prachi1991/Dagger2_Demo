@@ -55,7 +55,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_toEndOf="@id/ivWinner"
-                            android:text="Test Contest"
+                            tools:text="Test Contest"
                             android:textColor="@color/colorAccent"
                             android:textSize="@dimen/_12sdp" />
 
