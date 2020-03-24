@@ -11,6 +11,7 @@ import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
 import com.ccpp.shared.domain.match_details.MatchDetailsRes
 import com.ccpp.shared.domain.my_bets.MyBetsRes
 import com.ccpp.shared.domain.position.PositionRes
+import com.ccpp.shared.domain.user.UserRes
 import com.ccpp.shared.domain.winner.WinnerRes
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -70,6 +71,9 @@ internal interface ApiClient {
 
     @GET("ballchalu/api/v1/contests/{contestsId}/user_bets")
     fun callMyBetAsync(@Path("contestsId") contestsId: String): Deferred<Response<MyBetsRes>>
+
+    @GET("api/v1/users")
+    fun callUserAsync(): Deferred<Response<UserRes>>
 
     @GET("ballchalu/api/v1/contests/{contestId}/top_runners")
     fun callWinnerListingAsync(
