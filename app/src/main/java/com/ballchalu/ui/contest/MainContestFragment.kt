@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -30,7 +29,8 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
 
     private var matchListing: MatchListing? = null
     private var isDeclared: Boolean = false
-
+    private var allContest = 0
+    private var myContest = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -39,12 +39,15 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
         setupViewPager()
         initTabLayout()
 
+        onAllContest(allContest)
+        onUserContest(myContest)
+
         binding?.tvMatchName?.text = matchListing?.title
 
         return binding?.root
     }
 
-    fun initTabLayout() {
+    private fun initTabLayout() {
         val headerView =
             (activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
                 .inflate(R.layout.custom_contest_tab, null, false)
@@ -56,6 +59,7 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
         binding?.tablayout?.getTabAt(1)?.customView = linearLayout2
 
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -113,11 +117,12 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
     }
 
     override fun onAllContest(count: Int) {
+        allContest = count
         binding?.tablayout?.get(0)?.findViewById<TextView>(R.id.tvCountAll)?.text = count.toString()
     }
 
     override fun onUserContest(count: Int) {
+        myContest = count
         binding?.tablayout?.get(0)?.findViewById<TextView>(R.id.tvCountMy)?.text = count.toString()
     }
-
 }
