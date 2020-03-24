@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.R
+import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.FragmentCreateBetBinding
 import com.ballchalu.ui.create_bet.adapter.InPlayBetMatchListAdapter
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
@@ -66,6 +67,7 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
             }
 
             btnPlaceBet.setOnClickListener {
+                (activity as BaseActivity).hideSoftKeyBoard()
                 viewModel.placeBet(tvCount.text.toString())
             }
 
