@@ -150,8 +150,8 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
         viewModel.winnerMarketEvent.observe(viewLifecycleOwner, EventObserver { market ->
             binding.tvMarketType.text = market?.betfairMarketType
-            binding.tvBatTeamName.text = market?.runners?.get(0)?.runner?.betfairRunnerName
-            binding.tvBallTeamName.text = market?.runners?.get(1)?.runner?.betfairRunnerName
+            binding.tvMatchTeam1.text = market?.runners?.get(0)?.runner?.betfairRunnerName
+            binding.tvMatchTeam2.text = market?.runners?.get(1)?.runner?.betfairRunnerName
         })
 
         viewModel.evenOddMarketEvent.observe(viewLifecycleOwner, EventObserver {
