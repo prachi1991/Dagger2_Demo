@@ -52,13 +52,7 @@ class NavigationActivity : BaseActivity() {
                     true
                 }
             }
-            menu.findItem(R.id.nav_winners).apply {
-                setOnMenuItemClickListener {
-                    navController.navigate(R.id.nav_winners)
-                    toggleDrawer()
-                    true
-                }
-            }
+
             menu.findItem(R.id.nav_bc_coins).apply {
                 setOnMenuItemClickListener {
                     navController.navigate(R.id.nav_bc_coins)

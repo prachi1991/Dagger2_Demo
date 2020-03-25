@@ -24,6 +24,7 @@ object ConstantsBase {
     const val KEY_CONTESTS_ID: String = "contestsId"
     const val KEY_CONTESTS_MATCH_ID: String = "contestsMatchId"
     const val KEY_MATCH_ITEM: String = "keyMatchList"
+    const val KEY_TITLE: String = "titleBundle"
     const val open = "OPEN"
     const val suspend = "SUSPEND"
     const val close = "CLOSE"

@@ -39,6 +39,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
+    var title: String? = null
     val myBetFragment: MyBetsFragment by lazy {
         MyBetsFragment().apply {
             arguments = Bundle().apply {
@@ -291,7 +292,7 @@ class MatchDetailsViewModel @Inject constructor(
     }
 
     private fun updateEvent(oddJsonObject: JSONObject) {
-        if (matchId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
+        if (providerId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
             oddJsonObject.getJSONObject(ConstantsBase.HEROIC_COMMENTARY).let {
                 if (it.getString(ConstantsBase.event).isNotEmpty())
                     _betStatusEvent.postValue(
@@ -315,7 +316,7 @@ class MatchDetailsViewModel @Inject constructor(
                         val type = oddJsonObject.getString(ConstantsBase.type)
                         when {
                             type.equals(ConstantsBase.score, ignoreCase = true) -> {
-                                if (matchId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
+                                if (providerId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
                                     parseScore(oddJsonObject)
                                 }
                             }
@@ -354,7 +355,7 @@ class MatchDetailsViewModel @Inject constructor(
 
     private fun updateSession(sessionObject: JSONObject) {
         val jsonObject: JSONObject = sessionObject.getJSONObject(ConstantsBase.SESSION)
-        if (matchId == jsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
+        if (providerId == jsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
             val sessionsItem: SessionsItem =
                 Gson().fromJson(sessionObject.toString(), SessionsItem::class.java)
             _updateSessionEvent.postValue(Event(sessionsItem))
@@ -370,7 +371,7 @@ class MatchDetailsViewModel @Inject constructor(
     private fun parseMarket(oddJsonObject: JSONObject) {
         if (!oddJsonObject.has(ConstantsBase.KEY_MARKET)) return
         val marketObject = oddJsonObject.getJSONObject(ConstantsBase.KEY_MARKET)
-        if (matchId == marketObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
+        if (providerId == marketObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
             val market: Market? =
                 GsonBuilder().create().fromJson(oddJsonObject.toString(), MqttMarket::class.java)
                     ?.market
@@ -450,7 +451,7 @@ class MatchDetailsViewModel @Inject constructor(
             BetDetailsBundle(
                 betReq =
                 CreateBetReq(
-                    matchId = matchId.toString(),
+                    matchId = providerId.toString(),
                     oddsType = if (isLay) ConstantsBase.KHAI else ConstantsBase.LAGAI,
                     runnerId = runner?.id,
                     oddsVal = oddValue,
@@ -475,7 +476,7 @@ class MatchDetailsViewModel @Inject constructor(
             BetDetailsBundle(
                 betSessionReq =
                 CreateSessionBetReq(
-                    matchId = matchId.toString(),
+                    matchId = providerId.toString(),
                     runs = if (isLagai) session.sessionRun?.yesRun else session.sessionRun?.noRun,
                     sessionBetType = if (isLagai) ConstantsBase.YES else ConstantsBase.NO,
                     sessionId = session.id,
@@ -499,7 +500,7 @@ class MatchDetailsViewModel @Inject constructor(
             BetDetailsBundle(
                 betReq =
                 CreateBetReq(
-                    matchId = matchId.toString(),
+                    matchId = providerId.toString(),
                     oddsType = ConstantsBase.LAGAI,
                     runnerId = runner?.id,
                     oddsVal = runner?.back,
@@ -519,7 +520,7 @@ class MatchDetailsViewModel @Inject constructor(
             BetDetailsBundle(
                 betReq =
                 CreateBetReq(
-                    matchId = matchId.toString(),
+                    matchId = providerId.toString(),
                     oddsType = ConstantsBase.LAGAI,
                     runnerId = market?.id,
                     oddsVal = market?.B,

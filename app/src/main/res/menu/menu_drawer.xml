@@ -24,10 +24,7 @@
         android:id="@+id/nav_sport"
         android:icon="@drawable/ic_circle"
         android:title="@string/nav_sports" />
-    <item
-        android:id="@+id/nav_winners"
-        android:icon="@drawable/ic_circle"
-        android:title="@string/nav_winners" />
+
     <item
         android:id="@+id/nav_tipers"
         android:icon="@drawable/ic_circle"
