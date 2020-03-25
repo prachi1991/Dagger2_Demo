@@ -41,7 +41,7 @@ object StringUtils {
 
             }
             ConstantsBase.DOT -> {
-                textView.text = "Dot"
+                textView.text = "No Ball"
 
             }
             ConstantsBase.RUN1 -> {

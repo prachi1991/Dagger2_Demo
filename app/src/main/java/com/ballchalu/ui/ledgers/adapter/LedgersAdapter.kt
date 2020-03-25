@@ -24,8 +24,10 @@ class LedgersAdapter : RecyclerView.Adapter<LedgersAdapter.ViewHolder>() {
     }
 
     fun setItemList(list: List<BcCoinsLedgerData>) {
+        val size = this.list.size
         this.list.addAll(list)
-        notifyDataSetChanged()
+        val sizeNew = this.list.size
+        notifyItemRangeChanged(size, sizeNew)
     }
 
     override fun getItemCount(): Int {
