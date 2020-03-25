@@ -7,7 +7,7 @@ import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.domain.bccoins.BcCoinLedgersRes
-import com.ccpp.shared.domain.match_details.MatchDetailsRes
+import com.ccpp.shared.domain.bccoins.BcCoinsLedgerData
 import com.ccpp.shared.network.repository.BcCoinsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,8 +15,10 @@ import javax.inject.Inject
 
 class BcCoinsLedgersViewModel @Inject constructor(private val repository: BcCoinsRepository) :
     BaseViewModel() {
-    private val _bcCoinsListObserver = MutableLiveData<Event<MatchDetailsRes?>>()
-    val bcCoinsListObserver: LiveData<Event<MatchDetailsRes?>> = _bcCoinsListObserver
+    var isLoading: Boolean = false
+    var isLastPage: Boolean = false
+    private val _bcCoinsListObserver = MutableLiveData<Event<List<BcCoinsLedgerData>>>()
+    val bcCoinsListObserver: LiveData<Event<List<BcCoinsLedgerData>>> = _bcCoinsListObserver
 
     var page: Int = 1
 
@@ -32,7 +34,9 @@ class BcCoinsLedgersViewModel @Inject constructor(private val repository: BcCoin
     }
 
     private fun handleSuccess(data: BcCoinLedgersRes) {
-
+        _bcCoinsListObserver.postValue(Event(data.bc_coins_ledgers))
+        isLastPage = data.meta.total_pages < page
+        isLoading = false
     }
 
 }

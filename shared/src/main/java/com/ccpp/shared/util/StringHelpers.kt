@@ -70,117 +70,17 @@ object StringHelpers {
 
         return UUID(pseudoID.hashCode().toLong(), serial.hashCode().toLong()).toString()
     }
-
-    fun isValidEmail(target: CharSequence): Boolean {
-        return !target.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(target).matches()
-    }
-
-    fun displayMobileNumber(number: String): String {
-        if (number.length < 10) {
-            return number
-        }
-        return number.substring(0, 3) + " " + number.substring(3, 6) + " " + number.substring(6, 10)
-    }
-
-    fun getFormattedMobileNumber(number: String): String {
-        if (number.length < 10) {
-            return number
-        }
-        return number.substring(0, 3) + "-" + number.substring(3, 6) + "-" + number.substring(6, 10)
-    }
-
-    fun maskMobileNumber(number: String): String {
-        if (number.length < 10) {
-            return number
-        }
-        return number.substring(0, 3) + "-XXX-X" + number.substring(7, 10)
-    }
-
-    fun numberInstance(number: String): String {
-        try {
-            val _number = clearNumberFormat(number)
-            if (_number.isEmpty()) {
-                return "0.00"
-            }
-            val nf = NumberFormat.getNumberInstance(Locale.US)
-            val formatter = nf as DecimalFormat
-            formatter.applyPattern("###,###,##0.00")
-            return formatter.format(_number.toBigDecimal()).toString()
-        } catch (e: Exception) {
-            return number
-        }
-    }
-
-    fun numberInstanceNoDecimal(number: String): String {
-        try {
-            val _number = clearNumberFormat(number)
-            if (_number.isEmpty()) {
-                return "0.00"
-            }
-
-            val df = DecimalFormat("###,###,##0")
-            return df.format(_number.toBigDecimal()).toString()
-        } catch (e: Exception) {
-            return number
-        }
-    }
-
-    fun clearNumberFormat(numberFormat: String): String {
-        return numberFormat.replace(",", "")
-    }
-
-    fun calculateMaxTopup(balance: String, maxTopup: String): String {
-        if (maxTopup == "" || maxTopup == "" || maxTopup.isEmpty()) {
-            return "0.00"
-        }
-
-        if (balance == "" || balance == "" || balance.isEmpty()) {
-            return maxTopup
-        }
-
-        val cal = (maxTopup.toBigDecimal() - balance.toBigDecimal()).toString()
-
-        if (cal.toBigDecimal() <= BigDecimal(0.00)) {
-            return "0.00"
-        }
-        return cal
-    }
-
-    fun calculateAmountLessThanMaxTopup(_amount: String, _maxTopup: String): Boolean {
-        val amount = clearNumberFormat(_amount)
-        val maxTopup = clearNumberFormat(_maxTopup)
-        if (amount == "" || amount == "" || amount.isEmpty()) {
-            return false
-        }
-        if (maxTopup == "" || maxTopup == "" || maxTopup.isEmpty()) {
-            return false
-        }
-        return amount.toBigDecimal() > maxTopup.toBigDecimal()
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    fun timeStampToDisplayDateTime(sdkDatetime: String): String {
-        var result = ""
-        if (sdkDatetime.length > 16) {
-            val displayDate = sdkDatetime.subSequence(0, 10).toString()
-            val displayTime = sdkDatetime.subSequence(11, 16).toString()
-            result += historyTimeToDisplayDate("$displayDate $displayTime")
-            result += ", " + historyTimeToDisplayTime(displayTime)
-        }
-        return result
-    }
-
     @SuppressLint("SimpleDateFormat")
     fun parseSDKStringToDateTime(sdkDatetime: String): Date {
         return SimpleDateFormat("dd/MM/yyyy").parse(sdkDatetime)
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun profileDateTimeToDisplayDateTime(sdkDatetime: String): String {
+    fun parseFullData(sdkDatetime: String): String {
         return try {
-            var format = SimpleDateFormat("dd/MM/yyyy")
+            var format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
             val newDate = format.parse(sdkDatetime)
-            format = SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH)
+            format = SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH)
             format.format(newDate)
         } catch (e: Exception) {
             sdkDatetime
@@ -311,7 +211,6 @@ object StringHelpers {
         }
     }
 
-    @SuppressLint("SimpleDateFormat")
     fun dateToDisplayTime(time: String): String {
         return try {
             val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.UK)

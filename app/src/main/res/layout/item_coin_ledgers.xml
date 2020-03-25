@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="model"
+            type="com.ccpp.shared.domain.bccoins.BcCoinsLedgerData" />
     </data>
 
     <FrameLayout
@@ -24,7 +28,8 @@
                 android:background="@drawable/backgroud_solid_primary_dark2dp"
                 android:gravity="center"
                 android:padding="@dimen/_8sdp"
-                android:text="Note-Purchased Bc-Coins Offer"
+                android:text="@{String.format(@string/note_s, model.note)}"
+                tools:text="Note"
                 android:textSize="@dimen/_12ssp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -34,7 +39,8 @@
                 android:background="@drawable/backgroud_solid_primary_dark2dp"
                 android:gravity="center"
                 android:padding="@dimen/_8sdp"
-                android:text="Date - Feb 29, 2020"
+                android:text="@{String.format(@string/date_s, model.getDate)}"
+                tools:text="@string/date_s"
                 android:textSize="@dimen/_12ssp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -42,9 +48,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_2sdp"
                 android:background="@drawable/backgroud_solid_primary_dark2dp"
+                android:text="@{String.format(@string/reference_s, model.entity_type)}"
                 android:gravity="center"
                 android:padding="@dimen/_8sdp"
-                android:text="Reference - BcCoinsOffer"
+                tools:text="@string/reference_s"
                 android:textSize="@dimen/_12ssp" />
 
             <LinearLayout
@@ -59,10 +66,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_1sdp"
                     android:layout_weight="1"
+                    android:text="@{String.format(@string/debit_s, model.debit)}"
                     android:background="@drawable/backgroud_solid_primary_dark2dp"
                     android:gravity="center"
                     android:padding="@dimen/_8sdp"
-                    android:text="Debit -"
+                    tools:text="@string/debit_s"
                     android:textColor="@color/red"
                     android:textSize="@dimen/_12ssp" />
 
@@ -70,11 +78,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_1sdp"
+                    android:text="@{String.format(@string/balance_s, model.credit)}"
                     android:layout_weight="1"
                     android:background="@drawable/backgroud_solid_primary_dark2dp"
                     android:gravity="center"
                     android:padding="@dimen/_8sdp"
-                    android:text="Credit - 10"
+                    tools:text="@string/credit_s"
                     android:textSize="@dimen/_12ssp" />
 
 
@@ -84,9 +93,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/backgroud_solid_primary_dark2dp"
+                android:text="@{String.format(@string/balance_s, model.balance)}"
                 android:gravity="center"
                 android:padding="@dimen/_8sdp"
-                android:text="Balance - 760"
+                tools:text="@string/balance_s"
                 android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
