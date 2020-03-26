@@ -1,5 +1,6 @@
 package com.ccpp.shared.domain.contest
 
+import com.ccpp.shared.domain.user.UserData
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
@@ -23,7 +24,7 @@ class UserContest (
     var contest: Contest? = null,
     @SerializedName("user")
     @Expose
-    var user: User? = null
+    var user: UserData? = null
 
     ){
 

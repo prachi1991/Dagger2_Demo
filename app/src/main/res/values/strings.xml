@@ -124,4 +124,6 @@
     <string name="debit_s">Debit - %s</string>
     <string name="credit_s">Credit - %s</string>
     <string name="balance_s">Balance - %s</string>
+    <string name="dialog_title">Success</string>
+    <string name="dialog_desc">User buy BC Coin</string>
 </resources>

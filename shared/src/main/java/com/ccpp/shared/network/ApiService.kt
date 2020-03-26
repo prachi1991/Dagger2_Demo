@@ -29,6 +29,8 @@ open class ApiService @Inject constructor(
 
     fun callUserAsync() = apiClient.callUserAsync()
 
+    fun callBuyNowCoinsAsync(id: Int) = apiClient.callBuyNowCoinsAsync(id)
+
     fun callLoginWithSocialAsync(token: String, socialMedia: String, emailId: String) =
         apiClient.callLoginWithSocialAsync(token, socialMedia, emailId)
 
@@ -48,6 +50,8 @@ open class ApiService @Inject constructor(
         matchDetailsApiClient.callMatchDetailsAsync(providerId)
 
     fun callBcCoinsLedgersAsync(page: Int) = apiClient.callBcCoinsLedgersAsync(page)
+
+    fun callBcCoinsListAsync() = apiClient.callBcCoinsListAsync()
 
     fun callUserMatchContestAsync(matchId: String) = apiClient.callUserMatchContestAsync(matchId)
 
