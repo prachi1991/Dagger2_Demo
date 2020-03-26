@@ -263,7 +263,7 @@ class MatchDetailsViewModel @Inject constructor(
                     batTeamRunner = run1
                     batTeamRunId = run1.id
                 }
-                setBatStatus(run1.canBack && run1.canLay && run2.canBack && run2.canLay)
+                setBatStatus(run1.canBack || run1.canLay || run2.canBack || run2.canLay)
             }
         }
 //        _marketStatusEvent.postValue(Event)
@@ -419,7 +419,7 @@ class MatchDetailsViewModel @Inject constructor(
                     run1.betfairRunnerName = batTeamRunner?.betfairRunnerName
                     _batTeamBhaavEvent.value = Event(parseRunnerObject(run1))
                 }
-                setBatStatus(run1.canBack && run1.canLay && run2.canBack && run2.canLay)
+                setBatStatus(run1.canBack || run1.canLay || run2.canBack || run2.canLay)
 
 //                if (run3?.id != 0 && drawTeamRunId == run3?.id)
 //                    setDrawTeamBhaav(run3?.B, run3?.L, run3?.canBack, run3?.canLay)
