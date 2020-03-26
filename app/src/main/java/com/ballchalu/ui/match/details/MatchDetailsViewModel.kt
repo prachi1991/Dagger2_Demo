@@ -39,6 +39,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
+    val betStatus: String = ""
     var title: String? = null
     val myBetFragment: MyBetsFragment by lazy {
         MyBetsFragment().apply {
@@ -238,34 +239,36 @@ class MatchDetailsViewModel @Inject constructor(
 
     private fun setMarketData(market: Market?) {
         _winnerMarketEvent.postValue(Event(market))
-        val items1: Runner? = market?.runners?.get(0)?.runner.apply { this?.marketId = market?.id }
-        val items2: Runner? = market?.runners?.get(1)?.runner.apply { this?.marketId = market?.id }
+        val run1: Runner? = market?.runners?.get(0)?.runner.apply { this?.marketId = market?.id }
+        val run2: Runner? = market?.runners?.get(1)?.runner.apply { this?.marketId = market?.id }
 
         if (market?.status?.equals(ConstantsBase.open, true) == true) {
-            if (items1 != null && items2 != null) {
-                if (items1.betfairRunnerName?.trim().equals(batTeamRunName.trim())) {
-                    _batTeamBhaavEvent.postValue(Event(items1))
-                    batTeamRunId = items1.id
-                    batTeamRunner = items1
+            if (run1 != null && run2 != null) {
+                if (run1.betfairRunnerName?.trim().equals(batTeamRunName.trim())) {
+                    _batTeamBhaavEvent.postValue(Event(run1))
+                    batTeamRunId = run1.id
+                    batTeamRunner = run1
                 } else {
-                    _bwlTeamBhaavEvent.postValue(Event(items2))
-                    bwlTeamRunId = items2.id
-                    bwlTeamRunner = items2
+                    _bwlTeamBhaavEvent.postValue(Event(run2))
+                    bwlTeamRunId = run2.id
+                    bwlTeamRunner = run2
                 }
 
-                if (items2.betfairRunnerName?.trim().equals(bwlTeamRunName.trim())) {
-                    _bwlTeamBhaavEvent.postValue(Event(items2))
-                    bwlTeamRunId = items2.id
-                    bwlTeamRunner = items2
+                if (run2.betfairRunnerName?.trim().equals(bwlTeamRunName.trim())) {
+                    _bwlTeamBhaavEvent.postValue(Event(run2))
+                    bwlTeamRunId = run2.id
+                    bwlTeamRunner = run2
                 } else {
-                    _batTeamBhaavEvent.postValue(Event(items1))
-                    batTeamRunner = items1
-                    batTeamRunId = items1.id
+                    _batTeamBhaavEvent.postValue(Event(run1))
+                    batTeamRunner = run1
+                    batTeamRunId = run1.id
                 }
+                setBatStatus(run1.canBack && run1.canLay && run2.canBack && run2.canLay)
             }
         }
 //        _marketStatusEvent.postValue(Event)
         if (market?.status?.equals(ConstantsBase.suspend, true) == true) {
+            setBatStatus(false)
             _batTeamBhaavEvent.postValue(null)
             _batTeamBhaavEvent.postValue(null)
         }
@@ -416,11 +419,13 @@ class MatchDetailsViewModel @Inject constructor(
                     run1.betfairRunnerName = batTeamRunner?.betfairRunnerName
                     _batTeamBhaavEvent.value = Event(parseRunnerObject(run1))
                 }
+                setBatStatus(run1.canBack && run1.canLay && run2.canBack && run2.canLay)
 
 //                if (run3?.id != 0 && drawTeamRunId == run3?.id)
 //                    setDrawTeamBhaav(run3?.B, run3?.L, run3?.canBack, run3?.canLay)
             }
             ConstantsBase.suspend, ConstantsBase.close -> {
+                setBatStatus(false)
                 _batTeamBhaavEvent.postValue(Event(Runner()))
                 _batTeamBhaavEvent.postValue(Event(Runner()))
             }
@@ -438,6 +443,10 @@ class MatchDetailsViewModel @Inject constructor(
             betfairSelectionId = runnersItem.betfairSelectionId,
             marketId = runnersItem.marketId
         )
+    }
+
+    private fun setBatStatus(isOpen: Boolean) {
+        _betStatusEvent.postValue(Event(if (isOpen) ConstantsBase.betOpen else ConstantsBase.betClose))
     }
 
     private val _openBetScreenEvent = MutableLiveData<Event<BetDetailsBundle?>>()

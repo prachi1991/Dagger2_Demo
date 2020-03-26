@@ -44,7 +44,9 @@ class AppModule {
     @Provides
     fun providesMqttConnectOptions(): MqttConnectOptions =
         MqttConnectOptions().also {
+            it.isAutomaticReconnect = true
             it.isCleanSession = false
+            it.keepAliveInterval = 5
             it.userName = BuildConfig.mqttUserName
             it.password = BuildConfig.mqttPassword.toCharArray()
         }

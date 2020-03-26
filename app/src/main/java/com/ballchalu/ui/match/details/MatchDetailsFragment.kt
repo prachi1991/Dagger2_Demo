@@ -241,8 +241,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
                 text = it?.bwlTeamRunner?.runner() ?: ""
                 setTextColor(it?.bwlTeamRunner?.color() ?: Color.GREEN)
             }
-        }
-        )
+        })
 
         viewModel.positionEvenOddObserver.observe(viewLifecycleOwner, EventObserver {
             binding.tvEvenPosition.apply {

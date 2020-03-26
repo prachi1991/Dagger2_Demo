@@ -64,6 +64,8 @@ object ConstantsBase {
 
     //Bet screen
     const val SUCCESS = "success"
+    const val betOpen = "Bet Open"
+    const val betClose = "Bet Closed"
 
 
     //Events
