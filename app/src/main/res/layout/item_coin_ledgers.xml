@@ -78,7 +78,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_1sdp"
-                    android:text="@{String.format(@string/balance_s, model.credit)}"
+                    android:text="@{String.format(@string/credit_s, model.credit)}"
                     android:layout_weight="1"
                     android:background="@drawable/backgroud_solid_primary_dark2dp"
                     android:gravity="center"
