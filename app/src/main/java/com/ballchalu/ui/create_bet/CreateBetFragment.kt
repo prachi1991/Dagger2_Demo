@@ -76,13 +76,6 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
             }
 
 
-            tvCount.onFocusChangeListener = OnFocusChangeListener { view, hasFocus ->
-                if (hasFocus) {
-                    count = 0
-                } else {
-
-                }
-            }
 
             tvCount.doOnTextChanged { text, start, count, after ->
                 if (!text.isNullOrEmpty())
@@ -115,7 +108,6 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
 
 
     private fun updateCountText() {
-        binding.tvCount.clearFocus()
         val list = viewModel.betArray()
         if (count in 0..10)
             binding.tvCount.setText(list[count].toString())
