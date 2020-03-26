@@ -50,13 +50,13 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
 
             lifecycleOwner = this@CreateBetFragment
 
-            minusLayout.setOnClickListener {
+            ivMinus.setOnClickListener {
                 if (count > 0)
                     count--
                 updateCountText()
             }
 
-            plusLayout.setOnClickListener {
+            ivPlus.setOnClickListener {
                 if (count < 10)
                     count++
                 updateCountText()
@@ -117,7 +117,7 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
     private fun updateCountText() {
         binding.tvCount.clearFocus()
         val list = viewModel.betArray()
-        if (count in 1..10)
+        if (count in 0..10)
             binding.tvCount.setText(list[count].toString())
     }
 
