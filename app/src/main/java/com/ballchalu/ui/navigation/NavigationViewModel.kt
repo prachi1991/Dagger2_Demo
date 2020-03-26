@@ -6,6 +6,8 @@ import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.domain.User
+import com.ccpp.shared.domain.user.UserData
 import com.ccpp.shared.domain.user.UserRes
 import com.ccpp.shared.network.repository.LoginRepository
 import kotlinx.coroutines.Dispatchers
@@ -31,8 +33,8 @@ class NavigationViewModel @Inject constructor(
         }
     }
 
-    private val _userDetails = MutableLiveData<Event<UserRes>>()
-    var userDetails: MutableLiveData<Event<UserRes>> = _userDetails
+    private val _userDetails = MutableLiveData<Event<UserData?>>()
+    var userDetails: MutableLiveData<Event<UserData?>> = _userDetails
 
     fun callUserDetails() {
         loading.postValue(Event(true))
@@ -47,7 +49,7 @@ class NavigationViewModel @Inject constructor(
 
     private fun handleSuccess(data: UserRes) {
         sharedPref.userName = data.user?.email ?: ""
-        _userDetails.postValue(Event(data))
+        _userDetails.postValue(Event(data.user))
     }
 
     override fun onCleared() {

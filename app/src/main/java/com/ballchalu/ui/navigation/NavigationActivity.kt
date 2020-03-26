@@ -16,7 +16,7 @@ import com.ballchalu.databinding.ActivityNavigationBinding
 import com.ballchalu.ui.login.container.LoginActivity
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.domain.user.UserRes
+import com.ccpp.shared.domain.user.UserData
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -71,11 +71,11 @@ class NavigationActivity : BaseActivity() {
 
     }
 
-    private fun setHeaderUi(userRes: UserRes) {
+    private fun setHeaderUi(userRes: UserData?) {
         val headerView = binding.navView.getHeaderView(0)
-        headerView.findViewById<TextView>(R.id.tvNavEmail).text = userRes.user?.email
+        headerView.findViewById<TextView>(R.id.tvNavEmail).text = userRes?.email
         headerView.findViewById<TextView>(R.id.tvMoneyValue).text =
-            userRes.user?.bc_coins?.toString()
+            userRes?.bc_coins?.toString()
     }
 
     private fun openLogoutDialog() {
