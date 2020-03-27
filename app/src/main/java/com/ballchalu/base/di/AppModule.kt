@@ -54,7 +54,8 @@ class AppModule {
     @Singleton
     @Provides
     fun provideMqttClient(context: Context): MqttAndroidClient {
-        val clientId = Settings.Secure.ANDROID_ID
+        val clientId =
+            Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID);
         val port = 1883
         val uri: String
         uri = "${BuildConfig.mqttUrl}:$port"
@@ -78,3 +79,4 @@ class AppModule {
         MqttConnection(context, mqttAndroidClient, mqttConnectOptions)
 
 }
+
