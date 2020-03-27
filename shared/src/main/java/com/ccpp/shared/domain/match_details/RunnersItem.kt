@@ -25,6 +25,7 @@ data class RunnersItem(
 
 
     var marketId: Int? = null,
+    var status: String? = null,
     var runnerPosition: Int? = null,
     var betfairRunnerName: String? = null,
     var betfairSelectionId: String? = null

@@ -39,7 +39,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
-    val betStatus: String = ""
+    var betStatus: String = ""
     var title: String? = null
     val myBetFragment: MyBetsFragment by lazy {
         MyBetsFragment().apply {
@@ -57,13 +57,15 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
+    private var endingDigitMarket: Market? = null
+    private var evenOddMarket: Market? = null
+    private var sessionMarket: Market? = null
     var evenMarket: RunnersItem? = RunnersItem()
     var oddMarket: RunnersItem? = RunnersItem()
     var bwlTeamRunner: Runner? = null
     var batTeamRunner: Runner? = null
     var batTeamRunId: Int? = 0
     var bwlTeamRunId: Int? = 0
-    var drawTeamRunId: Int? = 0
 
     var batTeamRunName = ""
     var bwlTeamRunName = ""
@@ -120,7 +122,7 @@ class MatchDetailsViewModel @Inject constructor(
     val positionSessionObserver: LiveData<Event<String?>> = _positionSessionObserver
 
 
-    fun handlePositionSuccess(data: Positions?) {
+    private fun handlePositionSuccess(data: Positions?) {
         _positionSessionObserver.postValue(Event(data?.sessionPosition))
         handleMarketPositionList(data?.marketPosition)
     }
@@ -194,10 +196,11 @@ class MatchDetailsViewModel @Inject constructor(
     val sessionEvent: LiveData<Event<List<SessionsItem>?>> = _sessionEvent
 
     private fun setSessionData(sessions: List<SessionsItem>?) {
-        sessions?.filter { it.session?.status == ConstantsBase.suspend || it.session?.status == ConstantsBase.open }
-            ?.let {
-                _sessionEvent.postValue(Event(it))
-            }
+        sessions?.filter {
+            it.session?.status == ConstantsBase.suspend || it.session?.status == ConstantsBase.open
+        }?.let {
+            _sessionEvent.postValue(Event(it))
+        }
     }
 
     private val _winnerMarketEvent = MutableLiveData<Event<Market?>>()
@@ -218,17 +221,17 @@ class MatchDetailsViewModel @Inject constructor(
                         && (market.status?.equals(ConstantsBase.open, true) == true
                         || market.status?.equals(ConstantsBase.suspend, true) == true))
                 -> {
-                    market.let {
-                        setMarketData(market)
-                    }
+                    setMarketData(market)
                 }
                 market?.heroicMarketType?.equals(ConstantsBase.EVEN_ODD, true) == true -> {
                     market.let {
+                        evenOddMarket = market
                         _evenOddMarketEvent.postValue(Event(it))
                     }
                 }
                 market?.heroicMarketType?.equals(ConstantsBase.ENDING_DIGIT, true) == true -> {
                     market.let {
+                        endingDigitMarket = market
                         _endingDigitMarketEvent.postValue(Event(it))
                     }
                 }
@@ -239,9 +242,14 @@ class MatchDetailsViewModel @Inject constructor(
 
     private fun setMarketData(market: Market?) {
         _winnerMarketEvent.postValue(Event(market))
-        val run1: Runner? = market?.runners?.get(0)?.runner.apply { this?.marketId = market?.id }
-        val run2: Runner? = market?.runners?.get(1)?.runner.apply { this?.marketId = market?.id }
-
+        val run1: Runner? = market?.runners?.get(0)?.runner.apply {
+            this?.marketId = market?.id
+            this?.status = market?.status
+        }
+        val run2: Runner? = market?.runners?.get(1)?.runner.apply {
+            this?.marketId = market?.id
+            this?.status = market?.status
+        }
         if (market?.status?.equals(ConstantsBase.open, true) == true) {
             if (run1 != null && run2 != null) {
                 if (run1.betfairRunnerName?.trim().equals(batTeamRunName.trim())) {
@@ -297,7 +305,8 @@ class MatchDetailsViewModel @Inject constructor(
     private fun updateEvent(oddJsonObject: JSONObject) {
         if (providerId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
             oddJsonObject.getJSONObject(ConstantsBase.HEROIC_COMMENTARY).let {
-                if (it.getString(ConstantsBase.event).isNotEmpty())
+                if (it.getString(ConstantsBase.event).isNotEmpty()) {
+                    betStatus = if (checkStatus()) ConstantsBase.betOpen else ConstantsBase.betClose
                     _betStatusEvent.postValue(
                         Event(
                             it.getString(ConstantsBase.event).toLowerCase(
@@ -305,8 +314,38 @@ class MatchDetailsViewModel @Inject constructor(
                             )
                         )
                     )
+                }
             }
         }
+    }
+
+    private fun checkStatus(): Boolean {
+        batTeamRunner?.let {
+            if (it.status?.equals(ConstantsBase.open, true) == true)
+                if (it.canLay || it.canBack)
+                    return true
+        }
+        bwlTeamRunner?.let {
+            if (it.status?.equals(ConstantsBase.open, true) == true)
+                if (it.canLay || it.canBack)
+                    return true
+        }
+
+        evenOddMarket?.let { market ->
+            if (market.status?.equals(ConstantsBase.open, true) == true)
+                market.runners?.forEach { it ->
+                    if (it.canLay || it.canBack) {
+                        return true
+                    }
+                }
+        }
+        endingDigitMarket?.let {
+            if (it.status?.equals(ConstantsBase.open, true) == true)
+                it.runners?.forEach { run ->
+                    if (run.canBack) return true
+                }
+        }
+        return false
     }
 
     val scoreUpdate = object : BroadcastReceiver() {
@@ -379,9 +418,17 @@ class MatchDetailsViewModel @Inject constructor(
                 GsonBuilder().create().fromJson(oddJsonObject.toString(), MqttMarket::class.java)
                     ?.market
             when (market?.heroicMarketType?.toLowerCase(Locale.ENGLISH)) {
-                ConstantsBase.EVEN_ODD -> _updateEvenOddDataEvent.value = Event(market)
-                ConstantsBase.ENDING_DIGIT -> _updateEndingDigitDataEvent.value = Event(market)
-                ConstantsBase.MATCH_WINNER -> updateMarket(market)
+                ConstantsBase.EVEN_ODD -> {
+                    _updateEvenOddDataEvent.value = Event(market)
+                    evenOddMarket = market
+                }
+                ConstantsBase.ENDING_DIGIT -> {
+                    endingDigitMarket = market
+                    _updateEndingDigitDataEvent.value = Event(market)
+                }
+                ConstantsBase.MATCH_WINNER -> {
+                    updateMarket(market)
+                }
             }
         }
     }
@@ -395,8 +442,14 @@ class MatchDetailsViewModel @Inject constructor(
     private fun updateMarket(market: Market?) {
         when (market?.status?.trim()) {
             ConstantsBase.open -> {
-                val run1: RunnersItem? = market.runners?.get(0).apply { this?.marketId = market.id }
-                val run2: RunnersItem? = market.runners?.get(1).apply { this?.marketId = market.id }
+                val run1: RunnersItem? = market.runners?.get(0).apply {
+                    this?.marketId = market.id
+                    this?.status = market.status
+                }
+                val run2: RunnersItem? = market.runners?.get(1).apply {
+                    this?.marketId = market.id
+                    this?.status = market.status
+                }
                 val run3: RunnersItem? = when {
                     market.runners?.size ?: 0 > 2 -> market.runners?.get(2)
                     else -> null
@@ -435,6 +488,7 @@ class MatchDetailsViewModel @Inject constructor(
     private fun parseRunnerObject(runnersItem: RunnersItem): Runner {
         return Runner(
             id = runnersItem.id,
+            status = runnersItem.status,
             back = runnersItem.B,
             canBack = runnersItem.canBack,
             lay = runnersItem.L,
@@ -447,6 +501,7 @@ class MatchDetailsViewModel @Inject constructor(
 
     private fun setBatStatus(isOpen: Boolean) {
         _betStatusEvent.postValue(Event(if (isOpen) ConstantsBase.betOpen else ConstantsBase.betClose))
+
     }
 
     private val _openBetScreenEvent = MutableLiveData<Event<BetDetailsBundle?>>()

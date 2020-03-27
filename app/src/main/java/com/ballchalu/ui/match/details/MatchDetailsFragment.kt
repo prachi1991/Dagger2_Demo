@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,7 @@ import javax.inject.Inject
 
 class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSuccessListener {
 
+    private val handler: Handler = Handler()
     private var snackBar: Snackbar? = null
     private var sessionAdapter: SessionAdapter? = null
     private var endingDigitAdapter: EndingDigitAdapter? = null
@@ -168,6 +170,10 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         })
 
         viewModel.betStatusEvent.observe(viewLifecycleOwner, EventObserver {
+            viewModel.betStatus = it
+            handler.removeCallbacks(runnable)
+            val secondsDelayed = 2000
+            handler.postDelayed(runnable, secondsDelayed.toLong())
             StringUtils.setEvents(it, binding.tvBetStatus)
         })
         viewModel.updateSessionEvent.observe(viewLifecycleOwner, EventObserver {
@@ -281,6 +287,11 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         })
 
     }
+
+    private val runnable = Runnable {
+        StringUtils.setEvents(viewModel.betStatus, binding.tvBetStatus)
+    }
+
 
     private fun initListeners() {
 
