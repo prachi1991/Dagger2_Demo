@@ -272,14 +272,12 @@ class MatchDetailsViewModel @Inject constructor(
                     batTeamRunner = run1
                     batTeamRunId = run1.id
                 }
-                setBatStatus(run1.canBack || run1.canLay || run2.canBack || run2.canLay)
             }
         }
 //        _marketStatusEvent.postValue(Event)
         if (market?.status?.equals(ConstantsBase.suspend, true) == true) {
-            setBatStatus(false)
-            _batTeamBhaavEvent.postValue(Event(null))
-            _batTeamBhaavEvent.postValue(Event(null))
+            _batTeamBhaavEvent.postValue(Event(Runner()))
+            _batTeamBhaavEvent.postValue(Event(Runner()))
         }
     }
 
@@ -442,6 +440,8 @@ class MatchDetailsViewModel @Inject constructor(
                     updateMarket(market)
                 }
             }
+            parseBetStatus()
+            setBatStatus()
         }
     }
 
@@ -485,13 +485,11 @@ class MatchDetailsViewModel @Inject constructor(
                     run1.betfairRunnerName = batTeamRunner?.betfairRunnerName
                     _batTeamBhaavEvent.value = Event(parseRunnerObject(run1))
                 }
-                setBatStatus(run1.canBack || run1.canLay || run2.canBack || run2.canLay)
 
 //                if (run3?.id != 0 && drawTeamRunId == run3?.id)
 //                    setDrawTeamBhaav(run3?.B, run3?.L, run3?.canBack, run3?.canLay)
             }
             ConstantsBase.suspend, ConstantsBase.close -> {
-                setBatStatus(false)
                 _batTeamBhaavEvent.postValue(Event(Runner()))
                 _batTeamBhaavEvent.postValue(Event(Runner()))
             }
@@ -514,8 +512,8 @@ class MatchDetailsViewModel @Inject constructor(
     }
 
     //Mqtt set bet status
-    private fun setBatStatus(isOpen: Boolean) {
-//        _betStatusEvent.postValue(Event(if (isOpen) ConstantsBase.betOpen else ConstantsBase.betClose))
+    private fun setBatStatus() {
+        _betStatusEvent.value = Event(betStatus ?: "")
 
     }
 
