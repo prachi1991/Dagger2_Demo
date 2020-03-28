@@ -170,7 +170,6 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         })
 
         viewModel.betStatusEvent.observe(viewLifecycleOwner, EventObserver {
-            viewModel.betStatus = it
             handler.removeCallbacks(runnable)
             val secondsDelayed = 2000
             handler.postDelayed(runnable, secondsDelayed.toLong())
@@ -289,7 +288,9 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
     }
 
     private val runnable = Runnable {
-        StringUtils.setEvents(viewModel.betStatus, binding.tvBetStatus)
+        viewModel.betStatus?.let {
+            StringUtils.setEvents(it, binding.tvBetStatus)
+        }
     }
 
 

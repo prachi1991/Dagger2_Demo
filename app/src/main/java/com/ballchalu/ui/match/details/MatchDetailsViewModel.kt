@@ -14,7 +14,6 @@ import com.ballchalu.ui.match.details.my_bets.MyBetsFragment
 import com.ballchalu.ui.winners.WinnersFragment
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.create_bet.BetDetailsBundle
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
@@ -34,12 +33,11 @@ import java.util.*
 import javax.inject.Inject
 
 class MatchDetailsViewModel @Inject constructor(
-    private val sharePref: SharedPreferenceStorage,
     private val loginRepository: MatchDetailsRepository,
     private val context: Context
 ) :
     BaseViewModel() {
-    var betStatus: String = ""
+    var betStatus: String? = null
     var title: String? = null
     val myBetFragment: MyBetsFragment by lazy {
         MyBetsFragment().apply {
@@ -180,6 +178,7 @@ class MatchDetailsViewModel @Inject constructor(
     }
     //---------------------position section End------------------------//
 
+    //Handling market from API
     private fun handleSuccess(data: MatchDetailsRes?) {
         callPositionDetailsAsync(contestsId)
         data?.let {
@@ -195,6 +194,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val _sessionEvent = MutableLiveData<Event<List<SessionsItem>?>>()
     val sessionEvent: LiveData<Event<List<SessionsItem>?>> = _sessionEvent
 
+    //API setting Session data
     private fun setSessionData(sessions: List<SessionsItem>?) {
         sessions?.filter {
             it.session?.status == ConstantsBase.suspend || it.session?.status == ConstantsBase.open
@@ -212,7 +212,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val _endingDigitMarketEvent = MutableLiveData<Event<Market>>()
     val endingDigitMarketEvent: LiveData<Event<Market>> = _endingDigitMarketEvent
 
-
+    //API setting market
     private fun setMarketData(marketList: List<MarketsItem>?) {
         marketList?.forEachIndexed { _, marketsItem ->
             val market: Market? = marketsItem.market
@@ -240,6 +240,7 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
+    //API setting Match winner market
     private fun setMarketData(market: Market?) {
         _winnerMarketEvent.postValue(Event(market))
         val run1: Runner? = market?.runners?.get(0)?.runner.apply {
@@ -286,6 +287,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val _betStatusEvent = MutableLiveData<Event<String>>()
     val betStatusEvent: LiveData<Event<String>> = _betStatusEvent
 
+    //MQTT receiver for commentary
     val oddsReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             intent.getStringExtra(ConstantsBase.ODDS)?.let {
@@ -302,6 +304,7 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
+    //MQTT update score event
     private fun updateEvent(oddJsonObject: JSONObject) {
         if (providerId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
             oddJsonObject.getJSONObject(ConstantsBase.HEROIC_COMMENTARY).let {
@@ -319,6 +322,7 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
+    //Checking status of all market for bet screen
     private fun checkStatus(): Boolean {
         batTeamRunner?.let {
             if (it.status?.equals(ConstantsBase.open, true) == true)
@@ -348,6 +352,7 @@ class MatchDetailsViewModel @Inject constructor(
         return false
     }
 
+    //Mqtt receiver
     val scoreUpdate = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             intent.getStringExtra(ConstantsBase.PUB_NUB)?.let {
@@ -380,6 +385,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val _updateScoreEvent = MutableLiveData<Event<Score?>>()
     val updateScoreEvent: LiveData<Event<Score?>> = _updateScoreEvent
 
+    //Mqtt ScoreUpdate
     private fun parseScore(oddJsonObject: JSONObject) {
         val score: Score =
             GsonBuilder().create()
@@ -395,6 +401,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val _updateSessionEvent = MutableLiveData<Event<SessionsItem>>()
     val updateSessionEvent: LiveData<Event<SessionsItem>> = _updateSessionEvent
 
+    //Mqtt session update
     private fun updateSession(sessionObject: JSONObject) {
         val jsonObject: JSONObject = sessionObject.getJSONObject(ConstantsBase.SESSION)
         if (providerId == jsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
@@ -410,6 +417,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val _updateEndingDigitDataEvent = MutableLiveData<Event<Market>>()
     val updateEndingDigitDataEvent: LiveData<Event<Market>> = _updateEndingDigitDataEvent
 
+    //Mqtt Market Updates
     private fun parseMarket(oddJsonObject: JSONObject) {
         if (!oddJsonObject.has(ConstantsBase.KEY_MARKET)) return
         val marketObject = oddJsonObject.getJSONObject(ConstantsBase.KEY_MARKET)
@@ -439,6 +447,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val _bwlTeamBhaavEvent = MutableLiveData<Event<Runner?>>()
     val bwlTeamBhaavEvent: LiveData<Event<Runner?>> = _bwlTeamBhaavEvent
 
+    //Mqtt match winner market update
     private fun updateMarket(market: Market?) {
         when (market?.status?.trim()) {
             ConstantsBase.open -> {
@@ -485,6 +494,7 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
+    //Mqtt convert model runnerItem to runner
     private fun parseRunnerObject(runnersItem: RunnersItem): Runner {
         return Runner(
             id = runnersItem.id,
@@ -499,11 +509,14 @@ class MatchDetailsViewModel @Inject constructor(
         )
     }
 
+    //Mqtt set bet status
     private fun setBatStatus(isOpen: Boolean) {
         _betStatusEvent.postValue(Event(if (isOpen) ConstantsBase.betOpen else ConstantsBase.betClose))
 
     }
 
+
+    //_________________________________ON CLICK OPEN BET SCREEN___________________________//
     private val _openBetScreenEvent = MutableLiveData<Event<BetDetailsBundle?>>()
     val openBetScreenEvent: LiveData<Event<BetDetailsBundle?>> = _openBetScreenEvent
 

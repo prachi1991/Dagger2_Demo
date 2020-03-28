@@ -23,7 +23,7 @@ class MqttConnection @Inject constructor(
 
     fun connectToClient() {
         if (NetworkUtil.getConnectivityStatus(context) == 0) return
-        if (appStatus)
+        if (appStatus && mqttAndroidClient?.isConnected == false)
             createConnection()
     }
 
