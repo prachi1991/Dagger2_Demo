@@ -278,8 +278,8 @@ class MatchDetailsViewModel @Inject constructor(
 //        _marketStatusEvent.postValue(Event)
         if (market?.status?.equals(ConstantsBase.suspend, true) == true) {
             setBatStatus(false)
-            _batTeamBhaavEvent.postValue(null)
-            _batTeamBhaavEvent.postValue(null)
+            _batTeamBhaavEvent.postValue(Event(null))
+            _batTeamBhaavEvent.postValue(Event(null))
         }
     }
 
