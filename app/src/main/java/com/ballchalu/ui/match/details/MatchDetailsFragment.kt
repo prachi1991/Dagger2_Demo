@@ -173,9 +173,15 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         })
 
         viewModel.betStatusEvent.observe(viewLifecycleOwner, EventObserver {
-            handler.removeCallbacks(runnable)
-            val secondsDelayed = 2000
-            handler.postDelayed(runnable, secondsDelayed.toLong())
+            if (!(it.equals(ConstantsBase.FREE_HIT, true) ||
+                        it.equals(ConstantsBase.PLAYER_INJURED, true) ||
+                        it.equals(ConstantsBase.THIRD_UMPIRE, true) ||
+                        it.equals(ConstantsBase.BALL_START, true))
+            ) {
+                handler.removeCallbacks(runnable)
+                val secondsDelayed = 2000
+                handler.postDelayed(runnable, secondsDelayed.toLong())
+            }
             StringUtils.setEvents(it, binding.tvBetStatus)
         })
         viewModel.updateSessionEvent.observe(viewLifecycleOwner, EventObserver {
