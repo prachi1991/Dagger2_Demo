@@ -132,6 +132,9 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvMatchTeam1.text = response?.match?.team1
             binding.tvMatchTeam2.text = response?.match?.team2
             binding.tvBetStatus.text = response?.match?.heroicCommentary?.event ?: ""
+            viewModel.parseBetStatus()
+            val secondsDelayed = 2000
+            handler.postDelayed(runnable, secondsDelayed.toLong())
         })
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE

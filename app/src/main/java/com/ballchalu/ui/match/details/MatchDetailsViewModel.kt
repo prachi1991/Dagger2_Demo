@@ -309,7 +309,7 @@ class MatchDetailsViewModel @Inject constructor(
         if (providerId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
             oddJsonObject.getJSONObject(ConstantsBase.HEROIC_COMMENTARY).let {
                 if (it.getString(ConstantsBase.event).isNotEmpty()) {
-                    betStatus = if (checkStatus()) ConstantsBase.betOpen else ConstantsBase.betClose
+                    parseBetStatus()
                     _betStatusEvent.postValue(
                         Event(
                             it.getString(ConstantsBase.event).toLowerCase(
@@ -320,6 +320,10 @@ class MatchDetailsViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun parseBetStatus() {
+        betStatus = if (checkStatus()) ConstantsBase.betOpen else ConstantsBase.betClose
     }
 
     //Checking status of all market for bet screen
@@ -511,7 +515,7 @@ class MatchDetailsViewModel @Inject constructor(
 
     //Mqtt set bet status
     private fun setBatStatus(isOpen: Boolean) {
-        _betStatusEvent.postValue(Event(if (isOpen) ConstantsBase.betOpen else ConstantsBase.betClose))
+//        _betStatusEvent.postValue(Event(if (isOpen) ConstantsBase.betOpen else ConstantsBase.betClose))
 
     }
 
