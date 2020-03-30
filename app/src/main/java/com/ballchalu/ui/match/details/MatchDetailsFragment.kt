@@ -167,7 +167,6 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvEndingDigitTitle.text = market.betfairMarketType
             binding.llEndingDigitSection.visibility =
                 if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
-            binding.tvEvenOddType.text = market.betfairMarketType
             endingDigitAdapter?.setItemList(market.runners, market.status, market.id)
         })
 
@@ -207,7 +206,9 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvTeam2Back.text = if (runners?.canLay == true) runners.lay else ""
             binding.tvTeam2Lay.isClickable = (runners?.canBack == true)
             binding.tvTeam2Back.isClickable = (runners?.canLay == true)
-            viewModel.bwlTeamRunner = runners
+            runners?.betfairRunnerName?.let {
+                viewModel.bwlTeamRunner = runners
+            }
         })
 
         viewModel.updateEndingDigitDataEvent.observe(

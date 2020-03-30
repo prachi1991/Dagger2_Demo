@@ -37,7 +37,6 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
-    private var lastBetStatus: String? = null
     var betStatus: String? = null
 
     var title: String? = null
@@ -185,7 +184,6 @@ class MatchDetailsViewModel @Inject constructor(
         callPositionDetailsAsync(contestsId)
         data?.let {
             _matchResult.postValue(Event(data))
-            lastBetStatus = it.match?.heroicCommentary?.event ?: ""
             batTeamRunName = it.match?.score?.batteamname ?: ""
             bwlTeamRunName = it.match?.score?.bwlteamname ?: ""
             _updateScoreEvent.postValue(Event(it.match?.score))
@@ -313,9 +311,9 @@ class MatchDetailsViewModel @Inject constructor(
         if (providerId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
             oddJsonObject.getJSONObject(ConstantsBase.HEROIC_COMMENTARY).let {
                 Timber.e(oddJsonObject.toString())
-                lastBetStatus = it.getString(ConstantsBase.event).toLowerCase(Locale.ENGLISH)
-                if (lastBetStatus?.isNotEmpty() == true) {
-                    _betStatusEvent.postValue(Event(lastBetStatus!!))
+                val lastBetStatus = it.getString(ConstantsBase.event).toLowerCase(Locale.ENGLISH)
+                if (lastBetStatus.isNotEmpty()) {
+                    _betStatusEvent.postValue(Event(lastBetStatus))
                     if (isFPBT(lastBetStatus))
                         parseBetStatus()
 
