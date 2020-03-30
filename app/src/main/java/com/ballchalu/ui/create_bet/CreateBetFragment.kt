@@ -14,7 +14,6 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.R
 import com.ballchalu.databinding.FragmentCreateBetBinding
-import com.ballchalu.ui.create_bet.adapter.InPlayBetMatchListAdapter
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListingItem
@@ -34,9 +33,8 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
 
     private lateinit var binding: FragmentCreateBetBinding
     var count = 0
-    private var inPlayListAdapter: InPlayBetMatchListAdapter? = null
-    private var upcomingListAdapter: InPlayMatchListingAdapter? = null
 
+    private var isCountMultiply = true
     internal var listener: OnBetResponseSuccessListener? = null
 
     override fun onCreateView(
@@ -94,7 +92,7 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
                 viewModel.createSessionBetReq = it
             }
             updateUI(viewModel.createBetReq, viewModel.createSessionBetReq)
-
+            isCountMultiply = betDetailsBundle?.isCountMultiply == true
         }
 
         return binding.root
@@ -113,9 +111,11 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
     }
 
     private fun updateRateCount() {
+        val count = if (isCountMultiply) binding.tvOddValue.text.toString().toDouble() else 1.0
+
         binding.tvReturnRate.text = String.format(
             "%.2f",
-            (binding.tvCount.text.toString().toDouble() * binding.tvOddValue.text.toString().toDouble())
+            (count * binding.tvCount.text.toString().toDouble())
         )
     }
 

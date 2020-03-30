@@ -543,7 +543,7 @@ class MatchDetailsViewModel @Inject constructor(
                     heroicMarketType = ConstantsBase.MATCH_WINNER,
                     contestsId = contestsId,
                     evenTypeTitle = runner?.betfairRunnerName
-                )
+                ), isCountMultiply = !isLay
             )
         )
     }
