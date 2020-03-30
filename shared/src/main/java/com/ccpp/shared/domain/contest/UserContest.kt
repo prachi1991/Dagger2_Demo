@@ -18,7 +18,7 @@ class UserContest (
     var winnedCoins: Any? = null,
     @SerializedName("available_coins")
     @Expose
-    var availableCoins: Int? = null,
+    var availableCoins: String? = null,
     @SerializedName("contest")
     @Expose
     var contest: Contest? = null,
