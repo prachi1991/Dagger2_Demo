@@ -12,7 +12,6 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.ContestCountListener
 import com.ballchalu.ui.contest.ContestViewModel
-import com.ballchalu.ui.contest.MainContestFragment
 import com.ballchalu.ui.contest.user_contest.adapter.UserContestAdapter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListing

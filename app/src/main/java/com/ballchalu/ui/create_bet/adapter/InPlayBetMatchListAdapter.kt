@@ -1,16 +1,13 @@
 package com.ballchalu.ui.create_bet.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.RowBetLivePlayMatchBinding
-import com.ballchalu.databinding.RowInPlayMatchListingBinding
 import com.ccpp.shared.domain.MatchListingItem
-import com.ccpp.shared.util.ConstantsBase
 
 
-class InPlayBetMatchListAdapter() :
+class InPlayBetMatchListAdapter :
     RecyclerView.Adapter<InPlayBetMatchListAdapter.ViewHolder>() {
     private var list: List<MatchListingItem>? = null
     private var matchStatus: String = ""
@@ -29,7 +26,8 @@ class InPlayBetMatchListAdapter() :
         holder.setData(list?.get(position), position)
     }
 
-    fun setItemList(list: List<MatchListingItem>?, match_status: String
+    fun setItemList(
+        list: List<MatchListingItem>?, match_status: String
     ) {
         this.list = list
         this.matchStatus = match_status

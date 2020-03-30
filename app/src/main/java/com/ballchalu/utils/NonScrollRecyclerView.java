@@ -10,12 +10,15 @@ public class NonScrollRecyclerView extends RecyclerView {
     public NonScrollRecyclerView(Context context) {
         super(context);
     }
+
     public NonScrollRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
     public NonScrollRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int heightMeasureSpec_custom = MeasureSpec.makeMeasureSpec(

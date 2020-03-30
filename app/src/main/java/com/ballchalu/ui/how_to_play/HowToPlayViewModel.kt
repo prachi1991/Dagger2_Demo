@@ -5,7 +5,4 @@ import javax.inject.Inject
 
 class HowToPlayViewModel @Inject constructor(
 
-):BaseViewModel()
-{
-
-}
+) : BaseViewModel()

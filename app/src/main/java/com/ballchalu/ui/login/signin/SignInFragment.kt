@@ -41,7 +41,7 @@ class SignInFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel.loginFormState.observe(viewLifecycleOwner, EventObserver {
-            val loginState = it ?: return@EventObserver
+            val loginState = it
             if (loginState.usernameError != null) {
                 binding.tvUsernameValue.error = getString(loginState.usernameError!!)
             }

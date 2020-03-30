@@ -15,9 +15,9 @@ import javax.inject.Singleton
 open class NotificationDialog(private val context: Context) {
 
     private var mDialog: Dialog = Dialog(context)
-    private var view : View? = null
+    private var view: View? = null
 
-    open fun showMesssage(isLoading: Boolean,message: String) {
+    open fun showMesssage(isLoading: Boolean, message: String) {
         if (isLoading) {
             show(message)
         } else {
@@ -25,8 +25,8 @@ open class NotificationDialog(private val context: Context) {
         }
     }
 
-    fun setView(message: String){
-        if(view != null){
+    fun setView(message: String) {
+        if (view != null) {
             val tvMessage = view?.findViewById<TextView>(R.id.tvMessage)
             tvMessage?.text = message
         }
@@ -37,9 +37,15 @@ open class NotificationDialog(private val context: Context) {
             view = LayoutInflater.from(context).inflate(R.layout.notification_dialog_loading, null)
             setView(message)
             mDialog.window?.setGravity(Gravity.TOP)
-            mDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+            mDialog.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             mDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            mDialog.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            mDialog.window?.setFlags(
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+            )
             mDialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
             mDialog.setCancelable(false)
             mDialog.setContentView(view!!)

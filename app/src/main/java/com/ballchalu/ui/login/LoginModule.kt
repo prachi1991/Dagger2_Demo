@@ -26,5 +26,4 @@ internal abstract class LoginModule {
     internal abstract fun bindViewModel(viewModel: LoginViewModel): ViewModel
 
 
-
 }

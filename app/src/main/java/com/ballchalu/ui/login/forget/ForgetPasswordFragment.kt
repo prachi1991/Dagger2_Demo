@@ -36,7 +36,7 @@ class ForgetPasswordFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel.loginFormState.observe(viewLifecycleOwner, EventObserver {
-            val loginState = it ?: return@EventObserver
+            val loginState = it
             if (loginState.usernameError != null) {
                 binding.edtEmailValue.error = getString(loginState.usernameError!!)
             }

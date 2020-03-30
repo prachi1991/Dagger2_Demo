@@ -39,6 +39,7 @@ class ForgetPasswordViewModel @Inject constructor(private val loginRepository: L
             _loginResult.postValue(Event(result))
         }
     }
+
     fun validateData(username: String) {
         if (!isUserNameValid(username)) {
             _loginForm.value =

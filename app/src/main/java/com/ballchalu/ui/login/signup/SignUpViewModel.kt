@@ -107,7 +107,4 @@ class SignUpViewModel @Inject constructor(private val loginRepository: LoginRepo
         return password.length > 5
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
 }

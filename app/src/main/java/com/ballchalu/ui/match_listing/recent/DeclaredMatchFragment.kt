@@ -42,7 +42,7 @@ class DeclaredMatchFragment : BaseFragment(), DeclaredAdapter.OnItemClickListene
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding?.pullRefreshLayout?.setOnRefreshListener {
+        binding.pullRefreshLayout.setOnRefreshListener {
             getMatchesListing()
         }
         getMatchesListing()

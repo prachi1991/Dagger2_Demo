@@ -31,7 +31,7 @@ class LedgersAdapter : RecyclerView.Adapter<LedgersAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return list.size ?: 0
+        return list.size
     }
 
 

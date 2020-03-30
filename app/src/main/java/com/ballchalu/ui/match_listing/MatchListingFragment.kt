@@ -30,7 +30,6 @@ class MatchListingFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemCli
     private var upcomingListAdapter: InPlayMatchListingAdapter? = null
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,25 +50,25 @@ class MatchListingFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemCli
     }
 
     private fun getMatchesListing() {
-        viewModel.callMatchListing(ConstantsBase.EVENT_TYPE,ConstantsBase.IN_PLAY)
-        viewModel.callMatchListing(ConstantsBase.EVENT_TYPE,ConstantsBase.UPCOMING)
+        viewModel.callMatchListing(ConstantsBase.EVENT_TYPE, ConstantsBase.IN_PLAY)
+        viewModel.callMatchListing(ConstantsBase.EVENT_TYPE, ConstantsBase.UPCOMING)
 
-        binding.llInplay.visibility=View.GONE
-        binding.llUpcoming.visibility=View.GONE
+        binding.llInplay.visibility = View.GONE
+        binding.llUpcoming.visibility = View.GONE
 
 
-        viewModel.inPlayListEvent.observe(viewLifecycleOwner,EventObserver{
+        viewModel.inPlayListEvent.observe(viewLifecycleOwner, EventObserver {
 
-            if(it.matches?.size!=0)
-                binding.llInplay.visibility=View.VISIBLE
+            if (it.matches?.size != 0)
+                binding.llInplay.visibility = View.VISIBLE
 
             inPlayListAdapter = InPlayMatchListingAdapter(this)
             binding.rvInPlayMatchListing.adapter = inPlayListAdapter
-            inPlayListAdapter?.setItemList(it.matches,ConstantsBase.IN_PLAY)
+            inPlayListAdapter?.setItemList(it.matches, ConstantsBase.IN_PLAY)
         })
-        viewModel.upcomingListEvent.observe(viewLifecycleOwner,EventObserver{
-            if(it.matches?.size!=0)
-                binding.llUpcoming.visibility=View.VISIBLE
+        viewModel.upcomingListEvent.observe(viewLifecycleOwner, EventObserver {
+            if (it.matches?.size != 0)
+                binding.llUpcoming.visibility = View.VISIBLE
             upcomingListAdapter = InPlayMatchListingAdapter(this)
             binding.rvUpcomingMatchListing.adapter = upcomingListAdapter
             upcomingListAdapter?.setItemList(it.matches, ConstantsBase.UPCOMING)

@@ -71,7 +71,7 @@ class SignInUpContainerFragment : BaseFragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        viewModel.callbackManager?.onActivityResult(requestCode, resultCode, data);
+        viewModel.callbackManager?.onActivityResult(requestCode, resultCode, data)
         if (requestCode == AppConstants.GOOGLE_SIGN_IN_REQUEST) {
             viewModel.handleSignInResult(GoogleSignIn.getSignedInAccountFromIntent(data))
         }

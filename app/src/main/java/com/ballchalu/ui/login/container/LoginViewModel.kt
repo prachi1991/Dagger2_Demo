@@ -77,7 +77,7 @@ class LoginViewModel @Inject constructor(
     fun initFacebook(context: Fragment) {
         callbackManager = CallbackManager.Factory.create()
         LoginManager.getInstance()
-            .logInWithReadPermissions(context, listOf("email", "public_profile"));
+            .logInWithReadPermissions(context, listOf("email", "public_profile"))
         LoginManager.getInstance().registerCallback(callbackManager,
             object : FacebookCallback<com.facebook.login.LoginResult?> {
                 override fun onSuccess(loginResult: com.facebook.login.LoginResult?) { // App code
@@ -105,7 +105,7 @@ class LoginViewModel @Inject constructor(
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build()
-        mGoogleSignInClient = GoogleSignIn.getClient(App.instance, gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(App.instance, gso)
     }
 
     private val _loggedInEvent = MutableLiveData<Event<String>>()

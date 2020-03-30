@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemHowToPlayLayoutBinding
 
 
-class HowToPlayAdapter() :
+class HowToPlayAdapter :
     RecyclerView.Adapter<HowToPlayAdapter.ViewHolder>() {
     // private var list: ArrayList<Contest>? = null
 
@@ -22,7 +22,7 @@ class HowToPlayAdapter() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-      //  holder.setData(list?.get(position), position)
+        //  holder.setData(list?.get(position), position)
     }
 
 //    fun setItemList(list: ArrayList<Contest>?) {
