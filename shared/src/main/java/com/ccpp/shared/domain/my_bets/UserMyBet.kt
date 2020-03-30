@@ -79,7 +79,7 @@ data class UserMyBet(
         getInfoModelObject()?.session?.heroicTitle ?: ""
 
     fun getSessionRate(): String {
-        return if (actions.equals(ConstantsBase.YES, true))
+        return if (action.equals(ConstantsBase.YES, true))
             getInfoModelObject()?.session?.sessionRun?.yesRate ?: ""
         else
             getInfoModelObject()?.session?.sessionRun?.noRate ?: ""
