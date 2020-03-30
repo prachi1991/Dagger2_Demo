@@ -37,7 +37,9 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
+    private var lastBetStatus: String? = null
     var betStatus: String? = null
+
     var title: String? = null
     val myBetFragment: MyBetsFragment by lazy {
         MyBetsFragment().apply {
@@ -65,8 +67,8 @@ class MatchDetailsViewModel @Inject constructor(
     var batTeamRunId: Int? = 0
     var bwlTeamRunId: Int? = 0
 
-    var batTeamRunName = ""
-    var bwlTeamRunName = ""
+    private var batTeamRunName = ""
+    private var bwlTeamRunName = ""
 
     var providerId: Int = 0
     var matchId: Int = 0
@@ -183,11 +185,13 @@ class MatchDetailsViewModel @Inject constructor(
         callPositionDetailsAsync(contestsId)
         data?.let {
             _matchResult.postValue(Event(data))
+            lastBetStatus = it.match?.heroicCommentary?.event ?: ""
             batTeamRunName = it.match?.score?.batteamname ?: ""
             bwlTeamRunName = it.match?.score?.bwlteamname ?: ""
             _updateScoreEvent.postValue(Event(it.match?.score))
             setMarketData(data.markets)
             setSessionData(data.sessions)
+            parseBetStatus()
         }
     }
 
@@ -276,8 +280,10 @@ class MatchDetailsViewModel @Inject constructor(
         }
 //        _marketStatusEvent.postValue(Event)
         if (market?.status?.equals(ConstantsBase.suspend, true) == true) {
+            batTeamRunner?.status = ConstantsBase.suspend
+            bwlTeamRunner?.status = ConstantsBase.suspend
             _batTeamBhaavEvent.postValue(Event(Runner()))
-            _batTeamBhaavEvent.postValue(Event(Runner()))
+            _bwlTeamBhaavEvent.postValue(Event(Runner()))
         }
     }
 
@@ -306,21 +312,19 @@ class MatchDetailsViewModel @Inject constructor(
     private fun updateEvent(oddJsonObject: JSONObject) {
         if (providerId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
             oddJsonObject.getJSONObject(ConstantsBase.HEROIC_COMMENTARY).let {
-                if (it.getString(ConstantsBase.event).isNotEmpty()) {
-                    parseBetStatus()
-                    _betStatusEvent.postValue(
-                        Event(
-                            it.getString(ConstantsBase.event).toLowerCase(
-                                Locale.ENGLISH
-                            )
-                        )
-                    )
+                Timber.e(oddJsonObject.toString())
+                lastBetStatus = it.getString(ConstantsBase.event).toLowerCase(Locale.ENGLISH)
+                if (lastBetStatus?.isNotEmpty() == true) {
+                    _betStatusEvent.postValue(Event(lastBetStatus!!))
+                    if (isFPBT(lastBetStatus))
+                        parseBetStatus()
+
                 }
             }
         }
     }
 
-    fun parseBetStatus() {
+    private fun parseBetStatus() {
         betStatus = if (checkStatus()) ConstantsBase.betOpen else ConstantsBase.betClose
     }
 
@@ -358,7 +362,6 @@ class MatchDetailsViewModel @Inject constructor(
     val scoreUpdate = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             intent.getStringExtra(ConstantsBase.PUB_NUB)?.let {
-                Timber.e(it)
                 try {
                     val oddJsonObject = JSONObject(it)
                     if (oddJsonObject.has(ConstantsBase.type)) {
@@ -366,6 +369,7 @@ class MatchDetailsViewModel @Inject constructor(
                         when {
                             type.equals(ConstantsBase.score, ignoreCase = true) -> {
                                 if (providerId == oddJsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
+                                    Timber.e(it)
                                     parseScore(oddJsonObject)
                                 }
                             }
@@ -397,7 +401,7 @@ class MatchDetailsViewModel @Inject constructor(
                 )
         batTeamRunName = score.batteamname ?: ""
         bwlTeamRunName = score.bwlteamname ?: ""
-        _updateScoreEvent.postValue(Event(score))
+        _updateScoreEvent.value = (Event(score))
     }
 
     private val _updateSessionEvent = MutableLiveData<Event<SessionsItem>>()
@@ -407,6 +411,7 @@ class MatchDetailsViewModel @Inject constructor(
     private fun updateSession(sessionObject: JSONObject) {
         val jsonObject: JSONObject = sessionObject.getJSONObject(ConstantsBase.SESSION)
         if (providerId == jsonObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
+            Timber.e(jsonObject.toString())
             val sessionsItem: SessionsItem =
                 Gson().fromJson(sessionObject.toString(), SessionsItem::class.java)
             _updateSessionEvent.postValue(Event(sessionsItem))
@@ -420,12 +425,13 @@ class MatchDetailsViewModel @Inject constructor(
     val updateEndingDigitDataEvent: LiveData<Event<Market>> = _updateEndingDigitDataEvent
 
     //Mqtt Market Updates
-    private fun parseMarket(oddJsonObject: JSONObject) {
-        if (!oddJsonObject.has(ConstantsBase.KEY_MARKET)) return
-        val marketObject = oddJsonObject.getJSONObject(ConstantsBase.KEY_MARKET)
+    private fun parseMarket(jsonObject: JSONObject) {
+        if (!jsonObject.has(ConstantsBase.KEY_MARKET)) return
+        val marketObject = jsonObject.getJSONObject(ConstantsBase.KEY_MARKET)
         if (providerId == marketObject.getInt(ConstantsBase.KEY_MATCH_ID)) {
+            Timber.e(jsonObject.toString())
             val market: Market? =
-                GsonBuilder().create().fromJson(oddJsonObject.toString(), MqttMarket::class.java)
+                GsonBuilder().create().fromJson(jsonObject.toString(), MqttMarket::class.java)
                     ?.market
             when (market?.heroicMarketType?.toLowerCase(Locale.ENGLISH)) {
                 ConstantsBase.EVEN_ODD -> {
@@ -490,8 +496,10 @@ class MatchDetailsViewModel @Inject constructor(
 //                    setDrawTeamBhaav(run3?.B, run3?.L, run3?.canBack, run3?.canLay)
             }
             ConstantsBase.suspend, ConstantsBase.close -> {
-                _batTeamBhaavEvent.postValue(Event(Runner()))
-                _batTeamBhaavEvent.postValue(Event(Runner()))
+                batTeamRunner?.status = ConstantsBase.suspend
+                bwlTeamRunner?.status = ConstantsBase.suspend
+                _batTeamBhaavEvent.value = (Event(Runner()))
+                _bwlTeamBhaavEvent.value = (Event(Runner()))
             }
         }
     }
@@ -514,7 +522,6 @@ class MatchDetailsViewModel @Inject constructor(
     //Mqtt set bet status
     private fun setBatStatus() {
         _betStatusEvent.value = Event(betStatus ?: "")
-
     }
 
 
@@ -611,5 +618,11 @@ class MatchDetailsViewModel @Inject constructor(
             )
         )
     }
+
+    fun isFPBT(status: String?): Boolean = !(status.equals(ConstantsBase.FREE_HIT, true) ||
+            status.equals(ConstantsBase.PLAYER_INJURED, true) ||
+            status.equals(ConstantsBase.THIRD_UMPIRE, true) ||
+            status.equals(ConstantsBase.BALL_START, true))
+
 
 }

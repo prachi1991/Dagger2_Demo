@@ -132,7 +132,6 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvMatchTeam1.text = response?.match?.team1
             binding.tvMatchTeam2.text = response?.match?.team2
             binding.tvBetStatus.text = response?.match?.heroicCommentary?.event ?: ""
-            viewModel.parseBetStatus()
             val secondsDelayed = 2000
             handler.postDelayed(runnable, secondsDelayed.toLong())
         })
@@ -173,12 +172,8 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         })
 
         viewModel.betStatusEvent.observe(viewLifecycleOwner, EventObserver {
-            if (!(it.equals(ConstantsBase.FREE_HIT, true) ||
-                        it.equals(ConstantsBase.PLAYER_INJURED, true) ||
-                        it.equals(ConstantsBase.THIRD_UMPIRE, true) ||
-                        it.equals(ConstantsBase.BALL_START, true))
-            ) {
-                handler.removeCallbacks(runnable)
+            handler.removeCallbacks(runnable)
+            if (viewModel.isFPBT(it)) {
                 val secondsDelayed = 2000
                 handler.postDelayed(runnable, secondsDelayed.toLong())
             }

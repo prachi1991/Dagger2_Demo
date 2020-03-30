@@ -32,7 +32,7 @@ data class Runner(
     var status: String? = null,
 
     var marketId: Int? = 0,
-    var runnerPosition: Int? = null
+    var runnerPosition: Int? = 0
 
 ) {
     fun color(): Int = ColorUtils.getPositionColor(runnerPosition ?: 0)
