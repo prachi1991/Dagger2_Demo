@@ -81,8 +81,8 @@ class MatchDetailsViewModel @Inject constructor(
     val matchResult: LiveData<Event<MatchDetailsRes?>> = _matchResult
 
     fun callMatchDetailsAsync() {
-        loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(Event(true))
             when (val result = loginRepository.callMatchDetailsAsync(providerId)) {
                 is Results.Success -> handleSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
@@ -95,8 +95,8 @@ class MatchDetailsViewModel @Inject constructor(
 
 
     private fun callPositionDetailsAsync(contestId: Int) {
-        loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(Event(true))
             when (val result = loginRepository.callPositionDetailsAsync(contestId)) {
                 is Results.Success -> handlePositionSuccess(result.data.positions)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
@@ -412,7 +412,7 @@ class MatchDetailsViewModel @Inject constructor(
             Timber.e(jsonObject.toString())
             val sessionsItem: SessionsItem =
                 Gson().fromJson(sessionObject.toString(), SessionsItem::class.java)
-            _updateSessionEvent.postValue(Event(sessionsItem))
+            _updateSessionEvent.value = (Event(sessionsItem))
         }
     }
 
