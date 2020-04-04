@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.ballchalu.BuildConfig
 import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityNavigationBinding
@@ -35,7 +36,7 @@ class NavigationActivity : BaseActivity() {
         binding = ActivityNavigationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.lifecycleOwner = this
-
+        setBuildVersion()
 
         initNavigationDrawer()
         setObservers()
@@ -130,5 +131,13 @@ class NavigationActivity : BaseActivity() {
             binding.drawerLayout.closeDrawer(GravityCompat.END)
         } else
             binding.drawerLayout.openDrawer(GravityCompat.END)
+    }
+
+    private fun setBuildVersion() {
+        binding.tvBuildNo.text = resources.getString(R.string.build_d, BuildConfig.VERSION_CODE)
+        binding.tvVersionCode.text =
+            resources.getString(R.string.version_s, BuildConfig.VERSION_NAME)
+        binding.tvEnvironment.text = BuildConfig.ENVIRONMENT
+
     }
 }
