@@ -313,7 +313,7 @@ class MatchDetailsViewModel @Inject constructor(
                 Timber.e(oddJsonObject.toString())
                 val lastBetStatus = it.getString(ConstantsBase.event).toLowerCase(Locale.ENGLISH)
                 if (lastBetStatus.isNotEmpty()) {
-                    _betStatusEvent.postValue(Event(lastBetStatus))
+                    _betStatusEvent.value = (Event(lastBetStatus))
                     if (isFPBT(lastBetStatus))
                         parseBetStatus()
 

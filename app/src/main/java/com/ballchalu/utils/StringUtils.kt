@@ -60,7 +60,7 @@ object StringUtils {
             }
             ConstantsBase.FOUR -> {
 
-                textView?.text = "Bet Closed"
+                textView?.text = "4"
             }
             ConstantsBase.SIX -> {
 
