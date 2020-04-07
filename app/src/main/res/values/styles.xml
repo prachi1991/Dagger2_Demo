@@ -18,21 +18,6 @@
 
     -
 
-    <style name="Regular">
-
-        <item name="android:fontFamily">@font/play_bold</item>
-
-        <item name="android:textStyle">normal</item>
-
-        <item name="android:textSize">28sp</item>
-
-        <item name="android:text">sans-serif</item>
-
-    </style>
-    <style name="Base.Theme.AppTheme.progressbar">
-        <item name="colorAccent">@color/colorPrimary</item> <!-- Whatever color you want-->
-    </style>
-
     <style name="Base.Theme.AppTheme.menutitle" parent="TextAppearance.AppCompat.Medium">
         <item name="fontPath">@string/font_play_bold</item>
         <item name="android:textSize">@dimen/_14sdp</item>
@@ -44,8 +29,6 @@
     </style>
 
     <style name="Base.Theme.AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Base.Theme.AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <string name="font_play_bold">\@fonts/Play-Bold.ttf</string>
 
