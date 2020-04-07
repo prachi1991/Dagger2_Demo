@@ -55,7 +55,6 @@ class UserContestFragment : BaseFragment() {
 
         viewModel.matchUserContestResult.observe(viewLifecycleOwner, EventObserver {
             contestAdapter?.clear()
-            it.contests?.size?.let { it1 -> listener?.onUserContest(it1) }
             userContestList = it.contests as ArrayList<UserContest>?
             contestAdapter?.setItemList(userContestList, true)
         })
@@ -63,8 +62,6 @@ class UserContestFragment : BaseFragment() {
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
-
-        viewModel.getUserMatchesContest()
 
     }
 
