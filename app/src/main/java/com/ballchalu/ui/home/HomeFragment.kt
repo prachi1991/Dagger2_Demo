@@ -38,8 +38,9 @@ class HomeFragment : Fragment() {
         tabLayout = root.findViewById(R.id.tablayout) as TabLayout
         tabLayout!!.setupWithViewPager(viewPager)
 
-        val headerView=(activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
-            .inflate(R.layout.custom_tab,null,false)
+        val headerView =
+            (activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
+                .inflate(R.layout.custom_tab, null, false)
 
         val linearLayoutOne = headerView.findViewById(R.id.ll) as LinearLayout
         val linearLayout2 = headerView.findViewById(R.id.ll2) as LinearLayout
@@ -58,7 +59,8 @@ class HomeFragment : Fragment() {
         viewPager.adapter = adapter
     }
 
-    internal inner class ViewPagerAdapter(manager: FragmentManager) :FragmentPagerAdapter(manager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    internal inner class ViewPagerAdapter(manager: FragmentManager) :
+        FragmentPagerAdapter(manager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         private val mFragmentList = ArrayList<Fragment>()
         private val mFragmentTitleList = ArrayList<String>()
 

@@ -56,7 +56,7 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
 
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
             binding.tvEmail.text = it?.email ?: ""
-            binding.tvBcCoinBalance.text = it?.bc_coins.toString() ?: ""
+            binding.tvBcCoinBalance.text = it?.bc_coins.toString()
         })
         viewModel.bcCoinBuyObserver.observe(viewLifecycleOwner, EventObserver {
             model = activityViewModelProvider(viewModelFactory)

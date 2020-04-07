@@ -28,8 +28,9 @@ class WinnersAdapter :
         this.arrayList.addAll(arrayList)
         notifyDataSetChanged()
     }
+
     override fun getItemCount(): Int {
-        return arrayList.size ?: 0
+        return arrayList.size
     }
 
 
@@ -44,7 +45,7 @@ class WinnersAdapter :
     }
 
     fun clear() {
-        arrayList?.clear()
+        arrayList.clear()
         notifyDataSetChanged()
     }
 
