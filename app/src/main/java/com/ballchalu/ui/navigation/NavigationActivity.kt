@@ -3,6 +3,7 @@ package com.ballchalu.ui.navigation
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.GravityCompat
@@ -137,7 +138,10 @@ class NavigationActivity : BaseActivity() {
         binding.tvBuildNo.text = resources.getString(R.string.build_d, BuildConfig.VERSION_CODE)
         binding.tvVersionCode.text =
             resources.getString(R.string.version_s, BuildConfig.VERSION_NAME)
-        binding.tvEnvironment.text = BuildConfig.ENVIRONMENT
+        if (BuildConfig.DEBUG) {
+            binding.tvEnvironment.text = BuildConfig.ENVIRONMENT
+            binding.tvEnvironment.visibility = View.VISIBLE
+        }
 
     }
 }

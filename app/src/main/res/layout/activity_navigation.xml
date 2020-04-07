@@ -98,6 +98,8 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvEnvironment"
                     android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible"
                     android:layout_height="wrap_content"
                     android:textColor="@color/light_white_color"
                     tools:text="Staging" />
