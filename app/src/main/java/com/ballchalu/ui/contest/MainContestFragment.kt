@@ -83,7 +83,7 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
             }
         }, "ONE")
         adapter.addFragment(UserContestFragment().also {
-            it.setListeners(this)
+            //            it.setListeners(this)
             it.arguments = Bundle().apply {
                 putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
                 putBoolean(ConstantsBase.KEY_DECLARED, isDeclared)

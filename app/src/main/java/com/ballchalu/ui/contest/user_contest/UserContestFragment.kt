@@ -64,9 +64,6 @@ class UserContestFragment : BaseFragment() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
-        viewModel.createContestResult.observe(viewLifecycleOwner, EventObserver {
-            Toast.makeText(context, "You Successfully Buy Contest", Toast.LENGTH_SHORT).show()
-        })
         viewModel.getUserMatchesContest()
 
     }

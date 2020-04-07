@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
@@ -49,8 +50,15 @@ class ContestFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         initSessionAdapterAdapter()
 
+        viewModel.createContestResult.observe(viewLifecycleOwner, EventObserver { it ->
+            Toast.makeText(context, "You Successfully Buy Contest", Toast.LENGTH_SHORT).show()
+            viewModel.getAllMatchesContest()
+        })
         viewModel.matchContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             contestAdapter?.clear()
+            it.contests?.count { it.isParticipated }?.let { count ->
+                listener?.onUserContest(count)
+            }
             it.contests?.size?.let { it1 -> listener?.onAllContest(it1) }
             if (viewModel.isDeclared)
                 contestAdapter?.setItemList(it.contests)
