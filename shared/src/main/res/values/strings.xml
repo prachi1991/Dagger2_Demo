@@ -2,5 +2,4 @@
 
 <resources>
     <string name="app_name" translatable="false">BCM</string>
-    <string name="app_icon_name" translatable="false">BCM</string>
 </resources>
