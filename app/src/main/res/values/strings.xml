@@ -128,4 +128,5 @@
     <string name="dialog_desc">User buy BC Coin</string>
     <string name="build_d">Build %d</string>
     <string name="version_s">Version %s</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
