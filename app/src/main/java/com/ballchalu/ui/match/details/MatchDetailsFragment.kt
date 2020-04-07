@@ -463,8 +463,8 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         }
     }
 
-    override fun onBetSuccess(it: CreateBetRes) {
-        viewModel.handleMarketPositionList(it.marketPosition)
+    override fun onBetSuccess(createBetRes: CreateBetRes) {
+        viewModel.handleMarketPositionList(createBetRes.marketPosition)
     }
 
     override fun onSessionBetSuccess(createSessionBetRes: CreateSessionBetRes?) {
