@@ -65,14 +65,47 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"
+            android:background="#343743"
             android:fitsSystemWindows="true"
             android:textAlignment="viewEnd"
-            android:background="#343743"
             app:headerLayout="@layout/nav_header_navigation"
             app:itemIconTint="@color/menu_light_green"
             app:itemTextAppearance="@style/Base.Theme.AppTheme.menutitle"
             app:itemTextColor="@color/selector_green"
-            app:menu="@menu/menu_drawer" />
+            app:menu="@menu/menu_drawer">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical"
+                android:padding="@dimen/_10ssp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvBuildNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/light_white_color"
+                    tools:text="@string/build_d" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvVersionCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/light_white_color"
+                    tools:text="@string/version_s" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvEnvironment"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/light_white_color"
+                    tools:text="Staging" />
+
+            </LinearLayout>
+        </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
