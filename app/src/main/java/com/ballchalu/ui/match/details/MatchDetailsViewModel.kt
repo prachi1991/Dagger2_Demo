@@ -617,10 +617,10 @@ class MatchDetailsViewModel @Inject constructor(
         )
     }
 
-    fun isFPBT(status: String?): Boolean = !(status.equals(ConstantsBase.FREE_HIT, true) ||
-            status.equals(ConstantsBase.PLAYER_INJURED, true) ||
-            status.equals(ConstantsBase.THIRD_UMPIRE, true) ||
-            status.equals(ConstantsBase.BALL_START, true))
+    fun isFPBT(status: String?): Boolean = !(status.equals(ConstantsBase.Event_FREE_HIT, true) ||
+            status.equals(ConstantsBase.Event_PLAYER_INJURED, true) ||
+            status.equals(ConstantsBase.Event_THIRD_UMPIRE, true) ||
+            status.equals(ConstantsBase.Event_BALL_START, true))
 
 
 }
