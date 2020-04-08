@@ -25,6 +25,16 @@ class MqttConnection @Inject constructor(
         if (NetworkUtil.getConnectivityStatus(context) == 0) return
         if (appStatus && mqttAndroidClient?.isConnected == false)
             createConnection()
+        else subscribe()
+    }
+
+    private fun subscribe() {
+        try {
+            mqttAndroidClient?.subscribe(topic, 0)
+            context.sendBroadcast(Intent(mqttAction))
+        } catch (e: MqttException) {
+            Timber.e(e)
+        }
     }
 
     private fun createConnection() {
@@ -35,12 +45,7 @@ class MqttConnection @Inject constructor(
                     val message = MqttMessage("Hello, I am Android Mqtt Client.".toByteArray())
                     message.qos = 2
                     message.isRetained = false
-                    try {
-                        mqttAndroidClient.subscribe(topic, 0)
-                        context.sendBroadcast(Intent(mqttAction))
-                    } catch (e: MqttException) {
-                        Timber.e(e)
-                    }
+                    subscribe()
                 }
 
                 override fun onFailure(arg0: IMqttToken, arg1: Throwable) {
