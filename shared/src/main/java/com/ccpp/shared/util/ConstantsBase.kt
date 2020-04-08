@@ -28,6 +28,7 @@ object ConstantsBase {
     const val open = "OPEN"
     const val suspend = "SUSPEND"
     const val close = "CLOSE"
+    const val KEY_LIVE_USER = "liveUser"
 
     const val LAY = "lay"
     const val BACK = "back"

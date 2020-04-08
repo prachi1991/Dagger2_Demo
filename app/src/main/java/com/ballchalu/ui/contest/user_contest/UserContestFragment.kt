@@ -78,6 +78,10 @@ class UserContestFragment : BaseFragment() {
                         ConstantsBase.KEY_PROVIDER_ID,
                         contestModel.contest?.match?.providerId ?: 0
                     )
+                    val liveUser = contestModel.contest?.spots?.minus(
+                        contestModel.contest?.availableSpots ?: 1
+                    ) ?: 1
+                    putInt(ConstantsBase.KEY_LIVE_USER, liveUser)
                     putInt(ConstantsBase.KEY_CONTESTS_ID, contestModel.id ?: 0)
                     putString(ConstantsBase.KEY_TITLE, contestModel.contest?.title)
                     putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, contestModel.contest?.id ?: 0)

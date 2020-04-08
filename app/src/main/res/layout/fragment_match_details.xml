@@ -80,7 +80,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:layout_toStartOf="@id/ivLive"
-                            android:text="1 Users"
+                            android:text="@string/d_users"
                             android:textColor="@color/text_color_grey"
                             android:textSize="@dimen/_10sdp" />
 

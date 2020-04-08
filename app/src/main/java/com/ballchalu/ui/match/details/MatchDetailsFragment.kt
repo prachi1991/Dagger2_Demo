@@ -40,6 +40,7 @@ import javax.inject.Inject
 
 class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSuccessListener {
 
+    private var liveUser: Int = 0
     private val handler: Handler = Handler()
     private var snackBar: Snackbar? = null
     private var sessionAdapter: SessionAdapter? = null
@@ -61,6 +62,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             lifecycleOwner = this@MatchDetailsFragment
             model = viewModel
             tvContest.text = viewModel.title
+            tvUserCount.text = resources.getString(R.string.d_users, liveUser)
         }
         if (viewModel.isDeclared)
             setWinnerListener()
@@ -97,6 +99,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             viewModel.contestsMatchId = it.getInt(ConstantsBase.KEY_CONTESTS_MATCH_ID)
             viewModel.matchId = it.getInt(ConstantsBase.KEY_MATCH_ID)
             viewModel.title = it.getString(ConstantsBase.KEY_TITLE)
+            liveUser = it.getInt(ConstantsBase.KEY_LIVE_USER)
             viewModel.isDeclared = it.getBoolean(ConstantsBase.KEY_DECLARED)
         }
     }
