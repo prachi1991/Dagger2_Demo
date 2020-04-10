@@ -58,13 +58,13 @@ class MatchDetailsViewModel @Inject constructor(
 
     private var endingDigitMarket: Market? = null
     private var evenOddMarket: Market? = null
-    private var sessionMarket: Market? = null
     var evenMarket: RunnersItem? = RunnersItem()
     var oddMarket: RunnersItem? = RunnersItem()
     var bwlTeamRunner: Runner? = null
     var batTeamRunner: Runner? = null
     var batTeamRunId: Int? = 0
     var bwlTeamRunId: Int? = 0
+    var sessionCount: Int = 0
 
     private var batTeamRunName = ""
     private var bwlTeamRunName = ""
@@ -190,6 +190,7 @@ class MatchDetailsViewModel @Inject constructor(
             setMarketData(data.markets)
             setSessionData(data.sessions)
             parseBetStatus()
+            calculateTotalCount()
         }
     }
 
@@ -198,9 +199,11 @@ class MatchDetailsViewModel @Inject constructor(
 
     //API setting Session data
     private fun setSessionData(sessions: List<SessionsItem>?) {
+        sessionCount = 0
         sessions?.filter {
             it.session?.status == ConstantsBase.suspend || it.session?.status == ConstantsBase.open
         }?.let {
+            sessionCount = it.size
             _sessionEvent.postValue(Event(it))
         }
     }
@@ -383,6 +386,7 @@ class MatchDetailsViewModel @Inject constructor(
                     Timber.e(e)
                 }
             }
+            calculateTotalCount()
         }
     }
 
@@ -622,5 +626,17 @@ class MatchDetailsViewModel @Inject constructor(
             status.equals(ConstantsBase.Event_THIRD_UMPIRE, true) ||
             status.equals(ConstantsBase.Event_BALL_START, true))
 
+    private val _allCountObserver = MutableLiveData<Event<Int>>()
+    val allCountObserver: LiveData<Event<Int>> = _allCountObserver
+
+    private fun calculateTotalCount() {
+        var count = 0
+        /*if (bwlTeamRunner != null && bwlTeamRunner != null)*/ count++
+        if (evenOddMarket?.runners?.isNotEmpty() == true) count++
+        count += sessionCount
+        if (endingDigitMarket?.runners?.isNotEmpty() == true) count++
+
+        _allCountObserver.postValue(Event(count))
+    }
 
 }

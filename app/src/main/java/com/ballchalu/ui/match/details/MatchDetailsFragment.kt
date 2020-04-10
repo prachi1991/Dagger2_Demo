@@ -150,6 +150,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.rvSession.visibility =
                 if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
             sessionAdapter?.setItemList(sessionList)
+            binding.tvCountSession.text = sessionList?.size.toString()
         })
 
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
@@ -160,10 +161,12 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvMarketType.text = market?.betfairMarketType
             binding.tvMatchTeam1.text = market?.runners?.get(0)?.runner?.betfairRunnerName
             binding.tvMatchTeam2.text = market?.runners?.get(1)?.runner?.betfairRunnerName
+            binding.tvCountMarket.text = if (market?.runners?.isNotEmpty() == true) "1" else "0"
         })
 
-        viewModel.evenOddMarketEvent.observe(viewLifecycleOwner, EventObserver {
-            setEvenOddData(it)
+        viewModel.evenOddMarketEvent.observe(viewLifecycleOwner, EventObserver { market ->
+            setEvenOddData(market)
+            binding.tvCountEvenOdd.text = if (market.runners?.isNotEmpty() == true) "1" else "0"
         })
 
         viewModel.endingDigitMarketEvent.observe(viewLifecycleOwner, EventObserver { market ->
@@ -171,6 +174,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.llEndingDigitSection.visibility =
                 if (market.runners?.isNotEmpty() == true) View.VISIBLE else View.GONE
             endingDigitAdapter?.setItemList(market.runners, market.status, market.id)
+            binding.tvCountEndingDigit.text = if (market.runners?.isNotEmpty() == true) "1" else "0"
         })
 
         viewModel.betStatusEvent.observe(viewLifecycleOwner, EventObserver {
@@ -279,6 +283,9 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         binding.pullRefreshLayout.setOnRefreshListener {
             viewModel.callMatchDetailsAsync()
         }
+        viewModel.allCountObserver.observe(viewLifecycleOwner, EventObserver {
+            binding.tvCountAll.text = it.toString()
+        })
 
         viewModel.openBetScreenEvent.observe(viewLifecycleOwner, EventObserver {
             //            findNavController().navigate(R.id.nav_create_bet, bundle)
@@ -428,6 +435,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         } catch (e: Exception) {
             Timber.e(e)
         }
+        viewModel.sessionCount = sessionAdapter?.itemCount ?: 0
     }
 
     private fun showNetworkError() {
