@@ -11,10 +11,14 @@ import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.ContestCountListener
 import com.ballchalu.ui.contest.ContestViewModel
 import com.ballchalu.ui.contest.adapter.ContestAdapter
+import com.ballchalu.ui.navigation.NavigationActivity
+import com.ballchalu.ui.navigation.NavigationViewModel
+import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListing
 import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.util.ConstantsBase
+import com.ccpp.shared.util.activityViewModelProvider
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -26,6 +30,7 @@ class ContestFragment : BaseFragment() {
 
     private lateinit var binding: FragmentContestBinding
     private lateinit var viewModel: ContestViewModel
+    private lateinit var model: NavigationViewModel
 
     private var allContestList: ArrayList<Contest>? = null
 
@@ -51,6 +56,8 @@ class ContestFragment : BaseFragment() {
         initSessionAdapterAdapter()
 
         viewModel.createContestResult.observe(viewLifecycleOwner, EventObserver { it ->
+            model = activityViewModelProvider(viewModelFactory)
+            model.userDetails.postValue(Event(it.userContest?.user))
             Toast.makeText(context, "You Successfully Buy Contest", Toast.LENGTH_SHORT).show()
             viewModel.getAllMatchesContest()
         })
