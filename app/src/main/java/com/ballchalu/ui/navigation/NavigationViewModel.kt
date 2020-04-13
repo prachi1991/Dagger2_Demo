@@ -62,7 +62,6 @@ class NavigationViewModel @Inject constructor(
     val declareEvent = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             intent.getStringExtra(ConstantsBase.ACTION_DECLARE)?.let {
-                Timber.e("MQTT EVENT declareEvent1234  $it")
                 try {
                     val oddJsonObject = JSONObject(it)
                     if (oddJsonObject.has(ConstantsBase.type)) {
@@ -71,7 +70,6 @@ class NavigationViewModel @Inject constructor(
                                 DeclareModel::class.java
                             ).message?.match_declare == true
                         ) {
-                            Timber.e("MQTT EVENT declareEvent1234 Calling callUserDetails...........")
                             callUserDetails()
                         }
 
