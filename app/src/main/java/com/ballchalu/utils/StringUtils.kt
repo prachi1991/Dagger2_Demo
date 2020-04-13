@@ -3,6 +3,7 @@ package com.ballchalu.utils
 import android.widget.TextView
 import com.ballchalu.application.App
 import com.ccpp.shared.util.ConstantsBase
+import java.util.*
 
 object StringUtils {
     fun getString(id: Int, arg: String): String? {
@@ -10,7 +11,7 @@ object StringUtils {
     }
 
     fun setEvents(event: String, textView: TextView?) {
-        when (event) {
+        when (event.toLowerCase(Locale.getDefault())) {
             ConstantsBase.Event_WICKET -> {
                 textView?.text = "Out"
             }

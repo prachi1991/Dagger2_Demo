@@ -2,6 +2,7 @@ package com.ballchalu.ui.navigation
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -19,6 +20,7 @@ import com.ballchalu.ui.login.container.LoginActivity
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.user.UserData
+import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -41,6 +43,7 @@ class NavigationActivity : BaseActivity() {
 
         initNavigationDrawer()
         setObservers()
+        registerReceiver()
     }
 
     private fun initNavigationDrawer() {
@@ -143,5 +146,19 @@ class NavigationActivity : BaseActivity() {
             binding.tvEnvironment.visibility = View.VISIBLE
         }
 
+    }
+
+
+    private fun registerReceiver() {
+        registerReceiver(viewModel.declareEvent, IntentFilter(ConstantsBase.MATCH_DECLARED))
+    }
+
+    private fun unRegisterReceiver() {
+        unregisterReceiver(viewModel.declareEvent)
+    }
+
+    override fun onDestroy() {
+        unRegisterReceiver()
+        super.onDestroy()
     }
 }

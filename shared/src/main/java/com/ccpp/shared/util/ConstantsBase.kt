@@ -5,6 +5,8 @@ object ConstantsBase {
     const val BHAAV_TYPE_BACK = "bhaav_type_back"
     const val BHAAV_TYPE_LAY = "bhaav_type_lay"
     const val HEROIC_COMMENTARY = "heroic_commentary"
+    const val MATCH_DECLARED = "match_declare"
+    const val ACTION_DECLARE = "declareMatch"
     const val ODDS = "odds"
     const val STATUS_SUCCESS = 200
     const val REQUEST_TIMEOUT = 60

@@ -36,6 +36,7 @@ import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSuccessListener {
@@ -134,7 +135,10 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         viewModel.matchResult.observe(viewLifecycleOwner, EventObserver { response ->
             binding.tvMatchTeam1.text = response?.match?.team1
             binding.tvMatchTeam2.text = response?.match?.team2
-            binding.tvBetStatus.text = response?.match?.heroicCommentary?.event ?: ""
+            StringUtils.setEvents(
+                response?.match?.heroicCommentary?.event ?: "",
+                binding.tvBetStatus
+            )
             val secondsDelayed = 2000
             handler.postDelayed(runnable, secondsDelayed.toLong())
         })

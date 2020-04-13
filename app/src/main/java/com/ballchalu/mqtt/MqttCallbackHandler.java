@@ -4,6 +4,8 @@ package com.ballchalu.mqtt;
 import android.content.Context;
 import android.content.Intent;
 
+import com.ccpp.shared.util.ConstantsBase;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -62,15 +64,19 @@ public class MqttCallbackHandler implements MqttCallback {
         String type = Helper.INSTANCE.getSafeStringObjectFromJson(jsonObject, "type");
         Intent refreshIntent = new Intent();
 
-        if (type.equalsIgnoreCase("heroic_commentary")) {
+        if (type.equalsIgnoreCase(ConstantsBase.HEROIC_COMMENTARY)) {
 
-            refreshIntent.setAction("Odds_Updates");
-            refreshIntent.putExtra("odds", args[0]);
+            refreshIntent.setAction(ConstantsBase.ODDS_UPDATES);
+            refreshIntent.putExtra(ConstantsBase.ODDS, args[0]);
+
+        } else if (type.equalsIgnoreCase(ConstantsBase.MATCH_DECLARED)) {
+
+            refreshIntent.setAction(ConstantsBase.MATCH_DECLARED);
+            refreshIntent.putExtra(ConstantsBase.ACTION_DECLARE, args[0]);
 
         } else {
-            refreshIntent.setAction("Action_Pubnub");
-            refreshIntent.putExtra("PubnubMsg", args[0]);
-
+            refreshIntent.setAction(ConstantsBase.ACTION_PUB_NUB);
+            refreshIntent.putExtra(ConstantsBase.PUB_NUB, args[0]);
         }
 
         context.sendBroadcast(refreshIntent);

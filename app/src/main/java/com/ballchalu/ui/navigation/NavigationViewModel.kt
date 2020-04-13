@@ -1,16 +1,24 @@
 package com.ballchalu.ui.navigation
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.domain.declare.DeclareModel
 import com.ccpp.shared.domain.user.UserData
 import com.ccpp.shared.domain.user.UserRes
 import com.ccpp.shared.network.repository.LoginRepository
+import com.ccpp.shared.util.ConstantsBase
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -51,4 +59,27 @@ class NavigationViewModel @Inject constructor(
         _userDetails.postValue(Event(data.user))
     }
 
+    val declareEvent = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            intent.getStringExtra(ConstantsBase.ACTION_DECLARE)?.let {
+                Timber.e("MQTT EVENT declareEvent1234  $it")
+                try {
+                    val oddJsonObject = JSONObject(it)
+                    if (oddJsonObject.has(ConstantsBase.type)) {
+                        if (GsonBuilder().create().fromJson(
+                                it,
+                                DeclareModel::class.java
+                            ).message?.match_declare == true
+                        ) {
+                            Timber.e("MQTT EVENT declareEvent1234 Calling callUserDetails...........")
+                            callUserDetails()
+                        }
+
+                    }
+                } catch (e: Exception) {
+                    Timber.e(e)
+                }
+            }
+        }
+    }
 }

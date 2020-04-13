@@ -363,6 +363,7 @@ class MatchDetailsViewModel @Inject constructor(
     val scoreUpdate = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             intent.getStringExtra(ConstantsBase.PUB_NUB)?.let {
+                Timber.e("MQTT EVENT scoreUpdate1234  $it")
                 try {
                     val oddJsonObject = JSONObject(it)
                     if (oddJsonObject.has(ConstantsBase.type)) {
