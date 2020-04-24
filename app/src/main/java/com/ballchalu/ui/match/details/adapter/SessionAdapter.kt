@@ -46,12 +46,14 @@ class SessionAdapter(val listener: OnItemClickListener?) :
 
     fun removeSessionItem(sessionsItem: SessionsItem) {
         this.list?.remove(sessionsItem)
+        this.list?.sort()
         notifyDataSetChanged()
     }
 
     fun addSession(response: SessionsItem?) {
         response?.let {
             this.list?.add(it)
+            this.list?.sort()
             notifyDataSetChanged()
         }
     }
