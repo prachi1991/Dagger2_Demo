@@ -11,12 +11,10 @@ import android.provider.MediaStore
 import android.text.*
 import android.text.format.DateUtils
 import android.text.style.ForegroundColorSpan
-import android.util.Patterns
 import android.widget.EditText
 import com.ccpp.shared.core.exception.empty
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
-import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DateFormatSymbols
 import java.text.DecimalFormat
@@ -84,6 +82,17 @@ object StringHelpers {
             format.format(newDate)
         } catch (e: Exception) {
             sdkDatetime
+        }
+    }
+
+    //    Dec 29 2019,  5:34 PM
+    fun parseMatchDate(sdkDatetime: String): Date {
+        return try {
+            val format = SimpleDateFormat("MMM dd yyyy, hh:mm a", Locale.US)
+            val newDate = format.parse(sdkDatetime)
+            newDate ?: Date()
+        } catch (e: Exception) {
+            Date()
         }
     }
 

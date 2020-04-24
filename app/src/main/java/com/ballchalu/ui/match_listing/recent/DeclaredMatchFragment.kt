@@ -52,12 +52,12 @@ class DeclaredMatchFragment : BaseFragment(), DeclaredAdapter.OnItemClickListene
         viewModel.callMatchListing(ConstantsBase.EVENT_TYPE, ConstantsBase.DECLARED)
 
         viewModel.matchListObserver.observe(viewLifecycleOwner, EventObserver {
-            if (it.matches?.size != 0)
+            if (it.isNotEmpty())
                 binding.llInplay.visibility = View.VISIBLE
 
             adapter = DeclaredAdapter(this)
             binding.rvMatchList.adapter = adapter
-            adapter?.setItemList(it.matches)
+            adapter?.setItemList(it)
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
