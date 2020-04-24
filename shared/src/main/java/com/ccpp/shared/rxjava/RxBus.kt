@@ -1,4 +1,4 @@
-package com.ballchalu.base.rxjava
+package com.ccpp.shared.rxjava
 
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

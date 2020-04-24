@@ -11,6 +11,7 @@ object ConstantsBase {
     const val STATUS_SUCCESS = 200
     const val REQUEST_TIMEOUT = 60
     const val INTERNAL_ERROR = 500
+    const val TOKEN_EXPIRED = 401
 
 
     const val KEY_MATCH_ID: String = "match_id"

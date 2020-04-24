@@ -20,11 +20,14 @@ import com.ballchalu.ui.login.container.LoginActivity
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.user.UserData
+import com.ccpp.shared.rxjava.RxBus
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 class NavigationActivity : BaseActivity() {
+    private var disposable: Disposable? = null
     private lateinit var viewModel: NavigationViewModel
     @Inject
     lateinit var sharePref: SharedPreferenceStorage
@@ -40,10 +43,18 @@ class NavigationActivity : BaseActivity() {
         setContentView(binding.root)
         binding.lifecycleOwner = this
         setBuildVersion()
-
+        setRxObserver()
         initNavigationDrawer()
         setObservers()
         registerReceiver()
+    }
+
+    private fun setRxObserver() {
+        disposable = RxBus.listen(Any::class.java).subscribe {
+            when (it) {
+                ConstantsBase.TOKEN_EXPIRED -> viewModel.callLogout()
+            }
+        }
     }
 
     private fun initNavigationDrawer() {
@@ -158,6 +169,7 @@ class NavigationActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
+        disposable?.dispose()
         unRegisterReceiver()
         super.onDestroy()
     }

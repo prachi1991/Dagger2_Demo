@@ -1,6 +1,7 @@
 package com.ccpp.shared.core.base
 
 import com.ccpp.shared.core.result.Results
+import com.ccpp.shared.rxjava.RxBus
 import com.ccpp.shared.util.ConstantsBase
 import retrofit2.Response
 import java.io.IOException
@@ -18,6 +19,9 @@ open class BaseRepository @Inject constructor() {
             Results.Success(response.body()!!)
         } else if (response.code() == ConstantsBase.INTERNAL_ERROR) {
             Results.Error(IOException("Internal Server Error"))
+        } else if (response.code() == ConstantsBase.TOKEN_EXPIRED) {
+            RxBus.publish(ConstantsBase.TOKEN_EXPIRED)
+            Results.Error(IOException("Session Expired"))
         } else if (response.errorBody() != null) {
             Results.Error(IOException(response.errorBody()?.toString()))
         } else {

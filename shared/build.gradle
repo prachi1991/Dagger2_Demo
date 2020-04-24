@@ -121,6 +121,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
+    //Rxjava
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
+
+
 }
 
 //apply plugin: 'com.google.gms.google-services'
