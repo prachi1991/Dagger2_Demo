@@ -45,6 +45,7 @@ class SignUpViewModel @Inject constructor(private val loginRepository: LoginRepo
     fun validateData(
         firstName: String,
         lastName: String,
+        username: String,
         email: String,
         pass: String,
         confPass: String
@@ -62,7 +63,13 @@ class SignUpViewModel @Inject constructor(private val loginRepository: LoginRepo
                         lastName = R.string.invalid_last_name
                     )
             }
-            !isUserNameValid(email) -> {
+            username.isEmpty() -> {
+                _loginForm.value =
+                    LoginFormState(
+                        emailError = R.string.invalid_username
+                    )
+            }
+            !isEmailValid(email) -> {
                 _loginForm.value =
                     LoginFormState(
                         emailError = R.string.invalid_email
@@ -96,7 +103,7 @@ class SignUpViewModel @Inject constructor(private val loginRepository: LoginRepo
     }
 
     // A placeholder username validation check
-    private fun isUserNameValid(username: String): Boolean {
+    private fun isEmailValid(username: String): Boolean {
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
         } else false

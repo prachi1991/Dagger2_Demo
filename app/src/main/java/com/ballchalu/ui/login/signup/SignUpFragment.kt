@@ -55,6 +55,10 @@ class SignUpFragment : BaseFragment() {
                 binding.edtEmailValue.error = getString(it)
             }
 
+            loginState.usernameError?.let {
+                binding.edtUserName.error = getString(it)
+            }
+
             loginState.passwordError?.let {
                 binding.edtPasswordValue.error = getString(it)
             }
@@ -70,7 +74,7 @@ class SignUpFragment : BaseFragment() {
                         User(
                             firstName = binding.edtFirstName.text.toString(),
                             lastName = binding.edtLastNameValue.text.toString(),
-                            userName = binding.edtEmailValue.text.toString(),
+                            userName = binding.edtUserName.text.toString(),
                             email = binding.edtEmailValue.text.toString(),
                             password = binding.edtPasswordValue.text.toString(),
                             confirmPassword = binding.edtConfirmPasswordValue.text.toString()
@@ -101,6 +105,7 @@ class SignUpFragment : BaseFragment() {
             viewModel.validateData(
                 binding.edtFirstName.text.toString(),
                 binding.edtLastNameValue.text.toString(),
+                binding.edtUserName.text.toString(),
                 binding.edtEmailValue.text.toString(),
                 binding.edtPasswordValue.text.toString(),
                 binding.edtConfirmPasswordValue.text.toString()

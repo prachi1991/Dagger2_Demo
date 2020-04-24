@@ -89,7 +89,7 @@ class NavigationActivity : BaseActivity() {
 
     private fun setHeaderUi(userRes: UserData?) {
         val headerView = binding.navView.getHeaderView(0)
-        headerView.findViewById<TextView>(R.id.tvNavEmail).text = userRes?.email
+        headerView.findViewById<TextView>(R.id.tvNavEmail).text = userRes?.user_name
         headerView.findViewById<TextView>(R.id.tvMoneyValue).text =
             userRes?.bc_coins?.toString()
     }
