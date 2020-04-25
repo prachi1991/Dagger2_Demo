@@ -36,7 +36,6 @@ import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 
 class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSuccessListener {
@@ -147,18 +146,18 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             if (binding.pullRefreshLayout.isRefreshing)
                 binding.pullRefreshLayout.isRefreshing = false
         })
-
+        //API call
         viewModel.sessionEvent.observe(viewLifecycleOwner, EventObserver { sessionList ->
             binding.llSessionSection.visibility =
-                if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
+                if (sessionList.isNotEmpty()) View.VISIBLE else View.GONE
             binding.rvSession.visibility =
-                if (sessionList?.isNotEmpty() == true) View.VISIBLE else View.GONE
+                if (sessionList.isNotEmpty()) View.VISIBLE else View.GONE
             sessionAdapter?.setItemList(sessionList)
-            binding.tvCountSession.text = sessionList?.size.toString()
+            binding.tvCountSession.text = sessionList.size.toString()
         })
 
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
-            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
 
         viewModel.winnerMarketEvent.observe(viewLifecycleOwner, EventObserver { market ->
@@ -454,7 +453,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
                 resources.getString(R.string.no_connection),
                 Snackbar.LENGTH_INDEFINITE
             )
-            snackBar?.setAction("Retry") { v: View? ->
+            snackBar?.setAction("Retry") {
                 snackBar?.dismiss()
                 showNetworkError()
             }

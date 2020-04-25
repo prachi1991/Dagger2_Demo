@@ -12,6 +12,6 @@ data class SessionsItem(
 ) : Comparable<SessionsItem> {
 
     override fun compareTo(other: SessionsItem): Int {
-        return other.session?.overs?.let { this.session?.overs?.compareTo(it) } ?: 0
+        return this.session?.overs?.let { other.session?.overs?.compareTo(it) } ?: 0
     }
 }
