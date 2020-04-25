@@ -55,7 +55,10 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_toStartOf="@+id/tvMyBets"
                             android:layout_toEndOf="@id/ivWinner"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             android:textColor="@color/colorAccent"
                             android:textSize="@dimen/_12sdp"
                             tools:text="Test Contest" />
@@ -68,7 +71,8 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_toEndOf="@id/tvContest"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_toStartOf="@+id/tvUserCount"
                             android:text="My Bets"
                             android:textColor="@color/menu_light_green"
                             android:textSize="@dimen/_12sdp" />
