@@ -20,15 +20,7 @@
         android:id="@+id/nav_coin_ledgers"
         android:icon="@drawable/ic_circle"
         android:title="@string/nav_bc_coins_ledgers" />
-    <item
-        android:id="@+id/nav_sport"
-        android:icon="@drawable/ic_circle"
-        android:title="@string/nav_sports" />
 
-    <item
-        android:id="@+id/nav_tipers"
-        android:icon="@drawable/ic_circle"
-        android:title="@string/nav_tipers" />
     <item
         android:id="@+id/nav_bc_coins"
         android:icon="@drawable/ic_circle"

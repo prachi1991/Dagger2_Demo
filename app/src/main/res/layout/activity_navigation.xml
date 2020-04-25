@@ -69,6 +69,7 @@
             android:fitsSystemWindows="true"
             android:textAlignment="viewEnd"
             app:headerLayout="@layout/nav_header_navigation"
+            android:theme="@style/Base.Theme.AppTheme.NavigationView"
             app:itemIconTint="@color/menu_light_green"
             app:itemTextAppearance="@style/Base.Theme.AppTheme.menutitle"
             app:itemTextColor="@color/selector_green"
