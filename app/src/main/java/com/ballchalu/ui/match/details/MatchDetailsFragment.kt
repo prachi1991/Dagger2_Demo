@@ -246,7 +246,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             }
             market.runners?.get(1)?.let {
                 it.marketId = market.id
-                binding.tvOddEvenBack2.text = if (it.canBack && marketStatus) it.L else ""
+                binding.tvOddEvenBack2.text = if (it.canBack && marketStatus) it.B else ""
                 binding.tvOddEvenBack2.isClickable = (it.canBack && marketStatus)
                 viewModel.evenMarket = it
             }
