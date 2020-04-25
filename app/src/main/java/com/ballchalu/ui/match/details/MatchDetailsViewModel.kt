@@ -31,6 +31,7 @@ import org.json.JSONObject
 import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class MatchDetailsViewModel @Inject constructor(
     private val loginRepository: MatchDetailsRepository,
@@ -194,8 +195,8 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
-    private val _sessionEvent = MutableLiveData<Event<List<SessionsItem>?>>()
-    val sessionEvent: LiveData<Event<List<SessionsItem>?>> = _sessionEvent
+    private val _sessionEvent = MutableLiveData<Event<ArrayList<SessionsItem>>>()
+    val sessionEvent: LiveData<Event<ArrayList<SessionsItem>>> = _sessionEvent
 
     //API setting Session data
     private fun setSessionData(sessions: List<SessionsItem>?) {
@@ -204,7 +205,9 @@ class MatchDetailsViewModel @Inject constructor(
             it.session?.status == ConstantsBase.suspend || it.session?.status == ConstantsBase.open
         }?.let {
             sessionCount = it.size
-            _sessionEvent.postValue(Event(it))
+            val arrayList = ArrayList(it)
+            arrayList.sort()
+            _sessionEvent.postValue(Event(arrayList))
         }
     }
 

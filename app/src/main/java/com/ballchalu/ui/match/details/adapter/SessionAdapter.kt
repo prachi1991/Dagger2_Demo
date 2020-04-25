@@ -8,6 +8,7 @@ import com.ccpp.shared.domain.match_details.Session
 import com.ccpp.shared.domain.match_details.SessionsItem
 import com.ccpp.shared.util.ConstantsBase
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SessionAdapter(val listener: OnItemClickListener?) :
@@ -28,7 +29,7 @@ class SessionAdapter(val listener: OnItemClickListener?) :
         holder.setData(list?.get(position), position)
     }
 
-    fun setItemList(sessionList: List<SessionsItem>?) {
+    fun setItemList(sessionList: ArrayList<SessionsItem>?) {
         this.list?.clear()
         sessionList?.let {
             this.list?.addAll(it)
@@ -46,7 +47,6 @@ class SessionAdapter(val listener: OnItemClickListener?) :
 
     fun removeSessionItem(sessionsItem: SessionsItem) {
         this.list?.remove(sessionsItem)
-        this.list?.sort()
         notifyDataSetChanged()
     }
 
