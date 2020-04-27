@@ -66,15 +66,17 @@ class ContestFragment : BaseFragment() {
             it.contests?.count { it.isParticipated }?.let { count ->
                 listener?.onUserContest(count)
             }
-            it.contests?.size?.let { it1 -> listener?.onAllContest(it1) }
-            if (viewModel.isDeclared)
+            if (viewModel.isDeclared) {
+                it.contests?.size?.let { it1 -> listener?.onAllContest(it1) }
                 contestAdapter?.setItemList(it.contests)
+            }
             else {
                 allContestList?.clear()
                 it.contests?.forEach {
                     if (it.availableSpots ?: 0 > 0)
                         allContestList?.add(it)
                 }
+                allContestList?.size?.let { it1 -> listener?.onAllContest(it1) }
                 contestAdapter?.setItemList(allContestList)
             }
         })
