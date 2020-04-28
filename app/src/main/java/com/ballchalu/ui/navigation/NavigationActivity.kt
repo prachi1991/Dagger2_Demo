@@ -61,6 +61,7 @@ class NavigationActivity : BaseActivity() {
 
     private fun updateContestCoin(it: RxEvent.BcCoin) {
         binding.tvContestCoin.text = getString(R.string.bc_coin_s, it.userContest.availableCoins)
+        setHeaderUi(it.userContest.user)
     }
 
     private fun initNavigationDrawer() {
@@ -100,10 +101,11 @@ class NavigationActivity : BaseActivity() {
     }
 
     private fun setHeaderUi(userRes: UserData?) {
-        val headerView = binding.navView.getHeaderView(0)
-        headerView.findViewById<TextView>(R.id.tvNavEmail).text = userRes?.user_name
-        headerView.findViewById<TextView>(R.id.tvMoneyValue).text =
-            userRes?.bc_coins?.toString()
+        userRes?.let {
+            val headerView = binding.navView.getHeaderView(0)
+            headerView.findViewById<TextView>(R.id.tvNavEmail).text = it.user_name
+            headerView.findViewById<TextView>(R.id.tvMoneyValue).text = it.bc_coins?.toString()
+        }
     }
 
     private fun openLogoutDialog() {

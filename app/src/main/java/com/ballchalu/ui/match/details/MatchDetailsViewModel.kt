@@ -14,11 +14,11 @@ import com.ballchalu.ui.match.details.my_bets.MyBetsFragment
 import com.ballchalu.ui.winners.WinnersFragment
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.domain.contest.CreateContestRes
 import com.ccpp.shared.domain.contest.UserContest
 import com.ccpp.shared.domain.create_bet.BetDetailsBundle
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
+import com.ccpp.shared.domain.declare.DeclareModel
 import com.ccpp.shared.domain.match_details.*
 import com.ccpp.shared.domain.position.PositionMarketItem
 import com.ccpp.shared.domain.position.Positions
@@ -216,7 +216,8 @@ class MatchDetailsViewModel @Inject constructor(
             parseBetStatus()
             calculateTotalCount()
         }
-        callUserContestAsync()
+        if (!isDeclared)
+            callUserContestAsync()
     }
 
     private val _sessionEvent = MutableLiveData<Event<ArrayList<SessionsItem>>>()
@@ -666,4 +667,25 @@ class MatchDetailsViewModel @Inject constructor(
         _allCountObserver.postValue(Event(count))
     }
 
+    val declareEvent = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            intent.getStringExtra(ConstantsBase.ACTION_DECLARE)?.let {
+                try {
+                    val oddJsonObject = JSONObject(it)
+                    if (oddJsonObject.has(ConstantsBase.type)) {
+                        if (GsonBuilder().create().fromJson(
+                                it,
+                                DeclareModel::class.java
+                            ).message?.match_declare == true
+                        ) {
+                            callUserContestAsync()
+                        }
+
+                    }
+                } catch (e: Exception) {
+                    Timber.e(e)
+                }
+            }
+        }
+    }
 }

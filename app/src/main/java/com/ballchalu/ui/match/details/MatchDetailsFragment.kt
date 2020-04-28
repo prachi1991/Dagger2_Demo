@@ -120,12 +120,18 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             viewModel.oddsReceiver,
             IntentFilter(ConstantsBase.ODDS_UPDATES)
         )
+        requireContext().registerReceiver(
+            viewModel.declareEvent,
+            IntentFilter(ConstantsBase.MATCH_DECLARED)
+        )
+
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         requireContext().unregisterReceiver(viewModel.scoreUpdate)
         requireContext().unregisterReceiver(viewModel.oddsReceiver)
+        requireContext().unregisterReceiver(viewModel.declareEvent)
+        super.onDestroyView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -314,7 +320,8 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
     }
 
     private fun publishBcCoin(userContest: UserContest?) {
-        userContest?.let { RxBus.publish(RxEvent.BcCoin(it)) }
+        if (!viewModel.isDeclared)
+            userContest?.let { RxBus.publish(RxEvent.BcCoin(it)) }
     }
 
     private val runnable = Runnable {
