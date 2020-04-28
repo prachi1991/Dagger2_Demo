@@ -7,7 +7,7 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:openDrawer="right">
+        tools:openDrawer="start">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -33,13 +33,27 @@
                         android:paddingRight="@dimen/_10sdp"
                         android:src="@drawable/ic_humburger" />
 
-
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogo"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingRight="@dimen/_10sdp"
                         android:src="@drawable/logo_ball_chalu" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvContestCoin"
+                        fontPath="fonts/Play-Bold.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_toStartOf="@id/ibMenu"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:src="@drawable/logo_ball_chalu"
+                        android:textColor="@color/text_light_green"
+                        android:textSize="@dimen/_12ssp"
+                        tools:text="BC Coin 200" />
 
 
                 </RelativeLayout>
@@ -68,8 +82,8 @@
             android:background="#343743"
             android:fitsSystemWindows="true"
             android:textAlignment="viewEnd"
-            app:headerLayout="@layout/nav_header_navigation"
             android:theme="@style/Base.Theme.AppTheme.NavigationView"
+            app:headerLayout="@layout/nav_header_navigation"
             app:itemIconTint="@color/menu_light_green"
             app:itemTextAppearance="@style/Base.Theme.AppTheme.menutitle"
             app:itemTextColor="@color/selector_green"
@@ -99,11 +113,11 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvEnvironment"
                     android:layout_width="wrap_content"
-                    android:visibility="gone"
-                    tools:visibility="visible"
                     android:layout_height="wrap_content"
                     android:textColor="@color/light_white_color"
-                    tools:text="Staging" />
+                    android:visibility="gone"
+                    tools:text="Staging"
+                    tools:visibility="visible" />
 
             </LinearLayout>
         </com.google.android.material.navigation.NavigationView>

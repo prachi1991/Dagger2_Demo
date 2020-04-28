@@ -25,12 +25,15 @@ import com.ballchalu.ui.match.details.my_bets.MyBetsFragment
 import com.ballchalu.ui.winners.WinnersFragment
 import com.ballchalu.utils.StringUtils
 import com.ccpp.shared.core.result.EventObserver
+import com.ccpp.shared.domain.contest.UserContest
 import com.ccpp.shared.domain.create_bet.CreateBetRes
 import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
 import com.ccpp.shared.domain.match_details.Market
 import com.ccpp.shared.domain.match_details.Runner
 import com.ccpp.shared.domain.match_details.Session
 import com.ccpp.shared.domain.match_details.SessionsItem
+import com.ccpp.shared.rxjava.RxBus
+import com.ccpp.shared.rxjava.RxEvent
 import com.ccpp.shared.util.ColorUtils
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
@@ -141,6 +144,11 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             val secondsDelayed = 2000
             handler.postDelayed(runnable, secondsDelayed.toLong())
         })
+        //user_contest API response
+        viewModel.contestDetailsObserver.observe(viewLifecycleOwner, EventObserver { userContest ->
+            publishBcCoin(userContest)
+        })
+
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
             if (binding.pullRefreshLayout.isRefreshing)
@@ -303,6 +311,10 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             createBetFragment.show(ft, createBetFragment.tag)
         })
 
+    }
+
+    private fun publishBcCoin(userContest: UserContest?) {
+        userContest?.let { RxBus.publish(RxEvent.BcCoin(it)) }
     }
 
     private val runnable = Runnable {
@@ -479,10 +491,12 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
     override fun onBetSuccess(createBetRes: CreateBetRes) {
         viewModel.handleMarketPositionList(createBetRes.marketPosition)
+        publishBcCoin(createBetRes.userContest)
     }
 
     override fun onSessionBetSuccess(createSessionBetRes: CreateSessionBetRes?) {
         updateSessionPosition(createSessionBetRes?.sessionPosition.toString())
+        publishBcCoin(createSessionBetRes?.userContest)
     }
 
     override fun onResume() {

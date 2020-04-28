@@ -14,6 +14,8 @@ import com.ballchalu.ui.match.details.my_bets.MyBetsFragment
 import com.ballchalu.ui.winners.WinnersFragment
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
+import com.ccpp.shared.domain.contest.CreateContestRes
+import com.ccpp.shared.domain.contest.UserContest
 import com.ccpp.shared.domain.create_bet.BetDetailsBundle
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
@@ -92,13 +94,34 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
+    //---------------------User contest details------------------------//
+
+    private val _contestDetailsObserver = MutableLiveData<Event<UserContest?>>()
+    val contestDetailsObserver: LiveData<Event<UserContest?>> = _contestDetailsObserver
+
+    //UserCOntest APi details
+    private fun callUserContestAsync() {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(Event(true))
+            when (val result = loginRepository.callUserContestAsync(contestsId)) {
+                is Results.Success -> handleContestSuccess(result.data.userContest)
+                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+            }
+            loading.postValue(Event(false))
+        }
+    }
+
+    private fun handleContestSuccess(data: UserContest?) {
+        _contestDetailsObserver.postValue(Event(data))
+    }
+
     //---------------------position section Start------------------------//
 
 
     private fun callPositionDetailsAsync(contestId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(Event(true))
-            when (val result = loginRepository.callPositionDetailsAsync(contestId)) {
+            when (val result = loginRepository.callPositionDetailsAsync(contestsId)) {
                 is Results.Success -> handlePositionSuccess(result.data.positions)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }
@@ -193,6 +216,7 @@ class MatchDetailsViewModel @Inject constructor(
             parseBetStatus()
             calculateTotalCount()
         }
+        callUserContestAsync()
     }
 
     private val _sessionEvent = MutableLiveData<Event<ArrayList<SessionsItem>>>()

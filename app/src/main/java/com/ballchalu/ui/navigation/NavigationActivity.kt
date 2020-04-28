@@ -21,6 +21,7 @@ import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.user.UserData
 import com.ccpp.shared.rxjava.RxBus
+import com.ccpp.shared.rxjava.RxEvent
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import io.reactivex.disposables.Disposable
@@ -50,16 +51,27 @@ class NavigationActivity : BaseActivity() {
     }
 
     private fun setRxObserver() {
-        disposable = RxBus.listen(Any::class.java).subscribe {
-            when (it) {
+        disposable = RxBus.listen(Any::class.java).subscribe { event ->
+            when (event) {
                 ConstantsBase.TOKEN_EXPIRED -> viewModel.callLogout()
+                is RxEvent.BcCoin -> updateContestCoin(event)
             }
         }
+    }
+
+    private fun updateContestCoin(it: RxEvent.BcCoin) {
+        binding.tvContestCoin.text = getString(R.string.bc_coin_s, it.userContest.availableCoins)
     }
 
     private fun initNavigationDrawer() {
         navController = findNavController(R.id.nav_host_fragment)
         binding.navView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            binding.tvContestCoin.text = ""
+            binding.tvContestCoin.visibility =
+                if (destination.id == R.id.nav_home_match_details) View.VISIBLE else View.GONE
+
+        }
         binding.navView.apply {
             menu.findItem(R.id.nav_logout).apply {
                 setOnMenuItemClickListener {

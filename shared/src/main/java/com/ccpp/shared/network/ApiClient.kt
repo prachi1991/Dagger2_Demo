@@ -54,6 +54,9 @@ internal interface ApiClient {
     fun callPositionDetailsAsync(@Path("contestId") contestId: Int): Deferred<Response<PositionRes>>
 
 
+    @GET("ballchalu/api/v1/user_contests/{id}")
+    fun callUserContestAsync(@Path("id") id: Int): Deferred<Response<CreateContestRes>>
+
     //Contest screen api
     @GET("ballchalu/api/v1/contests")
     fun callMatchContestAsync(@Query("match_id") match_id: String): Deferred<Response<MatchContestRes>>
