@@ -178,6 +178,8 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvMarketType.text = market?.betfairMarketType
             binding.tvMatchTeam1.text = market?.runners?.get(0)?.runner?.betfairRunnerName
             binding.tvMatchTeam2.text = market?.runners?.get(1)?.runner?.betfairRunnerName
+            if (market?.runners?.size ?: 0 > 2)
+                binding.tvMatchTeam3.text = market?.runners?.get(2)?.runner?.betfairRunnerName
             binding.tvCountMarket.text = if (market?.runners?.isNotEmpty() == true) "1" else "0"
         })
 
@@ -234,6 +236,18 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
                 viewModel.bwlTeamRunner = runners
             }
         })
+        viewModel.drawTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver { runners ->
+            runners?.id?.let {
+                binding.rlDrawMarket.visibility = View.VISIBLE
+            }
+            binding.tvTeam3Lay.text = if (runners?.canBack == true) runners.back else ""
+            binding.tvTeam3Back.text = if (runners?.canLay == true) runners.lay else ""
+            binding.tvTeam3Lay.isClickable = (runners?.canBack == true)
+            binding.tvTeam3Back.isClickable = (runners?.canLay == true)
+            runners?.betfairRunnerName?.let {
+                viewModel.drawTeamRunner = runners
+            }
+        })
 
         viewModel.updateEndingDigitDataEvent.observe(
             viewLifecycleOwner,
@@ -274,6 +288,10 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvMatchWinnerPosition2.apply {
                 text = it?.bwlTeamRunner?.runner() ?: ""
                 setTextColor(it?.bwlTeamRunner?.color() ?: Color.GREEN)
+            }
+            binding.tvMatchWinnerPosition3.apply {
+                text = it?.drawTeamRunner?.runner() ?: ""
+                setTextColor(it?.drawTeamRunner?.color() ?: Color.GREEN)
             }
         })
 

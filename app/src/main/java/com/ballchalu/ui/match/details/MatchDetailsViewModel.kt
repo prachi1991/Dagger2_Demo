@@ -65,8 +65,10 @@ class MatchDetailsViewModel @Inject constructor(
     var oddMarket: RunnersItem? = RunnersItem()
     var bwlTeamRunner: Runner? = null
     var batTeamRunner: Runner? = null
+    var drawTeamRunner: Runner? = null
     var batTeamRunId: Int? = 0
     var bwlTeamRunId: Int? = 0
+    var drawTeamRunId: Int? = 0
     var sessionCount: Int = 0
 
     private var batTeamRunName = ""
@@ -162,13 +164,17 @@ class MatchDetailsViewModel @Inject constructor(
                             bwlTeamRunner?.id -> {
                                 bwlTeamRunner?.runnerPosition = it?.runnerPosition
                             }
+                            drawTeamRunner?.id -> {
+                                drawTeamRunner?.runnerPosition = it?.runnerPosition
+                            }
                         }
                     }
                     _positionMatchWinnerObserver.postValue(
                         Event(
                             MatchWinnerPosition(
                                 batTeamRunner,
-                                bwlTeamRunner
+                                bwlTeamRunner,
+                                drawTeamRunner
                             )
                         )
                     )
@@ -210,7 +216,7 @@ class MatchDetailsViewModel @Inject constructor(
             _matchResult.postValue(Event(data))
             batTeamRunName = it.match?.score?.batteamname ?: ""
             bwlTeamRunName = it.match?.score?.bwlteamname ?: ""
-            _updateScoreEvent.postValue(Event(it.match?.score))
+            setScore(it.match)
             setMarketData(data.markets)
             setSessionData(data.sessions)
             parseBetStatus()
@@ -273,6 +279,15 @@ class MatchDetailsViewModel @Inject constructor(
         }
     }
 
+    //set score from API
+    private fun setScore(match: Match?) {
+        if (match?.score != null)
+            _updateScoreEvent.postValue(Event(match?.score))
+        else _updateScoreEvent.postValue(
+            Event(Score(batteamname = match?.team1, bwlteamname = match?.team2))
+        )
+    }
+
     //API setting Match winner market
     private fun setMarketData(market: Market?) {
         _winnerMarketEvent.postValue(Event(market))
@@ -284,6 +299,12 @@ class MatchDetailsViewModel @Inject constructor(
             this?.marketId = market?.id
             this?.status = market?.status
         }
+        var run3: Runner? = null
+        if (market?.runners?.size ?: 0 > 2)
+            run3 = market?.runners?.get(2)?.runner.apply {
+                this?.marketId = market?.id
+                this?.status = market?.status
+            }
         if (market?.status?.equals(ConstantsBase.open, true) == true) {
             if (run1 != null && run2 != null) {
                 if (run1.betfairRunnerName?.trim().equals(batTeamRunName.trim())) {
@@ -305,14 +326,22 @@ class MatchDetailsViewModel @Inject constructor(
                     batTeamRunner = run1
                     batTeamRunId = run1.id
                 }
+
+                run3?.let {
+                    _drawTeamBhaavEvent.postValue(Event(it))
+                    drawTeamRunId = it.id
+                    drawTeamRunner = it
+                }
             }
         }
 //        _marketStatusEvent.postValue(Event)
         if (market?.status?.equals(ConstantsBase.suspend, true) == true) {
             batTeamRunner?.status = ConstantsBase.suspend
             bwlTeamRunner?.status = ConstantsBase.suspend
+            drawTeamRunner?.status = ConstantsBase.suspend
             _batTeamBhaavEvent.postValue(Event(Runner()))
             _bwlTeamBhaavEvent.postValue(Event(Runner()))
+            _drawTeamBhaavEvent.postValue(Event(Runner()))
         }
     }
 
@@ -365,6 +394,11 @@ class MatchDetailsViewModel @Inject constructor(
                     return true
         }
         bwlTeamRunner?.let {
+            if (it.status?.equals(ConstantsBase.open, true) == true)
+                if (it.canLay || it.canBack)
+                    return true
+        }
+        drawTeamRunner?.let {
             if (it.status?.equals(ConstantsBase.open, true) == true)
                 if (it.canLay || it.canBack)
                     return true
@@ -487,6 +521,9 @@ class MatchDetailsViewModel @Inject constructor(
     private val _bwlTeamBhaavEvent = MutableLiveData<Event<Runner?>>()
     val bwlTeamBhaavEvent: LiveData<Event<Runner?>> = _bwlTeamBhaavEvent
 
+    private val _drawTeamBhaavEvent = MutableLiveData<Event<Runner?>>()
+    val drawTeamBhaavEvent: LiveData<Event<Runner?>> = _drawTeamBhaavEvent
+
     //Mqtt match winner market update
     private fun updateMarket(market: Market?) {
         when (market?.status?.trim()) {
@@ -522,14 +559,19 @@ class MatchDetailsViewModel @Inject constructor(
                     _batTeamBhaavEvent.value = Event(parseRunnerObject(run1))
                 }
 
-//                if (run3?.id != 0 && drawTeamRunId == run3?.id)
-//                    setDrawTeamBhaav(run3?.B, run3?.L, run3?.canBack, run3?.canLay)
+                run3?.let {
+                    if (it.id != 0 && drawTeamRunId == it.id) {
+                        _drawTeamBhaavEvent.postValue(Event(parseRunnerObject(run3)))
+                    }
+                }
             }
             ConstantsBase.suspend, ConstantsBase.close -> {
                 batTeamRunner?.status = ConstantsBase.suspend
                 bwlTeamRunner?.status = ConstantsBase.suspend
+                drawTeamRunner?.status = ConstantsBase.suspend
                 _batTeamBhaavEvent.value = (Event(Runner()))
                 _bwlTeamBhaavEvent.value = (Event(Runner()))
+                _drawTeamBhaavEvent.value = (Event(Runner()))
             }
         }
     }
@@ -559,8 +601,9 @@ class MatchDetailsViewModel @Inject constructor(
     private val _openBetScreenEvent = MutableLiveData<Event<BetDetailsBundle?>>()
     val openBetScreenEvent: LiveData<Event<BetDetailsBundle?>> = _openBetScreenEvent
 
-    fun onMatchWinnerClicked(isLay: Boolean, isTeam1: Boolean) {
-        val runner = if (isTeam1) batTeamRunner else bwlTeamRunner
+    fun onMatchWinnerClicked(isLay: Boolean, teamNo: Int) {
+        val runner =
+            if (teamNo == 1) batTeamRunner else if (teamNo == 2) bwlTeamRunner else drawTeamRunner
         val oddValue = if (isLay) runner?.lay else runner?.back
         if (oddValue.isNullOrEmpty()) return
         _openBetScreenEvent.value = Event(
