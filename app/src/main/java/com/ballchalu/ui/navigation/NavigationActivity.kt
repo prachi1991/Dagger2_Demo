@@ -17,6 +17,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityNavigationBinding
 import com.ballchalu.ui.login.container.LoginActivity
+import com.ballchalu.utils.ThemeHelper
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.user.UserData
@@ -77,6 +78,15 @@ class NavigationActivity : BaseActivity() {
             menu.findItem(R.id.nav_logout).apply {
                 setOnMenuItemClickListener {
                     openLogoutDialog()
+                    binding.drawerLayout.closeDrawer(GravityCompat.END)
+                    true
+                }
+            }
+            menu.findItem(R.id.nav_theme).apply {
+                setOnMenuItemClickListener {
+                    sharePref.theme?.let { it1 ->
+                        ThemeHelper.applyTheme(ConstantsBase.THEME_DEFAULT_MODE)
+                    }
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
                     true
                 }

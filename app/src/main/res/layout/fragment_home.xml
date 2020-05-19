@@ -8,21 +8,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
-        android:background="@android:color/transparent"
-        >
+        android:background="@android:color/transparent">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/color_toolbar"
+            app:tabIndicator="@android:color/transparent"
             android:padding="@dimen/_5sdp"
             app:tabGravity="fill"
             app:tabMode="fixed" />

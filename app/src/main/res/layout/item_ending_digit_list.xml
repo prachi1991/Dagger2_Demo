@@ -17,14 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_3sdp"
-            android:background="@drawable/backgroud_solid_dark_grey"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/backgroud_solid_light_grey"
+                android:background="@drawable/back_solid_sub_comp_3"
                 android:padding="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -35,7 +34,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="@string/ending_digit_adapter_title"
-                    android:textColor="@color/white"
+                    android:textColor="@color/color_text"
                     android:textSize="@dimen/_10ssp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -74,14 +73,15 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:background="@drawable/backgroud_solid_light_blue1"
+                    android:background="@drawable/back_solid_sub_comp_4"
                     android:gravity="center"
                     android:minWidth="@dimen/_35sdp"
+                    android:textColor="@color/color_text"
                     android:paddingLeft="@dimen/_5sdp"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingRight="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_3sdp"
-                    android:textColor="@color/white"
+                    tools:text="1.0"
                     android:textSize="@dimen/_10ssp" />
 
             </RelativeLayout>

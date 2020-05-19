@@ -103,4 +103,8 @@ object ConstantsBase {
     const val Event_NOT_OUT = "not_out"
     const val Event_DOT = "dot"
 
+    //    _____________THEME______________________________
+    const val THEME_LIGHT_MODE = "light"
+    const val THEME_DARK_MODE = "dark"
+    const val THEME_DEFAULT_MODE = "default"
 }

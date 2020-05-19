@@ -11,13 +11,12 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.navigation.NavigationActivity">
+            android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/Base.Theme.AppTheme.AppBarOverlay">
+                android:background="@color/color_toolbar">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

@@ -22,8 +22,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".ui.match.details.MatchDetailsFragment">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -36,7 +35,7 @@
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:background="@drawable/backgroud_solid_primary"
+                        android:background="@drawable/backgroud_solid_primary_grey"
                         android:orientation="horizontal"
                         android:padding="@dimen/_5sdp">
 
@@ -106,13 +105,14 @@
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:background="@drawable/backgroud_solid_white"
+                        android:background="@drawable/backgroud_solid_white_grey"
                         android:orientation="vertical"
                         android:padding="@dimen/_3sdp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:baselineAligned="false"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -120,7 +120,7 @@
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_marginEnd="@dimen/_2sdp"
                                 android:layout_weight="1"
-                                android:background="@drawable/backgroud_solid_secondary"
+                                android:background="@drawable/backgroud_solid_secondary_white"
                                 android:gravity="center_vertical"
                                 android:orientation="vertical">
 
@@ -130,7 +130,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/_10sdp"
-                                    android:textColor="@color/menu_light_green"
+                                    android:textColor="@color/text_light_green"
                                     android:textSize="@dimen/_12ssp"
                                     tools:text="IND" />
 
@@ -140,7 +140,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/_10sdp"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/color_text"
                                     android:textSize="@dimen/_10ssp"
                                     tools:text="25/0 (1.4OVS)" />
 
@@ -151,7 +151,7 @@
                                 android:layout_height="@dimen/_40sdp"
                                 android:layout_marginStart="@dimen/_2sdp"
                                 android:layout_weight="1"
-                                android:background="@drawable/backgroud_solid_secondary"
+                                android:background="@drawable/backgroud_solid_secondary_white"
                                 android:gravity="center_vertical|right"
                                 android:orientation="vertical">
 
@@ -162,7 +162,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/_10sdp"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/color_text"
                                     android:textSize="@dimen/_12ssp"
                                     tools:text="PAK" />
 
@@ -172,7 +172,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/_10sdp"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/color_text"
                                     android:textSize="@dimen/_10ssp"
                                     tools:text="Bowling..." />
 
@@ -187,9 +187,10 @@
                             android:layout_height="@dimen/_50sdp"
                             android:layout_marginTop="@dimen/_4sdp"
                             android:layout_marginEnd="@dimen/_2sdp"
-                            android:background="@drawable/backgroud_solid_dark_grey"
+                            android:background="@drawable/back_solid_sub_comp_1"
                             android:gravity="center"
                             android:textSize="@dimen/_16ssp"
+                            android:textColor="@color/color_text"
                             tools:text="BET OPEN" />
 
                     </LinearLayout>
@@ -210,7 +211,7 @@
                             <HorizontalScrollView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:background="@drawable/back_solid_sub_comp_2"
                                 android:scrollbarSize="@dimen/_1sdp">
 
                                 <LinearLayout
@@ -229,7 +230,7 @@
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:singleLine="true"
                                         android:text="@string/all"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -239,6 +240,7 @@
                                         android:layout_marginStart="@dimen/_3sdp"
                                         android:background="@drawable/shape_solid_round_blue"
                                         android:gravity="center"
+                                        android:textColor="@color/white"
                                         android:text="@string/_0"
                                         android:textSize="@dimen/_8ssp" />
 
@@ -247,7 +249,7 @@
                                         android:layout_height="@dimen/_13sdp"
                                         android:layout_marginLeft="@dimen/_5sdp"
                                         android:layout_marginRight="@dimen/_5sdp"
-                                        android:background="@color/white" />
+                                        android:background="@color/color_text" />
 
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -257,7 +259,7 @@
                                         android:layout_height="wrap_content"
                                         android:singleLine="true"
                                         android:text="@string/market"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -275,7 +277,7 @@
                                         android:layout_height="@dimen/_13sdp"
                                         android:layout_marginLeft="@dimen/_5sdp"
                                         android:layout_marginRight="@dimen/_5sdp"
-                                        android:background="@color/white" />
+                                        android:background="@color/color_text" />
 
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -285,7 +287,7 @@
                                         android:layout_height="wrap_content"
                                         android:singleLine="true"
                                         android:text="@string/session"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -303,7 +305,7 @@
                                         android:layout_height="@dimen/_13sdp"
                                         android:layout_marginLeft="@dimen/_5sdp"
                                         android:layout_marginRight="@dimen/_5sdp"
-                                        android:background="@color/white" />
+                                        android:background="@color/color_text" />
 
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -313,7 +315,7 @@
                                         android:layout_height="wrap_content"
                                         android:singleLine="true"
                                         android:text="@string/even_odd"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -331,7 +333,7 @@
                                         android:layout_height="@dimen/_13sdp"
                                         android:layout_marginLeft="@dimen/_5sdp"
                                         android:layout_marginRight="@dimen/_5sdp"
-                                        android:background="@color/white" />
+                                        android:background="@color/color_text" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
                                         android:id="@+id/tvTabEnding"
@@ -340,7 +342,7 @@
                                         android:layout_height="wrap_content"
                                         android:singleLine="true"
                                         android:text="@string/ending_digit"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -360,14 +362,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:background="@drawable/back_solid_sub_comp_2"
                                 android:orientation="vertical"
                                 android:padding="@dimen/_3sdp">
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/backgroud_round_header_background"
+                                    android:background="@drawable/back_solid_header_comp_1"
                                     android:padding="@dimen/_5sdp">
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -377,7 +379,7 @@
                                         android:layout_height="match_parent"
                                         android:layout_centerVertical="true"
                                         android:text="Market |"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -399,7 +401,7 @@
                                         android:layout_alignParentEnd="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_10sdp"
-                                        android:textColor="@color/text_light_green"
+                                        android:textColor="@color/green"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="0" />
 
@@ -410,7 +412,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="@dimen/_3sdp"
-                                    android:background="@drawable/backgroud_solid_light_grey"
+                                    android:background="@drawable/back_solid_sub_comp_3"
                                     android:padding="@dimen/_5sdp">
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -420,7 +422,7 @@
                                         android:layout_height="match_parent"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="IND_DEMO1" />
 
@@ -446,14 +448,14 @@
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:layout_toStartOf="@id/tvTeam1Back"
-                                        android:background="@drawable/backgroud_solid_dark_blue"
+                                        android:background="@drawable/back_solid_sub_comp_5"
                                         android:gravity="center"
                                         android:minWidth="@dimen/_35sdp"
                                         android:onClick="@{view -> model.onMatchWinnerClicked(false,1)}"
                                         android:paddingTop="@dimen/_3sdp"
                                         android:paddingBottom="@dimen/_3sdp"
                                         android:singleLine="true"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="1.2" />
 
@@ -466,14 +468,14 @@
                                         android:layout_alignParentEnd="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
-                                        android:background="@drawable/backgroud_solid_light_blue1"
+                                        android:background="@drawable/back_solid_sub_comp_4"
                                         android:gravity="center"
                                         android:minWidth="@dimen/_35sdp"
                                         android:onClick="@{view -> model.onMatchWinnerClicked(true,1)}"
                                         android:paddingTop="@dimen/_3sdp"
                                         android:paddingBottom="@dimen/_3sdp"
                                         android:singleLine="true"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="1.2" />
 
@@ -484,7 +486,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="@dimen/_3sdp"
-                                    android:background="@drawable/backgroud_solid_light_grey"
+                                    android:background="@drawable/back_solid_sub_comp_3"
                                     android:padding="@dimen/_5sdp">
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -494,7 +496,7 @@
                                         android:layout_height="match_parent"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="IND_DEMO2" />
 
@@ -519,14 +521,14 @@
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:layout_toStartOf="@id/tvTeam2Back"
-                                        android:background="@drawable/backgroud_solid_dark_blue"
+                                        android:background="@drawable/back_solid_sub_comp_5"
                                         android:gravity="center"
                                         android:minWidth="@dimen/_35sdp"
                                         android:onClick="@{view -> model.onMatchWinnerClicked(false,2)}"
                                         android:paddingTop="@dimen/_3sdp"
                                         android:paddingBottom="@dimen/_3sdp"
                                         android:singleLine="true"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="1.2" />
 
@@ -539,14 +541,14 @@
                                         android:layout_alignParentEnd="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
-                                        android:background="@drawable/backgroud_solid_light_blue1"
+                                        android:background="@drawable/back_solid_sub_comp_4"
                                         android:gravity="center"
                                         android:minWidth="@dimen/_35sdp"
                                         android:onClick="@{view -> model.onMatchWinnerClicked(true,2)}"
                                         android:paddingTop="@dimen/_3sdp"
                                         android:paddingBottom="@dimen/_3sdp"
                                         android:singleLine="true"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="1.2" />
 
@@ -558,7 +560,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="@dimen/_3sdp"
-                                    android:background="@drawable/backgroud_solid_light_grey"
+                                    android:background="@drawable/back_solid_sub_comp_3"
                                     android:padding="@dimen/_5sdp"
                                     android:visibility="gone"
                                     tools:visibility="visible">
@@ -570,7 +572,7 @@
                                         android:layout_height="match_parent"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="Win Draw" />
 
@@ -595,14 +597,14 @@
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:layout_toStartOf="@id/tvTeam3Back"
-                                        android:background="@drawable/backgroud_solid_dark_blue"
+                                        android:background="@drawable/back_solid_sub_comp_5"
                                         android:gravity="center"
                                         android:minWidth="@dimen/_35sdp"
                                         android:onClick="@{view -> model.onMatchWinnerClicked(false,3)}"
                                         android:paddingTop="@dimen/_3sdp"
                                         android:paddingBottom="@dimen/_3sdp"
                                         android:singleLine="true"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="1.2" />
 
@@ -615,14 +617,14 @@
                                         android:layout_alignParentEnd="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
-                                        android:background="@drawable/backgroud_solid_light_blue1"
+                                        android:background="@drawable/back_solid_sub_comp_4"
                                         android:gravity="center"
                                         android:minWidth="@dimen/_35sdp"
                                         android:onClick="@{view -> model.onMatchWinnerClicked(true,3)}"
                                         android:paddingTop="@dimen/_3sdp"
                                         android:paddingBottom="@dimen/_3sdp"
                                         android:singleLine="true"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp"
                                         tools:text="1.2" />
 
@@ -636,7 +638,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:background="@drawable/back_solid_sub_comp_2"
                                 android:orientation="vertical"
                                 android:padding="@dimen/_3sdp"
                                 android:visibility="gone"
@@ -645,7 +647,7 @@
                                 <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/backgroud_round_header_background"
+                                    android:background="@drawable/back_solid_header_comp_1"
                                     android:padding="@dimen/_5sdp">
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -656,7 +658,7 @@
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:text="@string/session"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -689,7 +691,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:background="@drawable/back_solid_sub_comp_2"
                                 android:orientation="vertical"
                                 android:padding="@dimen/_3sdp"
                                 android:visibility="gone"
@@ -698,7 +700,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/backgroud_round_header_background"
+                                    android:background="@drawable/back_solid_header_comp_1"
                                     android:padding="@dimen/_5sdp">
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -707,7 +709,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:text="@string/market_divider"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -728,7 +730,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="@dimen/_3sdp"
-                                    android:background="@drawable/backgroud_solid_light_grey"
+                                    android:background="@drawable/back_solid_sub_comp_3"
                                     android:padding="@dimen/_5sdp">
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -739,7 +741,7 @@
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:text="@string/even"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -763,14 +765,14 @@
                                         android:layout_alignParentEnd="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
-                                        android:background="@drawable/backgroud_solid_light_blue1"
+                                        android:background="@drawable/back_solid_sub_comp_4"
                                         android:minWidth="@dimen/_35sdp"
                                         android:onClick="@{view ->  model.onEvenOddClicked(true)}"
                                         android:paddingLeft="@dimen/_5sdp"
                                         android:paddingTop="@dimen/_3sdp"
                                         android:paddingRight="@dimen/_5sdp"
                                         android:paddingBottom="@dimen/_3sdp"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                 </RelativeLayout>
@@ -780,7 +782,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="@dimen/_3sdp"
-                                    android:background="@drawable/backgroud_solid_light_grey"
+                                    android:background="@drawable/back_solid_sub_comp_3"
                                     android:padding="@dimen/_5sdp">
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -791,7 +793,7 @@
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:text="@string/odd"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -815,14 +817,14 @@
                                         android:layout_alignParentEnd="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
-                                        android:background="@drawable/backgroud_solid_light_blue1"
+                                        android:background="@drawable/back_solid_sub_comp_4"
                                         android:minWidth="@dimen/_35sdp"
                                         android:onClick="@{view ->  model.onEvenOddClicked(false)}"
                                         android:paddingLeft="@dimen/_5sdp"
                                         android:paddingTop="@dimen/_3sdp"
                                         android:paddingRight="@dimen/_5sdp"
                                         android:paddingBottom="@dimen/_3sdp"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                 </RelativeLayout>
@@ -836,7 +838,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:background="@drawable/backgroud_solid_dark_grey"
+                                android:background="@drawable/back_solid_sub_comp_2"
                                 android:orientation="vertical"
                                 android:padding="@dimen/_3sdp"
                                 android:visibility="gone"
@@ -845,7 +847,7 @@
                                 <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/backgroud_round_header_background"
+                                    android:background="@drawable/back_solid_header_comp_1"
                                     android:padding="@dimen/_5sdp">
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -856,7 +858,7 @@
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_5sdp"
                                         android:text="@string/market_divider"
-                                        android:textColor="@color/white"
+                                        android:textColor="@color/color_text"
                                         android:textSize="@dimen/_10ssp" />
 
                                     <androidx.appcompat.widget.AppCompatTextView

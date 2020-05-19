@@ -131,4 +131,5 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="d_users">%d Users</string>
     <string name="bc_coin_s">BC Coin %s</string>
+    <string name="nav_theme">Theme</string>
 </resources>

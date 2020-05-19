@@ -4,6 +4,9 @@ import com.ballchalu.BuildConfig
 import com.ballchalu.R
 import com.ballchalu.base.di.DaggerAppComponent
 import com.ballchalu.mqtt.MqttConnection
+import com.ballchalu.utils.ThemeHelper
+import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.util.ConstantsBase
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import io.github.inflationx.calligraphy3.CalligraphyConfig
@@ -17,6 +20,8 @@ import javax.inject.Inject
 class App : DaggerApplication() {
     @Inject
     lateinit var mqttConnection: MqttConnection
+    @Inject
+    lateinit var sharedPref: SharedPreferenceStorage
 
     override fun onCreate() {
         super.onCreate()
@@ -37,6 +42,8 @@ class App : DaggerApplication() {
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }
+        sharedPref.theme?.let { ThemeHelper.applyTheme(ConstantsBase.THEME_DEFAULT_MODE) }
+
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

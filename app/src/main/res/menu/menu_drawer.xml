@@ -34,6 +34,10 @@
         android:icon="@drawable/ic_circle"
         android:title="@string/nav_profile" />
     <item
+        android:id="@+id/nav_theme"
+        android:icon="@drawable/ic_circle"
+        android:title="@string/nav_theme" />
+    <item
         android:id="@+id/nav_logout"
         android:icon="@drawable/ic_circle"
         android:title="@string/nav_logout" />

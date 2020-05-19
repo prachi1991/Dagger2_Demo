@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import androidx.annotation.WorkerThread
 import androidx.core.content.edit
+import com.ccpp.shared.util.ConstantsBase
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.properties.ReadWriteProperty
@@ -17,6 +18,7 @@ import kotlin.reflect.KProperty
 interface PreferenceStorage {
     var token: String?
     var userName: String?
+    var theme: String?
 
 }
 
@@ -40,10 +42,17 @@ class SharedPreferenceStorage @Inject constructor(context: Context) :
         ""
     )
 
+    override var theme by StringPreference(
+        prefs,
+        PREF_THEME,
+        ConstantsBase.THEME_DARK_MODE
+    )
+
     companion object {
         const val PREFS_NAME = "SharePref"
         const val PREF_TOKEN = "pref_token"
         const val PREF_USERNAME = "pref_username"
+        const val PREF_THEME = "pref_theme"
     }
 
     fun registerOnPreferenceChangeListener(listener: OnSharedPreferenceChangeListener) {
