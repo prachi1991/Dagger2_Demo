@@ -14,6 +14,7 @@
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:navigationBarColor">@color/color_navigation_bar</item>
         <item name="editTextColor">@color/color_text</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
 
@@ -38,6 +39,20 @@
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
         <item name="android:windowExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+
+    <!-- Alert Dialog -->
+    <style name="AlertDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/color_text</item>
+        <item name="android:textColor">@color/color_text</item>
+        <item name="android:titleTextColor" tools:targetApi="m">@color/color_text</item>
+        <item name="itemTextColor">@color/color_text</item>
+        <item name="actionMenuTextColor">@color/color_text</item>
+        <item name="android:textColorSecondary">@color/color_text</item>
     </style>
 
 </resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#343743</color>
-    <color name="colorSecondary">#1a1d27</color>
-    <color name="colorPrimaryDark">#292d38</color>
+    <color name="colorPrimary">#fff</color>
+    <color name="colorSecondary">#4E4D4D</color>
+    <color name="colorPrimaryDark">#fff</color>
     <color name="colorAccent">#bc8b43</color>
 
     <color name="text_color_bright_Accent">#fcd462</color>
@@ -33,44 +33,45 @@
     <color name="color_navigation_bar">#292d38</color>
     <color name="color_splash_screen">#20262d</color>
     <color name="color_status_bar">#292d38</color>
-    <color name="color_window_background">#20262d</color>
-    <color name="color_toolbar">#343743</color>
-    <color name="color_sub_toolbar">#343743</color>
-    <color name="color_primary2">#1a1d27</color>
-    <color name="menu_header_background">#272a31</color>
-    <color name="color_drawer_sub_comp">#343743</color>
+    <color name="color_window_background">#fff</color>
+    <color name="color_toolbar">#6e6e6e</color>
+    <color name="color_sub_toolbar">#BEBEC1</color>
+    <color name="color_primary2">#fff</color>
+    <color name="menu_header_background">#DFDEDE</color>
+    <color name="color_drawer_sub_comp">#ffffff</color>
 
-    <color name="background_card">#fff</color>
+    <color name="background_card">#BEBEC1</color>
     <color name="green">#1d7116</color>
-    <color name="text_light_green">#a0de4e</color>
+    <color name="text_light_green">#1d7116</color>
     <color name="menu_light_green">#64b000</color>
     <color name="white">#fff</color>
     <color name="red">#ff5a5a</color>
-    <color name="color_text">#fff</color>
-    <color name="color_text_secondary">#999</color>
-    <color name="drawer_text_color">#64b000</color>
-    <color name="contest_tab">#adadad</color>
+    <color name="color_text">#292d38</color>
+    <color name="color_text_secondary">#292d38</color>
+    <color name="drawer_text_color">#1d7116</color>
+    <color name="contest_tab">#292d38</color>
 
     <!--Bets drawer-->
-    <color name="bets_toolbar">#000000</color>
-    <color name="bets_divider">#ffffff</color>
-    <color name="bets_background_component">#3a3f49</color>
+    <color name="bets_toolbar">#6e6e6e</color>
+    <color name="bets_divider">#6e6e6e</color>
+    <color name="bets_background_component">#BEBEC1</color>
 
     <!--icons-->
-    <color name="close_icon">#ffffff</color>
+    <color name="close_icon">#20262d</color>
 
-    <color name="color_sub_component1">#3a3f49</color>
-    <color name="color_sub_component2">#3a3f49</color>
-    <color name="color_sub_component3">#333743</color>
-    <color name="color_sub_component4">#3e4765</color>
-    <color name="color_sub_component5">#182238</color>
-    <color name="color_sub_component6">#292d38</color>
+    <color name="color_sub_component1">#ffffff</color>
+    <color name="color_sub_component2">#BEBEC1</color>
+    <color name="color_sub_component3">#ffffff</color>
+    <color name="color_sub_component4">#BEBEC1</color>
+    <color name="color_sub_component5">#878686</color>
+    <color name="color_sub_component6">#BEBEC1</color>
 
-    <color name="color_header_component1">#272a31</color>
-    <color name="color_header_component2">#1a1d27</color>
+    <color name="color_header_component1">#DFDEDE</color>
+    <color name="color_header_component2">#DFDEDE</color>
 
-    <color name="color_content_1">#1a1d27</color>
+    <color name="color_content_1">#BEBEC1</color>
 
-    <color name="color_stroke_component1">#21242d</color>
+    <color name="color_stroke_component1">#888888</color>
 
 </resources>
+

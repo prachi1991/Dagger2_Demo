@@ -42,7 +42,7 @@ class App : DaggerApplication() {
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }
-        sharedPref.theme?.let { ThemeHelper.applyTheme(ConstantsBase.THEME_DEFAULT_MODE) }
+        sharedPref.theme?.let { ThemeHelper.applyTheme(it) }
 
     }
 

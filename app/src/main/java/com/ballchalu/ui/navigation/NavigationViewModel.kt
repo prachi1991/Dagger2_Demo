@@ -59,6 +59,15 @@ class NavigationViewModel @Inject constructor(
         _userDetails.postValue(Event(data.user))
     }
 
+    fun getSelectedTheme(): Int {
+        when (sharedPref.theme) {
+            ConstantsBase.THEME_DARK_MODE -> return 0
+            ConstantsBase.THEME_LIGHT_MODE -> return 1
+            ConstantsBase.THEME_DEFAULT_MODE -> return 2
+        }
+        return 3
+    }
+
     val declareEvent = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             intent.getStringExtra(ConstantsBase.ACTION_DECLARE)?.let {

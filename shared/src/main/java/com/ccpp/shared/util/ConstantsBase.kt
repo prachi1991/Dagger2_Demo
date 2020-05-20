@@ -107,4 +107,8 @@ object ConstantsBase {
     const val THEME_LIGHT_MODE = "light"
     const val THEME_DARK_MODE = "dark"
     const val THEME_DEFAULT_MODE = "default"
+    //    _____________THEME______________________________
+    const val THEME_LIGHT = "Light"
+    const val THEME_DARK = "Dark"
+    const val THEME_DEFAULT = "Lets system decide"
 }

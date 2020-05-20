@@ -18,16 +18,17 @@ package com.ballchalu.utils
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import com.ccpp.shared.util.ConstantsBase.THEME_DARK_MODE
+import com.ccpp.shared.util.ConstantsBase.THEME_DEFAULT_MODE
 import com.ccpp.shared.util.ConstantsBase.THEME_LIGHT_MODE
 
 object ThemeHelper {
     fun applyTheme(themePref: String) {
         when (themePref) {
-            THEME_LIGHT_MODE -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
             THEME_DARK_MODE -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            THEME_LIGHT_MODE -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             else -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -37,5 +38,23 @@ object ThemeHelper {
                 }
             }
         }
+    }
+
+    fun getSelectedTheme(item: Int): String {
+        when (item) {
+            0 -> {
+                applyTheme(THEME_DARK_MODE)
+                return THEME_DARK_MODE
+            }
+            1 -> {
+                applyTheme(THEME_LIGHT_MODE)
+                return THEME_LIGHT_MODE
+            }
+            2 -> {
+                applyTheme(THEME_DEFAULT_MODE)
+                return THEME_DEFAULT_MODE
+            }
+        }
+        return THEME_DEFAULT_MODE
     }
 }

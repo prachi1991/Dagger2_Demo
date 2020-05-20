@@ -28,6 +28,7 @@ import com.ccpp.shared.util.viewModelProvider
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
+
 class NavigationActivity : BaseActivity() {
     private var disposable: Disposable? = null
     private lateinit var viewModel: NavigationViewModel
@@ -84,9 +85,7 @@ class NavigationActivity : BaseActivity() {
             }
             menu.findItem(R.id.nav_theme).apply {
                 setOnMenuItemClickListener {
-                    sharePref.theme?.let { it1 ->
-                        ThemeHelper.applyTheme(ConstantsBase.THEME_DEFAULT_MODE)
-                    }
+                    openThemeSelection()
                     binding.drawerLayout.closeDrawer(GravityCompat.END)
                     true
                 }
@@ -196,5 +195,24 @@ class NavigationActivity : BaseActivity() {
         disposable?.dispose()
         unRegisterReceiver()
         super.onDestroy()
+    }
+
+    private fun openThemeSelection() {
+        var alertDialog1: AlertDialog? = null
+        val values = arrayOf<CharSequence>(
+            ConstantsBase.THEME_DARK,
+            ConstantsBase.THEME_LIGHT,
+            ConstantsBase.THEME_DEFAULT
+        )
+        val builder = AlertDialog.Builder(this, R.style.AlertDialogTheme)
+        builder.setTitle("Select theme")
+        builder.setSingleChoiceItems(
+            values, viewModel.getSelectedTheme()
+        ) { dialog, item ->
+            sharePref.theme = ThemeHelper.getSelectedTheme(item)
+            alertDialog1?.dismiss()
+        }
+        alertDialog1 = builder.create()
+        alertDialog1.show()
     }
 }
