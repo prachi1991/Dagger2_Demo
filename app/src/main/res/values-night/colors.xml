@@ -11,7 +11,6 @@
 
     <color name="trans_color_window_background">#B3000000</color>
 
-    <color name="menu_header_background">#272a31</color>
     <color name="login_blue_color">#3d64a2</color>
     <color name="login_blue_text">#7993b9</color>
     <color name="divider">#38475d</color>
@@ -38,6 +37,8 @@
     <color name="color_toolbar">#6e6e6e</color>
     <color name="color_sub_toolbar">#BEBEC1</color>
     <color name="color_primary2">#fff</color>
+    <color name="menu_header_background">#DFDEDE</color>
+    <color name="color_drawer_sub_comp">#ffffff</color>
 
     <color name="background_card">#BEBEC1</color>
     <color name="green">#1d7116</color>
@@ -47,6 +48,11 @@
     <color name="red">#ff5a5a</color>
     <color name="color_text">#292d38</color>
     <color name="color_text_secondary">#292d38</color>
+    <color name="drawer_text_color">#1d7116</color>
+    <color name="contest_tab">#292d38</color>
+
+    <!--icons-->
+    <color name="close_icon">#20262d</color>
 
     <color name="color_sub_component1">#ffffff</color>
     <color name="color_sub_component2">#BEBEC1</color>

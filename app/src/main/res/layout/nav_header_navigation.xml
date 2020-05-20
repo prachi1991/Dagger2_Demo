@@ -38,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
+                android:textColor="@color/color_text"
                 android:singleLine="true"
                 android:textSize="@dimen/_12ssp"
                 tools:text="abc@gmail.com" />

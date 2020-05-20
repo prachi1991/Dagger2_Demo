@@ -3,5 +3,5 @@
     <item android:color="@color/white" android:state_selected="true" />
     <item android:color="@color/white" android:state_focused="true" />
     <item android:color="@color/white" android:state_checked="true" />
-    <item android:color="#adadad" /> <!-- default case -->
+    <item android:color="@color/contest_tab" /> <!-- default case -->
 </selector>

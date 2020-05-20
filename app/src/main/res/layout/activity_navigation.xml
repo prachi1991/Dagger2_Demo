@@ -7,7 +7,7 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:openDrawer="start">
+        tools:openDrawer="end">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:background="#343743"
+            android:background="@color/color_drawer_sub_comp"
             android:fitsSystemWindows="true"
             android:textAlignment="viewEnd"
             android:theme="@style/Base.Theme.AppTheme.NavigationView"

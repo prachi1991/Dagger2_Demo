@@ -16,7 +16,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/back_solid_header_comp_2"
                 android:padding="@dimen/_5sdp">
 
@@ -26,6 +26,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_3sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toStartOf="@+id/tvTime"
                     android:ellipsize="end"
@@ -56,13 +58,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@drawable/backgroud_solid_primary">
+                android:background="@drawable/backgroud_solid_primary_grey">
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tablayout"
                     android:layout_width="wrap_content"
                     android:background="@android:color/transparent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
                     android:orientation="horizontal"
                     app:tabIndicatorHeight="0dp"
                     app:tabMode="auto" />
