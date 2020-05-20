@@ -48,11 +48,12 @@
     <color name="color_text">#292d38</color>
     <color name="color_text_secondary">#292d38</color>
 
-    <color name="color_sub_component1">#fff</color>
+    <color name="color_sub_component1">#ffffff</color>
     <color name="color_sub_component2">#BEBEC1</color>
-    <color name="color_sub_component3">#fff</color>
+    <color name="color_sub_component3">#ffffff</color>
     <color name="color_sub_component4">#BEBEC1</color>
     <color name="color_sub_component5">#878686</color>
+    <color name="color_sub_component6">#BEBEC1</color>
 
     <color name="color_header_component1">#DFDEDE</color>
     <color name="color_header_component2">#DFDEDE</color>
