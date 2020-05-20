@@ -17,7 +17,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/backgroud_solid_secondary"
+                android:background="@drawable/back_solid_header_comp_2"
                 android:padding="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -27,11 +27,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_toLeftOf="@+id/tvTime"
+                    android:layout_toStartOf="@+id/tvTime"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="IND_Demo1 VS PAK_DEMO2"
-                    android:textColor="@color/white"
+                    android:textColor="@color/color_text"
+                    tools:text="IND_Demo1 VS PAK_DEMO2"
                     android:textSize="@dimen/_12ssp" />
 
 
@@ -47,7 +47,7 @@
                     android:drawablePadding="@dimen/_5sdp"
                     android:gravity="center_vertical"
                     android:text="00:00:00"
-                    android:textColor="@color/white"
+                    android:textColor="@color/color_text"
                     android:textSize="@dimen/_12ssp" />
             </RelativeLayout>
 

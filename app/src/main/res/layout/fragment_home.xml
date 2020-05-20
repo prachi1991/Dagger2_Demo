@@ -14,16 +14,15 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:background="@android:color/transparent">
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_toolbar"
-            app:tabIndicator="@android:color/transparent"
             android:padding="@dimen/_5sdp"
+            app:tabIndicatorColor="@color/colorAccent"
             app:tabGravity="fill"
             app:tabMode="fixed" />
 

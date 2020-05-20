@@ -24,7 +24,6 @@
     <color name="light_grey">#333743</color>
 
     <color name="dark_blue">#182238</color>
-    <color name="dark_blue1">#21242d</color>
 
     <color name="light_blue1">#3e4765</color>
 
@@ -47,6 +46,7 @@
     <color name="white">#fff</color>
     <color name="red">#ff5a5a</color>
     <color name="color_text">#fff</color>
+    <color name="color_text_secondary">#999</color>
 
     <color name="color_sub_component1">#3a3f49</color>
     <color name="color_sub_component2">#3a3f49</color>
@@ -55,5 +55,10 @@
     <color name="color_sub_component5">#182238</color>
 
     <color name="color_header_component1">#272a31</color>
+    <color name="color_header_component2">#1a1d27</color>
+
+    <color name="color_content_1">#1a1d27</color>
+
+    <color name="color_stroke_component1">#21242d</color>
 
 </resources>

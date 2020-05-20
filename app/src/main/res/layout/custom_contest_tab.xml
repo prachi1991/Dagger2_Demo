@@ -27,6 +27,7 @@
             android:id="@+id/tvCountAll"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
+            android:textColor="@color/selector_white_grey"
             android:background="@drawable/selector_contest_count"
             android:gravity="center"
             android:padding="@dimen/_5sdp"
@@ -51,6 +52,7 @@
             android:textSize="@dimen/_12ssp" />
 
         <TextView
+            android:textColor="@color/selector_white_grey"
             android:id="@+id/tvCountMy"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"

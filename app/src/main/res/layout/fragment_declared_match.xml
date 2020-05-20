@@ -29,7 +29,7 @@
                         android:id="@+id/ll_inplay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/backgroud_solid_dark_grey"
+                        android:background="@drawable/back_solid_sub_comp_2"
                         android:orientation="vertical"
                         android:padding="@dimen/_3sdp"
                         android:visibility="gone"
@@ -38,7 +38,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/backgroud_round_header_background"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:background="@drawable/back_solid_header_comp_1"
                             android:orientation="horizontal"
                             android:padding="@dimen/_5sdp">
 
@@ -54,7 +55,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:text="@string/declared"
-                                android:textColor="@color/white"
+                                android:textColor="@color/color_text"
                                 android:textSize="@dimen/_12ssp" />
 
                         </LinearLayout>
@@ -66,7 +67,7 @@
                             android:orientation="vertical"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:itemCount="1"
-                            tools:listitem="@layout/row_in_play_match_listing" />
+                            tools:listitem="@layout/item_declared_listing" />
 
                     </LinearLayout>
 

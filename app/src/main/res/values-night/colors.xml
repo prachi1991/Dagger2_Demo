@@ -24,7 +24,6 @@
     <color name="light_grey">#333743</color>
 
     <color name="dark_blue">#182238</color>
-    <color name="dark_blue1">#21242d</color>
 
     <color name="light_blue1">#3e4765</color>
 
@@ -47,6 +46,7 @@
     <color name="white">#fff</color>
     <color name="red">#ff5a5a</color>
     <color name="color_text">#292d38</color>
+    <color name="color_text_secondary">#292d38</color>
 
     <color name="color_sub_component1">#fff</color>
     <color name="color_sub_component2">#BEBEC1</color>
@@ -54,7 +54,11 @@
     <color name="color_sub_component4">#BEBEC1</color>
     <color name="color_sub_component5">#878686</color>
 
-    <color name="color_header_component1">#fff</color>
+    <color name="color_header_component1">#DFDEDE</color>
+    <color name="color_header_component2">#DFDEDE</color>
 
+    <color name="color_content_1">#BEBEC1</color>
+
+    <color name="color_stroke_component1">#888888</color>
 
 </resources>
