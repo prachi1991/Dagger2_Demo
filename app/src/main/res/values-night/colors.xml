@@ -51,6 +51,11 @@
     <color name="drawer_text_color">#1d7116</color>
     <color name="contest_tab">#292d38</color>
 
+    <!--Bets drawer-->
+    <color name="bets_toolbar">#6e6e6e</color>
+    <color name="bets_divider">#6e6e6e</color>
+    <color name="bets_background_component">#BEBEC1</color>
+
     <!--icons-->
     <color name="close_icon">#20262d</color>
 
