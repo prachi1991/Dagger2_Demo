@@ -23,7 +23,7 @@
             android:id="@+id/headerLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
-            android:background="@drawable/backgroud_solid_primary"
+            android:background="@drawable/back_solid_toolbar"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView

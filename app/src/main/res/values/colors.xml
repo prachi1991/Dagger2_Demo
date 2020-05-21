@@ -18,12 +18,7 @@
     <color name="text_color_grey">#999</color>
     <color name="dark_grey">#3a3f49</color>
 
-    <color name="header_background">#272a31</color>
     <color name="light_grey">#333743</color>
-
-    <color name="dark_blue">#182238</color>
-
-    <color name="light_blue1">#3e4765</color>
 
     <color name="light_white_color">#888888</color>
 
@@ -57,6 +52,7 @@
     <color name="bets_background_component">#BEBEC1</color>
 
     <color name="background_component">#BEBEC1</color>
+    <color name="how_to_play_content">#DFDEDE</color>
 
     <!--icons-->
     <color name="close_icon">#20262d</color>
@@ -75,7 +71,6 @@
     <color name="color_header_component2">#DFDEDE</color>
 
     <color name="color_content_1">#BEBEC1</color>
-    <color name="color_content_2">#BEBEC1</color>
 
     <color name="color_stroke_component1">#888888</color>
     <color name="color_stroke_component2">#DFDEDE</color>
