@@ -13,14 +13,12 @@
     <color name="login_blue_color">#3d64a2</color>
     <color name="login_blue_text">#7993b9</color>
     <color name="divider">#38475d</color>
-    <color name="black">#000</color>
     <color name="light_blue_text">#a7b8d2</color>
     <color name="text_color_grey">#999</color>
     <color name="dark_grey">#3a3f49</color>
 
     <color name="light_grey">#333743</color>
 
-    <color name="light_white_color">#888888</color>
 
     <!--___________________________SortedColor____________________________________________________________-->
 
@@ -45,6 +43,9 @@
     <color name="color_text_secondary">#999</color>
     <color name="drawer_text_color">#64b000</color>
     <color name="contest_tab">#adadad</color>
+    <color name="black">#000</color>
+
+    <color name="light_white_color">#888888</color>
 
     <!--Bets drawer-->
     <color name="bets_toolbar">#000000</color>

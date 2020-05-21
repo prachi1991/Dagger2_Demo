@@ -25,6 +25,7 @@ import com.ccpp.shared.rxjava.RxBus
 import com.ccpp.shared.rxjava.RxEvent
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
@@ -118,7 +119,7 @@ class NavigationActivity : BaseActivity() {
     }
 
     private fun openLogoutDialog() {
-        val builder = AlertDialog.Builder(this@NavigationActivity)
+        val builder = MaterialAlertDialogBuilder(this, R.style.MyMaterialAlertDialog)
         //set title for alert dialog
         builder.setTitle(R.string.dialogTitle)
         //set message for alert dialog
@@ -135,12 +136,7 @@ class NavigationActivity : BaseActivity() {
         builder.setNegativeButton("No") { dialogInterface, which ->
             //    alertDialog.dismiss()
         }
-        val alertDialog: AlertDialog
-        // Create the AlertDialog
-        alertDialog = builder.create()
-        // Set other dialog properties
-        alertDialog.setCancelable(false)
-        alertDialog.show()
+        builder.show()
 
     }
 
@@ -198,21 +194,18 @@ class NavigationActivity : BaseActivity() {
     }
 
     private fun openThemeSelection() {
-        var alertDialog1: AlertDialog? = null
         val values = arrayOf<CharSequence>(
             ConstantsBase.THEME_DARK,
             ConstantsBase.THEME_LIGHT,
             ConstantsBase.THEME_DEFAULT
         )
-        val builder = AlertDialog.Builder(this, R.style.AlertDialogTheme)
+        val builder = MaterialAlertDialogBuilder(this, R.style.MyMaterialAlertDialog)
         builder.setTitle("Select theme")
         builder.setSingleChoiceItems(
             values, viewModel.getSelectedTheme()
         ) { dialog, item ->
             sharePref.theme = ThemeHelper.getSelectedTheme(item)
-            alertDialog1?.dismiss()
         }
-        alertDialog1 = builder.create()
-        alertDialog1.show()
+        builder.show()
     }
 }

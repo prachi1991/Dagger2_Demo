@@ -55,4 +55,14 @@
         <item name="android:textColorSecondary">@color/color_text</item>
     </style>
 
+    <style name="MyMaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/OutlinedButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/OutlinedButton</item>
+    </style>
+
+    <style name="OutlinedButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/color_text</item>
+        <item name="backgroundColor">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
+    </style>
 </resources>

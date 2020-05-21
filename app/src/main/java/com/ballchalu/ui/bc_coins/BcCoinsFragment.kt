@@ -1,6 +1,7 @@
 package com.ballchalu.ui.bc_coins
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.bccoins.BcCoinContest
 import com.ccpp.shared.util.activityViewModelProvider
 import com.ccpp.shared.util.viewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
 
 /**
@@ -78,17 +80,18 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
     }
 
     private fun openLogoutDialog() {
-        val builder = AlertDialog.Builder(context)
+        val builder = MaterialAlertDialogBuilder(context, R.style.MyMaterialAlertDialog)
         builder.setTitle(R.string.dialog_title)
         builder.setMessage(R.string.dialog_desc)
         builder.setIcon(R.drawable.ic_success)
         builder.setPositiveButton("Ok") { _, _ ->
 
         }
-        val alertDialog: AlertDialog
-        alertDialog = builder.create()
-        alertDialog.setCancelable(false)
-        alertDialog.show()
+        builder.show()
+//        val alertDialog: AlertDialog
+//        alertDialog = builder.create()
+//        alertDialog.setCancelable(false)
+//        alertDialog.show()
 
     }
 }
