@@ -56,6 +56,8 @@
     <color name="bets_divider">#6e6e6e</color>
     <color name="bets_background_component">#BEBEC1</color>
 
+    <color name="background_component">#BEBEC1</color>
+
     <!--icons-->
     <color name="close_icon">#20262d</color>
 
@@ -66,6 +68,8 @@
     <color name="color_sub_component5">#878686</color>
     <color name="color_sub_component6">#BEBEC1</color>
     <color name="color_sub_component7">#BEBEC1</color>
+    <color name="color_sub_component8">#BEBEC1</color>
+    <color name="color_sub_component9">#DFDEDE</color>
 
     <color name="color_header_component1">#DFDEDE</color>
     <color name="color_header_component2">#DFDEDE</color>
@@ -79,4 +83,3 @@
     <color name="color_light_stroke">#BEBEC1</color>
 
 </resources>
-

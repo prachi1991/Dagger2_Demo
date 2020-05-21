@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_60sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/colorSecondary"
         app:cardCornerRadius="@dimen/_8sdp"
-        app:cardElevation="@dimen/_5sdp"
+        app:cardElevation="0dp"
         tools:ignore="MissingPrefix">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/back_solid_header_comp_2">
 
             <TextView
                 android:id="@+id/position"
@@ -60,7 +60,6 @@
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"
                     tools:text="jhon wick" />
 
@@ -69,12 +68,12 @@
                     fontPath="fonts/Play-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_color_grey"
+                    android:textColor="@color/color_text_secondary"
                     android:textSize="@dimen/_12ssp"
                     tools:text="2,45,000/-" />
 
             </LinearLayout>
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 </layout>

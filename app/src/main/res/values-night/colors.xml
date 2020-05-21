@@ -56,6 +56,8 @@
     <color name="bets_divider">#ffffff</color>
     <color name="bets_background_component">#3a3f49</color>
 
+    <color name="background_component">#3a3f49</color>
+
     <!--icons-->
     <color name="close_icon">#ffffff</color>
 
@@ -66,6 +68,8 @@
     <color name="color_sub_component5">#182238</color>
     <color name="color_sub_component6">#292d38</color>
     <color name="color_sub_component7">#343743</color>
+    <color name="color_sub_component8">#3a3f49</color>
+    <color name="color_sub_component9">#292d38</color>
 
     <color name="color_header_component1">#272a31</color>
     <color name="color_header_component2">#1a1d27</color>
