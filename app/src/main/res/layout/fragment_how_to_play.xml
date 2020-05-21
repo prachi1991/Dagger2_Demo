@@ -51,7 +51,7 @@
         <androidx.recyclerview.widget.RecyclerView
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_below="@+id/headerLayout"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:id="@+id/rvHowToPlay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
