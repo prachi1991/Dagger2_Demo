@@ -6,7 +6,6 @@
     <color name="colorPrimaryDark">#292d38</color>
     <color name="colorAccent">#bc8b43</color>
 
-    <color name="text_color_bright_Accent">#fcd462</color>
 
 
     <color name="trans_color_window_background">#B3000000</color>
@@ -46,6 +45,7 @@
     <color name="menu_light_green">#64b000</color>
     <color name="white">#fff</color>
     <color name="red">#ff5a5a</color>
+    <color name="color_accent">#fcd462</color>
     <color name="color_text">#fff</color>
     <color name="color_text_secondary">#999</color>
     <color name="drawer_text_color">#64b000</color>
@@ -65,12 +65,17 @@
     <color name="color_sub_component4">#3e4765</color>
     <color name="color_sub_component5">#182238</color>
     <color name="color_sub_component6">#292d38</color>
+    <color name="color_sub_component7">#343743</color>
 
     <color name="color_header_component1">#272a31</color>
     <color name="color_header_component2">#1a1d27</color>
 
     <color name="color_content_1">#1a1d27</color>
+    <color name="color_content_2">#1a1d27</color>
 
     <color name="color_stroke_component1">#21242d</color>
+    <color name="color_stroke_component2">#343743</color>
+
+    <color name="color_light_stroke">#3a3f49</color>
 
 </resources>
