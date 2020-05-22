@@ -27,13 +27,6 @@
         <item name="android:textSize">@dimen/_14ssp</item>
     </style>
 
-    <style name="Base.Theme.AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Base.Theme.AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <string name="font_play_bold">\@fonts/Play-Bold.ttf</string>
 
     <style name="DialogAnimation">

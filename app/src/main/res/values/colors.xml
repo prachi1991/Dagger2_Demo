@@ -16,7 +16,7 @@
     <!--___________________________SortedColor____________________________________________________________-->
 
     <color name="color_navigation_bar">#292d38</color>
-    <color name="color_splash_screen">#20262d</color>
+    <color name="color_splash_screen">#888888</color>
     <color name="color_status_bar">#292d38</color>
     <color name="color_window_background">#fff</color>
     <color name="color_toolbar">#6e6e6e</color>
