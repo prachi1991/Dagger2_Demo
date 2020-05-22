@@ -1,5 +1,6 @@
 package com.ballchalu.ui.match.details
 
+import android.app.Application
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -13,7 +14,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
@@ -40,6 +43,7 @@ import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import javax.inject.Inject
+
 
 class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSuccessListener {
 
@@ -68,29 +72,27 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             tvUserCount.text = resources.getString(R.string.d_users, liveUser)
         }
         if (viewModel.isDeclared)
-            setWinnerListener()
+            setWinnerFragment()
         registerReceiver()
 
         return binding.root
     }
 
-    private fun setWinnerListener() {
-        binding.ivWinner.setOnClickListener {
-            childFragmentManager.run {
-                if (findFragmentByTag(WinnersFragment::class.java.simpleName) == null) {
-                    beginTransaction().remove(viewModel.myBetFragment)
-                        .commitAllowingStateLoss()
-                    beginTransaction()
-                        .add(
-                            R.id.llMyBetContainer,
-                            viewModel.winnersFragment,
-                            WinnersFragment::class.java.simpleName
-                        )
-                        .commitAllowingStateLoss()
-                    binding.llMatchContainer.visibility = View.GONE
-                }
+    private fun setWinnerFragment() {
+        childFragmentManager.run {
+            if (findFragmentByTag(WinnersFragment::class.java.simpleName) == null) {
+                beginTransaction().remove(viewModel.myBetFragment)
+                    .commitAllowingStateLoss()
+                beginTransaction()
+                    .add(
+                        R.id.llMyBetContainer,
+                        viewModel.winnersFragment,
+                        WinnersFragment::class.java.simpleName
+                    )
+                    .commitAllowingStateLoss()
             }
         }
+        binding.llMatchContainer.visibility = View.GONE
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -136,6 +138,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback);
         initListeners()
         initSessionAdapterAdapter()
         initEndingDigitAdapterAdapter()
@@ -367,14 +370,15 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
                 }
             }
         }
-        binding.tvContest.setOnClickListener {
-            childFragmentManager.run {
-                beginTransaction().remove(viewModel.myBetFragment).commitAllowingStateLoss()
-                beginTransaction().remove(viewModel.winnersFragment).commitAllowingStateLoss()
-            }
-            binding.llMatchContainer.visibility = View.VISIBLE
+        if (!viewModel.isDeclared)
+            binding.tvContest.setOnClickListener {
+                childFragmentManager.run {
+                    beginTransaction().remove(viewModel.myBetFragment).commitAllowingStateLoss()
+                    beginTransaction().remove(viewModel.winnersFragment).commitAllowingStateLoss()
+                }
+                binding.llMatchContainer.visibility = View.VISIBLE
 
-        }
+            }
     }
 
     private fun setEvenOddData(market: Market) {
@@ -528,4 +532,23 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         super.onResume()
         mqttConnection.connectToClient()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    var callback: OnBackPressedCallback =
+        object : OnBackPressedCallback(true /* enabled by default */) {
+            override fun handleOnBackPressed() { // Handle the back button event
+                if (viewModel.myBetFragment.isVisible) {
+                    childFragmentManager.run {
+                        beginTransaction().remove(viewModel.myBetFragment).commitAllowingStateLoss()
+                        if (viewModel.isDeclared)
+                            setWinnerFragment()
+                        else binding.llMatchContainer.visibility = View.VISIBLE
+
+                    }
+                } else findNavController().navigateUp()
+            }
+        }
 }
