@@ -44,7 +44,7 @@
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_3sdp"
                 android:selectAllOnFocus="true"
-                android:textColor="@color/white"
+                android:textColor="@color/login_edit_text_color"
                 android:textSize="@dimen/_11ssp" />
 
             <View
@@ -52,7 +52,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:background="@color/divider" />
+                android:background="@color/login_divider" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvPasswordLabel"
@@ -81,7 +81,7 @@
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_3sdp"
                 android:selectAllOnFocus="true"
-                android:textColor="@color/white"
+                android:textColor="@color/login_edit_text_color"
                 android:textSize="@dimen/_11ssp" />
 
             <View
@@ -89,7 +89,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:background="@color/divider" />
+                android:background="@color/login_divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,7 +109,7 @@
                     android:background="@drawable/backgroud_btn_blue"
                     android:text="@string/sign_in"
                     android:textAllCaps="false"
-                    android:textColor="@color/light_blue_text"
+                    android:textColor="@color/login_light_blue_text"
                     android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView

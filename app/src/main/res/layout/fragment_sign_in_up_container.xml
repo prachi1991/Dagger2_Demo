@@ -98,7 +98,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_centerVertical="true"
-                            android:background="@color/divider" />
+                            android:background="@color/login_divider" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             fontPath="fonts/Play-Bold.ttf"
@@ -136,7 +136,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:text="@string/login_with_google"
-                            android:textColor="@color/light_blue_text"
+                            android:textColor="@color/login_light_blue_text"
                             android:textSize="@dimen/_10ssp" />
 
                     </LinearLayout>
@@ -164,7 +164,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:text="@string/login_with_facebook"
-                            android:textColor="@color/light_blue_text"
+                            android:textColor="@color/login_light_blue_text"
                             android:textSize="@dimen/_10ssp" />
 
                     </LinearLayout>

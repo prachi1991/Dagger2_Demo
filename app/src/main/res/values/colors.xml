@@ -7,18 +7,11 @@
     <color name="colorAccent">#bc8b43</color>
 
 
-    <color name="trans_color_window_background">#B39C9C9C</color>
 
-    <color name="login_blue_color">#8EBCFF</color>
-    <color name="login_blue_text">#3a3f49</color>
-    <color name="divider">#38475d</color>
-    <color name="light_blue_text">#3a3f49</color>
     <color name="text_color_grey">#999</color>
     <color name="dark_grey">#3a3f49</color>
-
     <color name="light_grey">#333743</color>
 
-    <color name="light_white_color">#888888</color>
 
     <!--___________________________SortedColor____________________________________________________________-->
 
@@ -44,6 +37,18 @@
     <color name="drawer_text_color">#1d7116</color>
     <color name="contest_tab">#292d38</color>
     <color name="black">#000</color>
+
+    <color name="light_white_color">#888888</color>
+
+    <!--Login-->
+    <color name="trans_color_window_background">#B3EAEAEA</color>
+    <color name="login_button_solid">#dbdbdb</color>
+    <color name="login_button_corner">#3d64a2</color>
+    <color name="login_edit_text_color">#000</color>
+    <color name="login_blue_color">#8EBCFF</color>
+    <color name="login_blue_text">#3a3f49</color>
+    <color name="login_divider">#657997</color>
+    <color name="login_light_blue_text">#3a3f49</color>
 
     <!--Bets drawer-->
     <color name="bets_toolbar">#6e6e6e</color>
