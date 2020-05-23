@@ -4,6 +4,7 @@ import com.ccpp.shared.BuildConfig
 import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
+import com.ccpp.shared.domain.profile.ChangePasswordReq
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -48,6 +49,9 @@ open class ApiService @Inject constructor(
 
     fun callMatchDetailsAsync(providerId: Int) =
         matchDetailsApiClient.callMatchDetailsAsync(providerId)
+
+    fun callChangePasswordAsync(changePasswordReq: ChangePasswordReq) =
+        apiClient.callChangePasswordAsync(changePasswordReq)
 
     fun callBcCoinsLedgersAsync(page: Int) = apiClient.callBcCoinsLedgersAsync(page)
 

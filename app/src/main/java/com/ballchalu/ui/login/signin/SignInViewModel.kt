@@ -29,7 +29,7 @@ class SignInViewModel @Inject constructor(private val loginRepository: LoginRepo
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = loginRepository.getLoginCall(getMapQuery(username, password))) {
                 is Results.Success -> _loginResult.postValue(Event(result.data))
-                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+                is Results.Error -> failure.postValue(Event("Unauthorised"))
             }
             loading.postValue(Event(false))
         }

@@ -14,6 +14,8 @@ import com.ccpp.shared.domain.create_bet.CreateSessionBetRes
 import com.ccpp.shared.domain.match_details.MatchDetailsRes
 import com.ccpp.shared.domain.my_bets.MyBetsRes
 import com.ccpp.shared.domain.position.PositionRes
+import com.ccpp.shared.domain.profile.ChangePasswordReq
+import com.ccpp.shared.domain.profile.ChangePasswordRes
 import com.ccpp.shared.domain.user.UserRes
 import com.ccpp.shared.domain.winner.WinnerRes
 import kotlinx.coroutines.Deferred
@@ -89,6 +91,9 @@ internal interface ApiClient {
 
     @POST("ballchalu/api/v1/bc_coins_offers/{id}}/bc_coins_transactions")
     fun callBuyNowCoinsAsync(@Path("id") id: Int): Deferred<Response<BcCoinBuyRes>>
+
+    @POST("api/v1/user/reset_password")
+    fun callChangePasswordAsync(@Body req: ChangePasswordReq): Deferred<Response<ChangePasswordRes>>
 
     @GET("ballchalu/api/v1/contests/{contestId}/top_runners")
     fun callWinnerListingAsync(
