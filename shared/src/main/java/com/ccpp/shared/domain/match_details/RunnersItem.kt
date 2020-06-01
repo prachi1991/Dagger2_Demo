@@ -32,6 +32,7 @@ data class RunnersItem(
 
 ) {
     fun color(): Int = ColorUtils.getPositionColor(runnerPosition ?: 0)
-    fun runner(): String = if (runnerPosition == 0) " " else runnerPosition.toString()
+    fun runner(): String =
+        if (runnerPosition == 0 || runnerPosition == null) " " else runnerPosition.toString()
 
 }

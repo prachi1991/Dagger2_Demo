@@ -88,10 +88,6 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
 
         }
         builder.show()
-//        val alertDialog: AlertDialog
-//        alertDialog = builder.create()
-//        alertDialog.setCancelable(false)
-//        alertDialog.show()
 
     }
 }

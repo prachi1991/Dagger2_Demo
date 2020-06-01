@@ -13,48 +13,58 @@
     <fragment
         android:id="@+id/nav_home_match_details"
         android:name="com.ballchalu.ui.match.details.MatchDetailsFragment"
-        android:label="MatchDetailsFragment" />
+        android:label="MatchDetailsFragment"
+        tools:layout="@layout/fragment_match_details" />
     <fragment
         android:id="@+id/nav_contest"
         android:name="com.ballchalu.ui.contest.MainContestFragment"
-        android:label="MainContestFragment" />
+        android:label="MainContestFragment"
+        tools:layout="@layout/fragment_contest" />
     <fragment
         android:id="@+id/nav_coin_ledgers"
         android:name="com.ballchalu.ui.ledgers.BcCoinsLedgersFragment"
-        android:label="BcCoinsLedgersFragment" />
+        android:label="BcCoinsLedgersFragment"
+        tools:layout="@layout/fragment_bc_coins_ledgers" />
 
     <fragment
         android:id="@+id/nav_bc_coins"
         android:name="com.ballchalu.ui.bc_coins.BcCoinsFragment"
-        android:label="BcCoinsFragment" />
+        android:label="BcCoinsFragment"
+        tools:layout="@layout/fragment_bc_coins" />
 
     <fragment
         android:id="@+id/nav_winners"
         android:name="com.ballchalu.ui.winners.WinnersFragment"
-        android:label="WinnersFragment" />
+        android:label="WinnersFragment"
+        tools:layout="@layout/fragment_winners" />
 
     <dialog
         android:id="@+id/nav_create_bet"
         android:name="com.ballchalu.ui.create_bet.CreateBetFragment"
-        android:label="CreateBetFragment" />
+        android:label="CreateBetFragment"
+        tools:layout="@layout/fragment_create_bet" />
 
     <fragment
         android:id="@+id/nav_my_bet"
         android:name="com.ballchalu.ui.match.details.my_bets.MyBetsFragment"
-        android:label="MyBetsFragment" />
+        android:label="MyBetsFragment"
+        tools:layout="@layout/fragment_my_bets" />
 
     <fragment
         android:id="@+id/nav_how_to_play"
         android:name="com.ballchalu.ui.how_to_play.HowToPlayFragment"
-        android:label="HowToPlayFragment" />
+        android:label="HowToPlayFragment"
+        tools:layout="@layout/fragment_how_to_play" />
 
     <fragment
         android:id="@+id/nav_declared"
         android:name="com.ballchalu.ui.match_listing.recent.DeclaredMatchFragment"
-        android:label="Declared Match" />
+        android:label="Declared Match"
+        tools:layout="@layout/fragment_declared_match" />
     <fragment
         android:id="@+id/nav_changePassword"
         android:name="com.ballchalu.ui.profile.changepassword.ChangePasswordFragment"
-        android:label="ChangePasswordFragment" />
+        android:label="ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password" />
 
 </navigation>

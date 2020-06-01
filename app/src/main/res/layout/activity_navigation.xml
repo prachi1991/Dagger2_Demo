@@ -26,7 +26,6 @@
                         android:id="@+id/ibMenu"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
                         android:background="@android:color/transparent"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingRight="@dimen/_10sdp"
@@ -38,13 +37,15 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingRight="@dimen/_10sdp"
-                        android:src="@drawable/logo_ball_chalu" />
+                        android:src="@drawable/logo_ball_chalu"
+                        android:visibility="gone" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvContestCoin"
                         fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_toStartOf="@id/ibMenu"
                         android:gravity="center"
@@ -77,10 +78,9 @@
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="end"
+            android:layout_gravity="start"
             android:background="@color/color_drawer_sub_comp"
             android:fitsSystemWindows="true"
-            android:textAlignment="viewEnd"
             android:theme="@style/Base.Theme.AppTheme.NavigationView"
             app:headerLayout="@layout/nav_header_navigation"
             app:itemIconTint="@color/menu_light_green"

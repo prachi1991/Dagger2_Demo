@@ -1,6 +1,5 @@
 package com.ballchalu.ui.navigation
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
@@ -11,6 +10,9 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.ballchalu.BuildConfig
 import com.ballchalu.R
@@ -74,40 +76,63 @@ class NavigationActivity : BaseActivity() {
             binding.tvContestCoin.text = ""
             binding.tvContestCoin.visibility =
                 if (destination.id == R.id.nav_home_match_details) View.VISIBLE else View.GONE
-
+            closeDrawer()
         }
         binding.navView.apply {
-            menu.findItem(R.id.nav_logout).apply {
-                setOnMenuItemClickListener {
-                    openLogoutDialog()
-                    binding.drawerLayout.closeDrawer(GravityCompat.END)
-                    true
-                }
-            }
-            menu.findItem(R.id.nav_theme).apply {
-                setOnMenuItemClickListener {
-                    openThemeSelection()
-                    binding.drawerLayout.closeDrawer(GravityCompat.END)
-                    true
-                }
-            }
 
             menu.findItem(R.id.nav_bc_coins).apply {
                 setOnMenuItemClickListener {
                     navController.navigate(R.id.nav_bc_coins)
-                    toggleDrawer()
+                    true
+                }
+            }
+            menu.findItem(R.id.nav_home).apply {
+                setOnMenuItemClickListener {
+                    navController.navigate(R.id.nav_home)
+                    true
+                }
+            }
+            menu.findItem(R.id.nav_coin_ledgers).apply {
+                setOnMenuItemClickListener {
+                    navController.navigate(R.id.nav_coin_ledgers)
                     true
                 }
             }
             menu.findItem(R.id.nav_declared).apply {
                 setOnMenuItemClickListener {
                     navController.navigate(R.id.nav_declared)
-                    toggleDrawer()
+                    true
+                }
+            }
+            menu.findItem(R.id.nav_how_to_play).apply {
+                setOnMenuItemClickListener {
+                    navController.navigate(R.id.nav_how_to_play)
+                    true
+                }
+            }
+
+            menu.findItem(R.id.nav_logout).apply {
+                setOnMenuItemClickListener {
+                    openLogoutDialog()
+                    closeDrawer()
+                    true
+                }
+            }
+            menu.findItem(R.id.nav_theme).apply {
+                setOnMenuItemClickListener {
+                    openThemeSelection()
+                    closeDrawer()
                     true
                 }
             }
         }
 
+    }
+
+    private fun closeDrawer() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        }
     }
 
     private fun setHeaderUi(userRes: UserData?) {
@@ -161,10 +186,10 @@ class NavigationActivity : BaseActivity() {
     }
 
     private fun toggleDrawer() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.END)) {
-            binding.drawerLayout.closeDrawer(GravityCompat.END)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else
-            binding.drawerLayout.openDrawer(GravityCompat.END)
+            binding.drawerLayout.openDrawer(GravityCompat.START)
     }
 
     private fun setBuildVersion() {
