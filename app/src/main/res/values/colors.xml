@@ -40,6 +40,8 @@
 
     <color name="light_white_color">#888888</color>
 
+    <color name="menu_icon_color">#888888</color>
+
     <!--Login-->
     <color name="trans_color_window_background">#B3EAEAEA</color>
     <color name="login_button_solid">#dbdbdb</color>

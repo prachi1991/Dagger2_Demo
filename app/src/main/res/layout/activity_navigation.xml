@@ -45,16 +45,24 @@
                         fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_toStartOf="@id/ibMenu"
                         android:gravity="center"
+                        android:layout_toLeftOf="@id/ibProfile"
                         android:paddingTop="@dimen/_5sdp"
                         android:src="@drawable/logo_ball_chalu"
                         android:textColor="@color/text_light_green"
                         android:textSize="@dimen/_12ssp"
                         tools:text="BC Coin 200" />
 
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/ibProfile"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@android:color/transparent"
+                        android:padding="@dimen/_7sdp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_avatar" />
 
                 </RelativeLayout>
 

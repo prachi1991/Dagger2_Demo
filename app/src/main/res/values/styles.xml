@@ -58,4 +58,9 @@
         <item name="backgroundColor">@android:color/transparent</item>
         <item name="background">@android:color/transparent</item>
     </style>
+
+    <style name="MyPopupOtherStyle" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/color_text</item>
+    </style>
 </resources>

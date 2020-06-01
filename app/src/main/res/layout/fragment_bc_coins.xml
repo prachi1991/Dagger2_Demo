@@ -36,7 +36,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:background="@drawable/shape_circle_grey"
                     android:padding="@dimen/_4sdp"
-                    android:src="@drawable/ic_avtar" />
+                    android:src="@drawable/ic_avatar" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvEmail"

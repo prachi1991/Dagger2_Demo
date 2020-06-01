@@ -3,16 +3,16 @@ package com.ballchalu.ui.navigation
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.view.ContextThemeWrapper
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.ballchalu.BuildConfig
 import com.ballchalu.R
@@ -29,6 +29,7 @@ import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.disposables.Disposable
+import java.lang.reflect.Field
 import javax.inject.Inject
 
 
@@ -82,31 +83,31 @@ class NavigationActivity : BaseActivity() {
 
             menu.findItem(R.id.nav_bc_coins).apply {
                 setOnMenuItemClickListener {
-                    navController.navigate(R.id.nav_bc_coins)
+                    navigate(R.id.nav_bc_coins)
                     true
                 }
             }
             menu.findItem(R.id.nav_home).apply {
                 setOnMenuItemClickListener {
-                    navController.navigate(R.id.nav_home)
+                    navigate(R.id.nav_home)
                     true
                 }
             }
             menu.findItem(R.id.nav_coin_ledgers).apply {
                 setOnMenuItemClickListener {
-                    navController.navigate(R.id.nav_coin_ledgers)
+                    navigate(R.id.nav_coin_ledgers)
                     true
                 }
             }
             menu.findItem(R.id.nav_declared).apply {
                 setOnMenuItemClickListener {
-                    navController.navigate(R.id.nav_declared)
+                    navigate(R.id.nav_declared)
                     true
                 }
             }
             menu.findItem(R.id.nav_how_to_play).apply {
                 setOnMenuItemClickListener {
-                    navController.navigate(R.id.nav_how_to_play)
+                    navigate(R.id.nav_how_to_play)
                     true
                 }
             }
@@ -127,6 +128,12 @@ class NavigationActivity : BaseActivity() {
             }
         }
 
+    }
+
+    private fun navigate(id: Int) {
+        if (navController.currentDestination?.id != id)
+            navController.navigate(id)
+        closeDrawer()
     }
 
     private fun closeDrawer() {
@@ -168,6 +175,9 @@ class NavigationActivity : BaseActivity() {
     private fun setObservers() {
         binding.ibMenu.setOnClickListener {
             toggleDrawer()
+        }
+        binding.ibProfile.setOnClickListener {
+            initProfileMenu(it)
         }
         binding.navView.getHeaderView(0).findViewById<ImageView>(R.id.ivCloseDrawer)
             .setOnClickListener {
@@ -232,5 +242,52 @@ class NavigationActivity : BaseActivity() {
             sharePref.theme = ThemeHelper.getSelectedTheme(item)
         }
         builder.show()
+    }
+
+    private fun initProfileMenu(view: View) {
+        val wrapper = ContextThemeWrapper(this, R.style.MyPopupOtherStyle)
+        val popup = PopupMenu(wrapper, view)
+        try {
+            val fields: Array<Field> = popup.javaClass.declaredFields
+            for (field in fields) {
+                if ("mPopup" == field.name) {
+                    field.isAccessible = true
+                    val menuPopupHelper = field.get(popup)
+                    val setForceIcons = Class.forName(menuPopupHelper.javaClass.name).getMethod(
+                        "setForceShowIcon",
+                        Boolean::class.javaPrimitiveType
+                    )
+                    setForceIcons.invoke(menuPopupHelper, true)
+                    break
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        popup.menuInflater.inflate(R.menu.menu_profile, popup.menu)
+        popup.setOnMenuItemClickListener(object : MenuItem.OnMenuItemClickListener,
+            PopupMenu.OnMenuItemClickListener {
+            override fun onMenuItemClick(item: MenuItem?): Boolean {
+                when (item?.itemId) {
+                    R.id.menuProfile -> {
+                        if (navController.currentDestination?.id != R.id.nav_profile)
+                            navController.navigate(R.id.nav_profile)
+                    }
+                    R.id.menuChangePassword -> {
+                        if (navController.currentDestination?.id != R.id.nav_changePassword)
+                            navController.navigate(R.id.nav_changePassword)
+                    }
+                    R.id.menuLogout -> {
+                        openLogoutDialog()
+                    }
+                }
+
+                return true
+            }
+
+        })
+
+        popup.show() //showing popup menu
+
     }
 }
