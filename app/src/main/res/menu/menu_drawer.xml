@@ -29,21 +29,21 @@
         android:id="@+id/nav_how_to_play"
         android:icon="@drawable/ic_circle"
         android:title="@string/nav_how_to_play" />
-    <item
-        android:id="@+id/nav_profile"
-        android:icon="@drawable/ic_circle"
-        android:title="@string/nav_profile" />
-    <item
-        android:id="@+id/nav_changePassword"
-        android:icon="@drawable/ic_circle"
-        android:title="@string/nav_change_password" />
+    <!--    <item-->
+    <!--        android:id="@+id/nav_profile"-->
+    <!--        android:icon="@drawable/ic_circle"-->
+    <!--        android:title="@string/nav_profile" />-->
+    <!--    <item-->
+    <!--        android:id="@+id/nav_changePassword"-->
+    <!--        android:icon="@drawable/ic_circle"-->
+    <!--        android:title="@string/nav_change_password" />-->
     <item
         android:id="@+id/nav_theme"
         android:icon="@drawable/ic_circle"
         android:title="@string/nav_theme" />
-    <item
-        android:id="@+id/nav_logout"
-        android:icon="@drawable/ic_circle"
-        android:title="@string/nav_logout" />
+    <!--    <item-->
+    <!--        android:id="@+id/nav_logout"-->
+    <!--        android:icon="@drawable/ic_circle"-->
+    <!--        android:title="@string/nav_logout" />-->
 
 </menu>
