@@ -66,6 +66,7 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
 
             btnPlaceBet.setOnClickListener {
                 viewModel.placeBet(tvCount.text.toString())
+                hideKeyboard()
             }
 
             imgClose.setOnClickListener {
@@ -165,6 +166,7 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         })
 
         viewModel.createBetObserver.observe(viewLifecycleOwner, EventObserver {
+            hideKeyboard()
             listener?.onBetSuccess(it)
             if (it.status.equals(ConstantsBase.SUCCESS, true))
                 dialog?.dismiss()
@@ -203,7 +205,7 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         fun onSessionBetSuccess(createSessionBetRes: CreateSessionBetRes?)
     }
 
-    fun hideKeyboard() {
+    private fun hideKeyboard() {
         val imm =
             activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
         imm?.hideSoftInputFromWindow(dialog?.currentFocus?.windowToken, 0)
