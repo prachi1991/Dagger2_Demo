@@ -71,6 +71,7 @@ object ConstantsBase {
     const val SUCCESS = "success"
     const val betOpen = "Bet Open"
     const val betClose = "Bet Closed"
+    const val BHAAV_CHANGED = "Bhav changed !"
 
 
     //Events

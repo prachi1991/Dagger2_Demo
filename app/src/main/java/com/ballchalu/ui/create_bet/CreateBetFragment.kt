@@ -168,8 +168,11 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
         viewModel.createBetObserver.observe(viewLifecycleOwner, EventObserver {
             hideKeyboard()
             listener?.onBetSuccess(it)
-            if (it.status.equals(ConstantsBase.SUCCESS, true))
+            if (it.status.equals(ConstantsBase.SUCCESS, true) ||
+                it.message.equals(ConstantsBase.BHAAV_CHANGED, true)
+            ) {
                 dialog?.dismiss()
+            }
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
 
