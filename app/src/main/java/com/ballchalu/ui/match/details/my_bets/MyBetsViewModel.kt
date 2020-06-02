@@ -57,6 +57,9 @@ class MyBetsViewModel @Inject constructor(
 
             }
         }
+        if (betEndingDigitArrayList.isEmpty() && betSessionArrayList.isEmpty() && betEvenOddArrayList.isEmpty() && betEndingDigitArrayList.isEmpty()) {
+            failure.postValue(Event(ConstantsBase.MY_BETS_EMPTY))
+        }
         _betMatchWinnerObserver.postValue(Event(betMatchWinnerArrayList))
         _betSessionObserver.postValue(Event(betSessionArrayList))
         _betEvenOddObserver.postValue(Event(betEvenOddArrayList))

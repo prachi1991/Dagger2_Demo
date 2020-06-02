@@ -1,6 +1,7 @@
 package com.ccpp.shared.util
 
 object ConstantsBase {
+    const val MY_BETS_EMPTY = "EMPTY_BETS"
     const val KEY_CREATE_BET_REQ = "create_bet_request_key"
     const val BHAAV_TYPE_BACK = "bhaav_type_back"
     const val BHAAV_TYPE_LAY = "bhaav_type_lay"
