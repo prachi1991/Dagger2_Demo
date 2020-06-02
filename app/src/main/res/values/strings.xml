@@ -5,11 +5,14 @@
     <string name="fb_login_protocol_scheme">fb1484865978352630</string>
 
     <string name="title_activity_login">Sign in</string>
-    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_username">Username can\'t be empty</string>
+    <string name="empty_password">Password can\'t be empty</string>
+    <string name="empty_confirm_password">Confirm Password can\'t be empty</string>
     <string name="invalid_password">Password must be >5 characters</string>
 
-    <string name="invalid_first_name">invalid first Name</string>
-    <string name="invalid_last_name">invalid Last Name</string>
+    <string name="invalid_first_name">Firstname can\'t be empty</string>
+    <string name="invalid_last_name">Lastname can\'t be empty</string>
+    <string name="empty_email">Email can\'t be empty</string>
 
     <string name="invalid_password_not_match">Password not matched</string>
 
@@ -36,7 +39,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="first_name">First Name</string>
     <string name="email_id">Email ID</string>
-    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_email">Email is Invalid</string>
     <string name="email">Email</string>
     <string name="send_me_reset_password_instruction">Send Me Reset Password Instruction</string>
     <string name="even_odd">Even Odd</string>

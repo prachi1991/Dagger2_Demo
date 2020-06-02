@@ -66,13 +66,32 @@ class SignUpViewModel @Inject constructor(private val loginRepository: LoginRepo
             username.isEmpty() -> {
                 _loginForm.value =
                     LoginFormState(
-                        emailError = R.string.invalid_username
+                        usernameError = R.string.invalid_username
+                    )
+            }
+
+            email.isEmpty() -> {
+                _loginForm.value =
+                    LoginFormState(
+                        emailError = R.string.empty_email
                     )
             }
             !isEmailValid(email) -> {
                 _loginForm.value =
                     LoginFormState(
                         emailError = R.string.invalid_email
+                    )
+            }
+            pass.isEmpty() -> {
+                _loginForm.value =
+                    LoginFormState(
+                        passwordError = R.string.empty_password
+                    )
+            }
+            confPass.isEmpty() -> {
+                _loginForm.value =
+                    LoginFormState(
+                        confirmPasswordError = R.string.empty_confirm_password
                     )
             }
             !isPasswordValid(pass) -> {
