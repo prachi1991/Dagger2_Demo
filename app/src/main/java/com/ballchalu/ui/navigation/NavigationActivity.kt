@@ -112,13 +112,13 @@ class NavigationActivity : BaseActivity() {
                 }
             }
 
-            menu.findItem(R.id.nav_logout).apply {
-                setOnMenuItemClickListener {
-                    openLogoutDialog()
-                    closeDrawer()
-                    true
-                }
-            }
+//            menu.findItem(R.id.nav_logout).apply {
+//                setOnMenuItemClickListener {
+//                    openLogoutDialog()
+//                    closeDrawer()
+//                    true
+//                }
+//            }
             menu.findItem(R.id.nav_theme).apply {
                 setOnMenuItemClickListener {
                     openThemeSelection()
