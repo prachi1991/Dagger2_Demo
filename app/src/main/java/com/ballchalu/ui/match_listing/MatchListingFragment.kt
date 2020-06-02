@@ -53,10 +53,6 @@ class MatchListingFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemCli
         viewModel.callMatchListing(ConstantsBase.EVENT_TYPE, ConstantsBase.IN_PLAY)
         viewModel.callMatchListing(ConstantsBase.EVENT_TYPE, ConstantsBase.UPCOMING)
 
-        binding.llInplay.visibility = View.GONE
-        binding.llUpcoming.visibility = View.GONE
-
-
         viewModel.inPlayListEvent.observe(viewLifecycleOwner, EventObserver {
 
             if (it.matches?.size != 0)
@@ -96,9 +92,10 @@ class MatchListingFragment : BaseFragment(), InPlayMatchListingAdapter.OnItemCli
             }
     }
 
-    override fun onMatchClicked(matchListingItem: MatchListingItem) {
+    override fun onMatchClicked(matchListingItem: MatchListingItem, isMatchStarted: Boolean) {
         val bundle = Bundle().apply {
             putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListingItem.match)
+            putBoolean(ConstantsBase.KEY_IS_MATCH_STARTED, isMatchStarted)
         }
         findNavController().navigate(R.id.nav_contest, bundle)
     }

@@ -28,9 +28,7 @@ class InPlayMatchListingAdapter(val listener: OnItemClickListener?) :
         holder.setData(list?.get(position), position)
     }
 
-    fun setItemList(
-        list: List<MatchListingItem>?, match_status: String
-    ) {
+    fun setItemList(list: List<MatchListingItem>?, match_status: String) {
         this.list = list
         this.matchStatus = match_status
         notifyDataSetChanged()
@@ -41,7 +39,10 @@ class InPlayMatchListingAdapter(val listener: OnItemClickListener?) :
     }
 
     interface OnItemClickListener {
-        fun onMatchClicked(matchListingItem: MatchListingItem)
+        fun onMatchClicked(
+            matchListingItem: MatchListingItem,
+            isMatchStarted: Boolean
+        )
     }
 
     inner class ViewHolder(val binding: RowInPlayMatchListingBinding) :
@@ -67,7 +68,12 @@ class InPlayMatchListingAdapter(val listener: OnItemClickListener?) :
                 }
 
                 root.setOnClickListener {
-                    matchListingItem?.let { it1 -> listener?.onMatchClicked(it1) }
+                    matchListingItem?.let { it1 ->
+                        listener?.onMatchClicked(
+                            it1,
+                            matchStatus.equals(ConstantsBase.IN_PLAY, true)
+                        )
+                    }
                 }
 
             }

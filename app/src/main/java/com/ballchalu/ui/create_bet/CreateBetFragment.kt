@@ -190,7 +190,10 @@ class CreateBetFragment : DaggerAppCompatDialogFragment(),
 
     }
 
-    override fun onMatchClicked(matchListingItem: MatchListingItem) {
+    override fun onMatchClicked(
+        matchListingItem: MatchListingItem,
+        matchStatus: Boolean
+    ) {
     }
 
     override fun onStart() {

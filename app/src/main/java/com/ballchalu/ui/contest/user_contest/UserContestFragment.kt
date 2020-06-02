@@ -44,6 +44,7 @@ class UserContestFragment : BaseFragment() {
         arguments?.let {
             viewModel.matchItem = it.getSerializable(ConstantsBase.KEY_MATCH_ITEM) as MatchListing?
             viewModel.isDeclared = it.getBoolean(ConstantsBase.KEY_DECLARED, false)
+            viewModel.isMatchStarted = it.getBoolean(ConstantsBase.KEY_IS_MATCH_STARTED, false)
         }
 
         return binding.root
@@ -73,6 +74,10 @@ class UserContestFragment : BaseFragment() {
     private fun initSessionAdapterAdapter() {
         contestAdapter = UserContestAdapter(object : UserContestAdapter.OnItemClickListener {
             override fun onPlayNowClicked(contestModel: UserContest) {
+                if (!viewModel.isDeclared && !viewModel.isMatchStarted) {
+                    Toast.makeText(requireContext(), "Match not Started", Toast.LENGTH_SHORT).show()
+                    return
+                }
                 val bundle = Bundle().apply {
                     putInt(
                         ConstantsBase.KEY_PROVIDER_ID,

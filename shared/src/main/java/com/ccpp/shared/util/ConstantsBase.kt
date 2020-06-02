@@ -15,6 +15,8 @@ object ConstantsBase {
     const val TOKEN_EXPIRED = 401
 
 
+    const val KEY_IS_MATCH_STARTED: String = "isMatchStated"
+
     const val KEY_MATCH_ID: String = "match_id"
     const val KEY_MARKET: String = "market"
 

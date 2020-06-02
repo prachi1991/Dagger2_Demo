@@ -23,6 +23,7 @@ class ContestViewModel @Inject constructor(
 
     var matchItem: MatchListing? = null
     var isDeclared: Boolean = false
+    var isMatchStarted: Boolean = false
 
     private val _matchContestResult = MutableLiveData<Event<MatchContestRes>>()
     val matchContestResult: LiveData<Event<MatchContestRes>> = _matchContestResult

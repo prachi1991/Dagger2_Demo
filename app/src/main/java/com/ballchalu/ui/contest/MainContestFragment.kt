@@ -29,6 +29,7 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
 
     private var matchListing: MatchListing? = null
     private var isDeclared: Boolean = false
+    private var isMatchStarted: Boolean = false
     private var allContest = 0
     private var myContest = 0
     override fun onCreateView(
@@ -68,6 +69,8 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
             if (it.containsKey(ConstantsBase.KEY_DECLARED)) {
                 isDeclared = it.getBoolean(ConstantsBase.KEY_DECLARED)
             }
+            if (it.containsKey(ConstantsBase.KEY_IS_MATCH_STARTED))
+                isMatchStarted = it.getBoolean(ConstantsBase.KEY_IS_MATCH_STARTED)
         }
     }
 
@@ -80,6 +83,7 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
             it.arguments = Bundle().apply {
                 putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
                 putBoolean(ConstantsBase.KEY_DECLARED, isDeclared)
+                putBoolean(ConstantsBase.KEY_IS_MATCH_STARTED, isMatchStarted)
             }
         }, "ONE")
         adapter.addFragment(UserContestFragment().also {
@@ -87,6 +91,7 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
             it.arguments = Bundle().apply {
                 putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
                 putBoolean(ConstantsBase.KEY_DECLARED, isDeclared)
+                putBoolean(ConstantsBase.KEY_IS_MATCH_STARTED, isMatchStarted)
             }
         }, "TWO")
         binding?.viewpager?.adapter = adapter

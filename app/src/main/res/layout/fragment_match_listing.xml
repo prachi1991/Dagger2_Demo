@@ -31,12 +31,14 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/back_solid_sub_comp_2"
                         android:orientation="vertical"
-                        android:padding="@dimen/_3sdp">
+                        android:padding="@dimen/_3sdp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_marginBottom="@dimen/_2sdp"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_2sdp"
                             android:background="@drawable/back_solid_header_comp_1"
                             android:orientation="horizontal"
                             android:padding="@dimen/_5sdp">
@@ -76,7 +78,9 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:background="@drawable/back_solid_sub_comp_2"
                         android:orientation="vertical"
-                        android:padding="@dimen/_3sdp">
+                        android:padding="@dimen/_3sdp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
