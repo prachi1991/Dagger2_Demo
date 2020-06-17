@@ -60,6 +60,8 @@
     <color name="background_component">#BEBEC1</color>
     <color name="how_to_play_content">#DFDEDE</color>
 
+    <color name="profile_divider">#dbdbdb</color>
+
     <!--icons-->
     <color name="close_icon">#20262d</color>
 

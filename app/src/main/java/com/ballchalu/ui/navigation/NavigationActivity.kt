@@ -36,8 +36,10 @@ import javax.inject.Inject
 class NavigationActivity : BaseActivity() {
     private var disposable: Disposable? = null
     private lateinit var viewModel: NavigationViewModel
+
     @Inject
     lateinit var sharePref: SharedPreferenceStorage
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var navController: NavController
@@ -177,7 +179,7 @@ class NavigationActivity : BaseActivity() {
             toggleDrawer()
         }
         binding.ibProfile.setOnClickListener {
-            initProfileMenu(it)
+            navController.navigate(R.id.nav_profile_list)
         }
         binding.navView.getHeaderView(0).findViewById<ImageView>(R.id.ivCloseDrawer)
             .setOnClickListener {
@@ -270,8 +272,8 @@ class NavigationActivity : BaseActivity() {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
                 when (item?.itemId) {
                     R.id.menuProfile -> {
-                        if (navController.currentDestination?.id != R.id.nav_profile)
-                            navController.navigate(R.id.nav_profile)
+                        if (navController.currentDestination?.id != R.id.nav_profile_list)
+                            navController.navigate(R.id.nav_profile_list)
                     }
                     R.id.menuChangePassword -> {
                         if (navController.currentDestination?.id != R.id.nav_changePassword)

@@ -63,6 +63,8 @@
     <!--icons-->
     <color name="close_icon">#ffffff</color>
 
+    <color name="profile_divider">#6b6d74</color>
+
     <color name="color_sub_component1">#3a3f49</color>
     <color name="color_sub_component2">#3a3f49</color>
     <color name="color_sub_component3">#333743</color>

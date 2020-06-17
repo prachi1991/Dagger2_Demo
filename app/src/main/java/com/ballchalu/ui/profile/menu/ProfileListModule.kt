@@ -1,4 +1,4 @@
-package com.ballchalu.ui.profile.details
+package com.ballchalu.ui.profile.menu
 
 import androidx.lifecycle.ViewModel
 import com.ccpp.shared.core.di.FragmentScoped
@@ -7,17 +7,18 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
+
 @Module
-internal abstract class ProfileModule {
+internal abstract class ProfileListModule {
 
     @FragmentScoped
     @ContributesAndroidInjector
-    internal abstract fun contributeFragment(): ProfileFragment
+    internal abstract fun contributeFragment(): ProfileListFragment
 
     @Binds
     @IntoMap
-    @ViewModelKey(ProfileViewModel::class)
-    internal abstract fun bindViewModel(viewModel: ProfileViewModel): ViewModel
+    @ViewModelKey(ProfileListViewModel::class)
+    internal abstract fun bindViewModel(viewModel: ProfileListViewModel): ViewModel
 
 
 }

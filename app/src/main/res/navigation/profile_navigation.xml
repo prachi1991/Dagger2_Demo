@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_navigation"
+    app:startDestination="@+id/profileListFragment">
+
+
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.ballchalu.ui.profile.changepassword.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
+    <fragment
+        android:id="@+id/profileListFragment"
+        android:name="com.ballchalu.ui.profile.menu.ProfileListFragment"
+        android:label="ProfileListFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ballchalu.ui.profile.details.ProfileFragment"
+        android:label="ProfileFragment" />
+</navigation>

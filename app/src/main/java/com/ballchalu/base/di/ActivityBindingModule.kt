@@ -16,7 +16,9 @@ import com.ballchalu.ui.match_listing.recent.DeclaredMatchModule
 import com.ballchalu.ui.navigation.NavigationActivity
 import com.ballchalu.ui.navigation.NavigationModule
 import com.ballchalu.ui.profile.changepassword.ChangePasswordModule
+import com.ballchalu.ui.profile.container.ProfileContainerModule
 import com.ballchalu.ui.profile.details.ProfileModule
+import com.ballchalu.ui.profile.menu.ProfileListModule
 import com.ballchalu.ui.splash.SplashActivity
 import com.ballchalu.ui.splash.SplashModule
 import com.ballchalu.ui.winners.WinnerModule
@@ -69,6 +71,8 @@ abstract class ActivityBindingModule {
             WinnerModule::class,
             DeclaredMatchModule::class,
             ProfileModule::class,
+            ProfileListModule::class,
+            ProfileContainerModule::class,
             ChangePasswordModule::class,
             HowToPlayModule::class
         ]
