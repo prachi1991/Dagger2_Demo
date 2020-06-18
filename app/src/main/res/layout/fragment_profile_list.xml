@@ -27,14 +27,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/test_profile" />
+                    tools:src="@drawable/test_profile" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivProfile"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/test_profile"
+                    tools:src="@drawable/test_profile"
                     app:civ_border_color="#FF000000"
                     app:civ_border_width="2dp" />
 

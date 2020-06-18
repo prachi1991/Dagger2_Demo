@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,14 +10,17 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="0dp"
             android:layout_height="match_parent">
             <FrameLayout
                 android:id="@+id/nav_host_profile_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 </layout>

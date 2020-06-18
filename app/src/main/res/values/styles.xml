@@ -65,7 +65,7 @@
     </style>
 
     <!-- set the rounded drawable as background to your bottom sheet -->
-    <style name="BottomSheet" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+    <style name="BottomSheet" parent="@style/Theme.MaterialComponents.BottomSheetDialog">
         <item name="background">@android:color/transparent</item>
         <item name="android:colorBackground">@android:color/transparent</item>
     </style>
@@ -80,7 +80,4 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
     </style>
-
-
-
 </resources>
