@@ -8,15 +8,12 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_20sdp"
         android:background="@android:color/transparent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/bottom_sheet_background_rounded">
-
+            android:layout_height="match_parent">
             <FrameLayout
                 android:id="@+id/nav_host_profile_fragment"
                 android:layout_width="match_parent"

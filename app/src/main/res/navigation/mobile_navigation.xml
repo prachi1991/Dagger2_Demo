@@ -67,7 +67,7 @@
         android:label="ChangePasswordFragment"
         tools:layout="@layout/fragment_change_password" />
 
-    <dialog
+    <fragment
         android:id="@+id/nav_profile_list"
         android:name="com.ballchalu.ui.profile.container.ProfileContainerBottomSheet"
         tools:layout="@layout/fragment_profile_list" />

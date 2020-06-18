@@ -19,6 +19,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityNavigationBinding
 import com.ballchalu.ui.login.container.LoginActivity
+import com.ballchalu.ui.profile.container.ProfileContainerBottomSheet
 import com.ballchalu.utils.ThemeHelper
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
@@ -179,7 +180,9 @@ class NavigationActivity : BaseActivity() {
             toggleDrawer()
         }
         binding.ibProfile.setOnClickListener {
-            navController.navigate(R.id.nav_profile_list)
+//            navController.navigate(R.id.nav_profile_list)
+            val fragment = ProfileContainerBottomSheet()
+            fragment.show(supportFragmentManager, "")
         }
         binding.navView.getHeaderView(0).findViewById<ImageView>(R.id.ivCloseDrawer)
             .setOnClickListener {

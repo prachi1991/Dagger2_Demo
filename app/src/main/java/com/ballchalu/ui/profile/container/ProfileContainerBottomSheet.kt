@@ -1,6 +1,7 @@
 package com.ballchalu.ui.profile.container
 
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.res.Resources
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.ballchalu.base.BottomSheetFragment
 import com.ballchalu.databinding.BottomSheetProfileContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import javax.inject.Inject
 
 
@@ -24,15 +26,11 @@ class ProfileContainerBottomSheet : BottomSheetFragment() {
 
     private lateinit var binding: BottomSheetProfileContainerBinding
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        viewModel = viewModelProvider(viewModelFactory)
         binding = BottomSheetProfileContainerBinding.inflate(inflater)
         binding.lifecycleOwner = this
         val navHost = NavHostFragment()
@@ -43,17 +41,6 @@ class ProfileContainerBottomSheet : BottomSheetFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback);
-    }
-
-    var callback: OnBackPressedCallback =
-        object : OnBackPressedCallback(true /* enabled by default */) {
-            override fun handleOnBackPressed() { // Handle the back button event
-                findNavController().navigateUp()
-            }
-        }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val bottomSheetDialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog

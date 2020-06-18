@@ -46,7 +46,7 @@ class SplashActivity : BaseActivity() {
 
         })
 
-        val secondsDelayed = 3000
+        val secondsDelayed = 2000
         Handler().postDelayed({
             viewModel.checkLogin()
 
