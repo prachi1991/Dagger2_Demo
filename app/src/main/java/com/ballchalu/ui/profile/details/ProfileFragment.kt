@@ -1,5 +1,6 @@
 package com.ballchalu.ui.profile.details
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentProfileBinding
+import com.ballchalu.utils.BlurBuilder
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.util.viewModelProvider
@@ -33,6 +38,7 @@ class ProfileFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = viewModelProvider(viewModelFactory)
         binding = FragmentProfileBinding.inflate(inflater).apply {
             lifecycleOwner = this@ProfileFragment
             tvEmailValue.text = sharedPref.userName
@@ -41,13 +47,14 @@ class ProfileFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = viewModelProvider(viewModelFactory)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
             it?.let {
                 binding.llBody.isVisible = true
-                binding.tvNameValue.text = "John Smith"
                 binding.tvEmailValue.text = it.email.toString()
                 binding.tvBcCoinValue.text = it.bc_coins.toString()
                 binding.tvAvailCoinValue.text = it.available_coins.toString()
@@ -62,6 +69,18 @@ class ProfileFragment : BaseFragment() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
         viewModel.callUserDetails()
+        viewModel.loadProfile.observe(viewLifecycleOwner, EventObserver {
+            val resultBmp: Bitmap = BlurBuilder.blur(requireContext(), it)
+            Glide.with(requireContext())
+                .load(resultBmp)
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+                .into(binding.ivProfileBlur)
+
+            Glide.with(requireContext())
+                .load(it)
+                .into(binding.ivProfile)
+        })
+        viewModel.loadProfileImage()
     }
 
 
@@ -76,4 +95,5 @@ class ProfileFragment : BaseFragment() {
         builder.show()
 
     }
+    
 }

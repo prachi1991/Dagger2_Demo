@@ -120,4 +120,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="buy_coin_ledger">Buy-Coin Ledger</string>
+    <string name="user_name">User Name</string>
+    <string name="bc_coin">BC Coins</string>
+    <string name="available_coin">Available Coins</string>
+    <string name="user_coin_info">User Coin Info</string>
+    <string name="coins">Coins</string>
 </resources>
