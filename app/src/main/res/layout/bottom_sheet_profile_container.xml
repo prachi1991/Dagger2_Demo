@@ -12,7 +12,6 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_20sdp"
             android:layout_height="match_parent">
             <FrameLayout
                 android:id="@+id/nav_host_profile_fragment"
