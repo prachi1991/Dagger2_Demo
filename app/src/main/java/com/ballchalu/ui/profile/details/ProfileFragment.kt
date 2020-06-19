@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,11 +19,17 @@ import com.bumptech.glide.request.RequestOptions
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.util.viewModelProvider
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.appbar.AppBarLayout
+import timber.log.Timber
+import java.lang.Math.abs
 import javax.inject.Inject
+import kotlin.math.roundToInt
+
 
 class ProfileFragment : BaseFragment() {
+
     private lateinit var binding: FragmentProfileBinding
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -81,19 +86,75 @@ class ProfileFragment : BaseFragment() {
                 .into(binding.ivProfile)
         })
         viewModel.loadProfileImage()
+
+        initAnimation()
     }
 
 
-    private fun openLogoutDialog() {
-        val builder = MaterialAlertDialogBuilder(context, R.style.MyMaterialAlertDialog)
-        builder.setTitle("User password Changed Successfully")
-        builder.setIcon(R.drawable.ic_success)
-        builder.setPositiveButton("Ok") { _, _ ->
-            findNavController().navigateUp()
+    private fun initAnimation() {
+        PADDING_RIGHT = resources.getDimensionPixelOffset(R.dimen._20sdp).toFloat()
+        EXPAND_AVATAR_SIZE = resources.getDimensionPixelOffset(R.dimen._80sdp).toFloat()
+        COLLAPSE_IMAGE_SIZE = resources.getDimensionPixelOffset(R.dimen._30sdp).toFloat()
+        val size = resources.getDimensionPixelOffset(R.dimen._200sdp).toFloat()
+        binding.appbar.addOnOffsetChangedListener(
+            AppBarLayout.OnOffsetChangedListener { appBarLayout, i ->
+                if (isCalculated.not()) {
+                    avatarAnimateStartPointY =
+                        abs((appBarLayout.height - (size + horizontalToolbarAvatarMargin)) / appBarLayout.totalScrollRange)
+                    avatarCollapseAnimationChangeWeight = 1 / (1 - avatarAnimateStartPointY)
+                    verticalToolbarAvatarMargin = (binding.toolbar.height - COLLAPSE_IMAGE_SIZE) * 2
+                    isCalculated = true
+                }
+                updateViews(abs(i / appBarLayout.totalScrollRange.toFloat()))
+            })
+    }
+
+    companion object {
+        private var EXPAND_AVATAR_SIZE: Float = 0F
+        private var COLLAPSE_IMAGE_SIZE: Float = 0F
+        private var horizontalToolbarAvatarMargin: Float = 0F
+        private var currentOffset: Float = 0F
+
+        /**/
+        private var avatarAnimateStartPointY: Float = 0F
+        private var avatarCollapseAnimationChangeWeight: Float = 0F
+        private var isCalculated = false
+        private var verticalToolbarAvatarMargin = 0F
+        private var PADDING_RIGHT = 15f
+
+    }
+
+    private fun updateViews(offset: Float) {
+        if (currentOffset != offset) {
+            currentOffset = offset
+            Timber.e("XXXXXXXXXXXXXXX  ${offset * 5} ")
+            binding.ivProfile.apply {
+                when {
+                    offset > avatarAnimateStartPointY -> {
+                        val avatarCollapseAnimateOffset =
+                            (offset - avatarAnimateStartPointY) * avatarCollapseAnimationChangeWeight
+                        val avatarSize =
+                            EXPAND_AVATAR_SIZE - (EXPAND_AVATAR_SIZE - COLLAPSE_IMAGE_SIZE) * avatarCollapseAnimateOffset
+                        val lp = layoutParams
+                        lp.width = avatarSize.roundToInt()
+                        lp.height = avatarSize.roundToInt()
+                        layoutParams = lp
+                        this.translationX =
+                            ((binding.appbar.width - horizontalToolbarAvatarMargin - COLLAPSE_IMAGE_SIZE - PADDING_RIGHT)) * avatarCollapseAnimateOffset
+
+                    }
+                    else -> this.layoutParams.also {
+                        if (it.height != EXPAND_AVATAR_SIZE.toInt()) {
+                            it.height = EXPAND_AVATAR_SIZE.toInt()
+                            it.width = EXPAND_AVATAR_SIZE.toInt()
+                            this.layoutParams = it
+                        }
+                        translationX = 0f
+                    }
+                }
+            }
         }
-        builder.setCancelable(false)
-        builder.show()
-
     }
-    
+
+
 }

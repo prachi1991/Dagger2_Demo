@@ -1,5 +1,6 @@
 package com.ballchalu.ui.profile.menu
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,13 +12,17 @@ import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentProfileListBinding
+import com.ballchalu.ui.login.container.LoginActivity
 import com.ballchalu.utils.BlurBuilder
+import com.ballchalu.utils.ThemeHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
 
 
@@ -61,6 +66,22 @@ class ProfileListFragment : BaseFragment() {
         binding.rlProfile.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
         }
+        binding.rlChangePassword.setOnClickListener {
+            findNavController().navigate(R.id.changePasswordFragment)
+        }
+        binding.rlBuyBcCoin.setOnClickListener {
+            findNavController().navigate(R.id.bcCoinsFragment)
+        }
+        binding.rlBuyLegders.setOnClickListener {
+            findNavController().navigate(R.id.bcCoinsLedgersFragment)
+        }
+        binding.rlTheme.setOnClickListener {
+            openThemeSelection()
+        }
+        binding.rlLogout.setOnClickListener {
+            openLogoutDialog()
+        }
+
         viewModel.loadProfile.observe(viewLifecycleOwner, EventObserver {
             val resultBmp: Bitmap = BlurBuilder.blur(requireContext(), it)
             Glide.with(requireContext())
@@ -75,5 +96,37 @@ class ProfileListFragment : BaseFragment() {
         viewModel.loadProfileImage()
     }
 
+    private fun openThemeSelection() {
+        val values = arrayOf<CharSequence>(
+            ConstantsBase.THEME_DARK,
+            ConstantsBase.THEME_LIGHT,
+            ConstantsBase.THEME_DEFAULT
+        )
+        val builder = MaterialAlertDialogBuilder(requireActivity(), R.style.MyMaterialAlertDialog)
+        builder.setTitle("Select theme")
+        builder.setSingleChoiceItems(
+            values, viewModel.getSelectedTheme()
+        ) { dialog, item ->
+            sharedPref.theme = ThemeHelper.getSelectedTheme(item)
+        }
+        builder.show()
+    }
 
+    private fun openLogoutDialog() {
+        val builder = MaterialAlertDialogBuilder(requireActivity(), R.style.MyMaterialAlertDialog)
+        builder.setTitle(R.string.dialogTitle)
+        builder.setMessage(R.string.dialogMessage)
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+        builder.setPositiveButton("Yes") { dialogInterface, which ->
+            dialogInterface.dismiss()
+            sharedPref.token = ""
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+        builder.setNegativeButton("No") { dialogInterface, which ->
+        }
+        builder.show()
+
+    }
 }

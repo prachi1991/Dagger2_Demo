@@ -42,6 +42,9 @@
 
     <color name="menu_icon_color">#888888</color>
 
+    <color name="profile_menu_text_color">#292D38</color>
+    <color name="profile_header_text">#274895</color>
+
     <!--Login-->
     <color name="trans_color_window_background">#B3EAEAEA</color>
     <color name="login_button_solid">#dbdbdb</color>
@@ -84,6 +87,7 @@
     <color name="color_stroke_component1">#888888</color>
     <color name="color_stroke_component2">#DFDEDE</color>
     <color name="color_stroke_component4">#6b6d74</color>
+    <color name="color_stroke_component5">#292D38</color>
 
     <color name="color_light_stroke">#BEBEC1</color>
 

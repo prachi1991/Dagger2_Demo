@@ -18,4 +18,12 @@
         android:id="@+id/profileFragment"
         android:name="com.ballchalu.ui.profile.details.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/bcCoinsFragment"
+        android:name="com.ballchalu.ui.bc_coins.BcCoinsFragment"
+        android:label="BcCoinsFragment" />
+    <fragment
+        android:id="@+id/bcCoinsLedgersFragment"
+        android:name="com.ballchalu.ui.ledgers.BcCoinsLedgersFragment"
+        android:label="BcCoinsLedgersFragment" />
 </navigation>

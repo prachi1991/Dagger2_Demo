@@ -102,7 +102,7 @@
                         android:gravity="center|start"
                         android:paddingEnd="@dimen/_5sdp"
                         android:text="Profile"
-                        android:textColor="@color/color_text"
+                        android:textColor="@color/profile_menu_text_color"
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
@@ -118,9 +118,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
                     android:background="@color/profile_divider" />
 
                 <RelativeLayout
+                    android:id="@+id/rlChangePassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/_3sdp"
@@ -135,7 +137,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:gravity="center|start"
                         android:text="@string/change_password"
-                        android:textColor="@color/color_text"
+                        android:textColor="@color/profile_menu_text_color"
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
@@ -151,9 +153,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
                     android:background="@color/profile_divider" />
 
                 <RelativeLayout
+                    android:id="@+id/rlBuyLegders"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/_5sdp"
@@ -168,7 +172,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:gravity="center|start"
                         android:text="@string/buy_coin_ledger"
-                        android:textColor="@color/color_text"
+                        android:textColor="@color/profile_menu_text_color"
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
@@ -181,12 +185,14 @@
                 </RelativeLayout>
 
                 <View
+                    android:layout_marginEnd="@dimen/_15sdp"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:background="@color/profile_divider" />
 
                 <RelativeLayout
+                    android:id="@+id/rlBuyBcCoin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/_3sdp"
@@ -201,7 +207,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:gravity="center|start"
                         android:text="Buy BC Coin "
-                        android:textColor="@color/color_text"
+                        android:textColor="@color/profile_menu_text_color"
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
@@ -215,11 +221,13 @@
 
                 <View
                     android:layout_width="match_parent"
+                    android:layout_marginEnd="@dimen/_15sdp"
                     android:layout_height="1dp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:background="@color/profile_divider" />
 
                 <RelativeLayout
+                    android:id="@+id/rlTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/_3sdp"
@@ -234,7 +242,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:gravity="center|start"
                         android:text="@string/nav_theme"
-                        android:textColor="@color/color_text"
+                        android:textColor="@color/profile_menu_text_color"
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
@@ -248,11 +256,13 @@
 
                 <View
                     android:layout_width="match_parent"
+                    android:layout_marginEnd="@dimen/_15sdp"
                     android:layout_height="1dp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:background="@color/profile_divider" />
 
                 <RelativeLayout
+                    android:id="@+id/rlLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/_3sdp"
@@ -267,7 +277,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:gravity="center|start"
                         android:text="@string/nav_logout"
-                        android:textColor="@color/color_text"
+                        android:textColor="@color/profile_menu_text_color"
                         android:textSize="@dimen/_12ssp" />
 
                     <ImageView
@@ -281,6 +291,7 @@
 
                 <View
                     android:layout_width="match_parent"
+                    android:layout_marginEnd="@dimen/_15sdp"
                     android:layout_height="1dp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:background="@color/profile_divider" />

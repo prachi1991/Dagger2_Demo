@@ -11,6 +11,7 @@ import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.user.UserData
 import com.ccpp.shared.domain.user.UserRes
 import com.ccpp.shared.network.repository.LoginRepository
+import com.ccpp.shared.util.ConstantsBase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -57,5 +58,14 @@ class ProfileListViewModel @Inject constructor(
                 Timber.e(e)
             }
         }
+    }
+
+    fun getSelectedTheme(): Int {
+        when (sharePref.theme) {
+            ConstantsBase.THEME_DARK_MODE -> return 0
+            ConstantsBase.THEME_LIGHT_MODE -> return 1
+            ConstantsBase.THEME_DEFAULT_MODE -> return 2
+        }
+        return 3
     }
 }
