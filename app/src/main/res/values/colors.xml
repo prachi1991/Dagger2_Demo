@@ -43,6 +43,7 @@
     <color name="menu_icon_color">#888888</color>
 
     <color name="profile_menu_text_color">#292D38</color>
+    <color name="profile_menu_icon_color">#292D38</color>
     <color name="profile_header_text">#274895</color>
     <color name="profile_background">#EDEEEF</color>
     <color name="profile_card">#fff</color>

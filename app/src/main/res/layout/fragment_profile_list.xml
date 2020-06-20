@@ -93,7 +93,7 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvNameLabel"
-                        fontPath="fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -129,7 +129,7 @@
                     android:paddingBottom="@dimen/_3sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        fontPath="fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -164,7 +164,7 @@
                     android:paddingBottom="@dimen/_5sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        fontPath="fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -199,7 +199,7 @@
                     android:paddingBottom="@dimen/_3sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        fontPath="fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -234,7 +234,7 @@
                     android:paddingBottom="@dimen/_3sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        fontPath="fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -269,7 +269,7 @@
                     android:paddingBottom="@dimen/_3sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        fontPath="fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"

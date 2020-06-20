@@ -1,6 +1,5 @@
 package com.ballchalu.ui.profile.details
 
-import android.R.attr
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.Gravity
@@ -61,7 +60,7 @@ class ProfileFragment : BaseFragment() {
             findNavController().popBackStack()
         }
         binding.tvEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.editProfileFragment)
+//            findNavController().navigate(R.id.editProfileFragment)
         }
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
             it?.let {
@@ -70,6 +69,7 @@ class ProfileFragment : BaseFragment() {
                 binding.tvBcCoinValue.text = it.bc_coins.toString()
                 binding.tvAvailCoinValue.text = it.available_coins.toString()
                 binding.tvUserNameValue.text = it.user_name.toString()
+                binding.toolbar.title = it.user_name.toString()
                 binding.tvCoinValue.text = it.coins.toString()
             }
         })
@@ -133,11 +133,6 @@ class ProfileFragment : BaseFragment() {
     private fun updateViews(offset: Float) {
         if (currentOffset != offset) {
             currentOffset = offset
-            Timber.e("XXXXXXXXXXXXXXX  ${offset * 5} ")
-
-            binding.tvName.apply {
-                setMargins(this, (offset * 20).toInt(), 0, 0, 0)
-            }
             binding.ivProfile.apply {
                 when {
                     offset > avatarAnimateStartPointY -> {
@@ -165,13 +160,4 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-    private fun setMargins(view: View, left: Int, top: Int, right: Int, bottom: Int) {
-        val params: CollapsingToolbarLayout.LayoutParams = CollapsingToolbarLayout.LayoutParams(
-            view.width,
-            view.height
-        )
-        params.setMargins(left, top, right, bottom)
-        params.gravity = Gravity.BOTTOM
-        view.layoutParams = params
-    }
 }
