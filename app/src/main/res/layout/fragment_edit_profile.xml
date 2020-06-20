@@ -64,39 +64,34 @@
                     android:padding="@dimen/_15sdp">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvUserNameLabel"
                         fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center|start"
-                        android:text="@string/user_coin_info"
-                        android:textColor="@color/color_text"
-                        android:textSize="@dimen/_14ssp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvUserNameLabel"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:gravity="center|start"
                         android:text="@string/first_name"
                         android:textColor="@color/profile_header_text"
                         android:textSize="@dimen/_12ssp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvUserNameValue"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edtFirstNameValue"
+                        fontPath="fonts/Play-Bold.ttf"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/enter_first_name"
                         android:gravity="center|start"
-                        android:text="john"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:paddingBottom="@dimen/_5sdp"
                         android:textColor="@color/color_text"
+                        android:textColorHint="@color/text_color_grey"
                         android:textSize="@dimen/_12ssp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvLastNameLabel"
-                        fontPath="fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
@@ -105,21 +100,26 @@
                         android:textColor="@color/profile_header_text"
                         android:textSize="@dimen/_12ssp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvLastNameValue"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edtLastNameValue"
+                        fontPath="fonts/Play-Bold.ttf"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/enter_last_name"
                         android:gravity="center|start"
-                        android:text="Smith"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:paddingBottom="@dimen/_5sdp"
                         android:textColor="@color/color_text"
+                        android:textColorHint="@color/text_color_grey"
                         android:textSize="@dimen/_12ssp" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvEmailLabel"
-                        fontPath="fonts/Play-Regular.ttf"
+                        fontPath="fonts/Play-Bold.ttf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
@@ -128,19 +128,27 @@
                         android:textColor="@color/profile_header_text"
                         android:textSize="@dimen/_12ssp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvEmailValue"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edtEmailValue"
+                        fontPath="fonts/Play-Bold.ttf"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center|start"
+                        android:background="@android:color/transparent"
+                        android:clickable="false"
+                        android:hint="@string/enter_mail_id"
+                        android:imeOptions="actionDone"
+                        android:inputType="textEmailAddress"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:paddingBottom="@dimen/_5sdp"
                         android:textColor="@color/color_text"
+                        android:textColorHint="@color/text_color_grey"
                         android:textSize="@dimen/_12ssp"
                         tools:text="johnSmith@definelabs.com" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSave"
+                    fontPath="fonts/Play-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginLeft="@dimen/_10sdp"

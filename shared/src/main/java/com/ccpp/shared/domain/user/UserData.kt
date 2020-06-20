@@ -8,6 +8,8 @@ data class UserData(
     val bc_coins: Double? = 0.0,
     val coins: Double? = 0.0,
     val email: String? = null,
+    val firstName: String? = "",
+    val lastName: String? = "",
     val profileUrl: String? = ConstantsBase.profileUrl,
     val id: Int? = null,
     val user_name: String? = null

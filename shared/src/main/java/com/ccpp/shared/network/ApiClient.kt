@@ -16,6 +16,8 @@ import com.ccpp.shared.domain.my_bets.MyBetsRes
 import com.ccpp.shared.domain.position.PositionRes
 import com.ccpp.shared.domain.profile.ChangePasswordReq
 import com.ccpp.shared.domain.profile.ChangePasswordRes
+import com.ccpp.shared.domain.profile.EditProfileReq
+import com.ccpp.shared.domain.profile.EditProfileRes
 import com.ccpp.shared.domain.user.UserRes
 import com.ccpp.shared.domain.winner.WinnerRes
 import kotlinx.coroutines.Deferred
@@ -101,5 +103,9 @@ internal interface ApiClient {
             "page"
         ) page: Int
     ): Deferred<Response<WinnerRes>>
+
+
+    @POST("ballchalu/api/v1/users/update")
+    fun callSaveProfileAsync(@Body editProfileReq: EditProfileReq): Deferred<Response<EditProfileRes>>
 
 }

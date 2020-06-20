@@ -5,6 +5,7 @@ import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.domain.create_bet.CreateBetReq
 import com.ccpp.shared.domain.create_bet.CreateSessionBetReq
 import com.ccpp.shared.domain.profile.ChangePasswordReq
+import com.ccpp.shared.domain.profile.EditProfileReq
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -71,5 +72,9 @@ open class ApiService @Inject constructor(
 
     fun callWinnerListingAsync(matchId: Int, contestId: Int, page: Int) =
         apiClient.callWinnerListingAsync(contestId, matchId, page)
+
+    fun callSaveProfileAsync(editProfileReq: EditProfileReq) =
+        apiClient.callSaveProfileAsync(editProfileReq)
+
 
 }

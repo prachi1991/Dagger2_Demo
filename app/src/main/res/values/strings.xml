@@ -127,4 +127,7 @@
     <string name="coins">Coins</string>
     <string name="last_name">Last Name</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="enter_first_name">Enter first name</string>
+    <string name="enter_last_name">Enter last name</string>
+    <string name="enter_mail_id">Enter mail-id</string>
 </resources>

@@ -5,6 +5,7 @@ import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.LoginRes
 import com.ccpp.shared.domain.SignUpReq
+import com.ccpp.shared.domain.profile.EditProfileReq
 import com.ccpp.shared.domain.user.UserRes
 import com.ccpp.shared.network.ApiService
 import javax.inject.Inject
@@ -62,4 +63,12 @@ class LoginRepository @Inject constructor(
         },
         errorMessage = "Error occurred"
     )
+
+    suspend fun callSaveProfile(editProfileReq: EditProfileReq) = baseRepository.safeApiCall(
+        call = {
+            service.callSaveProfileAsync(editProfileReq).await()
+        },
+        errorMessage = "Error occurred"
+    )
+
 }
