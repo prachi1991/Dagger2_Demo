@@ -44,6 +44,8 @@
 
     <color name="profile_menu_text_color">#fff</color>
     <color name="profile_header_text">#bc8b43</color>
+    <color name="profile_background">#20262D</color>
+    <color name="profile_card">#343743</color>
 
     <!--Login-->
     <color name="trans_color_window_background">#B3000000</color>

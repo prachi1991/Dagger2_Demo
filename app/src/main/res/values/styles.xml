@@ -80,4 +80,10 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
     </style>
+
+    <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="Base.Theme.AppTheme">
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:layout_marginBottom">@dimen/_90sdp</item>
+        <item name="contentPaddingBottom">@dimen/_90sdp</item>
+    </style>
 </resources>

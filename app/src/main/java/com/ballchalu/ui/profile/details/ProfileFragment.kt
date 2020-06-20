@@ -1,7 +1,9 @@
 package com.ballchalu.ui.profile.details
 
+import android.R.attr
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +22,7 @@ import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import timber.log.Timber
 import java.lang.Math.abs
 import javax.inject.Inject
@@ -128,6 +131,10 @@ class ProfileFragment : BaseFragment() {
         if (currentOffset != offset) {
             currentOffset = offset
             Timber.e("XXXXXXXXXXXXXXX  ${offset * 5} ")
+
+            binding.tvName.apply {
+                setMargins(this, (offset * 20).toInt(), 0, 0, 0)
+            }
             binding.ivProfile.apply {
                 when {
                     offset > avatarAnimateStartPointY -> {
@@ -141,7 +148,6 @@ class ProfileFragment : BaseFragment() {
                         layoutParams = lp
                         this.translationX =
                             ((binding.appbar.width - horizontalToolbarAvatarMargin - COLLAPSE_IMAGE_SIZE - PADDING_RIGHT)) * avatarCollapseAnimateOffset
-
                     }
                     else -> this.layoutParams.also {
                         if (it.height != EXPAND_AVATAR_SIZE.toInt()) {
@@ -156,5 +162,13 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-
+    private fun setMargins(view: View, left: Int, top: Int, right: Int, bottom: Int) {
+        val params: CollapsingToolbarLayout.LayoutParams = CollapsingToolbarLayout.LayoutParams(
+            view.width,
+            view.height
+        )
+        params.setMargins(left, top, right, bottom)
+        params.gravity = Gravity.BOTTOM
+        view.layoutParams = params
+    }
 }
