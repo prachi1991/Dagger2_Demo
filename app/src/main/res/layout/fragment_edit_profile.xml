@@ -14,25 +14,19 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
-            android:layout_height="@dimen/_200sdp"
             android:layout_width="match_parent"
-            android:background="@color/profile_background">
+            android:layout_height="@dimen/_160sdp"
+            android:background="@color/profile_background"
+            android:elevation="0dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:elevation="0dp"
                 app:contentScrim="@android:color/transparent"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                app:layout_scrollFlags="noScroll|exitUntilCollapsed|snap">
 
-
-                <ImageView
-                    android:id="@+id/ivProfileBlur"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_160sdp"
-                    android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax"
-                    tools:src="@drawable/test_profile" />
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
@@ -41,30 +35,31 @@
                     app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/ic_left_arrow" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvName"
-                    fontPath="fonts/Play-Bold.ttf"
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_14ssp"
-                    android:layout_marginBottom="@dimen/_90sdp"
-                    android:text="@string/user_coin_info"
-                    android:textColor="@color/color_text"
-                    android:visibility="gone" />
+                    android:layout_gravity="center">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ivProfile"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:src="@drawable/test_profile"
-                    app:civ_border_color="@color/color_text"
-                    app:civ_border_width="2dp" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfile"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:src="@drawable/test_profile"
+                        app:civ_border_color="@color/color_text"
+                        app:civ_border_width="2dp" />
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivEditProfile"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="bottom|center"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/solid_circle_white"
+                        android:elevation="@dimen/_2sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_edit" />
+                </FrameLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -82,8 +77,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/back_solid_sub_comp_profile_card"
                     android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/back_solid_sub_comp_profile_card"
                     android:elevation="@dimen/_5sdp"
                     android:orientation="vertical"
                     android:padding="@dimen/_15sdp">
@@ -104,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:gravity="center|start"
-                        android:text="@string/user_name"
+                        android:text="@string/first_name"
                         android:textColor="@color/profile_header_text"
                         android:textSize="@dimen/_12ssp" />
 
@@ -115,9 +110,31 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
+                        android:text="john"
                         android:textColor="@color/color_text"
-                        android:textSize="@dimen/_12ssp"
-                        tools:text="johnSmith" />
+                        android:textSize="@dimen/_12ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLastNameLabel"
+                        fontPath="fonts/Play-Regular.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center|start"
+                        android:text="@string/last_name"
+                        android:textColor="@color/profile_header_text"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLastNameValue"
+                        fontPath="fonts/Play-Regular.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center|start"
+                        android:text="Smith"
+                        android:textColor="@color/color_text"
+                        android:textSize="@dimen/_12ssp" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -143,105 +160,16 @@
                         tools:text="johnSmith@definelabs.com" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@drawable/back_solid_sub_comp_profile_card"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:elevation="@dimen/_5sdp"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_15sdp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        fontPath="fonts/Play-Bold.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center|start"
-                        android:text="@string/user_coin_info"
-                        android:textColor="@color/color_text"
-                        android:textSize="@dimen/_14ssp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvBcCoinLabel"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center|start"
-                        android:text="@string/bc_coin"
-                        android:textColor="@color/profile_header_text"
-                        android:textSize="@dimen/_12ssp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvBcCoinValue"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center|start"
-                        android:textColor="@color/color_text"
-                        android:textSize="@dimen/_12ssp"
-                        tools:text="40" />
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCoinLabel"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center|start"
-                        android:text="@string/coins"
-                        android:textColor="@color/profile_header_text"
-                        android:textSize="@dimen/_12ssp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCoinValue"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center|start"
-                        android:textColor="@color/color_text"
-                        android:textSize="@dimen/_12ssp"
-                        tools:text="40" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvAvailCoinLabel"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center|start"
-                        android:text="@string/available_coin"
-                        android:textColor="@color/profile_header_text"
-                        android:textSize="@dimen/_12ssp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvAvailCoinValue"
-                        fontPath="fonts/Play-Regular.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:gravity="center|start"
-                        android:textColor="@color/color_text"
-                        android:textSize="@dimen/_12ssp"
-                        tools:text="40" />
-                </LinearLayout>
-
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
-                    android:id="@+id/tvEditProfile"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:elevation="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@drawable/back_stroke_comp_5"
+                    android:elevation="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Edit Profile"
+                    android:text="Save"
                     android:textColor="@color/profile_menu_text_color"
                     android:textSize="@dimen/_13ssp" />
 

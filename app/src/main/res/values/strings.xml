@@ -125,4 +125,5 @@
     <string name="available_coin">Available Coins</string>
     <string name="user_coin_info">User Coin Info</string>
     <string name="coins">Coins</string>
+    <string name="last_name">Last Name</string>
 </resources>

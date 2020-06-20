@@ -63,6 +63,9 @@ class ProfileListFragment : BaseFragment() {
         })
         viewModel.callUserDetails()
 
+        binding.toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
         binding.rlProfile.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
         }

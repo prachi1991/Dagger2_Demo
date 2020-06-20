@@ -115,4 +115,6 @@ object ConstantsBase {
     const val THEME_LIGHT = "Light"
     const val THEME_DARK = "Dark"
     const val THEME_DEFAULT = "Lets system decide"
+
+    const val profileUrl = "https://i.pinimg.com/564x/2b/ee/1a/2bee1ac1d0cbcdeb429151feb4627ea3.jpg"
 }

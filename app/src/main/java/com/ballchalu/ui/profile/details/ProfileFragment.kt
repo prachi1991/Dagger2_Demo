@@ -60,6 +60,9 @@ class ProfileFragment : BaseFragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+        binding.tvEditProfile.setOnClickListener {
+            findNavController().navigate(R.id.editProfileFragment)
+        }
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
             it?.let {
                 binding.llBody.isVisible = true

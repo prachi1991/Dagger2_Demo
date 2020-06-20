@@ -26,4 +26,8 @@
         android:id="@+id/bcCoinsLedgersFragment"
         android:name="com.ballchalu.ui.ledgers.BcCoinsLedgersFragment"
         android:label="BcCoinsLedgersFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.ballchalu.ui.profile.edit.EditProfileFragment"
+        android:label="EditProfileFragment" />
 </navigation>

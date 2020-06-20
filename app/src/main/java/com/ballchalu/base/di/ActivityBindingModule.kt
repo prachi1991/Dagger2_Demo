@@ -18,6 +18,7 @@ import com.ballchalu.ui.navigation.NavigationModule
 import com.ballchalu.ui.profile.changepassword.ChangePasswordModule
 import com.ballchalu.ui.profile.container.ProfileContainerModule
 import com.ballchalu.ui.profile.details.ProfileModule
+import com.ballchalu.ui.profile.edit.EditProfileModule
 import com.ballchalu.ui.profile.menu.ProfileListModule
 import com.ballchalu.ui.splash.SplashActivity
 import com.ballchalu.ui.splash.SplashModule
@@ -73,6 +74,7 @@ abstract class ActivityBindingModule {
             ProfileModule::class,
             ProfileListModule::class,
             ProfileContainerModule::class,
+            EditProfileModule::class,
             ChangePasswordModule::class,
             HowToPlayModule::class
         ]
