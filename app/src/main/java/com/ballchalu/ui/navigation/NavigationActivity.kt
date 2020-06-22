@@ -19,7 +19,6 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityNavigationBinding
 import com.ballchalu.ui.login.container.LoginActivity
-import com.ballchalu.ui.profile.container.ProfileContainerBottomSheet
 import com.ballchalu.utils.ThemeHelper
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
@@ -155,21 +154,14 @@ class NavigationActivity : BaseActivity() {
 
     private fun openLogoutDialog() {
         val builder = MaterialAlertDialogBuilder(this, R.style.MyMaterialAlertDialog)
-        //set title for alert dialog
         builder.setTitle(R.string.dialogTitle)
-        //set message for alert dialog
         builder.setMessage(R.string.dialogMessage)
         builder.setIcon(android.R.drawable.ic_dialog_alert)
-
-
-        //performing positive action
         builder.setPositiveButton("Yes") { dialogInterface, which ->
             viewModel.callLogout()
         }
-
-        //performing negative action
         builder.setNegativeButton("No") { dialogInterface, which ->
-            //    alertDialog.dismiss()
+            dialogInterface.dismiss()
         }
         builder.show()
 
@@ -180,9 +172,7 @@ class NavigationActivity : BaseActivity() {
             toggleDrawer()
         }
         binding.ibProfile.setOnClickListener {
-//            navController.navigate(R.id.nav_profile_list)
-            val fragment = ProfileContainerBottomSheet()
-            fragment.show(supportFragmentManager, "")
+            navController.navigate(R.id.nav_profile_list)
         }
         binding.navView.getHeaderView(0).findViewById<ImageView>(R.id.ivCloseDrawer)
             .setOnClickListener {
@@ -294,5 +284,12 @@ class NavigationActivity : BaseActivity() {
 
         popup.show() //showing popup menu
 
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0)
+            supportFragmentManager.popBackStackImmediate()
+        else
+            super.onBackPressed()
     }
 }
