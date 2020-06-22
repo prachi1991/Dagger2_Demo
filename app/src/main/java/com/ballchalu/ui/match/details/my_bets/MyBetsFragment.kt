@@ -12,7 +12,6 @@ import com.ballchalu.databinding.FragmentMyBetsBinding
 import com.ballchalu.ui.match.details.my_bets.adapter.MyBetsMatchWinnerAdapter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.util.ConstantsBase
-import com.ccpp.shared.util.ConstantsBase.MY_BETS_EMPTY
 import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
@@ -69,10 +68,8 @@ class MyBetsFragment : BaseFragment() {
             adapter.setItemList(it)
             binding.rvEndingDigitMarket.adapter = adapter
         })
-        viewModel.failure.observe(viewLifecycleOwner, EventObserver {
-            if (it == MY_BETS_EMPTY) {
-                binding.tvEmptyBets.isVisible = true
-            }
+        viewModel.isEmpty.observe(viewLifecycleOwner, EventObserver {
+            binding.tvEmptyBets.isVisible = it
         })
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE

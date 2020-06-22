@@ -32,6 +32,9 @@ class MyBetsViewModel @Inject constructor(
     private val _betEndingDigitObserver = MutableLiveData<Event<ArrayList<UserMyBet>?>>()
     val betEndingDigitObserver: LiveData<Event<ArrayList<UserMyBet>?>> = _betEndingDigitObserver
 
+    private val _isEmpty = MutableLiveData<Event<Boolean>>()
+    val isEmpty: LiveData<Event<Boolean>> = _isEmpty
+
     fun callMyBetsDetailsAsync() {
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
@@ -57,9 +60,11 @@ class MyBetsViewModel @Inject constructor(
 
             }
         }
-        if (betEndingDigitArrayList.isEmpty() && betSessionArrayList.isEmpty() && betEvenOddArrayList.isEmpty() && betEndingDigitArrayList.isEmpty()) {
-            failure.postValue(Event(ConstantsBase.MY_BETS_EMPTY))
-        }
+        val isNull =
+            (betEndingDigitArrayList.isEmpty() && betSessionArrayList.isEmpty() && betEvenOddArrayList.isEmpty() && betMatchWinnerArrayList.isEmpty())
+
+        _isEmpty.postValue(Event(isNull))
+
         _betMatchWinnerObserver.postValue(Event(betMatchWinnerArrayList))
         _betSessionObserver.postValue(Event(betSessionArrayList))
         _betEvenOddObserver.postValue(Event(betEvenOddArrayList))
