@@ -9,8 +9,5 @@ open class BaseViewModel : ViewModel() {
     var failure: MutableLiveData<Event<String>> = MutableLiveData()
     var loading: MutableLiveData<Event<Boolean>> = MutableLiveData()
 
-    protected fun handleFailure(failure: Failure) {
-        this.failure.value = Event(failure.javaClass.toString())
-    }
 
 }

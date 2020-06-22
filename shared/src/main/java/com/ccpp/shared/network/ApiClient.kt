@@ -48,7 +48,7 @@ internal interface ApiClient {
 
 
     @GET("api/v1/passwords/forgot")
-    fun callForgetPasswordAsync(@QueryMap emailId: String): Deferred<Response<ForgetPassRes>>
+    fun callForgetPasswordAsync(@Query("email") emailId: String): Deferred<Response<ForgetPassRes>>
 
     //Match detail screen api
     @GET("api/v1/matches/{providerId}/user_match_show.json?play_status=in_play&event_type=cricket&session_type=simultaneous_open_session")

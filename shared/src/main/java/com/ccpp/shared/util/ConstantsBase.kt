@@ -13,6 +13,7 @@ object ConstantsBase {
     const val REQUEST_TIMEOUT = 60
     const val INTERNAL_ERROR = 500
     const val TOKEN_EXPIRED = 401
+    const val NOT_FOUND = 404
 
 
     const val KEY_IS_MATCH_STARTED: String = "isMatchStated"

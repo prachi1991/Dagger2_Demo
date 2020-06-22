@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
+import com.ccpp.shared.core.exception.NotFoundException
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.domain.ForgetPassRes
@@ -28,10 +29,17 @@ class ForgetPasswordViewModel @Inject constructor(private val loginRepository: L
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = loginRepository.getForgetPassword(email)) {
                 is Results.Success -> handleSuccess(result.data)
-                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+                is Results.Error -> handleFailure(result.exception)
             }
             loading.postValue(Event(false))
         }
+    }
+
+    private fun handleFailure(exception: Exception) {
+        if (exception is NotFoundException)
+            failure.postValue(Event("404 Undefined"))
+        else
+            failure.postValue(Event(exception.message.toString()))
     }
 
     private fun handleSuccess(result: ForgetPassRes) {

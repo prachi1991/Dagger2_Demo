@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentForgetPasswordBinding
 import com.ccpp.shared.core.result.EventObserver
@@ -42,8 +43,9 @@ class ForgetPasswordFragment : BaseFragment() {
             }
 
             if (it.isDataValid) {
+                hideSoftKeyBoard()
                 viewModel.callForgetPassword(
-                    binding.edtEmailValue.toString()
+                    binding.edtEmailValue.text.toString()
                 )
             }
         })
@@ -53,7 +55,12 @@ class ForgetPasswordFragment : BaseFragment() {
         })
 
         viewModel.loginResult.observe(viewLifecycleOwner, EventObserver {
-            activity?.onBackPressed()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.message_password_instruction),
+                Toast.LENGTH_LONG
+            ).show()
+            requireActivity().onBackPressed()
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
