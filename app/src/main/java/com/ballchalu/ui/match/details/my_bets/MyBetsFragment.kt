@@ -42,6 +42,7 @@ class MyBetsFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.betMatchWinnerObserver.observe(viewLifecycleOwner, EventObserver {
             binding.tvWinnerLabel.isGone = it.isNullOrEmpty()
+            binding.tvWinnerLabel.text = viewModel.marketType
             binding.rvWinnerMarker.isGone = it.isNullOrEmpty()
             val adapter = MyBetsMatchWinnerAdapter(ConstantsBase.MATCH_WINNER)
             adapter.setItemList(it)

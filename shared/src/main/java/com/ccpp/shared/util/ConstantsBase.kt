@@ -58,6 +58,7 @@ object ConstantsBase {
 
 
     const val SESSION = "session"
+    const val WIN_DRAW_WIN = "win/draw/win"
     const val EVEN_ODD = "even_odd"
     const val MATCH_WINNER = "match_winner"
     const val ENDING_DIGIT = "ending_digit"

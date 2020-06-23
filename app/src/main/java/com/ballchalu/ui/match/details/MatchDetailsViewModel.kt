@@ -40,6 +40,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
+    private var marketType: String? = ConstantsBase.MATCH_WINNER
     var betStatus: String? = null
 
     var title: String? = null
@@ -291,6 +292,7 @@ class MatchDetailsViewModel @Inject constructor(
 
     //API setting Match winner market
     private fun setMarketData(market: Market?) {
+        marketType = market?.betfairMarketType
         _winnerMarketEvent.postValue(Event(market))
         val run1: Runner? = market?.runners?.get(0)?.runner.apply {
             this?.marketId = market?.id
@@ -616,7 +618,7 @@ class MatchDetailsViewModel @Inject constructor(
                     runnerId = runner?.id,
                     oddsVal = oddValue,
                     marketId = runner?.marketId,
-                    heroicMarketType = ConstantsBase.MATCH_WINNER,
+                    heroicMarketType = marketType,
                     contestsId = contestsId,
                     evenTypeTitle = runner?.betfairRunnerName
                 ), isCountMultiply = !isLay

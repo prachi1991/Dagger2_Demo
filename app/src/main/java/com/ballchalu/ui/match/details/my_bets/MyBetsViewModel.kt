@@ -1,8 +1,10 @@
 package com.ballchalu.ui.match.details.my_bets
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
@@ -16,9 +18,11 @@ import java.util.*
 import javax.inject.Inject
 
 class MyBetsViewModel @Inject constructor(
-    private val myBetsRepository: MyBetsRepository
+    private val myBetsRepository: MyBetsRepository,
+    private val context: Context
 ) : BaseViewModel() {
     var providerId: Int = 0
+    var marketType: String = context.resources.getString(R.string.match_winner_market)
 
     private val _betMatchWinnerObserver = MutableLiveData<Event<ArrayList<UserMyBet>?>>()
     val betMatchWinnerObserver: LiveData<Event<ArrayList<UserMyBet>?>> = _betMatchWinnerObserver
@@ -53,7 +57,10 @@ class MyBetsViewModel @Inject constructor(
         val betEndingDigitArrayList = arrayListOf<UserMyBet>()
         data?.userBets?.forEach {
             when (it.userBet?.heroicMarketType?.trim()?.toLowerCase(Locale.US)) {
-                ConstantsBase.MATCH_WINNER -> betMatchWinnerArrayList.add(it.userBet!!)
+                ConstantsBase.MATCH_WINNER, ConstantsBase.WIN_DRAW_WIN -> {
+                    betMatchWinnerArrayList.add(it.userBet!!)
+                    marketType = it.userBet?.heroicMarketType!!.plus(" Market")
+                }
                 ConstantsBase.EVEN_ODD -> betEvenOddArrayList.add(it.userBet!!)
                 ConstantsBase.ENDING_DIGIT -> betEndingDigitArrayList.add(it.userBet!!)
                 null -> if (it.userBet?.sessionId != null) betSessionArrayList.add(it.userBet!!)
