@@ -1,92 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/image_login_background" />
 
-        <LinearLayout
-            android:id="@+id/llParentTab"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/_10sdp"
-            android:animateLayoutChanges="true"
-            android:background="@drawable/background_black_trans_round"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_10sdp">
+            android:background="@drawable/background_black_trans_round">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_home" />
-
-            <RadioGroup
-                android:id="@+id/rbGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@drawable/background_stroke_blue"
-                android:orientation="horizontal"
-                android:padding="@dimen/_2sdp"
-                android:weightSum="2">
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbSignUp"
-                    fontPath="fonts/Play-Regular.ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_left_round_blue"
-                    android:button="@null"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_3sdp"
-                    android:paddingRight="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_3sdp"
-                    android:textColor="@color/color_text"
-                    android:text="@string/sign_up"
-                    android:textSize="@dimen/_10ssp" />
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/rbSignIn"
-                    fontPath="fonts/Play-Regular.ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_right_round_blue"
-                    android:button="@null"
-                    android:checked="true"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_3sdp"
-                    android:paddingRight="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_3sdp"
-                    android:text="@string/sign_in"
-                    android:textSize="@dimen/_10ssp" />
-            </RadioGroup>
-
-            <androidx.core.widget.NestedScrollView
+            <LinearLayout
+                android:id="@+id/llParentTab"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_10sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_home" />
+
+                <RadioGroup
+                    android:id="@+id/rbGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/background_stroke_blue"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_2sdp"
+                    android:weightSum="2">
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/rbSignUp"
+                        fontPath="fonts/Play-Regular.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_left_round_blue"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_3sdp"
+                        android:text="@string/sign_up"
+                        android:textColor="@color/color_text"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/rbSignIn"
+                        fontPath="fonts/Play-Regular.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_right_round_blue"
+                        android:button="@null"
+                        android:checked="true"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_3sdp"
+                        android:text="@string/sign_in"
+                        android:textSize="@dimen/_10ssp" />
+                </RadioGroup>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_10sdp">
 
                     <FrameLayout
                         android:id="@+id/fragmentSign"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:animateLayoutChanges="true" />
 
                     <RelativeLayout
@@ -169,10 +170,10 @@
 
                     </LinearLayout>
                 </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-        </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
 
-    </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
