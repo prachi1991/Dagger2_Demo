@@ -60,7 +60,7 @@ class UserContestAdapter(
                     tvPlayNow.visibility = View.VISIBLE
                     tvPlayNow.text = ConstantsBase.play_now_key
                 } else if (isDeclared) {
-                    tvPlayNow.text = ConstantsBase.WINNER
+                    tvPlayNow.text = ConstantsBase.RESULT
                     tvPlayNow.visibility = View.VISIBLE
                 } else {
                     tvPlayNow.visibility = View.GONE

@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.ContestCountListener
 import com.ballchalu.ui.contest.ContestViewModel
 import com.ballchalu.ui.contest.adapter.ContestAdapter
-import com.ballchalu.ui.navigation.NavigationActivity
 import com.ballchalu.ui.navigation.NavigationViewModel
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.EventObserver
@@ -25,6 +26,7 @@ import javax.inject.Inject
 class ContestFragment : BaseFragment() {
     private var listener: ContestCountListener? = null
     private var contestAdapter: ContestAdapter? = null
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -69,8 +71,7 @@ class ContestFragment : BaseFragment() {
             if (viewModel.isDeclared) {
                 it.contests?.size?.let { it1 -> listener?.onAllContest(it1) }
                 contestAdapter?.setItemList(it.contests)
-            }
-            else {
+            } else {
                 allContestList?.clear()
                 it.contests?.forEach {
                     if (it.availableSpots ?: 0 > 0)
@@ -102,6 +103,11 @@ class ContestFragment : BaseFragment() {
             override fun onPlayNowClicked(contestModel: Contest) {
 
             }
+
+            override fun onResultClicked(contestModel: Contest) {
+                if (viewModel.isDeclared)
+                    openMatchDetailsScreen(contestModel)
+            }
         }, viewModel.isDeclared)
         binding.rvContest.adapter = contestAdapter
     }
@@ -110,4 +116,22 @@ class ContestFragment : BaseFragment() {
         this.listener = onCountListener
     }
 
+    private fun openMatchDetailsScreen(contestModel: Contest) {
+        val bundle = Bundle().apply {
+            putInt(
+                ConstantsBase.KEY_PROVIDER_ID,
+                contestModel.match.providerId ?: 0
+            )
+            val liveUser = contestModel.spots?.minus(
+                contestModel.availableSpots ?: 1
+            ) ?: 1
+            putInt(ConstantsBase.KEY_LIVE_USER, liveUser)
+            putInt(ConstantsBase.KEY_CONTESTS_ID, contestModel.id ?: 0)
+            putString(ConstantsBase.KEY_TITLE, contestModel.title)
+            putInt(ConstantsBase.KEY_CONTESTS_MATCH_ID, contestModel.id ?: 0)
+            putInt(ConstantsBase.KEY_MATCH_ID, contestModel.match.id ?: 0)
+            putBoolean(ConstantsBase.KEY_DECLARED, viewModel.isDeclared)
+        }
+        findNavController().navigate(R.id.nav_home_match_details, bundle)
+    }
 }

@@ -211,7 +211,8 @@ class MatchDetailsViewModel @Inject constructor(
 
     //Handling market from API
     private fun handleSuccess(data: MatchDetailsRes?) {
-        callPositionDetailsAsync(contestsId)
+        if (!isDeclared)
+            callPositionDetailsAsync(contestsId)
         data?.let {
             _matchResult.postValue(Event(data))
             batTeamRunName = it.match?.score?.batteamname ?: ""

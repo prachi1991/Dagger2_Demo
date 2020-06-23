@@ -3,6 +3,7 @@ package com.ballchalu.ui.contest.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemAllContestBinding
 import com.ccpp.shared.domain.contest.Contest
@@ -20,6 +21,7 @@ class ContestAdapter(
     interface OnItemClickListener {
         fun onBuyNowClicked(contestModel: Contest)
         fun onPlayNowClicked(contestModel: Contest)
+        fun onResultClicked(contestModel: Contest)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -78,8 +80,15 @@ class ContestAdapter(
                             }
                         }
                     }
-                } else
-                    tvPlayNow.visibility = View.GONE
+                } else {
+                    tvPlayNow.text = ConstantsBase.RESULT
+                    tvPlayNow.isVisible = true
+                    tvPlayNow.setOnClickListener {
+                        if (tvPlayNow.text == ConstantsBase.RESULT && contest != null)
+                            onItemClickListener?.onResultClicked(contest)
+                    }
+
+                }
 
 
                 val spotFilled =
