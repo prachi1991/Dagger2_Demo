@@ -181,8 +181,10 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             binding.tvMarketType.text = market?.betfairMarketType
             binding.tvMatchTeam1.text = market?.runners?.get(0)?.runner?.betfairRunnerName
             binding.tvMatchTeam2.text = market?.runners?.get(1)?.runner?.betfairRunnerName
-            if (market?.runners?.size ?: 0 > 2)
+            if (market?.runners?.size ?: 0 > 2) {
                 binding.tvMatchTeam3.text = market?.runners?.get(2)?.runner?.betfairRunnerName
+                binding.rlDrawMarket.visibility = View.VISIBLE
+            }
             binding.tvCountMarket.text = if (market?.runners?.isNotEmpty() == true) "1" else "0"
         })
 

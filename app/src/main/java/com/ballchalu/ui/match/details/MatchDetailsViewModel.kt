@@ -545,27 +545,14 @@ class MatchDetailsViewModel @Inject constructor(
                 }
                 if (run1 == null || run2 == null || run1.id == 0 || run2.id == 0) return
 
-                if (batTeamRunId == run1.id) {
-                    run1.betfairRunnerName = batTeamRunner?.betfairRunnerName
-                    _batTeamBhaavEvent.value = Event(parseRunnerObject(run1))
-                } else {
-                    run2.betfairRunnerName = bwlTeamRunner?.betfairRunnerName
-                    _bwlTeamBhaavEvent.value = Event(parseRunnerObject(run2))
-                }
+                run1.betfairRunnerName = batTeamRunner?.betfairRunnerName
+                _batTeamBhaavEvent.value = Event(parseRunnerObject(run1))
 
-
-                if (bwlTeamRunId == run2.id) {
-                    run2.betfairRunnerName = bwlTeamRunner?.betfairRunnerName
-                    _bwlTeamBhaavEvent.value = Event(parseRunnerObject(run2))
-                } else {
-                    run1.betfairRunnerName = batTeamRunner?.betfairRunnerName
-                    _batTeamBhaavEvent.value = Event(parseRunnerObject(run1))
-                }
+                run2.betfairRunnerName = bwlTeamRunner?.betfairRunnerName
+                _bwlTeamBhaavEvent.value = Event(parseRunnerObject(run2))
 
                 run3?.let {
-                    if (it.id != 0 && drawTeamRunId == it.id) {
-                        _drawTeamBhaavEvent.postValue(Event(parseRunnerObject(run3)))
-                    }
+                    _drawTeamBhaavEvent.postValue(Event(parseRunnerObject(run3)))
                 }
             }
             ConstantsBase.suspend, ConstantsBase.close -> {
