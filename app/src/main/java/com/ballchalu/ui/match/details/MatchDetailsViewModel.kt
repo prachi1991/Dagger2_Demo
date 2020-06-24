@@ -593,6 +593,7 @@ class MatchDetailsViewModel @Inject constructor(
     fun onMatchWinnerClicked(isLay: Boolean, teamNo: Int) {
         val runner =
             if (teamNo == 1) batTeamRunner else if (teamNo == 2) bwlTeamRunner else drawTeamRunner
+        if (runner?.status?.equals(ConstantsBase.open, true) == false) return
         val oddValue = if (isLay) runner?.lay else runner?.back
         if (oddValue.isNullOrEmpty()) return
         _openBetScreenEvent.value = Event(
