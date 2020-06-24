@@ -57,11 +57,10 @@ class MyBetsViewModel @Inject constructor(
         val betEndingDigitArrayList = arrayListOf<UserMyBet>()
         data?.userBets?.forEach {
             when (it.userBet?.heroicMarketType?.trim()?.toLowerCase(Locale.US)) {
-                 ConstantsBase.WIN_DRAW_WIN -> {
-                     betMatchWinnerArrayList.add(it.userBet!!)
-                     marketType = it.userBet?.heroicMarketType!!.plus(" Market")
-                 }
-                ConstantsBase.MATCH_WINNER -> betMatchWinnerArrayList.add(it.userBet!!)
+                ConstantsBase.MATCH_WINNER, ConstantsBase.MATCH_WINNER_STRING, ConstantsBase.WIN_DRAW_WIN -> {
+                    betMatchWinnerArrayList.add(it.userBet!!)
+                    marketType = it.userBet?.heroicMarketType?.plus(" Market")!!
+                }
                 ConstantsBase.EVEN_ODD -> betEvenOddArrayList.add(it.userBet!!)
                 ConstantsBase.ENDING_DIGIT -> betEndingDigitArrayList.add(it.userBet!!)
                 null -> if (it.userBet?.sessionId != null) betSessionArrayList.add(it.userBet!!)
