@@ -1,6 +1,5 @@
 package com.ballchalu.ui.match.details
 
-import android.app.Application
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -52,6 +51,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
     private var snackBar: Snackbar? = null
     private var sessionAdapter: SessionAdapter? = null
     private var endingDigitAdapter: EndingDigitAdapter? = null
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -223,8 +223,9 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         })
 
         viewModel.batTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver { runners ->
-            binding.tvTeam1Lay.text = if (runners?.canBack == true) runners.back else ""
-            binding.tvTeam1Back.text = if (runners?.canLay == true) runners.lay else ""
+            val isOpen = runners?.status.equals(ConstantsBase.open, true)
+            binding.tvTeam1Lay.text = if (runners?.canBack == true && isOpen) runners.back else ""
+            binding.tvTeam1Back.text = if (runners?.canLay == true && isOpen) runners.lay else ""
             binding.tvTeam1Lay.isClickable = (runners?.canBack == true)
             binding.tvTeam1Back.isClickable = (runners?.canLay == true)
             runners?.betfairRunnerName?.let {
@@ -233,8 +234,9 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         })
 
         viewModel.bwlTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver { runners ->
-            binding.tvTeam2Lay.text = if (runners?.canBack == true) runners.back else ""
-            binding.tvTeam2Back.text = if (runners?.canLay == true) runners.lay else ""
+            val isOpen = runners?.status.equals(ConstantsBase.open, true)
+            binding.tvTeam2Lay.text = if (runners?.canBack == true && isOpen) runners.back else ""
+            binding.tvTeam2Back.text = if (runners?.canLay == true && isOpen) runners.lay else ""
             binding.tvTeam2Lay.isClickable = (runners?.canBack == true)
             binding.tvTeam2Back.isClickable = (runners?.canLay == true)
             runners?.betfairRunnerName?.let {
@@ -242,11 +244,12 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             }
         })
         viewModel.drawTeamBhaavEvent.observe(viewLifecycleOwner, EventObserver { runners ->
+            val isOpen = runners?.status.equals(ConstantsBase.open, true)
             runners?.id?.let {
                 binding.rlDrawMarket.visibility = View.VISIBLE
             }
-            binding.tvTeam3Lay.text = if (runners?.canBack == true) runners.back else ""
-            binding.tvTeam3Back.text = if (runners?.canLay == true) runners.lay else ""
+            binding.tvTeam3Lay.text = if (runners?.canBack == true && isOpen) runners.back else ""
+            binding.tvTeam3Back.text = if (runners?.canLay == true && isOpen) runners.lay else ""
             binding.tvTeam3Lay.isClickable = (runners?.canBack == true)
             binding.tvTeam3Back.isClickable = (runners?.canLay == true)
             runners?.betfairRunnerName?.let {

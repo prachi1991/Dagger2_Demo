@@ -308,7 +308,10 @@ class MatchDetailsViewModel @Inject constructor(
                 this?.marketId = market?.id
                 this?.status = market?.status
             }
-        if (market?.status?.equals(ConstantsBase.open, true) == true) {
+        if (market?.status?.equals(ConstantsBase.open, true) == true
+            || market?.status?.equals(ConstantsBase.suspend, true) == true
+        ) {
+
             if (run1 != null && run2 != null) {
                 if (run1.betfairRunnerName?.trim().equals(batTeamRunName.trim())) {
                     _batTeamBhaavEvent.postValue(Event(run1))
@@ -337,14 +340,10 @@ class MatchDetailsViewModel @Inject constructor(
                 }
             }
         }
-//        _marketStatusEvent.postValue(Event)
         if (market?.status?.equals(ConstantsBase.suspend, true) == true) {
             batTeamRunner?.status = ConstantsBase.suspend
             bwlTeamRunner?.status = ConstantsBase.suspend
             drawTeamRunner?.status = ConstantsBase.suspend
-            _batTeamBhaavEvent.postValue(Event(Runner()))
-            _bwlTeamBhaavEvent.postValue(Event(Runner()))
-            _drawTeamBhaavEvent.postValue(Event(Runner()))
         }
     }
 
