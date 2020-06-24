@@ -94,7 +94,7 @@ class EditProfileFragment : BaseFragment() {
         builder.setTitle(R.string.dialog_title)
         builder.setMessage(message)
         builder.setIcon(R.drawable.ic_success)
-        builder.setPositiveButton("Cancel") { dialog, _ ->
+        builder.setPositiveButton("Ok") { dialog, _ ->
             findNavController().navigateUp()
             dialog.dismiss()
         }
