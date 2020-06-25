@@ -9,7 +9,8 @@ open class BaseFragment : DaggerFragment() {
         get() = this.javaClass.name
 
     fun hideSoftKeyBoard() {
-        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
     }
 }

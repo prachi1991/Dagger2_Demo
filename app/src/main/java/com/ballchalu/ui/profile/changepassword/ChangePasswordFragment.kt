@@ -68,7 +68,7 @@ class ChangePasswordFragment : BaseFragment() {
             binding.edtNewPass.error = "New password can not be empty"
             return
         }
-        if (isPasswordValid(binding.edtNewPass.text.toString())) {
+        if (!isPasswordValid(binding.edtNewPass.text.toString())) {
             binding.edtNewPass.error = resources.getString(R.string.invalid_password)
             return
         }
