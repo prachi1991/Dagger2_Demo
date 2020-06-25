@@ -44,6 +44,7 @@ class ChangePasswordFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
         binding.btnChangePassword.setOnClickListener {
+            hideSoftKeyBoard()
             validate()
         }
         viewModel.changePasswordObserver.observe(viewLifecycleOwner, EventObserver {
@@ -65,6 +66,10 @@ class ChangePasswordFragment : BaseFragment() {
         }
         if (binding.edtNewPass.text.toString().isEmpty()) {
             binding.edtNewPass.error = "New password can not be empty"
+            return
+        }
+        if (binding.edtOldPass.text.toString() == binding.edtNewPass.text.toString()) {
+            binding.edtNewPass.error = "Old password and new password can not be same "
             return
         }
         ChangePasswordReq(
