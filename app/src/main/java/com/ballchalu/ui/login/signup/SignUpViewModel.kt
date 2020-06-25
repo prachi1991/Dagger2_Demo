@@ -39,7 +39,10 @@ class SignUpViewModel @Inject constructor(private val loginRepository: LoginRepo
     private fun handleSuccess(result: LoginRes) {
         result.access_token?.isNotEmpty()?.let {
             _loginResult.postValue(Event(result))
+            return
         }
+        if (result.success == false && result.message?.isNotEmpty() == true)
+            failure.postValue(Event(result.message.toString()))
     }
 
     fun validateData(

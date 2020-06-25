@@ -5,5 +5,6 @@ data class LoginRes(
     val refresh_token: String? = null,
     val created_at: Int? = null,
     val token_taype: String? = null,
-    val expires_in: Int? = null
+    val message: String? = null,
+    val success: Boolean? = null
 )
