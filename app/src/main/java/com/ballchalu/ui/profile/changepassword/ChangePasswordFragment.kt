@@ -68,6 +68,11 @@ class ChangePasswordFragment : BaseFragment() {
             binding.edtNewPass.error = "New password can not be empty"
             return
         }
+        if (isPasswordValid(binding.edtNewPass.text.toString())) {
+            binding.edtNewPass.error = resources.getString(R.string.invalid_password)
+            return
+        }
+
         if (binding.edtOldPass.text.toString() == binding.edtNewPass.text.toString()) {
             binding.edtNewPass.error = "Old password and new password can not be same "
             return
@@ -93,5 +98,10 @@ class ChangePasswordFragment : BaseFragment() {
         builder.setCancelable(false)
         builder.show()
 
+
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        return password.length > 5
     }
 }
