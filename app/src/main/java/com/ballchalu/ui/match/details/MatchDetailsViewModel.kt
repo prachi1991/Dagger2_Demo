@@ -313,25 +313,15 @@ class MatchDetailsViewModel @Inject constructor(
         ) {
 
             if (run1 != null && run2 != null) {
-                if (run1.betfairRunnerName?.trim().equals(batTeamRunName.trim())) {
-                    _batTeamBhaavEvent.postValue(Event(run1))
-                    batTeamRunId = run1.id
-                    batTeamRunner = run1
-                } else {
-                    _bwlTeamBhaavEvent.postValue(Event(run2))
-                    bwlTeamRunId = run2.id
-                    bwlTeamRunner = run2
-                }
+                _batTeamBhaavEvent.postValue(Event(run1))
+                batTeamRunId = run1.id
+                batTeamRunner = run1
 
-                if (run2.betfairRunnerName?.trim().equals(bwlTeamRunName.trim())) {
-                    _bwlTeamBhaavEvent.postValue(Event(run2))
-                    bwlTeamRunId = run2.id
-                    bwlTeamRunner = run2
-                } else {
-                    _batTeamBhaavEvent.postValue(Event(run1))
-                    batTeamRunner = run1
-                    batTeamRunId = run1.id
-                }
+
+                _bwlTeamBhaavEvent.postValue(Event(run2))
+                bwlTeamRunId = run2.id
+                bwlTeamRunner = run2
+
 
                 run3?.let {
                     _drawTeamBhaavEvent.postValue(Event(it))
@@ -544,12 +534,27 @@ class MatchDetailsViewModel @Inject constructor(
                 }
                 if (run1 == null || run2 == null || run1.id == 0 || run2.id == 0) return
 
-                run1.betfairRunnerName = batTeamRunner?.betfairRunnerName
-                _batTeamBhaavEvent.value = Event(parseRunnerObject(run1))
+                when (run1.id) {
+                    batTeamRunner?.id -> {
+                        run1.betfairRunnerName = batTeamRunner?.betfairRunnerName
+                        _batTeamBhaavEvent.value = Event(parseRunnerObject(run1))
+                    }
+                    bwlTeamRunner?.id -> {
+                        run1.betfairRunnerName = bwlTeamRunner?.betfairRunnerName
+                        _bwlTeamBhaavEvent.value = Event(parseRunnerObject(run1))
+                    }
+                }
 
-                run2.betfairRunnerName = bwlTeamRunner?.betfairRunnerName
-                _bwlTeamBhaavEvent.value = Event(parseRunnerObject(run2))
-
+                when (run2.id) {
+                    batTeamRunner?.id -> {
+                        run2.betfairRunnerName = batTeamRunner?.betfairRunnerName
+                        _batTeamBhaavEvent.value = Event(parseRunnerObject(run2))
+                    }
+                    bwlTeamRunner?.id -> {
+                        run2.betfairRunnerName = bwlTeamRunner?.betfairRunnerName
+                        _bwlTeamBhaavEvent.value = Event(parseRunnerObject(run2))
+                    }
+                }
                 run3?.let {
                     _drawTeamBhaavEvent.postValue(Event(parseRunnerObject(run3)))
                 }
