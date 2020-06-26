@@ -31,7 +31,6 @@ class BcCoinsLedgersFragment : BaseFragment() {
         binding = FragmentBcCoinsLedgersBinding.inflate(inflater).apply {
             lifecycleOwner = this@BcCoinsLedgersFragment
         }
-        initLedgeAdapter()
 
         return binding.root
     }
@@ -64,8 +63,9 @@ class BcCoinsLedgersFragment : BaseFragment() {
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initLedgeAdapter()
         viewModel.bcCoinsListObserver.observe(viewLifecycleOwner, EventObserver {
             adapter.setItemList(it)
         })

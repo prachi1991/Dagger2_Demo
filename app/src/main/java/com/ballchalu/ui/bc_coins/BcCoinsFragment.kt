@@ -49,8 +49,8 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initSessionAdapterAdapter()
         viewModel.bcCoinListObserver.observe(viewLifecycleOwner, EventObserver {
             bcCoinAdapter?.setItemList(it)

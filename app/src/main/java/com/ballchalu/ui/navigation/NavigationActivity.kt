@@ -229,12 +229,14 @@ class NavigationActivity : BaseActivity() {
             ConstantsBase.THEME_LIGHT,
             ConstantsBase.THEME_DEFAULT
         )
-        val builder = MaterialAlertDialogBuilder(this, R.style.MyMaterialAlertDialog)
+        val builder = MaterialAlertDialogBuilder(this)
         builder.setTitle("Select theme")
         builder.setSingleChoiceItems(
             values, viewModel.getSelectedTheme()
         ) { dialog, item ->
+            dialog.dismiss()
             sharePref.theme = ThemeHelper.getSelectedTheme(item)
+
         }
         builder.show()
     }

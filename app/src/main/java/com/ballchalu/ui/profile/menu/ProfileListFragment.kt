@@ -110,6 +110,7 @@ class ProfileListFragment : BaseFragment() {
         builder.setSingleChoiceItems(
             values, viewModel.getSelectedTheme()
         ) { dialog, item ->
+            dialog.dismiss()
             sharedPref.theme = ThemeHelper.getSelectedTheme(item)
         }
         builder.show()

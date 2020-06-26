@@ -37,6 +37,13 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
     ): View? {
         binding = FragmentMainContestBinding.inflate(inflater, container, false)
 
+
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         setupViewPager()
         initTabLayout()
 
@@ -44,8 +51,6 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
         onUserContest(myContest)
 
         binding?.tvMatchName?.text = matchListing?.title
-
-        return binding?.root
     }
 
     private fun initTabLayout() {
