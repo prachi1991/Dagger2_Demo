@@ -18,53 +18,62 @@
                 android:layout_height="wrap_content"
                 android:background="@color/color_toolbar">
 
-                <RelativeLayout
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp">
+                    android:layout_height="@dimen/_40sdp"
+                    app:contentInsetStart="0dp"
+                    app:navigationIcon="@drawable/ic_humburger">
 
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/ibMenu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:paddingLeft="@dimen/_10sdp"
-                        android:paddingRight="@dimen/_10sdp"
-                        android:src="@drawable/ic_humburger" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/ivLogo"
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/_10sdp"
-                        android:paddingRight="@dimen/_10sdp"
-                        android:src="@drawable/logo_ball_chalu"
-                        android:visibility="gone" />
+                        <!--                        <androidx.appcompat.widget.AppCompatImageButton-->
+                        <!--                            android:id="@+id/ibMenu"-->
+                        <!--                            android:layout_width="wrap_content"-->
+                        <!--                            android:layout_height="match_parent"-->
+                        <!--                            android:background="@android:color/transparent"-->
+                        <!--                            android:paddingLeft="@dimen/_10sdp"-->
+                        <!--                            android:paddingRight="@dimen/_10sdp"-->
+                        <!--                            android:src="@drawable/ic_humburger" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvContestCoin"
-                        fontPath="fonts/Play-Bold.ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:gravity="center"
-                        android:layout_toLeftOf="@id/ibProfile"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:src="@drawable/logo_ball_chalu"
-                        android:textColor="@color/text_light_green"
-                        android:textSize="@dimen/_12ssp"
-                        tools:text="BC Coin 200" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivLogo"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:paddingRight="@dimen/_10sdp"
+                            android:src="@drawable/logo_ball_chalu"
+                            android:visibility="gone" />
 
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/ibProfile"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/_7sdp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_avatar" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvContestCoin"
+                            fontPath="fonts/Play-Bold.ttf"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_toLeftOf="@id/ibProfile"
+                            android:gravity="center"
+                            android:paddingTop="@dimen/_5sdp"
+                            android:src="@drawable/logo_ball_chalu"
+                            android:textColor="@color/text_light_green"
+                            android:textSize="@dimen/_12ssp"
+                            tools:text="BC Coin 200" />
 
-                </RelativeLayout>
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/ibProfile"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:background="@android:color/transparent"
+                            android:padding="@dimen/_7sdp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_avatar" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.appbar.MaterialToolbar>
 
             </com.google.android.material.appbar.AppBarLayout>
 

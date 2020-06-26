@@ -12,8 +12,10 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import com.ballchalu.BuildConfig
 import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
@@ -73,13 +75,21 @@ class NavigationActivity : BaseActivity() {
     }
 
     private fun initNavigationDrawer() {
+
         navController = findNavController(R.id.nav_host_fragment)
-        binding.navView.setupWithNavController(navController)
+        setSupportActionBar(binding.toolbar)
+        NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
+        NavigationUI.setupWithNavController(binding.toolbar, navController, appBarConfiguration)
+        binding.toolbar.setNavigationIcon(R.drawable.ic_humburger)
+
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             binding.tvContestCoin.text = ""
             binding.tvContestCoin.visibility =
                 if (destination.id == R.id.nav_home_match_details) View.VISIBLE else View.GONE
             closeDrawer()
+            if (destination.id in ids) {
+                binding.toolbar.setNavigationIcon(R.drawable.ic_humburger)
+            }
         }
         binding.navView.apply {
 
@@ -167,10 +177,14 @@ class NavigationActivity : BaseActivity() {
 
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController, binding.drawerLayout)
+    }
+
     private fun setObservers() {
-        binding.ibMenu.setOnClickListener {
-            toggleDrawer()
-        }
+//        binding.toolbar.setNavigationOnClickListener {
+//            toggleDrawer()
+//        }
         binding.ibProfile.setOnClickListener {
             navController.navigate(R.id.nav_profile_list)
         }
@@ -288,10 +302,13 @@ class NavigationActivity : BaseActivity() {
 
     }
 
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0)
-            supportFragmentManager.popBackStackImmediate()
-        else
-            super.onBackPressed()
-    }
+    private val appBarConfiguration by lazy { AppBarConfiguration(ids, binding.drawerLayout) }
+    private val ids = setOf(
+        R.id.nav_home,
+        R.id.nav_coin_ledgers,
+        R.id.nav_declared,
+        R.id.nav_how_to_play,
+        R.id.nav_bc_coins
+    )
+
 }
