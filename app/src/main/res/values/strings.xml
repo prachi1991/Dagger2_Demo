@@ -131,4 +131,5 @@
     <string name="enter_last_name">Enter last name</string>
     <string name="enter_mail_id">Enter mail-id</string>
     <string name="message_password_instruction">Sent your password instruction on your email</string>
+    <string name="user_info">User Info</string>
 </resources>

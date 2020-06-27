@@ -171,7 +171,7 @@
                         android:drawableStart="@drawable/ic_circle"
                         android:drawablePadding="@dimen/_10sdp"
                         android:gravity="center|start"
-                        android:text="@string/buy_coin_ledger"
+                        android:text="@string/nav_bc_coins_ledgers"
                         android:textColor="@color/profile_menu_text_color"
                         android:textSize="@dimen/_12ssp" />
 
@@ -206,7 +206,7 @@
                         android:drawableStart="@drawable/ic_circle"
                         android:drawablePadding="@dimen/_10sdp"
                         android:gravity="center|start"
-                        android:text="Buy BC Coin "
+                        android:text="@string/nav_bc_coins"
                         android:textColor="@color/profile_menu_text_color"
                         android:textSize="@dimen/_12ssp" />
 
