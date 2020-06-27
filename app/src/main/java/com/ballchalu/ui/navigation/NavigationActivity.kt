@@ -308,6 +308,7 @@ class NavigationActivity : BaseActivity() {
         R.id.nav_coin_ledgers,
         R.id.nav_declared,
         R.id.nav_how_to_play,
+        R.id.nav_profile_list,
         R.id.nav_bc_coins
     )
 

@@ -12,11 +12,13 @@
         android:label="ChangePasswordFragment" />
     <fragment
         android:id="@+id/profileListFragment"
+        tools:layout="@layout/fragment_profile_list"
         android:name="com.ballchalu.ui.profile.menu.ProfileListFragment"
         android:label="ProfileListFragment" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.ballchalu.ui.profile.details.ProfileFragment"
+        tools:layout="@layout/fragment_profile"
         android:label="ProfileFragment" />
     <fragment
         android:id="@+id/bcCoinsFragment"

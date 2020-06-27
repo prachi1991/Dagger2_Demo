@@ -1,7 +1,6 @@
 package com.ballchalu.ui.profile.container
 
 import android.app.Dialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.res.Resources
 import android.os.Bundle
@@ -9,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.activity.OnBackPressedCallback
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
@@ -18,12 +15,11 @@ import com.ballchalu.base.BottomSheetFragment
 import com.ballchalu.databinding.BottomSheetProfileContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import javax.inject.Inject
 
 
 class ProfileContainerBottomSheet : BottomSheetFragment() {
 
+    private lateinit var navHost: NavHostFragment
     private lateinit var binding: BottomSheetProfileContainerBinding
 
     override fun onCreateView(
@@ -33,7 +29,7 @@ class ProfileContainerBottomSheet : BottomSheetFragment() {
     ): View? {
         binding = BottomSheetProfileContainerBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        val navHost = NavHostFragment()
+        navHost = NavHostFragment()
         childFragmentManager.beginTransaction().replace(R.id.nav_host_profile_fragment, navHost)
             .commitNow()
         navHost.navController.setGraph(R.navigation.profile_navigation)
@@ -52,5 +48,10 @@ class ProfileContainerBottomSheet : BottomSheetFragment() {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
         }
         return bottomSheetDialog
+    }
+
+    override fun onBackEvent() {
+        val up = navHost.navController.navigateUp()
+        if (!up) findNavController().navigateUp()
     }
 }
