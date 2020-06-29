@@ -133,6 +133,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
         requireContext().unregisterReceiver(viewModel.scoreUpdate)
         requireContext().unregisterReceiver(viewModel.oddsReceiver)
         requireContext().unregisterReceiver(viewModel.declareEvent)
+        publishBcCoin(UserContest(availableCoins = ""))
         super.onDestroyView()
     }
 
@@ -346,8 +347,9 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
     }
 
     private fun publishBcCoin(userContest: UserContest?) {
-        if (!viewModel.isDeclared)
+        if (!viewModel.isDeclared) {
             userContest?.let { RxBus.publish(RxEvent.BcCoin(it)) }
+        }
     }
 
     private val runnable = Runnable {

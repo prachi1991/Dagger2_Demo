@@ -69,9 +69,11 @@ class NavigationActivity : BaseActivity() {
         }
     }
 
-    private fun updateContestCoin(it: UserContest) {
-        binding.tvContestCoin.text = getString(R.string.bc_coin_s, it.availableCoins)
-        setHeaderUi(it.user)
+    private fun updateContestCoin(userContest: UserContest) {
+        userContest.availableCoins?.let {
+            binding.tvContestCoin.text = if (it.isEmpty()) "" else getString(R.string.bc_coin_s, it)
+        }
+        setHeaderUi(userContest.user)
     }
 
     private fun initNavigationDrawer() {
@@ -83,7 +85,6 @@ class NavigationActivity : BaseActivity() {
         binding.toolbar.setNavigationIcon(R.drawable.ic_humburger)
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            binding.tvContestCoin.text = ""
             binding.tvContestCoin.visibility =
                 if (destination.id == R.id.nav_home_match_details) View.VISIBLE else View.GONE
             closeDrawer()
