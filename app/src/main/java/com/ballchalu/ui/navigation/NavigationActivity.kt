@@ -12,7 +12,6 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -24,6 +23,7 @@ import com.ballchalu.ui.login.container.LoginActivity
 import com.ballchalu.utils.ThemeHelper
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.domain.contest.UserContest
 import com.ccpp.shared.domain.user.UserData
 import com.ccpp.shared.rxjava.RxBus
 import com.ccpp.shared.rxjava.RxEvent
@@ -64,14 +64,14 @@ class NavigationActivity : BaseActivity() {
         disposable = RxBus.listen(Any::class.java).subscribe { event ->
             when (event) {
                 ConstantsBase.TOKEN_EXPIRED -> viewModel.callLogout()
-                is RxEvent.BcCoin -> updateContestCoin(event)
+                is RxEvent.BcCoin -> updateContestCoin(event.userContest)
             }
         }
     }
 
-    private fun updateContestCoin(it: RxEvent.BcCoin) {
-        binding.tvContestCoin.text = getString(R.string.bc_coin_s, it.userContest.availableCoins)
-        setHeaderUi(it.userContest.user)
+    private fun updateContestCoin(it: UserContest) {
+        binding.tvContestCoin.text = getString(R.string.bc_coin_s, it.availableCoins)
+        setHeaderUi(it.user)
     }
 
     private fun initNavigationDrawer() {
@@ -308,7 +308,6 @@ class NavigationActivity : BaseActivity() {
         R.id.nav_coin_ledgers,
         R.id.nav_declared,
         R.id.nav_how_to_play,
-        R.id.nav_profile_list,
         R.id.nav_bc_coins
     )
 

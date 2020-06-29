@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
@@ -64,7 +65,7 @@ class ProfileListFragment : BaseFragment() {
         viewModel.callUserDetails()
 
         binding.toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
+            requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
         }
         binding.rlProfile.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
