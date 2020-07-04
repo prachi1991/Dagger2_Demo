@@ -21,6 +21,9 @@ class ContestViewModel @Inject constructor(
     val context: Context
 ) : BaseViewModel() {
 
+    var allContest = 0
+    var myContest = 0
+
     var matchItem: MatchListing? = null
     var isDeclared: Boolean = false
     var isMatchStarted: Boolean = false

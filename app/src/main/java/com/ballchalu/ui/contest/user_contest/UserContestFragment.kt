@@ -12,6 +12,7 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
 import com.ballchalu.ui.contest.ContestCountListener
 import com.ballchalu.ui.contest.ContestViewModel
+import com.ballchalu.ui.contest.MainContestFragment
 import com.ballchalu.ui.contest.user_contest.adapter.UserContestAdapter
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.MatchListing
@@ -58,12 +59,18 @@ class UserContestFragment : BaseFragment() {
             contestAdapter?.clear()
             userContestList = it.contests as ArrayList<UserContest>?
             contestAdapter?.setItemList(userContestList, true)
+            userContestList?.size?.let { it1 -> onUserContest(it1) }
         })
 
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
+    }
+
+    private fun onUserContest(count: Int) {
+        if (parentFragment is MainContestFragment)
+            (parentFragment as MainContestFragment).onUserContest(count)
     }
 
     override fun onResume() {

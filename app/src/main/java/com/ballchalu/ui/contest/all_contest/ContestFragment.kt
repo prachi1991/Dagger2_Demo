@@ -10,8 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
-import com.ballchalu.ui.contest.ContestCountListener
 import com.ballchalu.ui.contest.ContestViewModel
+import com.ballchalu.ui.contest.MainContestFragment
 import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ballchalu.ui.navigation.NavigationViewModel
 import com.ccpp.shared.core.result.Event
@@ -24,7 +24,6 @@ import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class ContestFragment : BaseFragment() {
-    private var listener: ContestCountListener? = null
     private var contestAdapter: ContestAdapter? = null
 
     @Inject
@@ -66,10 +65,10 @@ class ContestFragment : BaseFragment() {
         viewModel.matchContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             contestAdapter?.clear()
             it.contests?.count { it.isParticipated }?.let { count ->
-                listener?.onUserContest(count)
+                onUserContest(count)
             }
             if (viewModel.isDeclared) {
-                it.contests?.size?.let { it1 -> listener?.onAllContest(it1) }
+                it.contests?.size?.let { it1 -> onAllContest(it1) }
                 contestAdapter?.setItemList(it.contests)
             } else {
                 allContestList?.clear()
@@ -77,7 +76,7 @@ class ContestFragment : BaseFragment() {
                     if (it.availableSpots ?: 0 > 0)
                         allContestList?.add(it)
                 }
-                allContestList?.size?.let { it1 -> listener?.onAllContest(it1) }
+                allContestList?.size?.let { it1 -> onAllContest(it1) }
                 contestAdapter?.setItemList(allContestList)
             }
         })
@@ -86,6 +85,16 @@ class ContestFragment : BaseFragment() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
+    }
+
+    private fun onUserContest(count: Int) {
+        if (parentFragment is MainContestFragment)
+            (parentFragment as MainContestFragment).onUserContest(count)
+    }
+
+    private fun onAllContest(count: Int) {
+        if (parentFragment is MainContestFragment)
+            (parentFragment as MainContestFragment).onAllContest(count)
     }
 
     override fun onResume() {
@@ -110,10 +119,6 @@ class ContestFragment : BaseFragment() {
             }
         }, viewModel.isDeclared)
         binding.rvContest.adapter = contestAdapter
-    }
-
-    fun setListeners(onCountListener: ContestCountListener) {
-        this.listener = onCountListener
     }
 
     private fun openMatchDetailsScreen(contestModel: Contest) {

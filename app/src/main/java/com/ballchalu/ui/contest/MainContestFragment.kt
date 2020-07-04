@@ -19,23 +19,27 @@ import com.ballchalu.ui.contest.all_contest.ContestFragment
 import com.ballchalu.ui.contest.user_contest.UserContestFragment
 import com.ccpp.shared.domain.MatchListing
 import com.ccpp.shared.util.ConstantsBase
+import com.ccpp.shared.util.viewModelProvider
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
 class MainContestFragment : BaseFragment(), ContestCountListener {
+    private var adapter: ViewPagerAdapter? = null
     private var binding: FragmentMainContestBinding? = null
+    private lateinit var viewModel: ContestViewModel
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private var matchListing: MatchListing? = null
     private var isDeclared: Boolean = false
     private var isMatchStarted: Boolean = false
-    private var allContest = 0
-    private var myContest = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainContestBinding.inflate(inflater, container, false)
+        viewModel = viewModelProvider(viewModelFactory)
 
 
         return binding?.root
@@ -47,15 +51,15 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
         setupViewPager()
         initTabLayout()
 
-        onAllContest(allContest)
-        onUserContest(myContest)
+        onAllContest(viewModel.allContest)
+        onUserContest(viewModel.myContest)
 
         binding?.tvMatchName?.text = matchListing?.title
     }
 
     private fun initTabLayout() {
         val headerView =
-            (activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
+            (requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
                 .inflate(R.layout.custom_contest_tab, null, false)
 
         val linearLayoutOne = headerView.findViewById(R.id.ll) as LinearLayout
@@ -64,6 +68,12 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
         binding?.tablayout?.getTabAt(0)?.customView = linearLayoutOne
         binding?.tablayout?.getTabAt(1)?.customView = linearLayout2
 
+    }
+
+    override fun onDestroyView() {
+        adapter?.clear()
+        adapter = null
+        super.onDestroyView()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,16 +92,16 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
 
     private fun setupViewPager() {
         binding?.tablayout?.setupWithViewPager(binding?.viewpager)
-        val adapter = ViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(ContestFragment().also {
-            it.setListeners(this)
+        adapter = ViewPagerAdapter(childFragmentManager)
+        binding?.viewpager?.offscreenPageLimit = 2
+        adapter?.addFragment(ContestFragment().also {
             it.arguments = Bundle().apply {
                 putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
                 putBoolean(ConstantsBase.KEY_DECLARED, isDeclared)
                 putBoolean(ConstantsBase.KEY_IS_MATCH_STARTED, isMatchStarted)
             }
         }, "ONE")
-        adapter.addFragment(UserContestFragment().also {
+        adapter?.addFragment(UserContestFragment().also {
             //            it.setListeners(this)
             it.arguments = Bundle().apply {
                 putSerializable(ConstantsBase.KEY_MATCH_ITEM, matchListing)
@@ -121,18 +131,22 @@ class MainContestFragment : BaseFragment(), ContestCountListener {
             mFragmentTitleList.add(title)
         }
 
+        fun clear() {
+            mFragmentList.clear()
+        }
+
         override fun getPageTitle(position: Int): CharSequence {
             return mFragmentTitleList[position]
         }
     }
 
     override fun onAllContest(count: Int) {
-        allContest = count
+        viewModel.allContest = count
         binding?.tablayout?.get(0)?.findViewById<TextView>(R.id.tvCountAll)?.text = count.toString()
     }
 
     override fun onUserContest(count: Int) {
-        myContest = count
+        viewModel.myContest = count
         binding?.tablayout?.get(0)?.findViewById<TextView>(R.id.tvCountMy)?.text = count.toString()
     }
 }
