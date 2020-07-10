@@ -1,6 +1,10 @@
 package com.ballchalu.ui.profile.edit
 
+import android.Manifest
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +21,13 @@ import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.profile.EditProfileReq
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import timber.log.Timber
+import java.io.File
 import javax.inject.Inject
 
 
@@ -67,8 +78,7 @@ class EditProfileFragment : BaseFragment() {
             openLogoutDialog(it.message)
         })
         binding.ivEditProfile.setOnClickListener {
-//            val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//            startActivityForResult(takePicture, 0)
+            checkPermission()
         }
         binding.tvSave.setOnClickListener {
             if (binding.edtFirstNameValue.text.toString().isEmpty()) {
@@ -101,5 +111,111 @@ class EditProfileFragment : BaseFragment() {
         builder.show()
 
     }
+
+
+    private fun checkPermission() {
+        Dexter.withContext(requireContext())
+            .withPermissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                    report?.let {
+                        if (report.areAllPermissionsGranted()) {
+                            openImageSelection()
+                        }
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: MutableList<PermissionRequest>?,
+                    token: PermissionToken?
+                ) {
+                    // Remember to invoke this method when the custom rationale is closed
+                    // or just by default if you don't want to use any custom rationale.
+                    token?.continuePermissionRequest()
+                }
+            })
+            .withErrorListener {
+                Timber.e(it.name)
+            }
+            .check()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_GALLERY_CODE && resultCode == RESULT_OK && null != data?.data) {
+            data.data?.let { uri ->
+                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+                val cursor = requireActivity().contentResolver.query(
+                    uri,
+                    filePathColumn, null, null, null
+                )
+                cursor?.moveToFirst()
+                cursor?.getColumnIndex(filePathColumn[0])?.let { columnIndex ->
+                    val picturePath = cursor.getString(columnIndex)
+                    loadImage(File(picturePath))
+                }
+                cursor?.close()
+            }
+        } else if (requestCode == REQUEST_CAMERA_CODE) {
+            if (resultCode == RESULT_OK) {
+                data?.extras?.get("data")?.let {
+                    loadImage(it)
+                }
+            } else {
+
+            }
+        }
+    }
+
+    private fun loadImage(path: Any) {
+        Glide.with(requireContext())
+            .load(path)
+            .into(binding.ivProfile)
+    }
+
+
+    private fun openImageSelection() {
+        val values = arrayOf<CharSequence>(
+            GALLERY_PICKER,
+            CAMERA_PICKER
+        )
+        val builder = MaterialAlertDialogBuilder(requireActivity(), R.style.MyMaterialAlertDialog)
+        builder.setTitle("Choose Options")
+        builder.setItems(values) { dialog, item ->
+            if (item == 0)
+                openGalleryIntent()
+            else if (item == 1) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, REQUEST_CAMERA_CODE)
+            }
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+    companion object {
+        const val REQUEST_GALLERY_CODE: Int = 1020
+        const val REQUEST_CAMERA_CODE: Int = 1030
+        const val GALLERY_PICKER = "Gallery"
+        const val CAMERA_PICKER = "Camera"
+        const val REMOVE = "Remove Photo"
+    }
+
+
+    private fun openGalleryIntent() {
+        val takePicture = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        startActivityForResult(takePicture, REQUEST_GALLERY_CODE)
+    }
+
 }
+
 
