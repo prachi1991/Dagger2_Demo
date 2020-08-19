@@ -93,7 +93,7 @@ class EditProfileFragment : BaseFragment() {
                     binding.edtFirstNameValue.text.toString(),
                     binding.edtLastNameValue.text.toString(),
                     binding.edtEmailValue.text.toString(),
-                    sharedPref.userEmail
+                    binding.edtUserNameValue.text.toString()
                 )
                 , binding.ivProfile.drawable
             )

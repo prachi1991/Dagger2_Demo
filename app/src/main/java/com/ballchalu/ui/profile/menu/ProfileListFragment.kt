@@ -58,7 +58,9 @@ class ProfileListFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
-
+            it?.let {
+                binding.tvName.text = "${it.firstName} ${it.lastName}"
+            }
         })
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()

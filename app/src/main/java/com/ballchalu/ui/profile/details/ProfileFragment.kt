@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,7 +13,6 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentProfileBinding
 import com.ballchalu.utils.BlurBuilder
-import com.ballchalu.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -66,6 +64,7 @@ class ProfileFragment : BaseFragment() {
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
             it?.let {
                 binding.llBody.isVisible = true
+                binding.collapsingToolbar.title = "${it.firstName} ${it.lastName}"
                 binding.tvEmailValue.text = it.email.toString()
                 binding.tvBcCoinValue.text = it.bc_coins.toString()
                 binding.tvAvailCoinValue.text = it.available_coins.toString()

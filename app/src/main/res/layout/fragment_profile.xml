@@ -32,8 +32,7 @@
                 app:elevation="@dimen/_5sdp"
                 app:expandedTitleMarginBottom="@dimen/_95sdp"
                 app:expandedTitleTextAppearance="@style/ExpandedToolbarTitleStyle"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                app:title="John smith">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
 
                 <androidx.appcompat.widget.AppCompatImageView
