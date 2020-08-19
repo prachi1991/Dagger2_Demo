@@ -34,7 +34,7 @@ class ChangePasswordFragment : BaseFragment() {
     ): View? {
         binding = FragmentChangePasswordBinding.inflate(inflater).apply {
             lifecycleOwner = this@ChangePasswordFragment
-            tvEmailValue.text = sharedPref.userName
+            tvEmailValue.text = sharedPref.userEmail
         }
 
         return binding.root
@@ -80,7 +80,7 @@ class ChangePasswordFragment : BaseFragment() {
         ChangePasswordReq(
             binding.edtNewPass.text.toString(),
             binding.edtOldPass.text.toString(),
-            sharedPref.userName
+            sharedPref.userEmail
         ).let {
             hideSoftKeyBoard()
             viewModel.callChangePasswordAsync(it)

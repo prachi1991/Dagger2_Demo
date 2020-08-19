@@ -64,7 +64,7 @@
                     android:layout_gravity="bottom"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:src="@drawable/test_profile"
+                    tools:src="@drawable/test_profile"
                     app:civ_border_color="@color/color_text"
                     app:civ_border_width="2dp" />
 

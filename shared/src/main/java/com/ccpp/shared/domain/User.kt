@@ -1,7 +1,10 @@
 package com.ccpp.shared.domain
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
 
     @SerializedName("password")
@@ -21,4 +24,4 @@ data class User(
 
     @SerializedName("confirm_password")
     val confirmPassword: String? = null
-)
+) : Parcelable

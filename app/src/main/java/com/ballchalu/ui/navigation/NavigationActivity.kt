@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -21,6 +22,7 @@ import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityNavigationBinding
 import com.ballchalu.ui.login.container.LoginActivity
 import com.ballchalu.utils.ThemeHelper
+import com.ballchalu.utils.Utils
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.contest.UserContest
@@ -28,6 +30,7 @@ import com.ccpp.shared.domain.user.UserData
 import com.ccpp.shared.rxjava.RxBus
 import com.ccpp.shared.rxjava.RxEvent
 import com.ccpp.shared.util.ConstantsBase
+import com.ccpp.shared.util.loadImage
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.disposables.Disposable
@@ -65,6 +68,9 @@ class NavigationActivity : BaseActivity() {
             when (event) {
                 ConstantsBase.TOKEN_EXPIRED -> viewModel.callLogout()
                 is RxEvent.BcCoin -> updateContestCoin(event.userContest)
+                is RxEvent.UpdateProfile -> {
+                    loadImage(event.bitmap, binding.ibProfile)
+                }
             }
         }
     }
@@ -160,6 +166,16 @@ class NavigationActivity : BaseActivity() {
             val headerView = binding.navView.getHeaderView(0)
             headerView.findViewById<TextView>(R.id.tvNavEmail).text = it.user_name
             headerView.findViewById<TextView>(R.id.tvMoneyValue).text = it.bc_coins?.toString()
+            if (it.profileUrl.isNullOrEmpty()) {
+                val image = Utils.getDrawableToBitmap(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.ic_user
+                    )!!
+                )
+                loadImage(image, binding.ibProfile)
+            } else
+                loadImage(it.profileUrl!!, binding.ibProfile)
         }
     }
 

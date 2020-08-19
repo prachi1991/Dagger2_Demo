@@ -54,7 +54,7 @@ class BcCoinsViewModel @Inject constructor(
     }
 
     private fun handleSuccess(data: UserRes) {
-        sharedPref.userName = data.user?.email ?: ""
+        sharedPref.userEmail = data.user?.email ?: ""
         _userDetails.postValue(Event(data.user))
     }
 

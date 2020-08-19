@@ -1,7 +1,5 @@
 package com.ballchalu.ui.bc_coins
 
-import android.app.AlertDialog
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +41,7 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
         viewModel = viewModelProvider(viewModelFactory)
         binding = FragmentBcCoinsBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = this@BcCoinsFragment
-            tvEmail.text = sharedPreferenceStorage.userName
+            tvEmail.text = sharedPreferenceStorage.userEmail
         }
 
         return binding.root

@@ -1,10 +1,14 @@
 package com.ballchalu.ui.profile.details
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
+import com.ballchalu.utils.Utils
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
@@ -20,6 +24,7 @@ import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
     private val sharePref: SharedPreferenceStorage,
+    private val context: Context,
     private val repository: LoginRepository
 ) : BaseViewModel() {
 
@@ -38,23 +43,31 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun handleSuccess(data: UserRes) {
-        sharePref.userName = data.user?.email ?: ""
+        sharePref.userEmail = data.user?.email ?: ""
         _userDetails.postValue(Event(data.user))
+        if (data.user?.profileUrl.isNullOrEmpty()) {
+            val image = Utils.getDrawableToBitmap(
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.ic_user
+                )!!
+            )
+            _loadProfile.postValue(Event(image))
+        } else
+            data.user?.profileUrl?.let { loadProfile(it) }
+    }
+
+    private fun loadProfile(profileUrl: String) {
+        try {
+            val url = URL(profileUrl)
+            val image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            _loadProfile.postValue(Event(image))
+        } catch (e: IOException) {
+            Timber.e(e)
+        }
     }
 
     private val _loadProfile = MutableLiveData<Event<Bitmap>>()
     var loadProfile: MutableLiveData<Event<Bitmap>> = _loadProfile
 
-    fun loadProfileImage() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val url =
-                    URL("https://i.pinimg.com/564x/2b/ee/1a/2bee1ac1d0cbcdeb429151feb4627ea3.jpg")
-                val image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                _loadProfile.postValue(Event(image))
-            } catch (e: IOException) {
-                Timber.e(e)
-            }
-        }
-    }
 }

@@ -61,9 +61,8 @@ class EditProfileFragment : BaseFragment() {
             binding.edtEmailValue.setText(it?.email.toString())
             binding.edtFirstNameValue.setText(it?.firstName.toString())
             binding.edtLastNameValue.setText(it?.lastName.toString())
-            Glide.with(requireContext())
-                .load(it?.profileUrl)
-                .into(binding.ivProfile)
+            binding.edtUserNameValue.setText(it?.user_name.toString())
+//            it?.profileUrl?.let { it1 -> loadImage(it1) }
         })
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
@@ -92,8 +91,11 @@ class EditProfileFragment : BaseFragment() {
             viewModel.saveDetails(
                 EditProfileReq(
                     binding.edtFirstNameValue.text.toString(),
-                    binding.edtLastNameValue.text.toString()
+                    binding.edtLastNameValue.text.toString(),
+                    binding.edtEmailValue.text.toString(),
+                    sharedPref.userEmail
                 )
+                , binding.ivProfile.drawable
             )
         }
         viewModel.callUserDetails()

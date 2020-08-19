@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.*
+import com.bumptech.glide.Glide
 import com.ccpp.shared.BuildConfig
 import timber.log.Timber
 
@@ -184,4 +186,10 @@ fun exceptionInDebug(t: Throwable) {
     } else {
         Timber.e(t)
     }
+}
+
+fun Context.loadImage(path: Any, imageView: ImageView) {
+    Glide.with(this)
+        .load(path)
+        .into(imageView)
 }

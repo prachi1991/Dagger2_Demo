@@ -10,7 +10,11 @@ data class EditProfileReq(
     @SerializedName("first_name")
     var firstName: String?,
     @SerializedName("last_name")
-    var LastName: String?,
-    @SerializedName("auth_token")
-    var auth_token: String? = ""
+    var lastName: String?,
+    @SerializedName("email")
+    var email: String?,
+    @SerializedName("user_name")
+    var userName: String?,
+    @SerializedName("image")
+    var image: String? = null
 ) : Parcelable
