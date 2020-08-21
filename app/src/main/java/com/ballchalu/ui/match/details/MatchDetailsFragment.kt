@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
@@ -71,6 +72,8 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
             tvContest.text = viewModel.title
             tvUserCount.text = resources.getString(R.string.d_users, liveUser)
         }
+        binding.llMyBetContainer.isVisible = false
+
         if (viewModel.isDeclared)
             setWinnerFragment()
         registerReceiver()
@@ -80,11 +83,12 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
     private fun setWinnerFragment() {
         childFragmentManager.run {
+            binding.llMyBetContainer.isVisible = true
             if (findFragmentByTag(WinnersFragment::class.java.simpleName) == null) {
                 beginTransaction().remove(viewModel.myBetFragment)
                     .commitAllowingStateLoss()
                 beginTransaction()
-                    .add(
+                    .replace(
                         R.id.llMyBetContainer,
                         viewModel.winnersFragment,
                         WinnersFragment::class.java.simpleName
@@ -360,21 +364,16 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
 
     private fun initListeners() {
-
         binding.tvMyBets.setOnClickListener {
             childFragmentManager.run {
-                if (findFragmentByTag(MyBetsFragment::class.java.simpleName) == null) {
-                    beginTransaction().remove(viewModel.winnersFragment)
-                        .commitAllowingStateLoss()
-                    beginTransaction()
-                        .add(
-                            R.id.llMyBetContainer,
-                            viewModel.myBetFragment,
-                            MyBetsFragment::class.java.simpleName
-                        )
-                        .commitAllowingStateLoss()
-                    binding.llMatchContainer.visibility = View.GONE
-                }
+                binding.llMyBetContainer.isVisible = true
+                beginTransaction().remove(viewModel.winnersFragment).commitAllowingStateLoss()
+                beginTransaction().replace(
+                    R.id.llMyBetContainer,
+                    viewModel.myBetFragment,
+                    MyBetsFragment::class.java.simpleName
+                ).commitAllowingStateLoss()
+                binding.llMatchContainer.visibility = View.GONE
             }
         }
         if (!viewModel.isDeclared)
@@ -552,7 +551,11 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
                         beginTransaction().remove(viewModel.myBetFragment).commitAllowingStateLoss()
                         if (viewModel.isDeclared)
                             setWinnerFragment()
-                        else binding.llMatchContainer.visibility = View.VISIBLE
+                        else {
+                            binding.llMatchContainer.visibility = View.VISIBLE
+                            binding.llMyBetContainer.isVisible = false
+                        }
+
 
                     }
                 } else findNavController().navigateUp()
