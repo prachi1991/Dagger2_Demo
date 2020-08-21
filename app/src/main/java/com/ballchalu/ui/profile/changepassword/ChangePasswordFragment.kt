@@ -1,6 +1,8 @@
 package com.ballchalu.ui.profile.changepassword
 
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +26,7 @@ class ChangePasswordFragment : BaseFragment() {
 
     @Inject
     lateinit var sharedPref: SharedPreferenceStorage
-
+    private var  mIsShowpass:Boolean=false
 
     private lateinit var viewModel: ChangePasswordViewModel
 
@@ -57,6 +59,14 @@ class ChangePasswordFragment : BaseFragment() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
             binding.btnChangePassword.isEnabled = !it
         })
+        binding.imgShowHideOldPassword.setOnClickListener {
+            mIsShowpass=!mIsShowpass
+            showOldPassword(mIsShowpass)
+        }
+        binding.imgShowHideNewPassword.setOnClickListener {
+            mIsShowpass=!mIsShowpass
+            showNewPassword(mIsShowpass)
+        }
     }
 
     private fun validate() {
@@ -98,6 +108,32 @@ class ChangePasswordFragment : BaseFragment() {
         builder.setCancelable(false)
         builder.show()
 
+
+    }
+    fun showOldPassword(isShow:Boolean){
+        if(isShow){
+            binding.edtOldPass.transformationMethod= HideReturnsTransformationMethod.getInstance()
+            binding.imgShowHideOldPassword.setImageResource(R.drawable.ic_hideeye)
+        }
+        else{
+            binding.edtOldPass.transformationMethod= PasswordTransformationMethod.getInstance()
+            binding.imgShowHideOldPassword.setImageResource(R.drawable.ic_eye)
+        }
+        val text = binding.edtOldPass.text
+        binding.edtOldPass.setSelection(text.toString().length)
+
+    }
+    fun showNewPassword(isShow:Boolean){
+        if(isShow){
+            binding.edtNewPass.transformationMethod= HideReturnsTransformationMethod.getInstance()
+            binding.imgShowHideNewPassword.setImageResource(R.drawable.ic_hideeye)
+        }
+        else{
+            binding.edtNewPass.transformationMethod= PasswordTransformationMethod.getInstance()
+            binding.imgShowHideNewPassword.setImageResource(R.drawable.ic_eye)
+        }
+        val text = binding.edtNewPass.text
+        binding.edtNewPass.setSelection(text.toString().length)
 
     }
 

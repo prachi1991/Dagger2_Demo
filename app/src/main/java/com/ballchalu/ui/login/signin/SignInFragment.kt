@@ -2,6 +2,8 @@ package com.ballchalu.ui.login.signin
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +22,7 @@ import javax.inject.Inject
 class SignInFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
+private var  mIsShowpass:Boolean=false
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: SignInViewModel
 
@@ -36,7 +38,19 @@ class SignInFragment : BaseFragment() {
 
         return binding.root
     }
+fun showPassword(isShow:Boolean){
+    if(isShow){
+        binding.tvPasswordValue.transformationMethod=HideReturnsTransformationMethod.getInstance()
+        binding.imgShowHidePassword.setImageResource(R.drawable.ic_hideeye)
+    }
+    else{
+        binding.tvPasswordValue.transformationMethod=PasswordTransformationMethod.getInstance()
+        binding.imgShowHidePassword.setImageResource(R.drawable.ic_eye)
+    }
+    val text = binding.tvPasswordValue.text
+    binding.tvPasswordValue.setSelection(text.toString().length)
 
+}
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -81,7 +95,10 @@ class SignInFragment : BaseFragment() {
         binding.tvForgetPassword.setOnClickListener {
             findNavController().navigate(R.id.nav_forgetPasswordFragment)
         }
-
+binding.imgShowHidePassword.setOnClickListener {
+    mIsShowpass=!mIsShowpass
+    showPassword(mIsShowpass)
+}
 
     }
 

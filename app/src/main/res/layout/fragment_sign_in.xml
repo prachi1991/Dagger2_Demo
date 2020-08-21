@@ -25,10 +25,10 @@
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@android:color/transparent"
-                android:text="@string/username"
                 android:inputType="textEmailAddress"
                 android:paddingTop="@dimen/_5sdp"
                 android:selectAllOnFocus="true"
+                android:text="@string/username"
                 android:textColor="@color/login_blue_text"
                 android:textSize="@dimen/_10ssp" />
 
@@ -63,26 +63,47 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@android:color/transparent"
-                android:text="@string/password"
                 android:paddingTop="@dimen/_5sdp"
                 android:selectAllOnFocus="true"
+                android:text="@string/password"
                 android:textColor="@color/login_blue_text"
                 android:textSize="@dimen/_10ssp" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/tvPasswordValue"
-                fontPath="fonts/Play-Bold.ttf"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:background="@android:color/transparent"
-                android:inputType="textPassword"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                android:selectAllOnFocus="true"
-                android:textColor="@color/login_edit_text_color"
-                android:textSize="@dimen/_11ssp" />
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/tvPasswordValue"
+                    fontPath="fonts/Play-Bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight=".9"
+                    android:background="@android:color/transparent"
+                    android:inputType="textPassword"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:selectAllOnFocus="true"
+                    android:textColor="@color/login_edit_text_color"
+                    android:textSize="@dimen/_11ssp" />
+
+                <ImageView
+                    android:id="@+id/img_show_hide_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight=".1"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:src="@drawable/ic_eye"
+                    android:paddingBottom="@dimen/_3sdp"
+                    />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -113,8 +134,8 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    fontPath="fonts/Play-Bold.ttf"
                     android:id="@+id/tvForgetPassword"
+                    fontPath="fonts/Play-Bold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
