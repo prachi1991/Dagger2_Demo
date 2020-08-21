@@ -85,6 +85,10 @@ class ContestFragment : BaseFragment() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
+        viewModel.failure.observe(viewLifecycleOwner, EventObserver {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+        })
+
     }
 
     private fun onUserContest(count: Int) {

@@ -2,8 +2,10 @@ package com.ccpp.shared.core.base
 
 import com.ccpp.shared.core.exception.NotFoundException
 import com.ccpp.shared.core.result.Results
+import com.ccpp.shared.domain.exception.ErrorMessage
 import com.ccpp.shared.rxjava.RxBus
 import com.ccpp.shared.util.ConstantsBase
+import com.google.gson.Gson
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
@@ -20,16 +22,20 @@ open class BaseRepository @Inject constructor() {
             Results.Success(response.body()!!)
         } else if (response.code() == ConstantsBase.INTERNAL_ERROR) {
             Results.Error(IOException("Internal Server Error"))
-        } else if (response.code() == ConstantsBase.NOT_FOUND && response.errorBody() != null) {
-            Results.Error(
-                NotFoundException(
-                    ConstantsBase.NOT_FOUND,
-                    response.errorBody()?.toString()
-                )
-            )
         } else if (response.code() == ConstantsBase.TOKEN_EXPIRED) {
             RxBus.publish(ConstantsBase.TOKEN_EXPIRED)
             Results.Error(IOException("Session Expired"))
+        } else if (response.errorBody() != null) {
+            if (response.code() == ConstantsBase.NOT_FOUND)
+                Results.Error(
+                    NotFoundException(
+                        ConstantsBase.NOT_FOUND,
+                        response.errorBody()?.toString()
+                    )
+                )
+            val message =
+                Gson().fromJson(response.errorBody()?.charStream(), ErrorMessage::class.java)
+            Results.Error(IOException(message?.errors ?: "Error"), response.code())
         } else if (response.errorBody() != null) {
             Results.Error(IOException(response.errorBody()?.toString()))
         } else {
