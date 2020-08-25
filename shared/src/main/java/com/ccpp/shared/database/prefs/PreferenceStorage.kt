@@ -18,6 +18,7 @@ import kotlin.reflect.KProperty
 interface PreferenceStorage {
     var token: String?
     var userName: String?
+    var userEmail: String?
     var theme: String?
 
 }
@@ -36,22 +37,17 @@ class SharedPreferenceStorage @Inject constructor(context: Context) :
         PREF_TOKEN,
         ""
     )
-    override var userName by StringPreference(
-        prefs,
-        PREF_USERNAME,
-        ""
-    )
+    override var userEmail by StringPreference(prefs, PREF_USERNAME, "")
 
-    override var theme by StringPreference(
-        prefs,
-        PREF_THEME,
-        ConstantsBase.THEME_DARK_MODE
-    )
+    override var userName by StringPreference(prefs, PREF_USER_EMAIL, "")
+
+    override var theme by StringPreference(prefs, PREF_THEME, ConstantsBase.THEME_DARK_MODE)
 
     companion object {
         const val PREFS_NAME = "SharePref"
         const val PREF_TOKEN = "pref_token"
         const val PREF_USERNAME = "pref_username"
+        const val PREF_USER_EMAIL = "pref_user_email"
         const val PREF_THEME = "pref_theme"
     }
 

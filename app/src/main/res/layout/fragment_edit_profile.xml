@@ -21,6 +21,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
+                    android:background="@color/color_window_background"
                     android:layout_height="@dimen/_160sdp">
 
                     <com.google.android.material.appbar.MaterialToolbar
@@ -37,7 +38,7 @@
                         android:layout_height="@dimen/_120sdp"
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/_15sdp"
-                        android:src="@drawable/test_profile"
+                        android:src="@drawable/ic_user"
                         app:civ_border_color="@color/color_text"
                         app:civ_border_width="2dp" />
 
@@ -110,6 +111,33 @@
                         android:gravity="center|start"
                         android:imeOptions="actionNext"
                         android:inputType="textPersonName"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:paddingBottom="@dimen/_5sdp"
+                        android:textColor="@color/color_text"
+                        android:textColorHint="@color/text_color_grey"
+                        android:textSize="@dimen/_12ssp" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvuserNameLabel"
+                        fontPath="fonts/Play-Bold.ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center|start"
+                        android:text="@string/username"
+                        android:textColor="@color/profile_header_text"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edtUserNameValue"
+                        fontPath="fonts/Play-Bold.ttf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:gravity="center|start"
+                        android:hint="@string/enter_username"
+                        android:imeOptions="actionNext"
                         android:paddingTop="@dimen/_5sdp"
                         android:paddingBottom="@dimen/_5sdp"
                         android:textColor="@color/color_text"

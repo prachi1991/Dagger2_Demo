@@ -9,7 +9,7 @@ import com.ccpp.shared.core.result.Results.Success
 sealed class Results<out R> {
 
     data class Success<out T>(val data: T) : Results<T>()
-    data class Error(val exception: Exception) : Results<Nothing>()
+    data class Error(val exception: Exception, val code: Int = 0) : Results<Nothing>()
     object Loading : Results<Nothing>()
 
     override fun toString(): String {

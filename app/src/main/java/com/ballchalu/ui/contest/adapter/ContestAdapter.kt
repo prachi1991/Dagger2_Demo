@@ -69,7 +69,6 @@ class ContestAdapter(
 
                     tvPlayNow.setOnClickListener {
                         if (!isMyContest && tvPlayNow.text == ConstantsBase.buy_now_key) {
-                            tvPlayNow.visibility = View.GONE
                             contest?.let {
                                 onItemClickListener?.onBuyNowClicked(contest)
                             }

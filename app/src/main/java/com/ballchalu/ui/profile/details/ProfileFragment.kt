@@ -2,7 +2,6 @@ package com.ballchalu.ui.profile.details
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +18,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.rxjava.RxBus
+import com.ccpp.shared.rxjava.RxEvent
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import timber.log.Timber
 import java.lang.Math.abs
 import javax.inject.Inject
 import kotlin.math.roundToInt
@@ -48,7 +47,7 @@ class ProfileFragment : BaseFragment() {
         viewModel = viewModelProvider(viewModelFactory)
         binding = FragmentProfileBinding.inflate(inflater).apply {
             lifecycleOwner = this@ProfileFragment
-            tvEmailValue.text = sharedPref.userName
+            tvEmailValue.text = sharedPref.userEmail
         }
 
         return binding.root
@@ -65,6 +64,7 @@ class ProfileFragment : BaseFragment() {
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
             it?.let {
                 binding.llBody.isVisible = true
+                binding.collapsingToolbar.title = "${it.firstName} ${it.lastName}"
                 binding.tvEmailValue.text = it.email.toString()
                 binding.tvBcCoinValue.text = it.bc_coins.toString()
                 binding.tvAvailCoinValue.text = it.available_coins.toString()
@@ -80,18 +80,18 @@ class ProfileFragment : BaseFragment() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
         viewModel.callUserDetails()
-        viewModel.loadProfile.observe(viewLifecycleOwner, EventObserver {
-            val resultBmp: Bitmap = BlurBuilder.blur(requireContext(), it)
+        viewModel.loadProfile.observe(viewLifecycleOwner, EventObserver { image ->
+            val resultBmp: Bitmap = BlurBuilder.blur(requireContext(), image)
             Glide.with(requireContext())
                 .load(resultBmp)
                 .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
                 .into(binding.ivProfileBlur)
 
             Glide.with(requireContext())
-                .load(it)
+                .load(image)
                 .into(binding.ivProfile)
+            RxBus.publish(RxEvent.UpdateProfile(bitmap = image))
         })
-        viewModel.loadProfileImage()
 
         initAnimation()
     }

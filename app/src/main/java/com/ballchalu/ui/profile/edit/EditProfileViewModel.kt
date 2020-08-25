@@ -1,8 +1,10 @@
 package com.ballchalu.ui.profile.edit
 
+import android.graphics.drawable.Drawable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ballchalu.base.BaseViewModel
+import com.ballchalu.utils.Utils
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.Results
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
@@ -36,12 +38,13 @@ class EditProfileViewModel @Inject constructor(
     }
 
     private fun handleSuccess(data: UserRes) {
-        sharePref.userName = data.user?.email ?: ""
+        sharePref.userEmail = data.user?.email ?: ""
         _userDetails.postValue(Event(data.user))
     }
 
-    fun saveDetails(editProfileReq: EditProfileReq) {
-        editProfileReq.auth_token = sharePref.token
+    fun saveDetails(editProfileReq: EditProfileReq, drawable: Drawable) {
+        val image = Utils.getFileToByte(drawable)
+        editProfileReq.image = image
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = repository.callSaveProfile(editProfileReq)) {

@@ -79,7 +79,7 @@ class ContestViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = contestRepository.createUserMatchContest(Id)) {
                 is Results.Success -> handleCreateContestSuccess(result.data)
-                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+                is Results.Error -> handleFailure(result.exception)
             }
             loading.postValue(Event(false))
         }
@@ -87,6 +87,10 @@ class ContestViewModel @Inject constructor(
 
     private fun handleCreateContestSuccess(result: CreateContestRes) {
         _createContestResult.postValue(Event(result))
+    }
+
+    private fun handleFailure(result: Exception) {
+        failure.postValue(Event(result.message.toString()))
     }
 
     /*------------------------------------------------------------------End Create Match Contest--------------------------------------------------------------*/

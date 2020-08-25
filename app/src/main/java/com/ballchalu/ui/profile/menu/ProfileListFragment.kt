@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -16,11 +17,14 @@ import com.ballchalu.databinding.FragmentProfileListBinding
 import com.ballchalu.ui.login.container.LoginActivity
 import com.ballchalu.utils.BlurBuilder
 import com.ballchalu.utils.ThemeHelper
+import com.ballchalu.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ccpp.shared.rxjava.RxBus
+import com.ccpp.shared.rxjava.RxEvent
 import com.ccpp.shared.util.ConstantsBase
 import com.ccpp.shared.util.viewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -54,7 +58,9 @@ class ProfileListFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
-
+            it?.let {
+                binding.tvName.text = "${it.firstName} ${it.lastName}"
+            }
         })
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
@@ -86,18 +92,19 @@ class ProfileListFragment : BaseFragment() {
             openLogoutDialog()
         }
 
-        viewModel.loadProfile.observe(viewLifecycleOwner, EventObserver {
-            val resultBmp: Bitmap = BlurBuilder.blur(requireContext(), it)
+        viewModel.loadProfile.observe(viewLifecycleOwner, EventObserver { image ->
+            val resultBmp: Bitmap = BlurBuilder.blur(requireContext(), image)
             Glide.with(requireContext())
                 .load(resultBmp)
                 .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
                 .into(binding.ivProfileBlur)
 
             Glide.with(requireContext())
-                .load(it)
+                .load(image)
+                .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.ic_user))
                 .into(binding.ivProfile)
+            RxBus.publish(RxEvent.UpdateProfile(bitmap = image))
         })
-        viewModel.loadProfileImage()
     }
 
     private fun openThemeSelection() {
