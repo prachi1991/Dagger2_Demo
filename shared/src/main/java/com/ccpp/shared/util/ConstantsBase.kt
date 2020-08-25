@@ -37,7 +37,7 @@ object ConstantsBase {
     const val suspend = "SUSPEND"
     const val close = "CLOSE"
     const val KEY_LIVE_USER = "liveUser"
-
+    const val ALREADY_PARTICIPATED = "Already Participated"
     const val LAY = "lay"
     const val BACK = "back"
 
@@ -112,6 +112,7 @@ object ConstantsBase {
     const val THEME_LIGHT_MODE = "light"
     const val THEME_DARK_MODE = "dark"
     const val THEME_DEFAULT_MODE = "default"
+
     //    _____________THEME______________________________
     const val THEME_LIGHT = "Light"
     const val THEME_DARK = "Dark"

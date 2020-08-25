@@ -24,7 +24,7 @@
     <color name="color_primary2">#1a1d27</color>
     <color name="menu_header_background">#272a31</color>
     <color name="color_drawer_sub_comp">#343743</color>
-
+    <color name="orange">#FF9800</color>
     <color name="background_card">#fff</color>
     <color name="green">#1d7116</color>
     <color name="text_light_green">#a0de4e</color>
