@@ -99,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_weight=".1"
+                    android:tint="@color/color_eye"
                     android:paddingTop="@dimen/_5sdp"
                     android:src="@drawable/ic_eye"
                     android:paddingBottom="@dimen/_3sdp"

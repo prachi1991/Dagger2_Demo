@@ -15,6 +15,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentSignUpBinding
 import com.ballchalu.ui.navigation.NavigationActivity
+import com.ballchalu.utils.Utils
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.domain.SignUpReq
 import com.ccpp.shared.domain.User
@@ -116,40 +117,16 @@ class SignUpFragment : BaseFragment() {
         }
         binding.imgShowHidePassword.setOnClickListener {
             mIsShowpass=!mIsShowpass
-            showPassword(mIsShowpass)
+            Utils.showPassword(binding.tvPasswordValue,binding.imgShowHidePassword,mIsShowpass)
         }
         binding.imgShowHideConfirmPassword.setOnClickListener {
             mIsShowpass=!mIsShowpass
-            showConfirmPassword(mIsShowpass)
+            Utils.showPassword(binding.edtConfirmPasswordValue,binding.imgShowHideConfirmPassword,mIsShowpass)
         }
 
     }
-    fun showConfirmPassword(isShow:Boolean){
-        if(isShow){
-            binding.edtConfirmPasswordValue.transformationMethod= HideReturnsTransformationMethod.getInstance()
-            binding.imgShowHideConfirmPassword.setImageResource(R.drawable.ic_hideeye)
-        }
-        else{
-            binding.edtConfirmPasswordValue.transformationMethod= PasswordTransformationMethod.getInstance()
-            binding.imgShowHideConfirmPassword.setImageResource(R.drawable.ic_eye)
-        }
-        val text = binding.edtConfirmPasswordValue.text
-        binding.edtConfirmPasswordValue.setSelection(text.toString().length)
 
-    }
-    fun showPassword(isShow:Boolean){
-        if(isShow){
-            binding.tvPasswordValue.transformationMethod= HideReturnsTransformationMethod.getInstance()
-            binding.imgShowHidePassword.setImageResource(R.drawable.ic_hideeye)
-        }
-        else{
-            binding.tvPasswordValue.transformationMethod= PasswordTransformationMethod.getInstance()
-            binding.imgShowHidePassword.setImageResource(R.drawable.ic_eye)
-        }
-        val text = binding.tvPasswordValue.text
-        binding.tvPasswordValue.setSelection(text.toString().length)
 
-    }
     private fun updateUiWithUser(status: String?) {
         Toast.makeText(requireContext(), "$status", Toast.LENGTH_LONG).show()
     }

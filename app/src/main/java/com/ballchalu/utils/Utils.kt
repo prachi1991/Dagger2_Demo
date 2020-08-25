@@ -1,10 +1,14 @@
 package com.ballchalu.utils
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Base64
+import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.graphics.drawable.toBitmap
+import com.ballchalu.R
 import java.io.ByteArrayOutputStream
 
 
@@ -29,5 +33,20 @@ object Utils {
             null
         }
     }
+    fun showPassword(
+        passwordView: AppCompatEditText,
+        eyeView: ImageView,
+        isShow: Boolean){
+        if(isShow){
+            passwordView.transformationMethod= HideReturnsTransformationMethod.getInstance()
+            eyeView.setImageResource(R.drawable.ic_hideeye)
+        }
+        else{
+            passwordView.transformationMethod= PasswordTransformationMethod.getInstance()
+            eyeView.setImageResource(R.drawable.ic_eye)
+        }
+        val text = passwordView.text
+        passwordView.setSelection(text.toString().length)
 
+    }
 }
