@@ -47,6 +47,7 @@
                     android:layout_alignParentEnd="true"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/_10sdp"
+                    android:background="@drawable/background_round_green_right"
                     android:paddingRight="@dimen/_10sdp"
                     android:text="@string/play_now"
                     android:textColor="@color/white"

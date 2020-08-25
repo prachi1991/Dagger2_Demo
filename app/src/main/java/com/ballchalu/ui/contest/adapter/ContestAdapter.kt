@@ -60,17 +60,15 @@ class ContestAdapter(
                 this.contest = contest
                 if (declared == false) {
                     if (contest?.isParticipated == false && !isMyContest) {
-                        tvPlayNow.isEnabled=true
                         tvPlayNow.visibility = View.VISIBLE
                         tvPlayNow.text = ConstantsBase.buy_now_key
                         tvPlayNow.setBackgroundResource(R.drawable.background_round_green_right)
                     } else if (isMyContest) {
-                        tvPlayNow.isEnabled=true
+
                         tvPlayNow.visibility = View.VISIBLE
                         tvPlayNow.setBackgroundResource(R.drawable.background_round_green_right)
                         tvPlayNow.text = ConstantsBase.play_now_key
                     } else {
-                        if(tvPlayNow.isEnabled)tvPlayNow.isEnabled=false
                         tvPlayNow.text=ConstantsBase.ALREADY_PARTICIPATED
                         tvPlayNow.setBackgroundResource(R.drawable.background_round_orange_right)
                     }
