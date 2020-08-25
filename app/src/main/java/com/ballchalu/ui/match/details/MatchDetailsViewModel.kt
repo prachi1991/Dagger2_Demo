@@ -40,6 +40,7 @@ class MatchDetailsViewModel @Inject constructor(
     private val context: Context
 ) :
     BaseViewModel() {
+    var isMyBet: Boolean = false
     private var marketType: String? = ConstantsBase.MATCH_WINNER
     var betStatus: String? = null
 

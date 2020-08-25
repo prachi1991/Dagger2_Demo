@@ -364,18 +364,7 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
 
 
     private fun initListeners() {
-        binding.tvMyBets.setOnClickListener {
-            childFragmentManager.run {
-                binding.llMyBetContainer.isVisible = true
-                beginTransaction().remove(viewModel.winnersFragment).commitAllowingStateLoss()
-                beginTransaction().replace(
-                    R.id.llMyBetContainer,
-                    viewModel.myBetFragment,
-                    MyBetsFragment::class.java.simpleName
-                ).commitAllowingStateLoss()
-                binding.llMatchContainer.visibility = View.GONE
-            }
-        }
+        binding.tvMyBets.setOnClickListener { showMyBet() }
         if (!viewModel.isDeclared)
             binding.tvContest.setOnClickListener {
                 childFragmentManager.run {
@@ -383,8 +372,25 @@ class MatchDetailsFragment : BaseFragment(), CreateBetFragment.OnBetResponseSucc
                     beginTransaction().remove(viewModel.winnersFragment).commitAllowingStateLoss()
                 }
                 binding.llMatchContainer.visibility = View.VISIBLE
-
+                viewModel.isMyBet = false
             }
+        if (viewModel.isMyBet) {
+            showMyBet()
+        }
+    }
+
+    private fun showMyBet() {
+        childFragmentManager.run {
+            binding.llMyBetContainer.isVisible = true
+            beginTransaction().remove(viewModel.winnersFragment).commitAllowingStateLoss()
+            beginTransaction().replace(
+                R.id.llMyBetContainer,
+                viewModel.myBetFragment,
+                MyBetsFragment::class.java.simpleName
+            ).commitAllowingStateLoss()
+            binding.llMatchContainer.visibility = View.GONE
+            viewModel.isMyBet = true
+        }
     }
 
     private fun setEvenOddData(market: Market) {
