@@ -62,7 +62,7 @@ class EditProfileFragment : BaseFragment() {
             binding.edtFirstNameValue.setText(it?.firstName.toString())
             binding.edtLastNameValue.setText(it?.lastName.toString())
             binding.edtUserNameValue.setText(it?.user_name.toString())
-//            it?.profileUrl?.let { it1 -> loadImage(it1) }
+            it?.profileUrl?.let { it1 -> loadImage(it1) }
         })
         viewModel.failure.observe(viewLifecycleOwner, EventObserver {
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
@@ -149,17 +149,7 @@ class EditProfileFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_GALLERY_CODE && resultCode == RESULT_OK && null != data?.data) {
             data.data?.let { uri ->
-                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-                val cursor = requireActivity().contentResolver.query(
-                    uri,
-                    filePathColumn, null, null, null
-                )
-                cursor?.moveToFirst()
-                cursor?.getColumnIndex(filePathColumn[0])?.let { columnIndex ->
-                    val picturePath = cursor.getString(columnIndex)
-                    loadImage(File(picturePath))
-                }
-                cursor?.close()
+                loadImage(uri)
             }
         } else if (requestCode == REQUEST_CAMERA_CODE) {
             if (resultCode == RESULT_OK) {

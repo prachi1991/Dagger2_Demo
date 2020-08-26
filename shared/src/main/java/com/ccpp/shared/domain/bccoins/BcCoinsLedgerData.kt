@@ -11,12 +11,15 @@ data class BcCoinsLedgerData(
     val created_at: String? = null,
     val entity_id: Int? = 0,
     val entity_type: String? = null,
+    val type: String? = null,
     val id: Int? = 0,
     val note: String? = null,
     val updated_at: String? = null,
     val user_id: Int? = 0
 ) : Parcelable {
     fun getDate() = created_at?.let { StringHelpers.parseFullData(it) }
+
+    fun getContestName() = type ?: ""
 
     fun getCredit(): String = if (amount ?: 0.0 > 0) amount.toString() else ""
     fun getDebit(): String = if (amount ?: 0.0 < 0) amount.toString() else ""
