@@ -97,6 +97,7 @@
     <string name="note_s">Note - %s</string>
     <string name="date_s">Date - %s</string>
     <string name="reference_s">Reference - %s</string>
+    <string name="contest_s">Contest Name - %s</string>
     <string name="debit_s">Debit - %s</string>
     <string name="credit_s">Credit - %s</string>
     <string name="balance_s">Balance - %s</string>

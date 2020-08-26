@@ -47,10 +47,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_2sdp"
                 android:background="@drawable/back_solid_sub_comp_6"
-                android:text="@{String.format(@string/reference_s, model.getContestName)}"
+                android:ellipsize="end"
                 android:gravity="center"
+                android:text="@{String.format(@string/contest_s, model.getContestName)}"
                 android:padding="@dimen/_8sdp"
-                tools:text="@string/reference_s"
+                tools:text="@string/contest_s"
                 android:textSize="@dimen/_12ssp" />
 
             <LinearLayout
