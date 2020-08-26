@@ -1,10 +1,12 @@
 package com.ballchalu.ui.contest.adapter
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.ballchalu.R
 import com.ballchalu.databinding.ItemAllContestBinding
 import com.ccpp.shared.domain.contest.Contest
 import com.ccpp.shared.util.ConstantsBase
@@ -60,11 +62,15 @@ class ContestAdapter(
                     if (contest?.isParticipated == false && !isMyContest) {
                         tvPlayNow.visibility = View.VISIBLE
                         tvPlayNow.text = ConstantsBase.buy_now_key
+                        tvPlayNow.setBackgroundResource(R.drawable.background_round_green_right)
                     } else if (isMyContest) {
+
                         tvPlayNow.visibility = View.VISIBLE
+                        tvPlayNow.setBackgroundResource(R.drawable.background_round_green_right)
                         tvPlayNow.text = ConstantsBase.play_now_key
                     } else {
-                        tvPlayNow.visibility = View.GONE
+                        tvPlayNow.text=ConstantsBase.ALREADY_PARTICIPATED
+                        tvPlayNow.setBackgroundResource(R.drawable.background_round_orange_right)
                     }
 
                     tvPlayNow.setOnClickListener {

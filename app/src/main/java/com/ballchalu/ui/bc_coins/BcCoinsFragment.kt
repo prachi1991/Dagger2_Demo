@@ -10,6 +10,7 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentBcCoinsBinding
 import com.ballchalu.ui.bc_coins.adapter.BcCoinAdapter
 import com.ballchalu.ui.navigation.NavigationViewModel
+import com.bumptech.glide.Glide
 import com.ccpp.shared.core.result.Event
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
@@ -51,11 +52,16 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
         super.onViewCreated(view, savedInstanceState)
         initSessionAdapterAdapter()
         viewModel.bcCoinListObserver.observe(viewLifecycleOwner, EventObserver {
+
             bcCoinAdapter?.setItemList(it)
         })
 
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
-            binding.tvEmail.text = it?.email ?: ""
+            Glide.with(requireContext())
+                .load(it?.profileUrl)
+                .into(binding.imgUserprofile)
+
+            binding.tvEmail.text = it?.firstName +" "+it?.lastName
             binding.tvBcCoinBalance.text = it?.bc_coins.toString()
         })
         viewModel.bcCoinBuyObserver.observe(viewLifecycleOwner, EventObserver {

@@ -2,10 +2,10 @@ package com.ballchalu.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Build
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import dagger.android.support.DaggerAppCompatActivity
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
@@ -20,21 +20,17 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
-    fun hideSoftKeyBoard() {
-        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (this.currentFocus != null) { // verify if the soft keyboard is open
-            imm.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
-        }
-    }
 
     override fun onStart() {
         super.onStart()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            if (window?.decorView?.systemUiVisibility != View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-//            window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-//            else
             window?.decorView?.systemUiVisibility = 0
         }
+        setAppOrientation()
+    }
+
+    fun setAppOrientation() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     private fun setLightStatusBar(activity: Activity) {

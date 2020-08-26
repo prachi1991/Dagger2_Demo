@@ -28,8 +28,8 @@
                 android:background="@drawable/back_solid_sub_comp_7"
                 android:orientation="horizontal"
                 android:padding="@dimen/_5sdp">
-
-                <androidx.appcompat.widget.AppCompatImageView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_userprofile"
                     android:layout_width="@dimen/_36sdp"
                     android:layout_height="@dimen/_36sdp"
                     android:layout_gravity="center_vertical"
