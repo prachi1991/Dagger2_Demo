@@ -8,12 +8,12 @@ android {
 
 
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.ballchalu"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 4
+        versionCode 7
         versionName "1.0_prod"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -75,6 +75,7 @@ ext {
 }
 dependencies {
     implementation project(':shared')
+    implementation project(':razorPay')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.material:material:1.1.0'
@@ -120,11 +121,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
+
     // Dagger
-    implementation "com.google.dagger:dagger-android:2.16"
-    implementation "com.google.dagger:dagger-android-support:2.16"
-    kapt "com.google.dagger:dagger-compiler:2.16"
-    kapt "com.google.dagger:dagger-android-processor:2.16"
+    implementation "com.google.dagger:dagger-android:2.23.1"
+    implementation "com.google.dagger:dagger-android-support:2.23.1"
+    implementation 'androidx.annotation:annotation:1.1.0'
+    kapt "com.google.dagger:dagger-compiler:2.23.1"
+    kapt "com.google.dagger:dagger-android-processor:2.23.1"
 
     //Firebase
     implementation 'com.google.firebase:firebase-auth:19.2.0'
@@ -139,9 +142,10 @@ dependencies {
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
-
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    implementation(name: 'razorpay-android-3.8.8', ext: 'aar')
     //Permission
     implementation 'com.karumi:dexter:6.2.1'
+    implementation 'com.alespero:expandable-cardview:0.8'
 }

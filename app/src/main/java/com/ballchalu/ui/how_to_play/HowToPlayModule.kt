@@ -1,8 +1,8 @@
 package com.ballchalu.ui.how_to_play
 
 import androidx.lifecycle.ViewModel
-import com.ccpp.shared.core.di.FragmentScoped
-import com.ccpp.shared.core.di.ViewModelKey
+import com.ballchalu.shared.core.di.FragmentScoped
+import com.ballchalu.shared.core.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

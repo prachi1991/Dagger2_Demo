@@ -13,7 +13,7 @@ import com.ballchalu.databinding.FragmentSignInUpContainerBinding
 import com.ballchalu.ui.login.signin.SignInFragment
 import com.ballchalu.ui.login.signup.SignUpFragment
 import com.ballchalu.utils.AppConstants
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.util.viewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import javax.inject.Inject
 

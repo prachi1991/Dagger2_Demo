@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemWinnersBinding
-import com.ccpp.shared.domain.winner.RanksItem
+import com.ballchalu.shared.domain.winner.RanksItem
 
 
 class WinnersAdapter :

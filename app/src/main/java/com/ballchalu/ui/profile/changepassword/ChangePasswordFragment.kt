@@ -13,10 +13,10 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentChangePasswordBinding
 import com.ballchalu.utils.Utils
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.domain.profile.ChangePasswordReq
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
+import com.ballchalu.shared.domain.profile.ChangePasswordReq
+import com.ballchalu.shared.util.viewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
 

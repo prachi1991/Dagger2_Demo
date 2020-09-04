@@ -6,11 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ballchalu.R
 import com.ballchalu.base.BaseViewModel
-import com.ccpp.shared.core.result.Event
-import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.domain.LoginRes
-import com.ccpp.shared.domain.data.LoginFormState
-import com.ccpp.shared.network.repository.LoginRepository
+import com.ballchalu.shared.core.result.Event
+import com.ballchalu.shared.core.result.Results
+import com.ballchalu.shared.domain.LoginRes
+import com.ballchalu.shared.domain.data.LoginFormState
+import com.ballchalu.shared.network.repository.LoginRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

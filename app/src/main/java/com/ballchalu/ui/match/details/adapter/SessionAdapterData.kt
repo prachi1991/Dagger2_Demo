@@ -1,7 +1,7 @@
 package com.ballchalu.ui.match.details.adapter
 
-import com.ccpp.shared.domain.match_details.Session
-import com.ccpp.shared.util.ConstantsBase
+import com.ballchalu.shared.domain.match_details.Session
+import com.ballchalu.shared.util.ConstantsBase
 
 data class SessionAdapterData(var session: Session?) {
     val isSuspend = session?.status.equals(ConstantsBase.suspend, true)

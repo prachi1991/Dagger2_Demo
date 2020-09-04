@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="contest_price">Contest Prize</string>
+    <string name="add_coin">Add Coin</string>
+    <string name="by_join">By joining a contest you agree terms and conditions</string>
+    <string name="choose">Choose the Package</string>
+    <string name="payment_option">Payment options</string>
+    <string name="next">Next</string>
+    <string name="total_coins">Total Coins</string>
+    <string name="your_total">"Your total coins will be calculated on the basis of package selected "</string>
+</resources>

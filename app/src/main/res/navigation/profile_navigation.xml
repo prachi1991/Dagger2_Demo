@@ -32,4 +32,23 @@
         android:id="@+id/editProfileFragment"
         android:name="com.ballchalu.ui.profile.edit.EditProfileFragment"
         android:label="EditProfileFragment" />
+
+    <fragment
+        android:id="@+id/cardFragment"
+        android:name="com.ballchalu.razorpay.method.card.CardFragment"
+        android:label="Card Details"
+        tools:layout="@layout/fragment_card">
+        <action
+            android:id="@+id/action_cardFragment_to_razorPayViewFragment"
+            app:destination="@id/razorPayViewFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/paymentSelectionActivity"
+        android:name="com.ballchalu.razorpay.PaymentSelectionActivity"
+        android:label="PaymentSelectionActivity"/>
+    <fragment
+        android:id="@+id/razorPayViewFragment"
+        android:name="com.ballchalu.razorpay.checkout.RazorPayViewFragment"
+        android:label="RazorPayViewFragment"
+        tools:layout="@layout/fragment_razor_pay_view" />
 </navigation>

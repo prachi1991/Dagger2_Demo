@@ -134,4 +134,13 @@
     <string name="message_password_instruction">Sent your password instruction on your email</string>
     <string name="user_info">User Info</string>
     <string name="enter_username">Enter UserName</string>
+    <string name="contest_price">Contest Prize</string>
+    <string name="add_coin">Add Coin</string>
+    <string name="by_join">By joining a contest you agree \n terms and conditions</string>
+    <string name="add_coins">Add Coins</string>
+    <string name="choose">Choose the Package</string>
+    <string name="payment_option">Payment options</string>
+    <string name="next">Next</string>
+    <string name="total_coins">Total Coins</string>
+    <string name="your_total">"Your total coins will be calculated \n on the basis of package selected "</string>
 </resources>

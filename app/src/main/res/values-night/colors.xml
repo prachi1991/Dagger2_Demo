@@ -69,9 +69,9 @@
 
     <!--icons-->
     <color name="close_icon">#ffffff</color>
-
+    <color name="color_content_text">#ffffff</color>
     <color name="profile_divider">#6b6d74</color>
-
+    <color name="color_contest">#1a1d27</color>
     <color name="color_sub_component1">#3a3f49</color>
     <color name="color_sub_component2">#3a3f49</color>
     <color name="color_sub_component3">#333743</color>
@@ -82,7 +82,7 @@
     <color name="color_sub_component8">#3a3f49</color>
     <color name="color_sub_component9">#292d38</color>
     <color name="color_sub_component10">#333743</color>
-
+    <color name="contest_btn_selector">#e36f10</color>
     <color name="color_header_component1">#272a31</color>
     <color name="color_header_component2">#1a1d27</color>
 
@@ -92,7 +92,6 @@
     <color name="color_stroke_component2">#343743</color>
     <color name="color_stroke_component4">#6b6d74</color>
     <color name="color_stroke_component5">#fff</color>
-
     <color name="color_light_stroke">#3a3f49</color>
 
 </resources>

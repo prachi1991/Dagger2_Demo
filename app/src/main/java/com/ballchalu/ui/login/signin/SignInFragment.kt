@@ -13,8 +13,8 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentSignInBinding
 import com.ballchalu.ui.navigation.NavigationActivity
 import com.ballchalu.utils.Utils
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.util.viewModelProvider
 import javax.inject.Inject
 
 

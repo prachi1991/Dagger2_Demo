@@ -8,9 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentWinnersBinding
 import com.ballchalu.ui.winners.adapter.WinnersAdapter
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.util.ConstantsBase
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.util.ConstantsBase
+import com.ballchalu.shared.util.viewModelProvider
 import javax.inject.Inject
 
 /**

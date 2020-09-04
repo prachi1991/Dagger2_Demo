@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.ccpp.shared.domain.my_bets.UserMyBet" />
+            type="com.ballchalu.shared.domain.my_bets.UserMyBet" />
 
     </data>
 

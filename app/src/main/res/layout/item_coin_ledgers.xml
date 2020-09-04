@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.ccpp.shared.domain.bccoins.BcCoinsLedgerData" />
+            type="com.ballchalu.shared.domain.bccoins.BcCoinsLedgerData" />
     </data>
 
     <FrameLayout

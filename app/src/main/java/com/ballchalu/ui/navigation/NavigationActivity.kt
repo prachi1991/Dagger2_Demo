@@ -23,15 +23,15 @@ import com.ballchalu.databinding.ActivityNavigationBinding
 import com.ballchalu.ui.login.container.LoginActivity
 import com.ballchalu.utils.ThemeHelper
 import com.ballchalu.utils.Utils
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.domain.contest.UserContest
-import com.ccpp.shared.domain.user.UserData
-import com.ccpp.shared.rxjava.RxBus
-import com.ccpp.shared.rxjava.RxEvent
-import com.ccpp.shared.util.ConstantsBase
-import com.ccpp.shared.util.loadImage
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
+import com.ballchalu.shared.domain.contest.UserContest
+import com.ballchalu.shared.domain.user.UserData
+import com.ballchalu.shared.rxjava.RxBus
+import com.ballchalu.shared.rxjava.RxEvent
+import com.ballchalu.shared.util.ConstantsBase
+import com.ballchalu.shared.util.loadImage
+import com.ballchalu.shared.util.viewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.disposables.Disposable
 import java.lang.reflect.Field
@@ -130,6 +130,7 @@ class NavigationActivity : BaseActivity() {
                     true
                 }
             }
+
 
 //            menu.findItem(R.id.nav_logout).apply {
 //                setOnMenuItemClickListener {
@@ -326,6 +327,7 @@ class NavigationActivity : BaseActivity() {
         R.id.nav_declared,
         R.id.nav_how_to_play,
         R.id.nav_bc_coins
+
     )
 
 }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityLoginBinding
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.util.viewModelProvider
 import javax.inject.Inject
 
 

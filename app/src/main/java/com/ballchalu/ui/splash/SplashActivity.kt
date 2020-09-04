@@ -10,8 +10,8 @@ import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivitySplashBinding
 import com.ballchalu.ui.login.container.LoginActivity
 import com.ballchalu.ui.navigation.NavigationActivity
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class SplashActivity : BaseActivity() {

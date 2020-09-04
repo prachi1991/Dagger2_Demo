@@ -9,9 +9,9 @@ import com.ballchalu.databinding.ItemMyBetEvenOddBinding
 import com.ballchalu.databinding.ItemMyBetMatchWinnerBinding
 import com.ballchalu.databinding.ItemMyBetSessionBinding
 import com.ballchalu.utils.StringUtils
-import com.ccpp.shared.domain.contest.UserContest
-import com.ccpp.shared.domain.my_bets.UserMyBet
-import com.ccpp.shared.util.ConstantsBase
+import com.ballchalu.shared.domain.contest.UserContest
+import com.ballchalu.shared.domain.my_bets.UserMyBet
+import com.ballchalu.shared.util.ConstantsBase
 
 class MyBetsMatchWinnerAdapter(var type: String) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

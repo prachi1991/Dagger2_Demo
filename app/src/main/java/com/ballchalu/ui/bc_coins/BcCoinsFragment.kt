@@ -5,18 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentBcCoinsBinding
 import com.ballchalu.ui.bc_coins.adapter.BcCoinAdapter
 import com.ballchalu.ui.navigation.NavigationViewModel
 import com.bumptech.glide.Glide
-import com.ccpp.shared.core.result.Event
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.domain.bccoins.BcCoinContest
-import com.ccpp.shared.util.activityViewModelProvider
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.Event
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
+import com.ballchalu.shared.domain.bccoins.BcCoinContest
+import com.ballchalu.shared.util.activityViewModelProvider
+import com.ballchalu.shared.util.viewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
 
@@ -80,7 +81,9 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
     }
 
     override fun onBuyNowClicked(bcCoinContest: BcCoinContest) {
-        viewModel.callBuyNow(bcCoinContest)
+        findNavController().navigate(R.id.paymentSelectionActivity)
+
+       // viewModel.callBuyNow(bcCoinContest)
     }
 
     private fun openLogoutDialog() {

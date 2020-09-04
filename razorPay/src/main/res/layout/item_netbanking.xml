@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rl_netbank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_15sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+     >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:weightSum="1"
+    android:id="@+id/ll_bank"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="match_parent"
+        android:src="@drawable/axisbank"
+        android:layout_gravity="center"
+        android:layout_weight=".8"
+        android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:layout_weight=".5"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
+            tools:text="State bank" />
+
+</LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:layout_below="@+id/ll_bank"
+            android:layout_marginTop="10dp"
+            android:background="@color/light_grey" />
+    </RelativeLayout>
+
+
+</layout>

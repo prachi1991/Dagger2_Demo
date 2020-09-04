@@ -10,20 +10,21 @@ import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.domain.MatchListing
+import com.ballchalu.shared.domain.contest.UserContest
+import com.ballchalu.shared.util.ConstantsBase
+import com.ballchalu.shared.util.viewModelProvider
 import com.ballchalu.ui.contest.ContestCountListener
 import com.ballchalu.ui.contest.ContestViewModel
 import com.ballchalu.ui.contest.MainContestFragment
 import com.ballchalu.ui.contest.user_contest.adapter.UserContestAdapter
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.domain.MatchListing
-import com.ccpp.shared.domain.contest.UserContest
-import com.ccpp.shared.util.ConstantsBase
-import com.ccpp.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class UserContestFragment : BaseFragment() {
     private var listener: ContestCountListener? = null
     private var contestAdapter: UserContestAdapter? = null
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -47,7 +48,7 @@ class UserContestFragment : BaseFragment() {
             viewModel.isDeclared = it.getBoolean(ConstantsBase.KEY_DECLARED, false)
             viewModel.isMatchStarted = it.getBoolean(ConstantsBase.KEY_IS_MATCH_STARTED, false)
         }
-
+        binding.bottomSheetBuy.visibility = View.GONE
         return binding.root
     }
 

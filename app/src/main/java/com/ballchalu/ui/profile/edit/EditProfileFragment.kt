@@ -3,6 +3,8 @@ package com.ballchalu.ui.profile.edit
 import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.drawable.Drawable
+
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -16,10 +18,13 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentEditProfileBinding
 import com.bumptech.glide.Glide
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.domain.profile.EditProfileReq
-import com.ccpp.shared.util.viewModelProvider
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
+import com.ballchalu.shared.domain.profile.EditProfileReq
+import com.ballchalu.shared.util.viewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -27,7 +32,6 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import timber.log.Timber
-import java.io.File
 import javax.inject.Inject
 
 
@@ -88,6 +92,7 @@ class EditProfileFragment : BaseFragment() {
                 binding.edtLastNameValue.error = "Last Name is Empty"
                 return@setOnClickListener
             }
+
             viewModel.saveDetails(
                 EditProfileReq(
                     binding.edtFirstNameValue.text.toString(),
@@ -165,27 +170,83 @@ class EditProfileFragment : BaseFragment() {
     private fun loadImage(path: Any) {
         Glide.with(requireContext())
             .load(path)
+            .listener(object :RequestListener<Drawable>{
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    Timber.d("drawable123  ${resource}  ${target}")
+                    return false
+                }
+
+            })
+
             .into(binding.ivProfile)
+
+
+
     }
 
 
     private fun openImageSelection() {
-        val values = arrayOf<CharSequence>(
-            GALLERY_PICKER,
-            CAMERA_PICKER
+
+        var values = arrayOf<CharSequence>(
+
         )
+        Timber.d("Tag123 ${binding.ivProfile.tag}")
+        if (binding.ivProfile.tag == 0) {
+            values = arrayOf<CharSequence>(
+                GALLERY_PICKER,
+                CAMERA_PICKER
+
+            )
+        } else {
+            values = arrayOf<CharSequence>(
+                GALLERY_PICKER,
+                CAMERA_PICKER, REMOVE
+
+            )
+        }
+
+
         val builder = MaterialAlertDialogBuilder(requireActivity(), R.style.MyMaterialAlertDialog)
         builder.setTitle("Choose Options")
+
         builder.setItems(values) { dialog, item ->
+
             if (item == 0)
                 openGalleryIntent()
             else if (item == 1) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQUEST_CAMERA_CODE)
+            } else if (item == 2) {
+                loadImage(R.drawable.ic_user)
+                viewModel.saveDetails(
+                    EditProfileReq(
+                        binding.edtFirstNameValue.text.toString(),
+                        binding.edtLastNameValue.text.toString(),
+                        binding.edtEmailValue.text.toString(),
+                        binding.edtUserNameValue.text.toString()
+                    )
+                    , null
+                )
             }
             dialog.dismiss()
+
         }
-        builder.setNegativeButton("Cancel") { dialog, which ->
+        builder.setNegativeButton("Ok") { dialog, which ->
             dialog.dismiss()
         }
         builder.show()

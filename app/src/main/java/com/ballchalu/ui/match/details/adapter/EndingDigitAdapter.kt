@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemEndingDigitListBinding
-import com.ccpp.shared.domain.match_details.Runner
-import com.ccpp.shared.domain.match_details.RunnersItem
-import com.ccpp.shared.domain.position.PositionMarketItem
-import com.ccpp.shared.util.ConstantsBase
+import com.ballchalu.shared.domain.match_details.Runner
+import com.ballchalu.shared.domain.match_details.RunnersItem
+import com.ballchalu.shared.domain.position.PositionMarketItem
+import com.ballchalu.shared.util.ConstantsBase
 
 
 class EndingDigitAdapter(val listener: OnItemClickListener?) :

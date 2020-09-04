@@ -1,8 +1,8 @@
 package com.ballchalu.base.di
 
 import com.ballchalu.application.App
-import com.ccpp.shared.core.di.ViewModelModule
-import com.ccpp.shared.network.NetworkModule
+import com.ballchalu.shared.core.di.ViewModelModule
+import com.ballchalu.shared.network.NetworkModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule

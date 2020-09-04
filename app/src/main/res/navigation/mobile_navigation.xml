@@ -71,4 +71,8 @@
         android:id="@+id/nav_profile_list"
         android:name="com.ballchalu.ui.profile.container.ProfileContainerBottomSheet"
         tools:layout="@layout/fragment_profile_list" />
+   <activity
+        android:id="@+id/paymentSelectionActivity"
+        android:name="com.ballchalu.razorpay.PaymentSelectionActivity"
+        android:label="PaymentSelectionActivity"/>
 </navigation>

@@ -6,7 +6,7 @@ import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Build
 import android.view.View
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
 import dagger.android.support.DaggerAppCompatActivity
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import javax.inject.Inject

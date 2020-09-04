@@ -10,17 +10,18 @@ import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentContestBinding
+import com.ballchalu.shared.core.result.Event
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.domain.MatchListing
+import com.ballchalu.shared.domain.contest.Contest
+import com.ballchalu.shared.util.ConstantsBase
+import com.ballchalu.shared.util.activityViewModelProvider
+import com.ballchalu.shared.util.viewModelProvider
 import com.ballchalu.ui.contest.ContestViewModel
 import com.ballchalu.ui.contest.MainContestFragment
 import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ballchalu.ui.navigation.NavigationViewModel
-import com.ccpp.shared.core.result.Event
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.domain.MatchListing
-import com.ccpp.shared.domain.contest.Contest
-import com.ccpp.shared.util.ConstantsBase
-import com.ccpp.shared.util.activityViewModelProvider
-import com.ccpp.shared.util.viewModelProvider
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import javax.inject.Inject
 
 class ContestFragment : BaseFragment() {
@@ -34,19 +35,31 @@ class ContestFragment : BaseFragment() {
     private lateinit var model: NavigationViewModel
 
     private var allContestList: ArrayList<Contest>? = null
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewModel = viewModelProvider(viewModelFactory)
+
+
         binding = FragmentContestBinding.inflate(inflater).apply {
             lifecycleOwner = this@ContestFragment
             allContestList = arrayListOf()
         }
+
         arguments?.let {
             viewModel.matchItem = it.getSerializable(ConstantsBase.KEY_MATCH_ITEM) as MatchListing?
             viewModel.isDeclared = it.getBoolean(ConstantsBase.KEY_DECLARED, false)
+        }
+
+        binding.imgClose.setOnClickListener {
+            binding.bottomSheetBuy.visibility = View.GONE
+        }
+        binding.btnAddCoin.setOnClickListener {
+
         }
 
         return binding.root
@@ -55,7 +68,7 @@ class ContestFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSessionAdapterAdapter()
-
+        binding.bottomSheetBuy.visibility = View.VISIBLE
         viewModel.createContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             model = activityViewModelProvider(viewModelFactory)
             model.userDetails.postValue(Event(it.userContest?.user))
@@ -110,6 +123,7 @@ class ContestFragment : BaseFragment() {
     private fun initSessionAdapterAdapter() {
         contestAdapter = ContestAdapter(object : ContestAdapter.OnItemClickListener {
             override fun onBuyNowClicked(contestModel: Contest) {
+
                 viewModel.createUserMatchContest(contestModel.id.toString())
             }
 

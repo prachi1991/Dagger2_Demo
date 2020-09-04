@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.R
 import com.ballchalu.databinding.ItemAllContestBinding
-import com.ccpp.shared.domain.contest.Contest
-import com.ccpp.shared.util.ConstantsBase
+import com.ballchalu.shared.domain.contest.Contest
+import com.ballchalu.shared.util.ConstantsBase
 
 
 class ContestAdapter(

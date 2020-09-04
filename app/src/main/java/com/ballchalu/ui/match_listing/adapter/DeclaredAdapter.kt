@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemDeclaredListingBinding
-import com.ccpp.shared.domain.MatchListing
-import com.ccpp.shared.domain.MatchListingItem
+import com.ballchalu.shared.domain.MatchListing
+import com.ballchalu.shared.domain.MatchListingItem
 
 
 class DeclaredAdapter(val listener: OnItemClickListener?) :

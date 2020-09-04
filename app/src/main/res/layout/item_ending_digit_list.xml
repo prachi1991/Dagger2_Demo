@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.ccpp.shared.domain.match_details.Runner" />
+            type="com.ballchalu.shared.domain.match_details.Runner" />
     </data>
 
     <FrameLayout

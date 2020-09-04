@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ballchalu.base.BaseViewModel
-import com.ccpp.shared.core.result.Event
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.network.repository.SplashRepository
+import com.ballchalu.shared.core.result.Event
+import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
+import com.ballchalu.shared.network.repository.SplashRepository
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import javax.inject.Inject
 

@@ -8,8 +8,9 @@ import com.ballchalu.application.App
 import com.ballchalu.mqtt.MqttCallbackHandler
 import com.ballchalu.mqtt.MqttConnection
 import com.ballchalu.mqtt.MqttTraceCallback
-import com.ccpp.shared.database.prefs.PreferenceStorage
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
+
+import com.ballchalu.shared.database.prefs.PreferenceStorage
+import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
 import dagger.Module
 import dagger.Provides
 import org.eclipse.paho.android.service.MqttAndroidClient

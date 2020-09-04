@@ -17,9 +17,9 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMainContestBinding
 import com.ballchalu.ui.contest.all_contest.ContestFragment
 import com.ballchalu.ui.contest.user_contest.UserContestFragment
-import com.ccpp.shared.domain.MatchListing
-import com.ccpp.shared.util.ConstantsBase
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.domain.MatchListing
+import com.ballchalu.shared.util.ConstantsBase
+import com.ballchalu.shared.util.viewModelProvider
 import timber.log.Timber
 import java.util.*
 import javax.inject.Inject

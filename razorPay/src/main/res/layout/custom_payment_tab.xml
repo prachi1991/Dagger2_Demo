@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/llCardtype"
+        android:layout_width="match_parent"
+        android:background="@color/color_content_1"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_below="@+id/toolbar"
+        android:orientation="horizontal"
+
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/ll_credit_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_2sdp"
+            android:layout_weight=".5"
+            android:padding="@dimen/_3sdp"
+            android:background="@drawable/background_stroke_white"
+            android:orientation="vertical"
+           >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_credit_card" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/credit_card"
+                android:textColor="@color/deep_sky_blue" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_debit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_2sdp"
+            android:layout_weight=".5"
+            android:padding="@dimen/_3sdp"
+            android:background="@drawable/background_stroke_white"
+            android:orientation="vertical"
+     >
+
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:src="@drawable/ic_credit_card_2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/debit_card"
+                android:textColor="@color/deep_sky_blue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_net_banking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_2sdp"
+            android:layout_weight=".5"
+            android:padding="@dimen/_3sdp"
+            android:background="@drawable/background_stroke_white"
+            android:orientation="vertical"
+           >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_surface1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/net_banking"
+                android:textColor="@color/deep_sky_blue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_2sdp"
+            android:layout_weight=".5"
+            android:padding="@dimen/_3sdp"
+            android:id="@+id/ll_wallet"
+            android:background="@drawable/background_stroke_white"
+            android:orientation="vertical"
+>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/image_5" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/wallet"
+                android:textColor="@color/deep_sky_blue" />
+        </LinearLayout>
+</LinearLayout>
+</LinearLayout>

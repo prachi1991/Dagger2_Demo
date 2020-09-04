@@ -66,7 +66,7 @@
 # Databinding CardViewBindingAdapter
 -dontwarn androidx.cardview.widget.CardView
 
--keep class com.ccpp.model.** {
+-keep class com.ballchalu.model.** {
     *;
 }
 
@@ -85,8 +85,8 @@
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 
 ##2C2P PGW Library
-#-dontwarn com.ccpp.my2c2psdk.**
-#-keep class com.ccpp.my2c2psdk.cores.** {*;}
+#-dontwarn com.ballchalu.my2c2psdk.**
+#-keep class com.ballchalu.my2c2psdk.cores.** {*;}
 
 # okhttp3
 -dontwarn okio.**

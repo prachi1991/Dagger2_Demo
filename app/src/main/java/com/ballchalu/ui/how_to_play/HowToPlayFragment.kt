@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentHowToPlayBinding
 import com.ballchalu.ui.how_to_play.adapter.HowToPlayAdapter
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.util.viewModelProvider
 import javax.inject.Inject
 
 /**

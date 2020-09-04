@@ -11,10 +11,10 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentDeclaredMatchBinding
 import com.ballchalu.ui.match_listing.adapter.DeclaredAdapter
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.domain.MatchListing
-import com.ccpp.shared.util.ConstantsBase
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.domain.MatchListing
+import com.ballchalu.shared.util.ConstantsBase
+import com.ballchalu.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class DeclaredMatchFragment : BaseFragment(), DeclaredAdapter.OnItemClickListener {

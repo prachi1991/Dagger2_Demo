@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ballchalu.base.BaseViewModel
 import com.ballchalu.utils.Utils
-import com.ccpp.shared.core.result.Event
-import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.domain.profile.EditProfileReq
-import com.ccpp.shared.domain.profile.EditProfileRes
-import com.ccpp.shared.domain.user.UserData
-import com.ccpp.shared.domain.user.UserRes
-import com.ccpp.shared.network.repository.LoginRepository
+import com.ballchalu.shared.core.result.Event
+import com.ballchalu.shared.core.result.Results
+import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
+import com.ballchalu.shared.domain.profile.EditProfileReq
+import com.ballchalu.shared.domain.profile.EditProfileRes
+import com.ballchalu.shared.domain.user.UserData
+import com.ballchalu.shared.domain.user.UserRes
+import com.ballchalu.shared.network.repository.LoginRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -42,7 +42,7 @@ class EditProfileViewModel @Inject constructor(
         _userDetails.postValue(Event(data.user))
     }
 
-    fun saveDetails(editProfileReq: EditProfileReq, drawable: Drawable) {
+    fun saveDetails(editProfileReq: EditProfileReq, drawable: Drawable?) {
         val image = Utils.getFileToByte(drawable)
         editProfileReq.image = image
         loading.postValue(Event(true))

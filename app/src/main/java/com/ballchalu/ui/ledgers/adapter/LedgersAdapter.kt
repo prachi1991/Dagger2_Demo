@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemCoinLedgersBinding
-import com.ccpp.shared.domain.bccoins.BcCoinsLedgerData
+import com.ballchalu.shared.domain.bccoins.BcCoinsLedgerData
 
 
 class LedgersAdapter : RecyclerView.Adapter<LedgersAdapter.ViewHolder>() {

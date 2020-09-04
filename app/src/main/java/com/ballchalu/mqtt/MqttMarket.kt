@@ -1,6 +1,6 @@
 package com.ballchalu.mqtt
 
-import com.ccpp.shared.domain.match_details.Market
+import com.ballchalu.shared.domain.match_details.Market
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 

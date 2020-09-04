@@ -4,7 +4,7 @@ package com.ballchalu.mqtt;
 import android.content.Context;
 import android.content.Intent;
 
-import com.ccpp.shared.util.ConstantsBase;
+import com.ballchalu.shared.util.ConstantsBase;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;

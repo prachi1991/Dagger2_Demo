@@ -1,7 +1,7 @@
 package com.ballchalu.ui.navigation
 
 import androidx.lifecycle.ViewModel
-import com.ccpp.shared.core.di.ViewModelKey
+import com.ballchalu.shared.core.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

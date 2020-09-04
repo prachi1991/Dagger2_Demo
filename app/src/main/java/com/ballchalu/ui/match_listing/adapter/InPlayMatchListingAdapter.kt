@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.RowInPlayMatchListingBinding
-import com.ccpp.shared.domain.MatchListingItem
-import com.ccpp.shared.util.ConstantsBase
+import com.ballchalu.shared.domain.MatchListingItem
+import com.ballchalu.shared.util.ConstantsBase
 
 
 class InPlayMatchListingAdapter(val listener: OnItemClickListener?) :

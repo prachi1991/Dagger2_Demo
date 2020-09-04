@@ -3,8 +3,8 @@ package com.ballchalu.ui.profile.changepassword
 import androidx.lifecycle.ViewModel
 import com.ballchalu.ui.match.details.my_bets.MyBetsFragment
 import com.ballchalu.ui.match.details.my_bets.MyBetsViewModel
-import com.ccpp.shared.core.di.FragmentScoped
-import com.ccpp.shared.core.di.ViewModelKey
+import com.ballchalu.shared.core.di.FragmentScoped
+import com.ballchalu.shared.core.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

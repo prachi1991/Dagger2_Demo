@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ballchalu.base.BaseViewModel
-import com.ccpp.shared.core.result.Event
-import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.domain.winner.RanksItem
-import com.ccpp.shared.domain.winner.WinnerRes
-import com.ccpp.shared.network.repository.WinnerRepository
+import com.ballchalu.shared.core.result.Event
+import com.ballchalu.shared.core.result.Results
+import com.ballchalu.shared.domain.winner.RanksItem
+import com.ballchalu.shared.domain.winner.WinnerRes
+import com.ballchalu.shared.network.repository.WinnerRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

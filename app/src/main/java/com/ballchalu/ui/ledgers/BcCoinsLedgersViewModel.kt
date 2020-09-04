@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ballchalu.base.BaseViewModel
-import com.ccpp.shared.core.result.Event
-import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.domain.bccoins.BcCoinLedgersRes
-import com.ccpp.shared.domain.bccoins.BcCoinsLedgerData
-import com.ccpp.shared.network.repository.BcCoinsRepository
+import com.ballchalu.shared.core.result.Event
+import com.ballchalu.shared.core.result.Results
+import com.ballchalu.shared.domain.bccoins.BcCoinLedgersRes
+import com.ballchalu.shared.domain.bccoins.BcCoinsLedgerData
+import com.ballchalu.shared.network.repository.BcCoinsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -17,9 +17,9 @@ package com.ballchalu.utils
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
-import com.ccpp.shared.util.ConstantsBase.THEME_DARK_MODE
-import com.ccpp.shared.util.ConstantsBase.THEME_DEFAULT_MODE
-import com.ccpp.shared.util.ConstantsBase.THEME_LIGHT_MODE
+import com.ballchalu.shared.util.ConstantsBase.THEME_DARK_MODE
+import com.ballchalu.shared.util.ConstantsBase.THEME_DEFAULT_MODE
+import com.ballchalu.shared.util.ConstantsBase.THEME_LIGHT_MODE
 
 object ThemeHelper {
     fun applyTheme(themePref: String) {

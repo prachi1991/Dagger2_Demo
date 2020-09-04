@@ -29,6 +29,7 @@
         android:id="@+id/nav_how_to_play"
         android:icon="@drawable/ic_circle"
         android:title="@string/nav_how_to_play" />
+
     <!--    <item-->
     <!--        android:id="@+id/nav_profile"-->
     <!--        android:icon="@drawable/ic_circle"-->

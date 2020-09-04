@@ -15,11 +15,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.R
 import com.ballchalu.databinding.FragmentCreateBetBinding
 import com.ballchalu.ui.match_listing.adapter.InPlayMatchListingAdapter
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.domain.MatchListingItem
-import com.ccpp.shared.domain.create_bet.*
-import com.ccpp.shared.util.ConstantsBase
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.domain.MatchListingItem
+import com.ballchalu.shared.domain.create_bet.*
+import com.ballchalu.shared.util.ConstantsBase
+import com.ballchalu.shared.util.viewModelProvider
 import dagger.android.support.DaggerAppCompatDialogFragment
 import javax.inject.Inject
 

@@ -1,5 +1,11 @@
 package com.ballchalu.base.di
 
+import com.ballchalu.razorpay.PaymentSelectionActivity
+import com.ballchalu.razorpay.checkout.RazorPayViewModule
+import com.ballchalu.razorpay.method.banking.NetBankingModule
+import com.ballchalu.razorpay.method.card.CardModule
+import com.ballchalu.razorpay.payment_mode.PaymentModeModule
+import com.ballchalu.shared.core.di.ActivityScoped
 import com.ballchalu.ui.bc_coins.BcCoinModule
 import com.ballchalu.ui.contest.ContestModule
 import com.ballchalu.ui.create_bet.CreateBetModule
@@ -23,7 +29,8 @@ import com.ballchalu.ui.profile.menu.ProfileListModule
 import com.ballchalu.ui.splash.SplashActivity
 import com.ballchalu.ui.splash.SplashModule
 import com.ballchalu.ui.winners.WinnerModule
-import com.ccpp.shared.core.di.ActivityScoped
+import com.dl.gc.ui.navigation.ui.gallery.PaymentCardModule
+import com.dl.gc.ui.navigation.ui.gallery.PaymentNetBankingModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -76,8 +83,24 @@ abstract class ActivityBindingModule {
             ProfileContainerModule::class,
             EditProfileModule::class,
             ChangePasswordModule::class,
-            HowToPlayModule::class
+            HowToPlayModule::class,
+            PaymentCardModule::class,
+        PaymentNetBankingModule::class
+
+
         ]
     )
+
     internal abstract fun navigationActivity(): NavigationActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+        modules = [
+            CardModule::class,
+            PaymentModeModule::class,
+            NetBankingModule::class,
+            RazorPayViewModule::class
+        ]
+    )
+    internal abstract fun paymentSelectionActivity(): PaymentSelectionActivity
 }

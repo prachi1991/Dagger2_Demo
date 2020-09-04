@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/paymentModelFragment">
+
+
+    <fragment
+        android:id="@+id/cardFragment"
+        android:name="com.ballchalu.razorpay.method.card.CardFragment"
+        android:label="Card Details"
+        tools:layout="@layout/fragment_card">
+        <action
+            android:id="@+id/action_cardFragment_to_razorPayViewFragment"
+            app:destination="@id/razorPayViewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/razorPayViewFragment"
+        android:name="com.ballchalu.razorpay.checkout.RazorPayViewFragment"
+        android:label="RazorPayViewFragment"
+        tools:layout="@layout/fragment_razor_pay_view" />
+    <fragment
+        android:id="@+id/paymentModelFragment"
+        android:name="com.ballchalu.razorpay.payment_mode.PaymentModeFragment"
+        android:label="Payment Option"
+        tools:layout="@layout/fragment_payment_mode">
+
+        <action
+            android:id="@+id/action_paymentModelFragment_to_netBankingFragment"
+            app:destination="@id/netBankingFragment" />
+        <action
+            android:id="@+id/action_paymentModelFragment_to_razorPayViewFragment"
+            app:destination="@id/razorPayViewFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/netBankingFragment"
+        android:name="com.ballchalu.razorpay.method.banking.NetBankingFragment"
+        android:label="NetBankingFragment"
+        tools:layout="@layout/fragment_net_banking">
+
+        <action
+            android:id="@+id/action_netBankingFragment_to_razorPayViewFragment"
+            app:destination="@id/razorPayViewFragment" />
+    </fragment>
+</navigation>

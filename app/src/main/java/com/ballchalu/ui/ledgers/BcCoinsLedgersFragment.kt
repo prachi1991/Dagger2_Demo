@@ -11,8 +11,8 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentBcCoinsLedgersBinding
 import com.ballchalu.ui.ledgers.adapter.LedgersAdapter
 import com.ballchalu.utils.PaginationScrollListener
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.util.viewModelProvider
 import javax.inject.Inject
 
 class BcCoinsLedgersFragment : BaseFragment() {

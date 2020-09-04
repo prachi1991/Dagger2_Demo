@@ -2,7 +2,7 @@ package com.ballchalu.utils
 
 import android.widget.TextView
 import com.ballchalu.application.App
-import com.ccpp.shared.util.ConstantsBase
+import com.ballchalu.shared.util.ConstantsBase
 import java.util.*
 
 object StringUtils {

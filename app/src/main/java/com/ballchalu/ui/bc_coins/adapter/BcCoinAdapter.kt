@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemBcCoinsContestBinding
-import com.ccpp.shared.domain.bccoins.BcCoinContest
+import com.ballchalu.shared.domain.bccoins.BcCoinContest
 
 
 class BcCoinAdapter(val listener: OnBcCoinListener?) :

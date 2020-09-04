@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballchalu.databinding.ItemSessionListBinding
-import com.ccpp.shared.domain.match_details.Session
-import com.ccpp.shared.domain.match_details.SessionsItem
-import com.ccpp.shared.util.ConstantsBase
+import com.ballchalu.shared.domain.match_details.Session
+import com.ballchalu.shared.domain.match_details.SessionsItem
+import com.ballchalu.shared.util.ConstantsBase
 import java.util.*
 import kotlin.collections.ArrayList
 

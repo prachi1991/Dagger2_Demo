@@ -3,8 +3,8 @@ package com.ballchalu.ui.profile.edit
 import androidx.lifecycle.ViewModel
 import com.ballchalu.ui.profile.menu.ProfileListFragment
 import com.ballchalu.ui.profile.menu.ProfileListViewModel
-import com.ccpp.shared.core.di.FragmentScoped
-import com.ccpp.shared.core.di.ViewModelKey
+import com.ballchalu.shared.core.di.FragmentScoped
+import com.ballchalu.shared.core.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

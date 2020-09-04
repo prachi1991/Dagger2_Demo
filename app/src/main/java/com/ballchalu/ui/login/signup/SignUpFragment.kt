@@ -16,10 +16,10 @@ import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentSignUpBinding
 import com.ballchalu.ui.navigation.NavigationActivity
 import com.ballchalu.utils.Utils
-import com.ccpp.shared.core.result.EventObserver
-import com.ccpp.shared.domain.SignUpReq
-import com.ccpp.shared.domain.User
-import com.ccpp.shared.util.viewModelProvider
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.domain.SignUpReq
+import com.ballchalu.shared.domain.User
+import com.ballchalu.shared.util.viewModelProvider
 import javax.inject.Inject
 
 

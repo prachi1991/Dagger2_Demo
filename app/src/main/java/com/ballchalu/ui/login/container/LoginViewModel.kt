@@ -8,11 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.ballchalu.application.App
 import com.ballchalu.base.BaseViewModel
 import com.ballchalu.utils.AppConstants
-import com.ccpp.shared.core.result.Event
-import com.ccpp.shared.core.result.Results
-import com.ccpp.shared.database.prefs.SharedPreferenceStorage
-import com.ccpp.shared.domain.LoginResult
-import com.ccpp.shared.network.repository.LoginRepository
+import com.ballchalu.shared.core.result.Event
+import com.ballchalu.shared.core.result.Results
+import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
+import com.ballchalu.shared.domain.LoginResult
+import com.ballchalu.shared.network.repository.LoginRepository
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
