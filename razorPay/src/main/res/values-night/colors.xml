@@ -101,6 +101,10 @@
     <color name="color_light_stroke">#3a3f49</color>
     <color name="totalcoins_subtext">#babee0</color>
     <color name="total_coins_text">#fff</color>
-
+    <color name="color_payment_result">#343643</color>
     <color name="color_package_card">#1a1c28</color>
+    <color name="color_subtext_result">#babee0</color>
+    <color name="color_heading_result">#ffff</color>
+    <color name="midgreen">#4cad48</color>
+
 </resources>

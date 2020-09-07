@@ -118,7 +118,6 @@ class PaymentModeFragment : Fragment() {
 
 
     fun getAmount(): String? {
-
         return price
     }
 
@@ -186,7 +185,7 @@ class PaymentModeFragment : Fragment() {
         binding?.layoutPaymentOption.tablayout?.getTabAt(1)?.customView = linearLayout2
         binding?.layoutPaymentOption.tablayout?.getTabAt(2)?.customView = linearLayout3
         binding?.layoutPaymentOption.tablayout?.getTabAt(3)?.customView = linearLayout4
-
+        (binding?.layoutPaymentOption.tablayout?.getTabAt(0)?.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.selected_solid_contest))
         binding?.layoutPaymentOption.tablayout.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

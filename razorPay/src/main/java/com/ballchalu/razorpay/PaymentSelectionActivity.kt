@@ -1,24 +1,18 @@
 package com.ballchalu.razorpay
-import android.content.Intent
-import androidx.core.view.isVisible
+
 import android.os.Bundle
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.ballchalu.razorpay.base.BaseActivity
+import com.ballchalu.razorpay.checkout.result.PaymentFailedDialog
+import com.ballchalu.razorpay.checkout.result.PaymentSucessDialog
 import com.ballchalu.razorpay.databinding.ActivityPayemtSelectionBinding
-import com.ballchalu.razorpay.method.card.CardFragment
-import com.ballchalu.shared.rxjava.RxBus
-import com.ballchalu.shared.rxjava.RxEvent
 import com.razorpay.Razorpay
-import timber.log.Timber
 
 class PaymentSelectionActivity : BaseActivity() {
-
+    var errorDesc: String? = null
     private lateinit var binding: ActivityPayemtSelectionBinding
     val razorPay: Razorpay? by lazy { Razorpay(this) }
 
@@ -37,14 +31,35 @@ class PaymentSelectionActivity : BaseActivity() {
         }
 
     }
-    fun onPaymentFailure(intent: Intent){
-        findNavController(R.id.nav_payment_host).popBackStack()
-        Toast.makeText(this,"PaymentFailure",Toast.LENGTH_LONG).show()
+
+    fun getError(desc: String) {
+        errorDesc = desc
+
     }
-    fun onPaymentSuccess(intent: Intent){
+
+    fun onPaymentFailure(data: String?) {
+
+        /*  data?.let {
+              val error = it.getStringExtra(Constants.ERROR_CODE)
+              val message = it.getStringExtra(Constants.ERROR_MESSAGE)
+              Toast.makeText(
+                  this,
+                  "Error $error  Message $message",
+                  Toast.LENGTH_LONG
+              ).show()
+          }*/
+        findNavController(R.id.nav_payment_host).popBackStack()
+        data?.let { getError(it) }
+        PaymentFailedDialog()
+            .show(supportFragmentManager, "PaymentFailedDialog")
+    }
+
+    fun onPaymentSuccess() {
 
         findNavController(R.id.nav_payment_host).popBackStack()
-        Toast.makeText(this,"PaymentSuccess",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "PaymentSuccess", Toast.LENGTH_LONG).show()
+        PaymentSucessDialog()
+            .show(supportFragmentManager, "PaymentFailedDialog")
     }
 
     override fun onDestroy() {
@@ -53,7 +68,7 @@ class PaymentSelectionActivity : BaseActivity() {
     }
 
 
-    }
+}
 
 
 

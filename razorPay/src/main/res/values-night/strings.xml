@@ -19,5 +19,7 @@
     <string name="Rs2000">\u20B9"2000"</string>
     <string name="total_coin">Total Coins</string>
     <string name="next">Next</string>
+    <string name="try_again">Try Again</string>
+    <string name="payment_failed">Your payment failed due to</string>
 
 </resources>

@@ -104,6 +104,9 @@
     <color name="color_light_stroke">#BEBEC1</color>
     <color name="light_blue_grey">#babee0</color>
     <color name="total_coins_text">#e36f10</color>
-
     <color name="color_package_card">#fff</color>
+    <color name="color_payment_result">#e4e4e4</color>
+    <color name="color_heading_result">#212121</color>
+    <color name="color_subtext_result">#716e6e</color>
+    <color name="midgreen">#4cad48</color>
 </resources>

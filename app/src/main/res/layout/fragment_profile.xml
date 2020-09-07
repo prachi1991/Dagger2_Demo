@@ -196,6 +196,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:gravity="center|start"
                         android:text="@string/coins"
+                        android:visibility="gone"
                         android:textColor="@color/profile_header_text"
                         android:textSize="@dimen/_12ssp" />
 
@@ -206,6 +207,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
+                        android:visibility="gone"
                         android:textColor="@color/color_text"
                         android:textSize="@dimen/_12ssp"
                         tools:text="40" />
@@ -218,6 +220,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:gravity="center|start"
                         android:text="@string/available_coin"
+                        android:visibility="gone"
                         android:textColor="@color/profile_header_text"
                         android:textSize="@dimen/_12ssp" />
 
@@ -228,6 +231,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center|start"
+                        android:visibility="gone"
                         android:textColor="@color/color_text"
                         android:textSize="@dimen/_12ssp"
                         tools:text="40" />

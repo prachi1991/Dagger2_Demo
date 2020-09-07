@@ -10,22 +10,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/rlParent"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
+
             android:layout_above="@+id/btnPayByCard"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvBankingList"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_stroke_fillwhite"
                 android:orientation="vertical"
-
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_netbanking" />
         </RelativeLayout>

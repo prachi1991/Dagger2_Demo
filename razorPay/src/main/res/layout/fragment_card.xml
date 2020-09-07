@@ -208,7 +208,7 @@
                                     android:layout_weight="1"
                                     android:ems="2"
                                     android:gravity="left"
-                                    android:hint="MM"
+                                    android:hint="MM/YY"
                                     android:inputType="number"
                                     android:maxLength="5"
                                     android:textColor="@color/black"

@@ -32,17 +32,7 @@ class CardFragment(price: String?) : BaseFragment() {
     private lateinit var binding: FragmentCardBinding
     private lateinit var viewModel: CardViewModel
     private var razorpay: Razorpay? = null
-    private val TOTAL_SYMBOLS = 19 // size of pattern 0000-0000-0000-0000
 
-    private val TOTAL_DIGITS = 16 // max numbers of digits in pattern: 0000 x 4
-
-    private val DIVIDER_MODULO =
-        5 // means divider position is every 5th symbol beginning with 1
-
-    private val DIVIDER_POSITION =
-        DIVIDER_MODULO - 1 // means divider position is every 4th symbol beginning with 0
-
-    private val DIVIDER = '-'
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

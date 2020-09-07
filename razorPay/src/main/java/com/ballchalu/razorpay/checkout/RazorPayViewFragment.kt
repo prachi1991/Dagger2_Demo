@@ -25,7 +25,6 @@ import com.razorpay.Razorpay
 import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
-
 class RazorPayViewFragment : BaseFragment(), PaymentResultListener {
 
     @Inject
@@ -115,17 +114,17 @@ class RazorPayViewFragment : BaseFragment(), PaymentResultListener {
             putExtra(Constants.ERROR_MESSAGE, error?.error?.description ?: errorDescription)
         }
         requireActivity().setResult(Activity.RESULT_CANCELED, intent)
-        (requireActivity() as PaymentSelectionActivity).onPaymentFailure(intent)
+        (requireActivity() as PaymentSelectionActivity).onPaymentFailure(error?.error?.description)
     }
 
     override fun onPaymentSuccess(razorpayPaymentId: String) {
         val intent = requireActivity().intent
-        Timber.d("OnPaymentSuccess ")
+        Timber.d("OnPaymentSuccess ${razorpayPaymentId}  ${amount}")
         intent.putExtra(Constants.RAZOR_PAY_ID, razorpayPaymentId)
         intent.putExtra(Constants.AMOUNT, amount)
         requireActivity().setResult(Activity.RESULT_OK, intent)
 
-        (requireActivity() as PaymentSelectionActivity).onPaymentSuccess(intent)
+        (requireActivity() as PaymentSelectionActivity).onPaymentSuccess()
 
     }
 
