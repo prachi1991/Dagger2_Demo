@@ -27,7 +27,6 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import timber.log.Timber
-import java.io.File
 import javax.inject.Inject
 
 
@@ -170,10 +169,26 @@ class EditProfileFragment : BaseFragment() {
 
 
     private fun openImageSelection() {
-        val values = arrayOf<CharSequence>(
-            GALLERY_PICKER,
-            CAMERA_PICKER
+
+        var values = arrayOf<CharSequence>(
+
         )
+        Timber.d("Tag123 ${binding.ivProfile.tag}")
+        if (binding.ivProfile.tag == 0) {
+            values = arrayOf<CharSequence>(
+                GALLERY_PICKER,
+                CAMERA_PICKER
+
+            )
+        } else {
+            values = arrayOf<CharSequence>(
+                GALLERY_PICKER,
+                CAMERA_PICKER, REMOVE
+
+            )
+        }
+
+
         val builder = MaterialAlertDialogBuilder(requireActivity(), R.style.MyMaterialAlertDialog)
         builder.setTitle("Choose Options")
         builder.setItems(values) { dialog, item ->
@@ -182,10 +197,22 @@ class EditProfileFragment : BaseFragment() {
             else if (item == 1) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQUEST_CAMERA_CODE)
+            } else if (item == 2) {
+                loadImage(R.drawable.ic_user)
+                viewModel.removeProfile(
+                    EditProfileReq(
+                        binding.edtFirstNameValue.text.toString(),
+                        binding.edtLastNameValue.text.toString(),
+                        binding.edtEmailValue.text.toString(),
+                        binding.edtUserNameValue.text.toString()
+                    )
+                    , null
+                )
             }
             dialog.dismiss()
+
         }
-        builder.setNegativeButton("Cancel") { dialog, which ->
+        builder.setNegativeButton("Ok") { dialog, which ->
             dialog.dismiss()
         }
         builder.show()

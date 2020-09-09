@@ -1,0 +1,1 @@
+[{"outputType":{"type":"MERGED_MANIFESTS"},"apkData":{"type":"MAIN","splits":[],"versionCode":1,"versionName":"1.0","enabled":true,"outputFile":"razorPay-prod.aar","fullName":"prod","baseName":"prod","dirName":""},"path":"../../library_manifest/prod/AndroidManifest.xml","properties":{"packageId":"com.ballchalu.razorpay","split":""}}]
