@@ -83,7 +83,7 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
     override fun onBuyNowClicked(bcCoinContest: BcCoinContest) {
         findNavController().navigate(R.id.paymentSelectionActivity)
 
-       // viewModel.callBuyNow(bcCoinContest)
+     //  viewModel.callBuyNow(bcCoinContest)
     }
 
     private fun openLogoutDialog() {

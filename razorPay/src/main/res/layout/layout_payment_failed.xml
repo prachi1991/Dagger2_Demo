@@ -50,9 +50,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_image"
-                android:fontFamily="@font/medium"
+                  fontPath="fonts/Roboto_Medium"
                 android:gravity="center"
-                android:text="@string/payment_completed"
+                android:text="@string/payment_fail"
                 android:textColor="@color/color_heading_result"
                 android:textSize="@dimen/_14ssp" />
 
@@ -60,6 +60,7 @@
                 android:id="@+id/tv_payment_failed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                fontPath="fonts/HelveticalNueue_Medium.ttf"
                 android:layout_below="@+id/tv_payment_completed"
                 android:gravity="center"
                 android:text="@string/payment_failed"
@@ -68,14 +69,15 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_try"
-                fontPath="fonts/Play-Regular.ttf"
-                android:layout_width="@dimen/_50sdp"
+                fontPath="fonts/HelveticalNueue_Medium.ttf"
+                android:layout_width="@dimen/_70sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_below="@+id/tv_payment_failed"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/background_round_treegreen_right"
+                android:background="@drawable/background_round_green"
                 android:gravity="center"
+
                 android:text="@string/try_again"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
@@ -86,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btn_try"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/medium"
+                  fontPath="fonts/Roboto_Medium"
                 android:gravity="center"
                 android:text="@string/ok"
                 android:textColor="@color/midgreen"

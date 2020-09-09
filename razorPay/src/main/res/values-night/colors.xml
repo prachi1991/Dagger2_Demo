@@ -106,5 +106,5 @@
     <color name="color_subtext_result">#babee0</color>
     <color name="color_heading_result">#ffff</color>
     <color name="midgreen">#4cad48</color>
-
+    <color name="color_remember">#ffff</color>
 </resources>

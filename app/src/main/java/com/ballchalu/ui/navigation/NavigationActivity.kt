@@ -199,6 +199,7 @@ class NavigationActivity : BaseActivity() {
         return NavigationUI.navigateUp(navController, binding.drawerLayout)
     }
 
+
     private fun setObservers() {
 //        binding.toolbar.setNavigationOnClickListener {
 //            toggleDrawer()

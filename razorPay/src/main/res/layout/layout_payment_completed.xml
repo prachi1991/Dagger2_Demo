@@ -41,6 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_image"
                 android:gravity="center"
+                fontPath="fonts/Roboto_Medium"
+                android:textColor="@color/color_heading_result"
                 android:text="@string/payment_completed" />
 
             <TextView
@@ -49,17 +51,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_payment_completed"
                 android:gravity="center"
+                fontPath="fonts/HelveticalNueue_Medium.ttf"
                 android:text="@string/payment_sucess" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnOk"
-                fontPath="fonts/Play-Regular.ttf"
+
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_below="@+id/tv_payment_success"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/background_round_treegreen_right"
+                fontPath="fonts/HelveticalNueue_Medium.ttf"
+                android:background="@drawable/background_round_green"
                 android:gravity="center"
                 android:text="@string/ok"
                 android:textAllCaps="false"

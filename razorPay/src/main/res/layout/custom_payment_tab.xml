@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:background="@color/color_content_1"
         android:layout_height="@dimen/_50sdp"
-        android:layout_below="@+id/toolbar"
         android:orientation="horizontal"
 
         android:weightSum="2">
@@ -19,20 +18,20 @@
             android:layout_margin="@dimen/_2sdp"
             android:layout_weight=".5"
             android:padding="@dimen/_3sdp"
-            android:background="@drawable/background_stroke_white"
-            android:orientation="vertical"
-           >
+            android:background="@drawable/back_solid_contest"
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_credit_card" />
 
-            <TextView
+               <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                   fontPath="fonts/Robotto_Regular.ttf"
                 android:text="@string/credit_card"
                 android:textColor="@color/deep_sky_blue" />
 
@@ -45,7 +44,7 @@
             android:layout_margin="@dimen/_2sdp"
             android:layout_weight=".5"
             android:padding="@dimen/_3sdp"
-            android:background="@drawable/background_stroke_white"
+            android:background="@drawable/back_solid_contest"
             android:orientation="vertical"
      >
 
@@ -57,10 +56,11 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_credit_card_2" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                fontPath="fonts/Robotto_Regular.ttf"
                 android:text="@string/debit_card"
                 android:textColor="@color/deep_sky_blue" />
         </LinearLayout>
@@ -72,7 +72,7 @@
             android:layout_margin="@dimen/_2sdp"
             android:layout_weight=".5"
             android:padding="@dimen/_3sdp"
-            android:background="@drawable/background_stroke_white"
+            android:background="@drawable/back_solid_contest"
             android:orientation="vertical"
            >
 
@@ -82,10 +82,11 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_surface1" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                fontPath="fonts/Robotto_Regular.ttf"
                 android:text="@string/net_banking"
                 android:textColor="@color/deep_sky_blue" />
         </LinearLayout>
@@ -97,20 +98,21 @@
             android:layout_weight=".5"
             android:padding="@dimen/_3sdp"
             android:id="@+id/ll_wallet"
-            android:background="@drawable/background_stroke_white"
+            android:background="@drawable/back_solid_contest"
             android:orientation="vertical"
 >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@drawable/image_5" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                fontPath="fonts/Robotto_Regular.ttf"
                 android:text="@string/wallet"
                 android:textColor="@color/deep_sky_blue" />
         </LinearLayout>

@@ -11,7 +11,7 @@
         <item name="android:statusBarColor">@color/color_status_bar</item>
         <item name="android:splitMotionEvents">false</item>
         <item name="android:textColor">@color/color_text</item>
-        <item name="android:fontFamily">@font/medium</item>
+
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:navigationBarColor">@color/color_navigation_bar</item>
         <item name="editTextColor">@color/color_text</item>
@@ -29,13 +29,11 @@
     </style>
 
     <style name="Base.Theme.AppTheme.menutitle" parent="TextAppearance.AppCompat.Medium">
-        <item name="fontPath">@string/font_play_bold</item>
-        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="fontPath">@string/font_bold</item>
+
     </style>
 
-    <string name="font_play_bold">\@fonts/Play-Bold.ttf</string>
-
-
+    <string name="font_bold">\@fonts/HelveticaNeue-Bold.ttf</string>
 
 
     <!-- Alert Dialog -->
@@ -84,17 +82,7 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <style name="ExpandedToolbarTitleStyle" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textSize">@dimen/_12ssp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">@font/play_bold</item>
-    </style>
 
-    <style name="CollapsedToolbarTitleStyle" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textSize">@dimen/_12ssp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:gravity">start</item>
-        <item name="android:fontFamily">@font/play_bold</item>
-        <item name="contentInsetLeft">0dp</item>
-    </style>
+
+
 </resources>

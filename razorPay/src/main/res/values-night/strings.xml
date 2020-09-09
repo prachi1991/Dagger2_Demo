@@ -21,5 +21,8 @@
     <string name="next">Next</string>
     <string name="try_again">Try Again</string>
     <string name="payment_failed">Your payment failed due to</string>
+    <string name="enter_cvv">Enter CVV</string>
+    <string name="two">200</string>
+    <string name="payment_fail">Payment Failed</string>
 
 </resources>

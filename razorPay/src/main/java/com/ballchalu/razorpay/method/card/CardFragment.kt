@@ -1,11 +1,13 @@
 package com.ballchalu.razorpay.method.card
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.razorpay.Constants
@@ -57,6 +59,7 @@ class CardFragment(price: String?) : BaseFragment() {
         razorpay = Razorpay(requireActivity())
 
         binding.btnPayByCard.setOnClickListener {
+            hideSoftKeyBoard()
             if(checkButton())
             onProcessDetails()
         }

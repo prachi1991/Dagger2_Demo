@@ -109,4 +109,5 @@
     <color name="color_heading_result">#212121</color>
     <color name="color_subtext_result">#716e6e</color>
     <color name="midgreen">#4cad48</color>
+    <color name="color_remember">#716e6e</color>
 </resources>

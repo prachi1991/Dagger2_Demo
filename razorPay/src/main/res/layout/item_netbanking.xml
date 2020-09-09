@@ -8,39 +8,46 @@
 
     <RelativeLayout
         android:id="@+id/rl_netbank"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_stroke_fillwhite"
         android:orientation="vertical"
 
-     >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:weightSum="1"
-    android:id="@+id/ll_bank"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="match_parent"
-        android:src="@drawable/axisbank"
-        android:layout_gravity="center"
-        android:layout_weight=".7"
-        android:layout_height="wrap_content"/>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvName"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="left|center"
-            android:layout_weight=".5"
-            android:textSize="@dimen/_12ssp"
-            android:textColor="@color/black"
-            tools:text="State bank" />
+        >
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_bank"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                android:layout_weight=".4"
+
+                android:src="@drawable/ic_axis_bank_logo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                fontPath="fonts/Roboto_Medium.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".6"
+                android:gravity="left|center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                tools:text="State bank" />
+
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height=".5dp"
+            android:layout_height="1dp"
             android:layout_below="@+id/ll_bank"
-            android:layout_marginTop="10dp"
+
             android:background="@color/light_grey" />
     </RelativeLayout>
 

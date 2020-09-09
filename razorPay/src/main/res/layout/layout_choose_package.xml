@@ -1,80 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
-    android:layout_marginLeft="@dimen/_10sdp"
+    android:layout_marginStart="@dimen/_10sdp"
     android:layout_marginTop="@dimen/_40sdp"
-    android:layout_marginRight="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_2sdp"
     android:background="@color/color_card_payment"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:padding="@dimen/_1sdp"
         android:weightSum="2">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_marginLeft="@dimen/_10sdp"
             android:orientation="vertical"
             android:padding="@dimen/_1sdp">
 
 
             <LinearLayout
-                android:layout_width="@dimen/_120sdp"
+                android:layout_width="@dimen/_110sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_weight=".5"
+
                 android:background="@drawable/back_solid_contest"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn5000"
+                    fontPath="fonts/HelveticaNeue-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
-                    android:fontFamily="@font/bold"
-                    android:gravity="center"
                     android:background="@drawable/back_solid_contest"
+
+                    android:gravity="center"
                     android:text="@string/Rs5000"
                     android:textAllCaps="false"
                     android:textColor="@color/color_content_text"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_13ssp" />
 
             </LinearLayout>
 
 
             <LinearLayout
-                android:layout_width="@dimen/_120sdp"
+                android:layout_width="@dimen/_110sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_weight=".5"
 
-                android:orientation="vertical"
-               >
+
+                android:orientation="vertical">
 
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn2000Rs"
+                    fontPath="fonts/HelveticaNeue-Bold.ttf"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
 
-                    android:fontFamily="@font/bold"
-                    android:gravity="center"
+                    android:layout_height="match_parent"
                     android:background="@drawable/back_solid_contest"
+                    android:gravity="center"
                     android:text="@string/Rs2000"
                     android:textAllCaps="false"
                     android:textColor="@color/color_content_text"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_13ssp" />
 
             </LinearLayout>
 
@@ -84,33 +86,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_weight="1"
-            android:layout_marginRight="@dimen/_10sdp"
             android:orientation="vertical"
             android:padding="@dimen/_1sdp">
 
 
             <LinearLayout
-                android:layout_width="@dimen/_120sdp"
+                android:layout_width="@dimen/_110sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_weight=".5"
+
                 android:background="@drawable/back_solid_contest"
-                android:orientation="vertical"
-             >
+                android:orientation="vertical">
 
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn1000Rs"
+                    fontPath="fonts/HelveticaNeue-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/back_solid_contest"
-                    android:fontFamily="@font/bold"
                     android:gravity="center"
-                    android:text="@string/Rs1000"
+                    android:text="@string/Rs5000"
                     android:textAllCaps="false"
                     android:textColor="@color/color_content_text"
-                    android:textSize="@dimen/_15ssp"
+                    android:textSize="@dimen/_13ssp"
 
                     />
 
@@ -118,26 +119,24 @@
 
 
             <LinearLayout
-                android:layout_width="@dimen/_120sdp"
+                android:layout_width="@dimen/_110sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_weight=".5"
                 android:background="@drawable/back_solid_contest"
-                android:orientation="vertical"
-              >
+                android:orientation="vertical">
 
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn3000Rs"
+                    fontPath="fonts/HelveticaNeue-Bold.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/back_solid_contest"
-                    android:fontFamily="@font/bold"
                     android:gravity="center"
                     android:text="@string/Rs3000"
                     android:textAllCaps="false"
                     android:textColor="@color/color_content_text"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_13ssp" />
 
             </LinearLayout>
 
@@ -147,7 +146,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_9sdp"
+        android:layout_marginEnd="@dimen/_9sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -156,65 +159,66 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
 
-            android:layout_marginLeft="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_3sdp"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/medium"
-                android:gravity="left"
-                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_margin="@dimen/_6sdp"
+                android:gravity="start"
                 android:text="@string/total_coin"
                 android:textColor="@color/total_coins_text"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_10ssp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bold"
-                android:gravity="left"
-                android:text="200"
-                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:layout_marginBottom="@dimen/_1sdp"
+                fontPath="fonts/HelveticaNeue-Bold.ttf"
+                android:gravity="start"
+                android:text="@string/two"
                 android:textColor="@color/color_content_text"
                 android:textSize="@dimen/_13ssp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
+                android:layout_marginBottom="@dimen/_1sdp"
                 android:background="@color/totalcoins_subtext" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                fontPath="fonts/HelveticaNeue.ttf"
+                android:gravity="start"
                 android:text="@string/your_total"
                 android:textColor="@color/totalcoins_subtext"
                 android:textSize="@dimen/_8ssp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-
-
             android:layout_weight="1"
             android:orientation="vertical">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnNext"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_2sdp"
-            android:layout_weight="1"
-            android:background="@drawable/background_round_green_right"
-            android:gravity="center"
-            android:text="@string/next"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_15sdp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNext"
+                fontPath="fonts/Roboto_Medium"
+                android:layout_width="@dimen/_88sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_20sdp"
+                android:background="@drawable/background_round_green"
+                android:gravity="center"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sdp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

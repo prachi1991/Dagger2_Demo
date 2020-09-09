@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -19,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.ballchalu.razorpay.Constants
+import com.ballchalu.razorpay.PaymentSelectionActivity
 import com.ballchalu.razorpay.R
 import com.ballchalu.razorpay.databinding.FragmentPaymentModeBinding
 import com.ballchalu.razorpay.method.banking.NetBankingFragment
@@ -30,7 +30,6 @@ import kotlinx.android.synthetic.main.layout_choose_package.view.*
 import kotlinx.android.synthetic.main.layout_payment_option.view.*
 import java.util.*
 import java.util.regex.Pattern
-
 
 class PaymentModeFragment : Fragment() {
     private var adapter: PaymentModeFragment.ViewPagerAdapter? = null
@@ -75,18 +74,24 @@ class PaymentModeFragment : Fragment() {
                     binding.cardviewChoosePackage,
                     AutoTransition()
                 )
+                setBackgroundCard()
                 binding.layoutPackage.visibility = View.VISIBLE
                 rotationAngle = if (rotationAngle == 0) 180 else 0 //toggle
                 binding.imgDropDown.animate().rotation(rotationAngle.toFloat()).setDuration(500)
                     .start()
             } else {
+                setBackgroundCard()
                 hideContestLayout();
             }
         }
+        setBackgroundCard()
         binding.cardviewPaymentOption.setOnClickListener {
             if (binding.layoutPaymentOption.visibility == View.GONE) {
+                setBackgroundCard()
                 setPaymentLayoutVissible()
+
             } else {
+                setBackgroundCard()
                 binding.layoutPaymentOption.visibility = View.GONE
                 rotationAnglePayment = if (rotationAnglePayment == 0) 180 else 0 //toggle
                 binding.imgDropDownOption.animate().rotation(rotationAnglePayment.toFloat())
@@ -107,13 +112,22 @@ class PaymentModeFragment : Fragment() {
             setPaymentLayoutVissible()
             hideContestLayout()
         }
+        (activity as PaymentSelectionActivity).getBackBtn().setOnClickListener {
+            (activity as PaymentSelectionActivity).onBackPressed()
+        }
         return binding.root
+    }
+
+    fun setBackgroundCard() {
+        binding.cardviewPaymentOption.setBackgroundDrawable(resources.getDrawable(R.drawable.background_card))
+        binding.cardviewChoosePackage.setBackgroundDrawable(resources.getDrawable(R.drawable.background_card))
     }
 
     fun callBack(bundle: Bundle) {
         findNavController().navigate(
             R.id.action_paymentModelFragment_to_razorPayViewFragment,
-            bundle)
+            bundle
+        )
     }
 
 
@@ -163,7 +177,6 @@ class PaymentModeFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
@@ -185,18 +198,22 @@ class PaymentModeFragment : Fragment() {
         binding?.layoutPaymentOption.tablayout?.getTabAt(1)?.customView = linearLayout2
         binding?.layoutPaymentOption.tablayout?.getTabAt(2)?.customView = linearLayout3
         binding?.layoutPaymentOption.tablayout?.getTabAt(3)?.customView = linearLayout4
-        (binding?.layoutPaymentOption.tablayout?.getTabAt(0)?.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.selected_solid_contest))
+        (binding?.layoutPaymentOption.tablayout?.getTabAt(0)?.customView as LinearLayout).setBackgroundDrawable(
+            resources.getDrawable(R.drawable.selected_solid_contest)
+        )
         binding?.layoutPaymentOption.tablayout.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                ( tab.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.selected_solid_contest))
+                (tab.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.selected_solid_contest))
 
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                ( tab.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.back_solid_contest))
+                (tab.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.back_solid_contest))
             }
+
             override fun onTabReselected(tab: TabLayout.Tab) {
-                ( tab.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.selected_solid_contest))
+                (tab.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.selected_solid_contest))
             }
 
         })

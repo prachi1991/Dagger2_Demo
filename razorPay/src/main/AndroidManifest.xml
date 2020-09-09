@@ -3,10 +3,11 @@
 
 
     <application>
+
         <activity android:name="com.ballchalu.razorpay.PaymentSelectionActivity" />
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_gv5v06DhD2WNlJ" />
+            android:value="rzp_test_Hp7ErFYxufCDEY" />
     </application>
 </manifest>
