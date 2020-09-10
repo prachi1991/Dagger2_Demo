@@ -1,6 +1,8 @@
 package com.ballchalu.shared.network.repository
 
 import com.ballchalu.shared.core.base.BaseRepository
+import com.ballchalu.shared.core.result.Results
+import com.ballchalu.shared.domain.user.UserRes
 import com.ballchalu.shared.network.ApiService
 import javax.inject.Inject
 
@@ -22,7 +24,13 @@ class ContestRepository @Inject constructor(
         },
         errorMessage = "Error occurred"
     )
-
+    suspend fun getUserDetails(): Results<UserRes> =
+        baseRepository.safeApiCall(
+            call = {
+                service.callUserAsync().await()
+            },
+            errorMessage = "Error occurred"
+        )
     suspend fun createUserMatchContest(matchId: String) = baseRepository.safeApiCall(
         call = {
             service.callCreateContestAsync(matchId).await()

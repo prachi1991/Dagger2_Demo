@@ -23,6 +23,7 @@ class ContestAdapter(
         fun onBuyNowClicked(contestModel: Contest)
         fun onPlayNowClicked(contestModel: Contest)
         fun onResultClicked(contestModel: Contest)
+        fun onClick(contestModel: Contest)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -101,8 +102,12 @@ class ContestAdapter(
                 val div: Float = spot?.toFloat()?.let { spotFilled?.toFloat()?.div(it) } ?: 0f
                 val percentage = div * 100
                 progressBar.progress = percentage.toInt()
+                parent.setOnClickListener {
+                    contest?.let { it1 -> onItemClickListener?.onClick(it1) }
+                }
             }
         }
+
     }
 
     fun clear() {

@@ -34,26 +34,40 @@
             android:indeterminateTintMode="src_atop"
             android:visibility="gone"
             tools:visibility="visible" />
+
+
+
+
         <LinearLayout
-            android:id="@+id/bottom_sheet_buy"
-            android:background="@drawable/back_solid_content_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="vertical">
+            android:id="@+id/ll_bottomsheet"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            android:background="@drawable/bottom_sheet_background_rounded"
+            android:orientation="vertical"
+
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_20sdp"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/img_close"
-                    android:layout_width="@dimen/_27sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:src="@drawable/ic_close"></ImageView>
+                <LinearLayout
+                    android:id="@+id/ll_close"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:background="@drawable/shape_btn_round">
 
+                    <ImageView
+                        android:id="@+id/img_close"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_close" />
+                </LinearLayout>
             </LinearLayout>
 
             <View
@@ -65,22 +79,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="fonts/HelveticalNueue_Medium.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/contest_price" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_contest_coins_value"
+                    fontPath="fonts/HelveticalNueue_Medium.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Rs 40" />
+                   />
 
             </LinearLayout>
 
@@ -88,52 +106,60 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:background="@color/text_color_grey" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="fonts/HelveticalNueue_Medium.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-
                     android:text="@string/available_coin" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_available_coins_value"
+                    fontPath="fonts/HelveticalNueue_Medium.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="20" />
+                 />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:background="@color/text_color_grey" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_20sdp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="fonts/HelveticalNueue_Medium.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
+
                     android:text="@string/add_coin" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
+                    fontPath="fonts/HelveticalNueue_Medium.ttf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -141,28 +167,35 @@
                     android:text="20" />
 
             </LinearLayout>
-
-            <TextView
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:visibility="gone"
+                android:background="@color/text_color_grey" />
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="fonts/HelveticalNueue.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="center"
                 android:lines="2"
+                android:singleLine="false"
                 android:text="@string/by_join" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAddCoin"
-                fontPath="fonts/Play-Regular.ttf"
+                fontPath="fonts/HelveticalNueue_Medium.ttf"
                 android:layout_width="@dimen/_150sdp"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/_30sdp"
+                android:layout_margin="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:layout_weight="1"
-                android:background="@drawable/background_round_green_right"
-                android:text="@string/add_coins"
+                android:background="@drawable/background_round_treegreen"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
         </LinearLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

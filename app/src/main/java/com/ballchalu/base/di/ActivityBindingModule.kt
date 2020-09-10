@@ -8,6 +8,7 @@ import com.ballchalu.razorpay.payment_mode.PaymentModeModule
 import com.ballchalu.shared.core.di.ActivityScoped
 import com.ballchalu.ui.bc_coins.BcCoinModule
 import com.ballchalu.ui.contest.ContestModule
+
 import com.ballchalu.ui.create_bet.CreateBetModule
 import com.ballchalu.ui.how_to_play.HowToPlayModule
 import com.ballchalu.ui.ledgers.BcCoinsLedgersModule
@@ -85,7 +86,8 @@ abstract class ActivityBindingModule {
             ChangePasswordModule::class,
             HowToPlayModule::class,
             PaymentCardModule::class,
-        PaymentNetBankingModule::class
+
+            PaymentNetBankingModule::class
 
 
         ]

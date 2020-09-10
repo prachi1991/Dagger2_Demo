@@ -93,5 +93,7 @@
     <color name="color_stroke_component4">#6b6d74</color>
     <color name="color_stroke_component5">#fff</color>
     <color name="color_light_stroke">#3a3f49</color>
-
+    <color name="bottomsheet_color">#1a1c28</color>
+    <color name="color_close">#1a1c28</color>
+    <color name="close_btn_background">#a9a9ad</color>
 </resources>

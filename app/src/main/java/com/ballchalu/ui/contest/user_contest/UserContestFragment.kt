@@ -48,7 +48,7 @@ class UserContestFragment : BaseFragment() {
             viewModel.isDeclared = it.getBoolean(ConstantsBase.KEY_DECLARED, false)
             viewModel.isMatchStarted = it.getBoolean(ConstantsBase.KEY_IS_MATCH_STARTED, false)
         }
-        binding.bottomSheetBuy.visibility = View.GONE
+        binding.llBottomsheet.visibility = View.GONE
         return binding.root
     }
 

@@ -8,9 +8,12 @@ import com.ballchalu.base.BaseViewModel
 import com.ballchalu.shared.core.result.Event
 import com.ballchalu.shared.core.result.Results
 import com.ballchalu.shared.domain.MatchListing
+import com.ballchalu.shared.domain.contest.Contest
 import com.ballchalu.shared.domain.contest.CreateContestRes
 import com.ballchalu.shared.domain.contest.MatchContestRes
 import com.ballchalu.shared.domain.contest.UserMatchContestRes
+import com.ballchalu.shared.domain.user.UserData
+import com.ballchalu.shared.domain.user.UserRes
 import com.ballchalu.shared.network.repository.ContestRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,15 +24,18 @@ class ContestViewModel @Inject constructor(
     val context: Context
 ) : BaseViewModel() {
 
+     lateinit var contestModel: Contest
     var allContest = 0
     var myContest = 0
-
+var  availablecoins:String?=null
     var matchItem: MatchListing? = null
     var isDeclared: Boolean = false
     var isMatchStarted: Boolean = false
 
     private val _matchContestResult = MutableLiveData<Event<MatchContestRes>>()
     val matchContestResult: LiveData<Event<MatchContestRes>> = _matchContestResult
+    private val _userDetails = MutableLiveData<Event<UserData?>>()
+    var userDetails: MutableLiveData<Event<UserData?>> = _userDetails
 
     fun getAllMatchesContest() {
         if (matchItem?.id == null) return
@@ -42,11 +48,23 @@ class ContestViewModel @Inject constructor(
             loading.postValue(Event(false))
         }
     }
+    private fun handleUserSuccess(data: UserRes) {
+        _userDetails.postValue(Event(data.user))
+    }
 
     private fun handleSuccess(result: MatchContestRes) {
         _matchContestResult.postValue(Event(result))
     }
-
+    fun callUserDetails() {
+        loading.postValue(Event(true))
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val result = contestRepository.getUserDetails()) {
+                is Results.Success -> handleUserSuccess(result.data)
+                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+            }
+            loading.postValue(Event(false))
+        }
+    }
     /*------------------------------------------------------------------End All Match Contest--------------------------------------------------------------*/
 
     private val _matchUserContestResult = MutableLiveData<Event<UserMatchContestRes>>()

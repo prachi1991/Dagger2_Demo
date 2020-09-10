@@ -22,6 +22,7 @@ import com.ballchalu.ui.contest.MainContestFragment
 import com.ballchalu.ui.contest.adapter.ContestAdapter
 import com.ballchalu.ui.navigation.NavigationViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import timber.log.Timber
 import javax.inject.Inject
 
 class ContestFragment : BaseFragment() {
@@ -55,28 +56,48 @@ class ContestFragment : BaseFragment() {
             viewModel.isDeclared = it.getBoolean(ConstantsBase.KEY_DECLARED, false)
         }
 
-        binding.imgClose.setOnClickListener {
+        /*binding.imgClose.setOnClickListener {
             binding.bottomSheetBuy.visibility = View.GONE
         }
         binding.btnAddCoin.setOnClickListener {
 
-        }
+        }*/
 
         return binding.root
+    }
+
+    private fun expandBottomSheet() {
+
+        bottomSheetBehavior.setHideable(true);
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSessionAdapterAdapter()
-        binding.bottomSheetBuy.visibility = View.VISIBLE
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.llBottomsheet)
+        hideBottomSheet()
+        //  binding.bottomSheetBuy.visibility = View.VISIBLE
         viewModel.createContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             model = activityViewModelProvider(viewModelFactory)
             model.userDetails.postValue(Event(it.userContest?.user))
+
+
             Toast.makeText(context, "You Successfully Buy Contest", Toast.LENGTH_SHORT).show()
             viewModel.getAllMatchesContest()
+
+
+        })
+        viewModel.userDetails.observe(viewLifecycleOwner, EventObserver { it ->
+            viewModel.availablecoins = it?.bc_coins.toString()
+            expandBottomSheet()
+            setDataToBottomSheet(viewModel.contestModel, it?.bc_coins.toString())
+            isAbletoBuyContest()
+
         })
         viewModel.matchContestResult.observe(viewLifecycleOwner, EventObserver { it ->
             contestAdapter?.clear()
+            it.contests
             it.contests?.count { it.isParticipated }?.let { count ->
                 onUserContest(count)
             }
@@ -92,8 +113,17 @@ class ContestFragment : BaseFragment() {
                 allContestList?.size?.let { it1 -> onAllContest(it1) }
                 contestAdapter?.setItemList(allContestList)
             }
-        })
 
+        })
+        binding.btnAddCoin.setOnClickListener {
+            hideBottomSheet();
+            setButtonClick()
+
+
+        }
+        binding.llClose.setOnClickListener {
+            hideBottomSheet();
+        }
         viewModel.loading.observe(viewLifecycleOwner, EventObserver {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
@@ -102,6 +132,44 @@ class ContestFragment : BaseFragment() {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
 
+    }
+
+    private fun setButtonClick() {
+        when (binding.btnAddCoin.text.toString()) {
+            getString(R.string.buy_now) -> {
+                Toast.makeText(activity, "buy", Toast.LENGTH_SHORT).show()
+            }
+            getString(R.string.add_coins) -> {
+                Toast.makeText(activity, "Add", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun setDataToBottomSheet(
+        contest: Contest,
+        availcoins: String
+    ) {
+        binding.tvContestCoinsValue.text = contest.getEntery()
+        binding.tvAvailableCoinsValue.text = availcoins
+
+
+    }
+
+    private fun isAbletoBuyContest() {
+        Timber.d("SetDataToBottomSheet  ${binding.tvContestCoinsValue.text}    ${binding.tvAvailableCoinsValue.text}")
+        val contestPrice = binding.tvContestCoinsValue.text.toString().replace(Regex("/-"), ".0")
+        val availablecoins = binding.tvAvailableCoinsValue.text.toString()
+        if (availablecoins.toDouble()
+                .compareTo(contestPrice.toDouble()) > 0
+        ) binding.btnAddCoin.setText(getString(R.string.buy_now))
+        else binding.btnAddCoin.setText(getString(R.string.add_coins))
+
+
+    }
+
+    private fun hideBottomSheet() {
+        bottomSheetBehavior.setHideable(true);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     private fun onUserContest(count: Int) {
@@ -134,6 +202,15 @@ class ContestFragment : BaseFragment() {
             override fun onResultClicked(contestModel: Contest) {
                 if (viewModel.isDeclared)
                     openMatchDetailsScreen(contestModel)
+            }
+
+            override fun onClick(contestModel: Contest) {
+                if (!contestModel.isParticipated) {
+                    viewModel.contestModel = contestModel
+                    viewModel.callUserDetails()
+                }
+
+
             }
         }, viewModel.isDeclared)
         binding.rvContest.adapter = contestAdapter
