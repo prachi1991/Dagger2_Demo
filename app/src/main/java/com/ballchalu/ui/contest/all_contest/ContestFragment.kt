@@ -137,10 +137,10 @@ class ContestFragment : BaseFragment() {
     private fun setButtonClick() {
         when (binding.btnAddCoin.text.toString()) {
             getString(R.string.buy_now) -> {
-                Toast.makeText(activity, "buy", Toast.LENGTH_SHORT).show()
+                viewModel.createUserMatchContest(viewModel.contestModel.id.toString())
             }
             getString(R.string.add_coins) -> {
-                Toast.makeText(activity, "Add", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.paymentSelectionActivity)
             }
         }
     }
@@ -151,20 +151,14 @@ class ContestFragment : BaseFragment() {
     ) {
         binding.tvContestCoinsValue.text = contest.getEntery()
         binding.tvAvailableCoinsValue.text = availcoins
-
-
     }
 
     private fun isAbletoBuyContest() {
-        Timber.d("SetDataToBottomSheet  ${binding.tvContestCoinsValue.text}    ${binding.tvAvailableCoinsValue.text}")
         val contestPrice = binding.tvContestCoinsValue.text.toString().replace(Regex("/-"), ".0")
         val availablecoins = binding.tvAvailableCoinsValue.text.toString()
-        if (availablecoins.toDouble()
-                .compareTo(contestPrice.toDouble()) > 0
-        ) binding.btnAddCoin.setText(getString(R.string.buy_now))
+        if (availablecoins.toDouble().compareTo(contestPrice.toDouble()) >=0)
+            binding.btnAddCoin.setText(getString(R.string.buy_now))
         else binding.btnAddCoin.setText(getString(R.string.add_coins))
-
-
     }
 
     private fun hideBottomSheet() {
