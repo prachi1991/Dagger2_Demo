@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import com.ballchalu.razorpay.PaymentSelectionActivity
+import com.ballchalu.razorpay.container.PaymentSelectionActivity
 import com.ballchalu.razorpay.R
 import com.ballchalu.razorpay.databinding.LayoutPaymentFailedBinding
 

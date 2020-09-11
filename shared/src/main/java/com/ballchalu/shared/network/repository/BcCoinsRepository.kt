@@ -6,7 +6,7 @@ import com.ballchalu.shared.domain.user.UserRes
 import com.ballchalu.shared.network.ApiService
 import javax.inject.Inject
 
-class BcCoinsRepository @Inject constructor(
+ class BcCoinsRepository @Inject constructor(
     private val service: ApiService,
     private val baseRepository: BaseRepository
 ) {

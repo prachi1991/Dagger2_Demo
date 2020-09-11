@@ -78,6 +78,6 @@ class BcCoinsViewModel @Inject constructor(
             _userDetails.postValue(Event(result.bc_coins_transaction?.user))
             _bcCoinBuyObserver.postValue(Event(result))
         }
-    }
+}
 
 }

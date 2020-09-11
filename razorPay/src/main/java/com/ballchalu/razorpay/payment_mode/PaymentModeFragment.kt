@@ -18,7 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.ballchalu.razorpay.Constants
-import com.ballchalu.razorpay.PaymentSelectionActivity
+import com.ballchalu.razorpay.container.PaymentSelectionActivity
 import com.ballchalu.razorpay.R
 import com.ballchalu.razorpay.databinding.FragmentPaymentModeBinding
 import com.ballchalu.razorpay.method.banking.NetBankingFragment
@@ -118,9 +118,11 @@ class PaymentModeFragment : Fragment() {
         return binding.root
     }
 
+
     fun setBackgroundCard() {
         binding.cardviewPaymentOption.setBackgroundDrawable(resources.getDrawable(R.drawable.background_card))
         binding.cardviewChoosePackage.setBackgroundDrawable(resources.getDrawable(R.drawable.background_card))
+
     }
 
     fun callBack(bundle: Bundle) {

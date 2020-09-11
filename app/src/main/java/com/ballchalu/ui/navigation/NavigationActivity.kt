@@ -20,11 +20,10 @@ import com.ballchalu.BuildConfig
 import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityNavigationBinding
-import com.ballchalu.ui.login.container.LoginActivity
-import com.ballchalu.utils.ThemeHelper
-import com.ballchalu.utils.Utils
+import com.ballchalu.razorpay.Constants
 import com.ballchalu.shared.core.result.EventObserver
 import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
+import com.ballchalu.shared.domain.bccoins.buy.BcCoinBuyRes
 import com.ballchalu.shared.domain.contest.UserContest
 import com.ballchalu.shared.domain.user.UserData
 import com.ballchalu.shared.rxjava.RxBus
@@ -32,8 +31,12 @@ import com.ballchalu.shared.rxjava.RxEvent
 import com.ballchalu.shared.util.ConstantsBase
 import com.ballchalu.shared.util.loadImage
 import com.ballchalu.shared.util.viewModelProvider
+import com.ballchalu.ui.login.container.LoginActivity
+import com.ballchalu.utils.ThemeHelper
+import com.ballchalu.utils.Utils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.disposables.Disposable
+import timber.log.Timber
 import java.lang.reflect.Field
 import javax.inject.Inject
 
@@ -67,10 +70,21 @@ class NavigationActivity : BaseActivity() {
         disposable = RxBus.listen(Any::class.java).subscribe { event ->
             when (event) {
                 ConstantsBase.TOKEN_EXPIRED -> viewModel.callLogout()
-                is RxEvent.BcCoin -> updateContestCoin(event.userContest)
+                is RxEvent.BcCoin ->
+                    when (event.action) {
+                        Constants.PAYMENT_SUCESSS -> {
+
+                            setHeaderUi((event.userContest as BcCoinBuyRes).bc_coins_transaction?.user)
+                        }
+                        Constants.MATCH_DETAILS -> {
+                            updateContestCoin(event.userContest as UserContest)
+                        }
+                    }
+
                 is RxEvent.UpdateProfile -> {
                     loadImage(event.bitmap, binding.ibProfile)
                 }
+
             }
         }
     }

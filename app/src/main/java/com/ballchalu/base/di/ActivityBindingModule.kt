@@ -1,7 +1,8 @@
 package com.ballchalu.base.di
 
-import com.ballchalu.razorpay.PaymentSelectionActivity
 import com.ballchalu.razorpay.checkout.RazorPayViewModule
+import com.ballchalu.razorpay.container.PaymentSelectionActivity
+import com.ballchalu.razorpay.container.PaymentSelectionModule
 import com.ballchalu.razorpay.method.banking.NetBankingModule
 import com.ballchalu.razorpay.method.card.CardModule
 import com.ballchalu.razorpay.payment_mode.PaymentModeModule
@@ -85,8 +86,7 @@ abstract class ActivityBindingModule {
             ChangePasswordModule::class,
             HowToPlayModule::class,
             PaymentCardModule::class,
-        PaymentNetBankingModule::class
-
+            PaymentNetBankingModule::class
 
         ]
     )
@@ -99,7 +99,8 @@ abstract class ActivityBindingModule {
             CardModule::class,
             PaymentModeModule::class,
             NetBankingModule::class,
-            RazorPayViewModule::class
+            RazorPayViewModule::class,
+            PaymentSelectionModule::class
         ]
     )
     internal abstract fun paymentSelectionActivity(): PaymentSelectionActivity

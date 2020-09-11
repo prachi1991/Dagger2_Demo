@@ -62,8 +62,9 @@ class ProfileListViewModel @Inject constructor(
         try {
             val url = URL(profileUrl)
             val image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            if(image!=null)
             _loadProfile.postValue(Event(image))
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             Timber.e(e)
         }
     }

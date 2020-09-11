@@ -1,18 +1,29 @@
-package com.ballchalu.razorpay
+package com.ballchalu.razorpay.container
 
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.ballchalu.razorpay.Constants
+import com.ballchalu.razorpay.R
 import com.ballchalu.razorpay.base.BaseActivity
 import com.ballchalu.razorpay.checkout.result.PaymentFailedDialog
 import com.ballchalu.razorpay.checkout.result.PaymentSucessDialog
 import com.ballchalu.razorpay.databinding.ActivityPayemtSelectionBinding
+import com.ballchalu.shared.core.result.Event
+import com.ballchalu.shared.core.result.EventObserver
+import com.ballchalu.shared.domain.bccoins.BcCoinContest
+import com.ballchalu.shared.domain.contest.UserContest
+import com.ballchalu.shared.rxjava.RxBus
+import com.ballchalu.shared.rxjava.RxEvent
+import com.ballchalu.shared.util.activityViewModelProvider
+import com.ballchalu.shared.util.viewModelProvider
 import com.razorpay.Razorpay
+import timber.log.Timber
+import javax.inject.Inject
 
 
 class PaymentSelectionActivity : BaseActivity() {
@@ -20,17 +31,23 @@ class PaymentSelectionActivity : BaseActivity() {
     private lateinit var binding: ActivityPayemtSelectionBinding
     val razorPay: Razorpay? by lazy { Razorpay(this) }
     private lateinit var navController: NavController
+    private lateinit var viewModel: PaymentSelectionViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPayemtSelectionBinding.inflate(layoutInflater).apply {
             lifecycleOwner = this@PaymentSelectionActivity
 
         }
+        viewModel = viewModelProvider(viewModelFactory)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-         navController = findNavController(R.id.nav_payment_host)
-        NavigationUI.setupWithNavController(binding.toolbar, navController)
+        getBcCoinData()
 
+        navController = findNavController(R.id.nav_payment_host)
+        NavigationUI.setupWithNavController(binding.toolbar, navController)
 
         NavigationUI.setupActionBarWithNavController(this, navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
@@ -42,25 +59,37 @@ class PaymentSelectionActivity : BaseActivity() {
         errorDesc = desc
 
     }
-fun getBackBtn(): ImageView {
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.bcCoinBuyObserver.observe(this, EventObserver {
+
+       RxBus.publish(RxEvent.BcCoin(it,Constants.PAYMENT_SUCESSS))
+
+    })
+    }
+    fun getBcCoinData() {
+        val model = intent.getParcelableExtra<BcCoinContest>(Constants.BC_COINS_ID)
+        Timber.d("stringExtra ${model.id}")
+        viewModel.bccoin = model
+    }
+
+    fun setCallBack() {
+
+
+    }
+
+    fun getBackBtn(): ImageView {
         return binding.imgBackbtn
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController,null)
+        return NavigationUI.navigateUp(navController, null)
     }
 
     fun onPaymentFailure(data: String?) {
 
-        /*  data?.let {
-              val error = it.getStringExtra(Constants.ERROR_CODE)
-              val message = it.getStringExtra(Constants.ERROR_MESSAGE)
-              Toast.makeText(
-                  this,
-                  "Error $error  Message $message",
-                  Toast.LENGTH_LONG
-              ).show()
-          }*/
+
         findNavController(R.id.nav_payment_host).popBackStack()
         data?.let { getError(it) }
         PaymentFailedDialog()
@@ -69,11 +98,10 @@ fun getBackBtn(): ImageView {
 
     fun onPaymentSuccess() {
 
+        viewModel.callBuyNow(viewModel.bccoin)
         findNavController(R.id.nav_payment_host).popBackStack()
-        Toast.makeText(this, "PaymentSuccess", Toast.LENGTH_LONG).show()
-
         PaymentSucessDialog()
-            .show(supportFragmentManager, "PaymentFailedDialog")
+            .show(supportFragmentManager, "PaymentSucessDialog")
     }
 
     override fun onDestroy() {

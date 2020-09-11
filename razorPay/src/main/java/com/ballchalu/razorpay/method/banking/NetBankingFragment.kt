@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.ballchalu.razorpay.Constants
-import com.ballchalu.razorpay.PaymentSelectionActivity
-import com.ballchalu.razorpay.R
 import com.ballchalu.razorpay.RazorParser
 import com.ballchalu.razorpay.base.BaseFragment
 import com.ballchalu.razorpay.databinding.FragmentNetBankingBinding

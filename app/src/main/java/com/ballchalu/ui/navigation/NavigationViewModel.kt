@@ -22,7 +22,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-class NavigationViewModel @Inject constructor(
+public class NavigationViewModel @Inject constructor(
     private val sharedPref: SharedPreferenceStorage,
     private val repository: LoginRepository
 ) :

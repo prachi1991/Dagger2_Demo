@@ -1,10 +1,11 @@
 package com.ballchalu.razorpay.payment_mode
 
 import androidx.lifecycle.ViewModel
+import com.ballchalu.razorpay.base.BaseViewModel
 import javax.inject.Inject
 
 class PaymentModeViewModel @Inject constructor(
-) : ViewModel() {
+) : BaseViewModel() {
 
 //    private val _userDetails = MutableLiveData<Event<UserData?>>()
 //    var userDetails: MutableLiveData<Event<UserData?>> = _userDetails

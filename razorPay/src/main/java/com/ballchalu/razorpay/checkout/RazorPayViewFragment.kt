@@ -12,7 +12,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ballchalu.razorpay.Constants
-import com.ballchalu.razorpay.PaymentSelectionActivity
+import com.ballchalu.razorpay.container.PaymentSelectionActivity
 import com.ballchalu.razorpay.base.BaseFragment
 import com.ballchalu.razorpay.checkout.model.RazorPayError
 import com.ballchalu.razorpay.databinding.FragmentRazorPayViewBinding
