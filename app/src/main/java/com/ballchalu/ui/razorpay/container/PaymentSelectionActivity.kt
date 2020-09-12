@@ -46,9 +46,8 @@ class PaymentSelectionActivity : com.ballchalu.base.BaseActivity() {
 
         navController = findNavController(R.id.nav_payment_host)
 
-        NavigationUI.setupWithNavController(binding.toolbar, navController)
+    /*    NavigationUI.setupWithNavController(binding.toolbar, navController)*/
 
-        NavigationUI.setupActionBarWithNavController(this, navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             binding.toolbar.isVisible = destination.id != R.id.razorPayViewFragment
         }
@@ -88,7 +87,6 @@ class PaymentSelectionActivity : com.ballchalu.base.BaseActivity() {
 
     fun getBcCoinData() {
         val model = intent.getParcelableExtra<BcCoinContest>(Constants.BC_COINS_ID)
-
         viewModel.bccoin = model
     }
 

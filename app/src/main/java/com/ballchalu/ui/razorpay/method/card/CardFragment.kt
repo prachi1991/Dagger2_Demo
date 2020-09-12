@@ -1,21 +1,19 @@
 package com.ballchalu.ui.razorpay.method.card
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.ballchalu.R
 import com.ballchalu.databinding.FragmentCardBinding
-import com.ballchalu.ui.razorpay.payment_mode.PaymentModeFragment
 import com.ballchalu.ui.razorpay.Constants
 import com.ballchalu.ui.razorpay.base.BaseFragment
 import com.ballchalu.ui.razorpay.model.PaymentDetailsModel
+import com.ballchalu.ui.razorpay.payment_mode.PaymentModeFragment
 import com.razorpay.Razorpay
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -60,12 +58,12 @@ class CardFragment(price: String?) : BaseFragment() {
 
         binding.btnPayByCard.setOnClickListener {
             hideSoftKeyBoard()
-            if(checkButton())
-            onProcessDetails()
+            if (checkButton())
+                onProcessDetails()
         }
-       binding.edtCardNumber.doAfterTextChanged {
-           it?.let { it1 -> formatCardNumber(it1) }
-          //  checkButton()
+        binding.edtCardNumber.doAfterTextChanged {
+            it?.let { it1 -> formatCardNumber(it1) }
+            //  checkButton()
 
         }
 
@@ -73,19 +71,20 @@ class CardFragment(price: String?) : BaseFragment() {
             it?.let { it1 -> formatDate(it1) }
 
         }
-
+        binding.checkbox.setOnClickListener {
+            hideSoftKeyBoard()
+        }
         binding.edtHolderName.doAfterTextChanged {
 
 
-       }
-
+        }
 
 
     }
 
-    fun formatDate(number:Editable){
+    fun formatDate(number: Editable) {
         if (number.toString() != current) {
-            val userInput = number.toString().replace(nonDigits,"")
+            val userInput = number.toString().replace(nonDigits, "")
             if (userInput.length <= 4) {
                 current = userInput.chunked(2).joinToString("/")
                 number?.filters = arrayOfNulls<InputFilter>(0)
@@ -94,9 +93,9 @@ class CardFragment(price: String?) : BaseFragment() {
         }
     }
 
-    fun formatCardNumber(number:Editable){
+    fun formatCardNumber(number: Editable) {
         if (number.toString() != current) {
-            val userInput = number.toString().replace(nonDigits,"")
+            val userInput = number.toString().replace(nonDigits, "")
             if (userInput.length <= 16) {
                 current = userInput.chunked(4).joinToString(" ")
                 number?.filters = arrayOfNulls<InputFilter>(0)
@@ -104,6 +103,7 @@ class CardFragment(price: String?) : BaseFragment() {
             number?.length?.let { it1 -> number.replace(0, it1, current, 0, current.length) }
         }
     }
+
     companion object {
         private val nonDigits = Regex("[^\\d]")
     }
@@ -111,18 +111,17 @@ class CardFragment(price: String?) : BaseFragment() {
     private fun onProcessDetails() {
 
 
-
         model = PaymentDetailsModel()
         model?.apply {
             cardname = binding.edtHolderName.text.toString().trim()
-            cardnumber = binding.edtCardNumber.text.toString().replace("\\s".toRegex(),"")
-            cardexpiryMonth = binding.edtExpiryDate.text.toString().substring(0,2)
-            cardexpiryYear =  binding.edtExpiryDate.text.toString().substring(3)
+            cardnumber = binding.edtCardNumber.text.toString().replace("\\s".toRegex(), "")
+            cardexpiryMonth = binding.edtExpiryDate.text.toString().substring(0, 2)
+            cardexpiryYear = binding.edtExpiryDate.text.toString().substring(3)
             cardcvv = binding.edtCvv.text.toString().trim()
             amount = getAmountFromParent()
-            method=Constants.TYPE_CARD
-            email="john@gmail.com"
-            contact="8888888888"
+            method = Constants.TYPE_CARD
+            email = "john@gmail.com"
+            contact = "8888888888"
 
         }
         try {
@@ -152,44 +151,45 @@ class CardFragment(price: String?) : BaseFragment() {
 
 
     }
-fun ValidateExpiryDate():Boolean{
-   if(binding.edtExpiryDate.text.length==5)
-       {
-           val sdf = SimpleDateFormat("MM/yy")
-           val strDate = sdf.parse(binding?.edtExpiryDate?.text?.toString())
-           Timber.d("ValidateExpiryDate123   ${strDate}     ${Date()}")
-           return  ( Date().before(strDate))
-       }
-    return false
-}
-    private fun checkButton() :Boolean{
+
+    fun ValidateExpiryDate(): Boolean {
+        if (binding.edtExpiryDate.text.length == 5) {
+            val sdf = SimpleDateFormat("MM/yy")
+            val strDate = sdf.parse(binding?.edtExpiryDate?.text?.toString())
+            Timber.d("ValidateExpiryDate123   ${strDate}     ${Date()}")
+            return (Date().before(strDate))
+        }
+        return false
+    }
+
+    private fun checkButton(): Boolean {
 
 
         var enable = true
-        if (binding.edtCardNumber.text.toString().isEmpty()){
+        if (binding.edtCardNumber.text.toString().isEmpty()) {
             enable = false
-            binding.edtCardNumber.error=getString(R.string.validation_cardnumber)
+            binding.edtCardNumber.error = getString(R.string.validation_cardnumber)
         }
 
-        if (binding.edtExpiryDate.text.toString().isEmpty()){
+        if (binding.edtExpiryDate.text.toString().isEmpty()) {
 
             enable = false
-            binding.edtExpiryDate.error=getString(R.string.validation_expirydate)
+            binding.edtExpiryDate.error = getString(R.string.validation_expirydate)
         }
-        if (!ValidateExpiryDate()){
+        if (!ValidateExpiryDate()) {
             enable = false
-            binding.edtExpiryDate.error=getString(R.string.validation_expirydate)
+            binding.edtExpiryDate.error = getString(R.string.validation_expirydate)
         }
-        if (binding.edtHolderName.text.toString().isEmpty()){
-            binding.edtHolderName.error=getString(R.string.validation_cardholder)
-            enable = false
-        }
-        if (!(binding.edtCvv.text.toString().length==3)){
-            binding.edtCvv.error=getString(R.string.validation_cvv)
+        if (binding.edtHolderName.text.toString().isEmpty()) {
+            binding.edtHolderName.error = getString(R.string.validation_cardholder)
             enable = false
         }
-        if (!binding.checkbox.isChecked){
-           binding.checkbox.error=getString(R.string.checkbox)
+        if (!(binding.edtCvv.text.toString().length == 3)) {
+            binding.edtCvv.error = getString(R.string.validation_cvv)
+            enable = false
+        }
+        if (!binding.checkbox.isChecked) {
+            binding.checkbox.error = getString(R.string.checkbox)
             enable = false
         }
         return enable

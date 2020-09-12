@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                   
+
+    
+
+           
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical" android:tag="layout/fragment_net_banking_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+
+        <RelativeLayout
+            android:id="@+id/rlParent"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnPayByCard"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_popularbank"
+                android:layout_width="wrap_content"
+                android:textColor="@color/color_heading_result"
+                android:textSize="@dimen/_12ssp"
+                   fontPath="fonts/Roboto_Regular.ttf"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="Popular Banks" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBankingList"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/tv_popularbank"
+                android:background="@drawable/background_stroke_fillwhite"
+                android:orientation="vertical"
+
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_netbanking" />
+        </RelativeLayout>
+    </RelativeLayout>
+         

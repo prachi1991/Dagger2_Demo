@@ -21,6 +21,12 @@ import com.ballchalu.ui.profile.container.ProfileContainerModule
 import com.ballchalu.ui.profile.details.ProfileModule
 import com.ballchalu.ui.profile.edit.EditProfileModule
 import com.ballchalu.ui.profile.menu.ProfileListModule
+import com.ballchalu.ui.razorpay.checkout.RazorPayViewModule
+import com.ballchalu.ui.razorpay.container.PaymentSelectionActivity
+import com.ballchalu.ui.razorpay.container.PaymentSelectionModule
+import com.ballchalu.ui.razorpay.method.banking.NetBankingModule
+import com.ballchalu.ui.razorpay.method.card.CardModule
+import com.ballchalu.ui.razorpay.payment_mode.PaymentModeModule
 import com.ballchalu.ui.splash.SplashActivity
 import com.ballchalu.ui.splash.SplashModule
 import com.ballchalu.ui.winners.WinnerModule
@@ -98,8 +104,10 @@ abstract class ActivityBindingModule {
             ProfileModule ::class,
             ProfileListModule::class,
             ProfileContainerModule::class,
-            EditProfileModule::class
+            EditProfileModule::class,
+            BcCoinModule::class,
+            MatchListingModule::class
         ]
     )
-    internal abstract fun paymentSelectionActivity(): PaymentSelectionActivity
+    abstract fun paymentSelectionActivity(): PaymentSelectionActivity
 }
