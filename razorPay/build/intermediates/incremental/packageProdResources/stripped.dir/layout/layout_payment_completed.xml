@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_package_card" android:tag="layout/layout_payment_completed_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/color_payment_result"
+            android:padding="@dimen/_30sdp">
+            <LinearLayout
+                android:id="@+id/ll_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/img_buble"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:gravity="center"
+                android:background="@drawable/ic_soap_bubbles"
+                android:orientation="vertical" >
+                <ImageView
+                    android:id="@+id/img_sucess"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_correct" />
+            </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_payment_completed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_image"
+                android:gravity="center"
+                fontPath="fonts/Roboto_Medium"
+                android:textColor="@color/color_heading_result"
+                android:text="@string/payment_completed" />
+
+            <TextView
+                android:id="@+id/tv_payment_success"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_payment_completed"
+                android:gravity="center"
+                fontPath="fonts/HelveticalNueue_Medium.ttf"
+                android:text="@string/payment_sucess" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnOk"
+
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_below="@+id/tv_payment_success"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                fontPath="fonts/HelveticalNueue_Medium.ttf"
+                android:background="@drawable/background_round_green"
+                android:gravity="center"
+                android:text="@string/ok"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+         

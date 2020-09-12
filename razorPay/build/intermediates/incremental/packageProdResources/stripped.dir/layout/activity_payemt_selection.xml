@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                   
+
+    
+
+           
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:tag="layout/activity_payemt_selection_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/color_toolbar"
+            app:contentInsetStart="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+
+
+                <ImageView
+                    android:id="@+id/img_backbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/ic_icon_material_arrow_back" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ibProfile"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/_7sdp"
+                    android:src="@drawable/ic_user"
+                    app:civ_border_color="@color/color_text"
+                    app:civ_border_width="1dp"
+                    tools:src="@color/text_color_grey" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+
+        <fragment
+            android:id="@+id/nav_payment_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/payment_navigation" />
+
+    </RelativeLayout>
+
+
+         

@@ -54,12 +54,12 @@ class EditProfileViewModel @Inject constructor(
             loading.postValue(Event(false))
         }
     }
-    fun removeProfile(editProfileReq: EditProfileReq, drawable: Drawable?) {
+    fun removeProfile(editProfileReq: EditProfileReq) {
 
-        editProfileReq.image = "null"
+        editProfileReq.image = ""
         loading.postValue(Event(true))
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = repository.callSaveProfile(editProfileReq)) {
+            when (val result = repository.removeProfileImage(editProfileReq)) {
                 is Results.Success -> handleEditProfileSuccess(result.data)
                 is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
             }

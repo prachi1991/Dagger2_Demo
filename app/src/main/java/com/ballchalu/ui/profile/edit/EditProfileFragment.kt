@@ -198,7 +198,7 @@ class EditProfileFragment : BaseFragment() {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQUEST_CAMERA_CODE)
             } else if (item == 2) {
-                loadImage(R.drawable.ic_user)
+
                 viewModel.removeProfile(
                     EditProfileReq(
                         binding.edtFirstNameValue.text.toString(),
@@ -206,7 +206,7 @@ class EditProfileFragment : BaseFragment() {
                         binding.edtEmailValue.text.toString(),
                         binding.edtUserNameValue.text.toString()
                     )
-                    , null
+
                 )
             }
             dialog.dismiss()

@@ -70,5 +70,11 @@ class LoginRepository @Inject constructor(
         },
         errorMessage = "Error occurred"
     )
+    suspend fun removeProfileImage(editProfileReq: EditProfileReq) = baseRepository.safeApiCall(
+        call = {
+            service.removeProfileImage(editProfileReq).await()
+        },
+        errorMessage = "Error occurred"
+    )
 
 }
