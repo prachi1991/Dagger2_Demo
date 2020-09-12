@@ -143,4 +143,36 @@
     <string name="next">Next</string>
     <string name="total_coins">Total Coins</string>
     <string name="your_total">"Your total coins will be calculated \n on the basis of package selected "</string>
+
+
+    //razorpay
+
+    <string name="card_number_hint">xxxx-xxxx-xxxx-xxxx</string>
+    <string name="valid">Valid through</string>
+    <string name="card_name">Name on card</string>
+    <string name="playnow">Play Now</string>
+    <string name="remember">Remember this card</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="debit_card">Debit Card</string>
+    <string name="net_banking">Net Banking</string>
+    <string name="wallet">Wallet</string>
+    <string name="enter_name">Enter the card holder name</string>
+    <string name="payment_completed">Payment Completed</string>
+    <string name="payment_sucess">Your payment was successfully \n  completed \n you can join the contest</string>
+    <string name="ok">OK</string>
+    <string name="try_again">Try Again</string>
+    <string name="validation_expirydate">Please enter expirydate</string>
+    <string name="validation_cardnumber">Please enter card number</string>
+    <string name="validation_cardholder">Please enter valid  expirydate</string>
+    <string name="validation_cvv">"Please enter a valid cvv "</string>
+    <string name="checkbox">Please check checkbox</string>
+    <string name="Rs1000">\u20B9"1000"</string>
+    <string name="Rs2000">\u20B9"2000"</string>
+    <string name="Rs3000">\u20B9"3000"</string>
+    <string name="Rs5000">\u20B9"5000"</string>
+    <string name="total_coin">Total Coins</string>
+    <string name="payment_failed">Your payment failed due to</string>
+    <string name="enter_cvv">Enter CVV</string>
+    <string name="two">200</string>
+    <string name="payment_fail">Payment Failed</string>
 </resources>

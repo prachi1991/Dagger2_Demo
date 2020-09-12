@@ -43,7 +43,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_Hp7ErFYxufCDEY" />
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 
         <activity
@@ -63,6 +65,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.ballchalu.ui.razorpay.container.PaymentSelectionActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+          />
     </application>
 
 </manifest>

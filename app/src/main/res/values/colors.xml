@@ -2,91 +2,90 @@
 <resources>
 
     <color name="colorPrimary">#fff</color>
-<color name="colorSecondary">#4E4D4D</color>
-<color name="colorPrimaryDark">#fff</color>
-<color name="colorAccent">#bc8b43</color>
+    <color name="colorSecondary">#4E4D4D</color>
+    <color name="colorPrimaryDark">#fff</color>
+    <color name="colorAccent">#bc8b43</color>
 
 
-
-<color name="text_color_grey">#999</color>
-<color name="dark_grey">#3a3f49</color>
-<color name="light_grey">#333743</color>
+    <color name="text_color_grey">#999</color>
+    <color name="dark_grey">#3a3f49</color>
+    <color name="light_grey">#333743</color>
 
 
     <!--___________________________SortedColor____________________________________________________________-->
 
-<color name="color_navigation_bar">#292d38</color>
-<color name="color_splash_screen">#888888</color>
-<color name="color_status_bar">#292d38</color>
-<color name="color_window_background">#fff</color>
-<color name="color_toolbar">#6e6e6e</color>
-<color name="color_sub_toolbar">#BEBEC1</color>
-<color name="color_primary2">#fff</color>
-<color name="menu_header_background">#DFDEDE</color>
-<color name="color_drawer_sub_comp">#ffffff</color>
-<color name="color_eye">#292d38</color>
-<color name="background_card">#BEBEC1</color>
-<color name="green">#1d7116</color>
-<color name="text_light_green">#1d7116</color>
-<color name="menu_light_green">#64b000</color>
-<color name="white">#fff</color>
-<color name="red">#ff5a5a</color>
-<color name="orange">#FF9800</color>
-<color name="color_accent">#83703B</color>
-<color name="color_text">#292d38</color>
-<color name="color_text_secondary">#292d38</color>
-<color name="drawer_text_color">#1d7116</color>
-<color name="contest_tab">#292d38</color>
-<color name="black">#000</color>
+    <color name="color_navigation_bar">#292d38</color>
+    <color name="color_splash_screen">#888888</color>
+    <color name="color_status_bar">#292d38</color>
+    <color name="color_window_background">#fff</color>
+    <color name="color_toolbar">#6e6e6e</color>
+    <color name="color_sub_toolbar">#BEBEC1</color>
+    <color name="color_primary2">#fff</color>
+    <color name="menu_header_background">#DFDEDE</color>
+    <color name="color_drawer_sub_comp">#ffffff</color>
+    <color name="color_eye">#292d38</color>
+    <color name="background_card">#BEBEC1</color>
+    <color name="green">#1d7116</color>
+    <color name="text_light_green">#1d7116</color>
+    <color name="menu_light_green">#64b000</color>
+    <color name="white">#fff</color>
+    <color name="red">#ff5a5a</color>
+    <color name="orange">#FF9800</color>
+    <color name="color_accent">#83703B</color>
+    <color name="color_text">#292d38</color>
+    <color name="color_text_secondary">#292d38</color>
+    <color name="drawer_text_color">#1d7116</color>
+    <color name="contest_tab">#292d38</color>
+    <color name="black">#000</color>
 
-<color name="light_white_color">#888888</color>
+    <color name="light_white_color">#888888</color>
 
-<color name="menu_icon_color">#888888</color>
+    <color name="menu_icon_color">#888888</color>
 
-<color name="profile_menu_text_color">#292D38</color>
-<color name="profile_menu_icon_color">#292D38</color>
-<color name="profile_header_text">#274895</color>
-<color name="profile_background">#EDEEEF</color>
-<color name="profile_card">#fff</color>
+    <color name="profile_menu_text_color">#292D38</color>
+    <color name="profile_menu_icon_color">#292D38</color>
+    <color name="profile_header_text">#274895</color>
+    <color name="profile_background">#EDEEEF</color>
+    <color name="profile_card">#fff</color>
 
     <!--Login-->
-<color name="trans_color_window_background">#B3EAEAEA</color>
-<color name="login_button_solid">#dbdbdb</color>
-<color name="login_button_corner">#3d64a2</color>
-<color name="login_edit_text_color">#000</color>
-<color name="login_blue_color">#8EBCFF</color>
-<color name="login_blue_text">#3a3f49</color>
-<color name="login_divider">#657997</color>
-<color name="login_light_blue_text">#3a3f49</color>
+    <color name="trans_color_window_background">#B3EAEAEA</color>
+    <color name="login_button_solid">#dbdbdb</color>
+    <color name="login_button_corner">#3d64a2</color>
+    <color name="login_edit_text_color">#000</color>
+    <color name="login_blue_color">#8EBCFF</color>
+    <color name="login_blue_text">#3a3f49</color>
+    <color name="login_divider">#657997</color>
+    <color name="login_light_blue_text">#3a3f49</color>
 
     <!--Bets drawer-->
-<color name="bets_toolbar">#6e6e6e</color>
-<color name="bets_divider">#6e6e6e</color>
-<color name="bets_background_component">#BEBEC1</color>
+    <color name="bets_toolbar">#6e6e6e</color>
+    <color name="bets_divider">#6e6e6e</color>
+    <color name="bets_background_component">#BEBEC1</color>
 
-<color name="background_component">#BEBEC1</color>
-<color name="how_to_play_content">#DFDEDE</color>
+    <color name="background_component">#BEBEC1</color>
+    <color name="how_to_play_content">#DFDEDE</color>
 
-<color name="profile_divider">#dbdbdb</color>
+    <color name="profile_divider">#dbdbdb</color>
 
     <!--icons-->
-<color name="close_icon">#20262d</color>
+    <color name="close_icon">#20262d</color>
     <color name="color_contest">#ffffff</color>
-<color name="color_sub_component1">#ffffff</color>
-<color name="color_sub_component2">#BEBEC1</color>
-<color name="color_sub_component3">#ffffff</color>
-<color name="color_sub_component4">#BEBEC1</color>
-<color name="color_sub_component5">#878686</color>
-<color name="color_sub_component6">#BEBEC1</color>
-<color name="color_sub_component7">#BEBEC1</color>
-<color name="color_sub_component8">#BEBEC1</color>
-<color name="color_sub_component9">#DFDEDE</color>
-<color name="color_sub_component10">#BEBEC1</color>
+    <color name="color_sub_component1">#ffffff</color>
+    <color name="color_sub_component2">#BEBEC1</color>
+    <color name="color_sub_component3">#ffffff</color>
+    <color name="color_sub_component4">#BEBEC1</color>
+    <color name="color_sub_component5">#878686</color>
+    <color name="color_sub_component6">#BEBEC1</color>
+    <color name="color_sub_component7">#BEBEC1</color>
+    <color name="color_sub_component8">#BEBEC1</color>
+    <color name="color_sub_component9">#DFDEDE</color>
+    <color name="color_sub_component10">#BEBEC1</color>
     <color name="contest_btn_selector">#e36f10</color>
-<color name="color_header_component1">#DFDEDE</color>
-<color name="color_header_component2">#DFDEDE</color>
+    <color name="color_header_component1">#DFDEDE</color>
+    <color name="color_header_component2">#DFDEDE</color>
     <color name="color_content_text">#000000</color>
-<color name="color_content_1">#BEBEC1</color>
+    <color name="color_content_1">#BEBEC1</color>
 
 <color name="color_stroke_component1">#888888</color>
 <color name="color_stroke_component2">#DFDEDE</color>
@@ -97,4 +96,23 @@
     <color name="close_btn_background">#f2f2f2</color>
 <color name="color_light_stroke">#BEBEC1</color>
 
-    </resources>
+
+    // razor pay
+
+    <color name="mid_green">#4cad48</color>
+    <color name="deep_sky_blue">#0080ff</color>
+    <color name="tree_green">#357318</color>
+    <color name="color_blue_grey">#6c7b95</color>
+    <color name="warm_grey_two">#9f9f9f</color>
+    <color name="outline_tab">#716e6e</color>
+    <color name="color_card_payment">#c1c1c1</color>
+    <color name="totalcoins_subtext">#716e6e</color>
+    <color name="light_blue_grey">#babee0</color>
+    <color name="total_coins_text">#e36f10</color>
+    <color name="color_package_card">#fff</color>
+    <color name="color_payment_result">#e4e4e4</color>
+    <color name="color_heading_result">#212121</color>
+    <color name="color_subtext_result">#716e6e</color>
+    <color name="midgreen">#4cad48</color>
+    <color name="color_remember">#716e6e</color>
+</resources>

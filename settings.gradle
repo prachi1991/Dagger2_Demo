@@ -1,4 +1,4 @@
-include ':razorPay'
+
 include ':app'
 include ':shared'
 rootProject.name='Demo'

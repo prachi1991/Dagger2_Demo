@@ -71,8 +71,7 @@ class AppModule {
     }
 
     @Singleton
-    @Provides
-    fun providesMqttConnection(
+    @Provides    fun providesMqttConnection(
         context: Context,
         mqttAndroidClient: MqttAndroidClient,
         mqttConnectOptions: MqttConnectOptions

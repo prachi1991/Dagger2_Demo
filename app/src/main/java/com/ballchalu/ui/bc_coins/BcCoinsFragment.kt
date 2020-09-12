@@ -9,17 +9,19 @@ import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentBcCoinsBinding
-import com.ballchalu.ui.bc_coins.adapter.BcCoinAdapter
-import com.ballchalu.ui.navigation.NavigationViewModel
-import com.bumptech.glide.Glide
+import com.ballchalu.ui.razorpay.Constants
 import com.ballchalu.shared.core.result.Event
 import com.ballchalu.shared.core.result.EventObserver
 import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
 import com.ballchalu.shared.domain.bccoins.BcCoinContest
 import com.ballchalu.shared.util.activityViewModelProvider
 import com.ballchalu.shared.util.viewModelProvider
+import com.ballchalu.ui.bc_coins.adapter.BcCoinAdapter
+import com.ballchalu.ui.navigation.NavigationViewModel
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
+
 
 /**
  * A simple [BcCoinsFragment] subclass.
@@ -27,8 +29,10 @@ import javax.inject.Inject
 class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
 
     private var bcCoinAdapter: BcCoinAdapter? = null
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     @Inject
     lateinit var sharedPreferenceStorage: SharedPreferenceStorage
 
@@ -62,13 +66,13 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
                 .load(it?.profileUrl)
                 .into(binding.imgUserprofile)
 
-            binding.tvEmail.text = it?.firstName +" "+it?.lastName
+            binding.tvEmail.text = it?.firstName + " " + it?.lastName
             binding.tvBcCoinBalance.text = it?.bc_coins.toString()
         })
         viewModel.bcCoinBuyObserver.observe(viewLifecycleOwner, EventObserver {
             model = activityViewModelProvider(viewModelFactory)
             model.userDetails.postValue(Event(it.bc_coins_transaction?.user))
-            openLogoutDialog()
+         //   openLogoutDialog()
         })
 
         viewModel.callUserDetails()
@@ -81,12 +85,15 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
     }
 
     override fun onBuyNowClicked(bcCoinContest: BcCoinContest) {
-        findNavController().navigate(R.id.paymentSelectionActivity)
+        findNavController().navigate(R.id.paymentSelectionActivity, Bundle().apply {
+            putParcelable(Constants.BC_COINS_ID, bcCoinContest)
+        })
 
-     //  viewModel.callBuyNow(bcCoinContest)
+        viewModel.callBuyNow(bcCoinContest)
     }
 
-    private fun openLogoutDialog() {
+
+    /*private fun openLogoutDialog() {
         val builder = MaterialAlertDialogBuilder(context, R.style.MyMaterialAlertDialog)
         builder.setTitle(R.string.dialog_title)
         builder.setMessage(R.string.dialog_desc)
@@ -96,5 +103,5 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
         }
         builder.show()
 
-    }
+    }*/
 }

@@ -30,7 +30,11 @@
         android:id="@+id/nav_bc_coins"
         android:name="com.ballchalu.ui.bc_coins.BcCoinsFragment"
         android:label="BcCoinsFragment"
-        tools:layout="@layout/fragment_bc_coins" />
+        tools:layout="@layout/fragment_bc_coins" >
+        <action
+            android:id="@+id/action_nav_bc_coins_to_paymentSelectionActivity"
+            app:destination="@id/paymentSelectionActivity" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_winners"
@@ -70,9 +74,11 @@
     <dialog
         android:id="@+id/nav_profile_list"
         android:name="com.ballchalu.ui.profile.container.ProfileContainerBottomSheet"
-        tools:layout="@layout/fragment_profile_list" />
+        tools:layout="@layout/fragment_profile_list" >
+
+    </dialog>
    <activity
         android:id="@+id/paymentSelectionActivity"
-        android:name="com.ballchalu.razorpay.PaymentSelectionActivity"
+        android:name="com.ballchalu.ui.razorpay.container.PaymentSelectionActivity"
         android:label="PaymentSelectionActivity"/>
 </navigation>

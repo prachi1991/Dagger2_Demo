@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/cardFragment"
-        android:name="com.ballchalu.razorpay.method.card.CardFragment"
+        android:name="com.ballchalu.ui.razorpay.method.card.CardFragment"
         android:label="Card Details"
         tools:layout="@layout/fragment_card">
         <action
@@ -44,11 +44,11 @@
     </fragment>
     <activity
         android:id="@+id/paymentSelectionActivity"
-        android:name="com.ballchalu.razorpay.PaymentSelectionActivity"
+        android:name="com.ballchalu.ui.razorpay.container.PaymentSelectionActivity"
         android:label="PaymentSelectionActivity"/>
     <fragment
         android:id="@+id/razorPayViewFragment"
-        android:name="com.ballchalu.razorpay.checkout.RazorPayViewFragment"
+        android:name="com.ballchalu.ui.razorpay.checkout.RazorPayViewFragment"
         android:label="RazorPayViewFragment"
         tools:layout="@layout/fragment_razor_pay_view" />
 </navigation>
