@@ -76,5 +76,6 @@ open class ApiService @Inject constructor(
     fun callSaveProfileAsync(editProfileReq: EditProfileReq) =
         apiClient.callSaveProfileAsync(editProfileReq)
 
-
+    fun removeProfileImage(editProfileReq: EditProfileReq) =
+        apiClient.removeProfileImage(editProfileReq)
 }

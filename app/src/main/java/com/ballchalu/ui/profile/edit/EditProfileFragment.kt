@@ -170,33 +170,7 @@ class EditProfileFragment : BaseFragment() {
     private fun loadImage(path: Any) {
         Glide.with(requireContext())
             .load(path)
-            .listener(object :RequestListener<Drawable>{
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Drawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    Timber.d("drawable123  ${resource}  ${target}")
-                    return false
-                }
-
-            })
-
             .into(binding.ivProfile)
-
-
-
     }
 
 
@@ -223,24 +197,22 @@ class EditProfileFragment : BaseFragment() {
 
         val builder = MaterialAlertDialogBuilder(requireActivity(), R.style.MyMaterialAlertDialog)
         builder.setTitle("Choose Options")
-
         builder.setItems(values) { dialog, item ->
-
             if (item == 0)
                 openGalleryIntent()
             else if (item == 1) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQUEST_CAMERA_CODE)
             } else if (item == 2) {
-                loadImage(R.drawable.ic_user)
-                viewModel.saveDetails(
+
+                viewModel.removeProfile(
                     EditProfileReq(
                         binding.edtFirstNameValue.text.toString(),
                         binding.edtLastNameValue.text.toString(),
                         binding.edtEmailValue.text.toString(),
                         binding.edtUserNameValue.text.toString()
                     )
-                    , null
+
                 )
             }
             dialog.dismiss()

@@ -108,4 +108,7 @@ internal interface ApiClient {
     @POST("ballchalu/api/v1/users/update")
     fun callSaveProfileAsync(@Body editProfileReq: EditProfileReq): Deferred<Response<EditProfileRes>>
 
+    @Headers("Accept: application/json")
+    @POST("ballchalu/api/v1/users/update")
+    fun removeProfileImage( @Body editProfileReq: EditProfileReq): Deferred<Response<EditProfileRes>>
 }

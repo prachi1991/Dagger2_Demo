@@ -54,7 +54,18 @@ class EditProfileViewModel @Inject constructor(
             loading.postValue(Event(false))
         }
     }
+    fun removeProfile(editProfileReq: EditProfileReq) {
 
+        editProfileReq.image = ""
+        loading.postValue(Event(true))
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val result = repository.removeProfileImage(editProfileReq)) {
+                is Results.Success -> handleEditProfileSuccess(result.data)
+                is Results.Error -> failure.postValue(Event(result.exception.message.toString()))
+            }
+            loading.postValue(Event(false))
+        }
+    }
 
     private val _editUserDetails = MutableLiveData<Event<EditProfileRes>>()
     var editUserDetails: MutableLiveData<Event<EditProfileRes>> = _editUserDetails
