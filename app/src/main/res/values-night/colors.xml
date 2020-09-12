@@ -7,7 +7,6 @@
     <color name="colorAccent">#bc8b43</color>
 
 
-
     <color name="text_color_grey">#999</color>
     <color name="dark_grey">#3a3f49</color>
     <color name="light_grey">#333743</color>
@@ -93,5 +92,27 @@
     <color name="color_stroke_component4">#6b6d74</color>
     <color name="color_stroke_component5">#fff</color>
     <color name="color_light_stroke">#3a3f49</color>
+
+
+    //razorpay
+
+    <color name="mid_green">#4cad48</color>
+    <color name="deep_sky_blue">#0080ff</color>
+    <color name="tree_green">#357318</color>
+    <color name="color_blue_grey">#6c7b95</color>
+    <color name="warm_grey_two">#9f9f9f</color>
+    <color name="color_card_payment">#343643</color>
+    <color name="outline_tab">#ffffff</color>
+    <color name="totalcoins_subtext">#babee0</color>
+    <color name="total_coins_text">#fff</color>
+    <color name="color_payment_result">#343643</color>
+    <color name="color_package_card">#1a1c28</color>
+    <color name="color_subtext_result">#babee0</color>
+    <color name="color_heading_result">#ffff</color>
+    <color name="midgreen">#4cad48</color>
+    <color name="color_remember">#ffff</color>
+    <color name="light_blue_grey">#babee0</color>
+
+
 
 </resources>

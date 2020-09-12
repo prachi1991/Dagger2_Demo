@@ -21,7 +21,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentMatchDetailsBinding
 import com.ballchalu.mqtt.MqttConnection
-import com.ballchalu.razorpay.Constants
+import com.ballchalu.ui.razorpay.Constants
 import com.ballchalu.ui.create_bet.CreateBetFragment
 import com.ballchalu.ui.match.details.adapter.EndingDigitAdapter
 import com.ballchalu.ui.match.details.adapter.SessionAdapter

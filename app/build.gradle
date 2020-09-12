@@ -75,7 +75,7 @@ ext {
 }
 dependencies {
     implementation project(':shared')
-    implementation project(':razorPay')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.material:material:1.1.0'
@@ -148,4 +148,5 @@ dependencies {
     //Permission
     implementation 'com.karumi:dexter:6.2.1'
     implementation 'com.alespero:expandable-cardview:0.8'
+
 }

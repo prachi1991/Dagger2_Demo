@@ -20,7 +20,7 @@ import com.ballchalu.BuildConfig
 import com.ballchalu.R
 import com.ballchalu.base.BaseActivity
 import com.ballchalu.databinding.ActivityNavigationBinding
-import com.ballchalu.razorpay.Constants
+import com.ballchalu.ui.razorpay.Constants
 import com.ballchalu.shared.core.result.EventObserver
 import com.ballchalu.shared.database.prefs.SharedPreferenceStorage
 import com.ballchalu.shared.domain.bccoins.buy.BcCoinBuyRes

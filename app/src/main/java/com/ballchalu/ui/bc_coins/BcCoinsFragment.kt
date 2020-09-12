@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentBcCoinsBinding
-import com.ballchalu.razorpay.Constants
+import com.ballchalu.ui.razorpay.Constants
 import com.ballchalu.shared.core.result.Event
 import com.ballchalu.shared.core.result.EventObserver
 import com.ballchalu.shared.database.prefs.SharedPreferenceStorage

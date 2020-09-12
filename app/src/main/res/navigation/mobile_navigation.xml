@@ -79,6 +79,6 @@
     </dialog>
    <activity
         android:id="@+id/paymentSelectionActivity"
-        android:name="com.ballchalu.razorpay.container.PaymentSelectionActivity"
+        android:name="com.ballchalu.ui.razorpay.container.PaymentSelectionActivity"
         android:label="PaymentSelectionActivity"/>
 </navigation>

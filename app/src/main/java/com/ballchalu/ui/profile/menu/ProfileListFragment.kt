@@ -27,6 +27,7 @@ import com.ballchalu.shared.rxjava.RxBus
 import com.ballchalu.shared.rxjava.RxEvent
 import com.ballchalu.shared.util.ConstantsBase
 import com.ballchalu.shared.util.viewModelProvider
+import com.ballchalu.ui.navigation.NavigationActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
 
@@ -71,8 +72,9 @@ class ProfileListFragment : BaseFragment() {
         viewModel.callUserDetails()
 
         binding.toolbar.setNavigationOnClickListener {
-            requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
-        }
+            if(requireActivity() is NavigationActivity) requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
+            else requireActivity().findNavController(R.id.nav_payment_host).navigateUp() }
+
         binding.rlProfile.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
         }
