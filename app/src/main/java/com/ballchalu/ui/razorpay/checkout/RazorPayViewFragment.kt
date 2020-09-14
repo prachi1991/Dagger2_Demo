@@ -63,12 +63,8 @@ class RazorPayViewFragment : BaseFragment(), PaymentResultListener {
                 val model = it.getParcelable<PaymentDetailsModel>(Constants.PAYMENT_MODEL)
                 amount = model?.amount
                 val json = JSONObject(Gson().toJson(model))
-
-                Timber.d("RazorPayCallback ${model?.amount.toString()}")
-//                razorpay?.openCheckout(json,this)
                 sendRequest(json)
             } catch (e: Exception) {
-                Timber.d("Exception123 ${e.message}")
                 Toast.makeText(requireActivity(), "Data Parsing Error", Toast.LENGTH_LONG).show()
                 requireActivity().finish()
             }
@@ -109,11 +105,11 @@ class RazorPayViewFragment : BaseFragment(), PaymentResultListener {
         } catch (e: Exception) {
             Timber.d("onPaymentError ${e.message}")
         }
-        val intent = Intent().apply {
+        /*val intent = Intent().apply {
             putExtra(Constants.ERROR_CODE, errorCode.toString())
             putExtra(Constants.ERROR_MESSAGE, error?.error?.description ?: errorDescription)
         }
-        requireActivity().setResult(Activity.RESULT_CANCELED, intent)
+        requireActivity().setResult(Activity.RESULT_CANCELED, intent)*/
         (requireActivity() as PaymentSelectionActivity).onPaymentFailure(error?.error?.description)
     }
 

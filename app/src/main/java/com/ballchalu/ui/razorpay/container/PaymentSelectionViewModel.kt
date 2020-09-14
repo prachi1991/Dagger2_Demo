@@ -19,7 +19,7 @@ class PaymentSelectionViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val _bcCoinBuyObserver = MutableLiveData<Event<BcCoinBuyRes>>()
     var bcCoinBuyObserver: MutableLiveData<Event<BcCoinBuyRes>> = _bcCoinBuyObserver
-    lateinit var bccoin: BcCoinContest
+   var bccoin: BcCoinContest?=null
     private val _userDetails = MutableLiveData<Event<UserData?>>()
     var userDetails: MutableLiveData<Event<UserData?>> = _userDetails
     fun callBuyNow(bcCoinContest: BcCoinContest) {

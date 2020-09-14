@@ -112,10 +112,8 @@
     <color name="midgreen">#4cad48</color>
     <color name="color_remember">#ffff</color>
     <color name="light_blue_grey">#babee0</color>
-
-
-
     <color name="bottomsheet_color">#1a1c28</color>
     <color name="color_close">#1a1c28</color>
     <color name="close_btn_background">#a9a9ad</color>
+    <color name="dialog_subtext">#babee0</color>
 </resources>

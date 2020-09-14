@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:id="@+id/llCardtype"
         android:layout_width="match_parent"
-        android:background="@color/color_content_1"
         android:layout_height="@dimen/_50sdp"
+        android:background="@color/color_content_1"
         android:orientation="horizontal"
 
         android:weightSum="2">
 
         <LinearLayout
             android:id="@+id/ll_credit_card"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_70sdp"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight=".5"
-            android:padding="@dimen/_3sdp"
+            android:layout_margin="@dimen/_1sdp"
+
             android:background="@drawable/back_solid_contest"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/_3sdp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -27,11 +28,11 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_credit_card" />
 
-               <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
+                fontPath="fonts/Robotto_Regular.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                   fontPath="fonts/Robotto_Regular.ttf"
                 android:text="@string/credit_card"
                 android:textColor="@color/deep_sky_blue" />
 
@@ -39,68 +40,66 @@
 
         <LinearLayout
             android:id="@+id/ll_debit"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_70sdp"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight=".5"
-            android:padding="@dimen/_3sdp"
+            android:layout_margin="@dimen/_1sdp"
+
             android:background="@drawable/back_solid_contest"
             android:orientation="vertical"
-     >
+            android:padding="@dimen/_3sdp">
 
             <ImageView
 
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
 
                 android:layout_weight="1"
                 android:src="@drawable/ic_credit_card_2" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                fontPath="fonts/Robotto_Regular.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                fontPath="fonts/Robotto_Regular.ttf"
                 android:text="@string/debit_card"
                 android:textColor="@color/deep_sky_blue" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_net_banking"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_70sdp"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight=".5"
-            android:padding="@dimen/_3sdp"
+            android:layout_margin="@dimen/_1sdp"
+
             android:background="@drawable/back_solid_contest"
             android:orientation="vertical"
-           >
+            android:padding="@dimen/_3sdp">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_surface1" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                fontPath="fonts/Robotto_Regular.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                fontPath="fonts/Robotto_Regular.ttf"
+                android:singleLine="true"
                 android:text="@string/net_banking"
                 android:textColor="@color/deep_sky_blue" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight=".5"
-            android:padding="@dimen/_3sdp"
             android:id="@+id/ll_wallet"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="match_parent"
+
+            android:layout_margin="@dimen/_1sdp"
             android:background="@drawable/back_solid_contest"
             android:orientation="vertical"
->
+            android:padding="@dimen/_3sdp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -109,12 +108,12 @@
                 android:src="@drawable/image_5" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                fontPath="fonts/Robotto_Regular.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                fontPath="fonts/Robotto_Regular.ttf"
                 android:text="@string/wallet"
                 android:textColor="@color/deep_sky_blue" />
         </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
 </LinearLayout>

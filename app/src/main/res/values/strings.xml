@@ -154,7 +154,7 @@
     <string name="remember">Remember this card</string>
     <string name="credit_card">Credit Card</string>
     <string name="debit_card">Debit Card</string>
-    <string name="net_banking">Net Banking</string>
+    <string name="net_banking">NetBanking</string>
     <string name="wallet">Wallet</string>
     <string name="enter_name">Enter the card holder name</string>
     <string name="payment_completed">Payment Completed</string>

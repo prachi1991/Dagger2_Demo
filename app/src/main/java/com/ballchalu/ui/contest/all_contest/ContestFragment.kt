@@ -140,6 +140,7 @@ class ContestFragment : BaseFragment() {
                 viewModel.createUserMatchContest(viewModel.contestModel.id.toString())
             }
             getString(R.string.add_coins) -> {
+
                 findNavController().navigate(R.id.paymentSelectionActivity)
             }
         }

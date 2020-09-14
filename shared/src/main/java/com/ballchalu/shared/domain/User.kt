@@ -24,4 +24,5 @@ data class User(
 
     @SerializedName("confirm_password")
     val confirmPassword: String? = null
+
 ) : Parcelable

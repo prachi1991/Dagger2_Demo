@@ -13,9 +13,10 @@ object Constants {
     const val TYPE_BANKING: String = "netbanking"
     const val TYPE_UPI: String = "upi"
     const val MATCH_DETAILS: String = "matchdetails"
-    const val PAYMENT_SUCESSS: String = "paymentselection"
-
+    const val PAYMENT_SUCESSS: String = "paymentsucess"
+    const val PAYMENT_FAILED: String = "paymentfailed"
     // Testing Payment Gateway
     const val PHONE_PATTERN = "^[987]\\d{9}$"
+    const val PAYMENT_RESULT: String = "result"
 
 }

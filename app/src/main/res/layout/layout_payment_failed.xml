@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_package_card">
 
-        <RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
+            android:id="@+id/rl_failed"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
             android:background="@color/color_payment_result"
@@ -45,18 +41,18 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_payment_completed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_image"
-                  fontPath="fonts/Roboto_Medium"
+                fontPath="fonts/Roboto_Medium"
                 android:gravity="center"
                 android:text="@string/payment_fail"
                 android:textColor="@color/color_heading_result"
                 android:textSize="@dimen/_14ssp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_payment_failed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +60,7 @@
                 android:layout_below="@+id/tv_payment_completed"
                 android:gravity="center"
                 android:text="@string/payment_failed"
-                android:textColor="@color/color_subtext_result"
+                android:textColor="@color/dialog_subtext"
                 android:textSize="@dimen/_10ssp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -77,23 +73,21 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/background_round_green"
                 android:gravity="center"
-
                 android:text="@string/try_again"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btn_try"
                 android:layout_marginTop="@dimen/_10sdp"
-                  fontPath="fonts/Roboto_Medium"
+                fontPath="fonts/Roboto_Medium"
                 android:gravity="center"
                 android:text="@string/ok"
                 android:textColor="@color/midgreen"
                 android:textSize="@dimen/_10ssp" />
         </RelativeLayout>
-    </RelativeLayout>
 
-</layout>
+

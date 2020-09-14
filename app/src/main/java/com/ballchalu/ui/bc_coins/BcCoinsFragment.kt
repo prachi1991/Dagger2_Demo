@@ -62,9 +62,17 @@ class BcCoinsFragment : BaseFragment(), BcCoinAdapter.OnBcCoinListener {
         })
 
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
-            Glide.with(requireContext())
-                .load(it?.profileUrl)
-                .into(binding.imgUserprofile)
+         if(!it?.profileUrl.equals(null)) {
+             Glide.with(requireContext())
+                 .load(it?.profileUrl)
+                 .into(binding.imgUserprofile)
+         }
+            else{
+             Glide.with(requireContext())
+                 .load(R.drawable.ic_user)
+                 .into(binding.imgUserprofile)
+         }
+
 
             binding.tvEmail.text = it?.firstName + " " + it?.lastName
             binding.tvBcCoinBalance.text = it?.bc_coins.toString()

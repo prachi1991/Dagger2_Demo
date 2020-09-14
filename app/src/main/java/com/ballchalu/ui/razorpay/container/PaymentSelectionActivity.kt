@@ -6,17 +6,16 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.ballchalu.R
 import com.ballchalu.databinding.ActivityPayemtSelectionBinding
 import com.ballchalu.shared.core.result.EventObserver
 import com.ballchalu.shared.domain.bccoins.BcCoinContest
+import com.ballchalu.shared.domain.user.UserData
 import com.ballchalu.shared.rxjava.RxBus
 import com.ballchalu.shared.rxjava.RxEvent
 import com.ballchalu.shared.util.loadImage
 import com.ballchalu.shared.util.viewModelProvider
 import com.ballchalu.ui.razorpay.Constants
-import com.ballchalu.ui.razorpay.checkout.result.PaymentFailedDialog
 import com.ballchalu.ui.razorpay.checkout.result.PaymentSucessDialog
 import com.razorpay.Razorpay
 import io.reactivex.disposables.Disposable
@@ -30,6 +29,7 @@ class PaymentSelectionActivity : com.ballchalu.base.BaseActivity() {
     private lateinit var navController: NavController
     private lateinit var viewModel: PaymentSelectionViewModel
     private var disposable: Disposable? = null
+    lateinit var userdata: UserData
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -46,7 +46,7 @@ class PaymentSelectionActivity : com.ballchalu.base.BaseActivity() {
 
         navController = findNavController(R.id.nav_payment_host)
 
-    /*    NavigationUI.setupWithNavController(binding.toolbar, navController)*/
+        /*    NavigationUI.setupWithNavController(binding.toolbar, navController)*/
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             binding.toolbar.isVisible = destination.id != R.id.razorPayViewFragment
@@ -55,6 +55,7 @@ class PaymentSelectionActivity : com.ballchalu.base.BaseActivity() {
             navController.navigate(R.id.nav_profile_list)
         }
         viewModel.callUserDetails()
+        setRxObserver()
     }
 
 
@@ -81,13 +82,33 @@ class PaymentSelectionActivity : com.ballchalu.base.BaseActivity() {
                     it1,
                     binding.ibProfile
                 )
+
             }
+            this.userdata = it!!
         });
+
+    }
+
+    private fun getUserData(userdata: UserData?): UserData? {
+        return userdata
+    }
+
+    private fun setRxObserver() {
+        disposable = RxBus.listen(Any::class.java).subscribe { event ->
+            when (event) {
+                is RxEvent.UpdateProfile -> {
+                    loadImage(event.bitmap, binding.ibProfile)
+                }
+
+            }
+        }
     }
 
     fun getBcCoinData() {
-        val model = intent.getParcelableExtra<BcCoinContest>(Constants.BC_COINS_ID)
-        viewModel.bccoin = model
+        if (intent.getParcelableExtra<BcCoinContest>(Constants.BC_COINS_ID) != null) {
+            viewModel?.bccoin = intent.getParcelableExtra<BcCoinContest>(Constants.BC_COINS_ID)
+        }
+
     }
 
     fun setCallBack() {
@@ -108,16 +129,19 @@ class PaymentSelectionActivity : com.ballchalu.base.BaseActivity() {
 
         findNavController(R.id.nav_payment_host).popBackStack()
         data?.let { getError(it) }
-        PaymentFailedDialog()
-            .show(supportFragmentManager, "PaymentFailedDialog")
+        navController.navigate(R.id.nav_payment_result,Bundle().apply{
+            putString(Constants.PAYMENT_RESULT,Constants.PAYMENT_FAILED)
+
+        })
     }
 
     fun onPaymentSuccess() {
-
-        viewModel.callBuyNow(viewModel.bccoin)
         findNavController(R.id.nav_payment_host).popBackStack()
-        PaymentSucessDialog()
-            .show(supportFragmentManager, "PaymentSucessDialog")
+        navController.navigate(R.id.nav_payment_result,Bundle().apply{
+            putString(Constants.PAYMENT_RESULT,Constants.PAYMENT_SUCESSS)
+        })
+        if (viewModel.bccoin != null)
+            viewModel.callBuyNow(viewModel.bccoin!!)
     }
 
     override fun onDestroy() {

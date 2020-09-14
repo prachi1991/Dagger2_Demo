@@ -28,6 +28,7 @@
                 android:background="@drawable/back_solid_sub_comp_7"
                 android:orientation="horizontal"
                 android:padding="@dimen/_5sdp">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_userprofile"
                     android:layout_width="@dimen/_36sdp"
@@ -36,7 +37,19 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:background="@drawable/shape_circle_grey"
                     android:padding="@dimen/_4sdp"
-                    android:src="@drawable/ic_avatar" />
+                    android:src="@drawable/ic_user" />
+<!--
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ibProfile"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/_7sdp"
+                    android:src="@drawable/ic_user"
+                    app:civ_border_color="@color/color_text"
+                    app:civ_border_width="1dp"
+                    tools:src="@color/text_color_grey" />-->
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvEmail"

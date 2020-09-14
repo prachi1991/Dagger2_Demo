@@ -62,6 +62,7 @@ class EditProfileFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
+            viewModel.userData=it
             binding.edtEmailValue.setText(it?.email.toString())
             binding.edtFirstNameValue.setText(it?.firstName.toString())
             binding.edtLastNameValue.setText(it?.lastName.toString())
@@ -78,6 +79,7 @@ class EditProfileFragment : BaseFragment() {
             findNavController().popBackStack()
         }
         viewModel.editUserDetails.observe(viewLifecycleOwner, EventObserver {
+            it.user?.profileUrl?.let { it1 -> loadImage(it1) }?:loadImage(R.drawable.ic_user)
             openLogoutDialog(it.message)
         })
         binding.ivEditProfile.setOnClickListener {
@@ -176,11 +178,8 @@ class EditProfileFragment : BaseFragment() {
 
     private fun openImageSelection() {
 
-        var values = arrayOf<CharSequence>(
-
-        )
-        Timber.d("Tag123 ${binding.ivProfile.tag}")
-        if (binding.ivProfile.tag == 0) {
+        var values = arrayOf<CharSequence>()
+        if (viewModel.userData?.profileUrl==null) {
             values = arrayOf<CharSequence>(
                 GALLERY_PICKER,
                 CAMERA_PICKER
@@ -189,9 +188,7 @@ class EditProfileFragment : BaseFragment() {
         } else {
             values = arrayOf<CharSequence>(
                 GALLERY_PICKER,
-                CAMERA_PICKER, REMOVE
-
-            )
+                CAMERA_PICKER, REMOVE)
         }
 
 

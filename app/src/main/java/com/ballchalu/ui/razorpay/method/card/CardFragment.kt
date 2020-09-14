@@ -12,6 +12,7 @@ import com.ballchalu.R
 import com.ballchalu.databinding.FragmentCardBinding
 import com.ballchalu.ui.razorpay.Constants
 import com.ballchalu.ui.razorpay.base.BaseFragment
+import com.ballchalu.ui.razorpay.container.PaymentSelectionActivity
 import com.ballchalu.ui.razorpay.model.PaymentDetailsModel
 import com.ballchalu.ui.razorpay.payment_mode.PaymentModeFragment
 import com.razorpay.Razorpay
@@ -79,7 +80,6 @@ class CardFragment(price: String?) : BaseFragment() {
 
         }
 
-
     }
 
     fun formatDate(number: Editable) {
@@ -120,7 +120,7 @@ class CardFragment(price: String?) : BaseFragment() {
             cardcvv = binding.edtCvv.text.toString().trim()
             amount = getAmountFromParent()
             method = Constants.TYPE_CARD
-            email = "john@gmail.com"
+            email = (activity as PaymentSelectionActivity).userdata.email
             contact = "8888888888"
 
         }
@@ -156,7 +156,6 @@ class CardFragment(price: String?) : BaseFragment() {
         if (binding.edtExpiryDate.text.length == 5) {
             val sdf = SimpleDateFormat("MM/yy")
             val strDate = sdf.parse(binding?.edtExpiryDate?.text?.toString())
-            Timber.d("ValidateExpiryDate123   ${strDate}     ${Date()}")
             return (Date().before(strDate))
         }
         return false

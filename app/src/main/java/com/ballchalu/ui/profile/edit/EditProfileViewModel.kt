@@ -22,7 +22,7 @@ class EditProfileViewModel @Inject constructor(
     private val repository: LoginRepository
 ) : BaseViewModel() {
 
-
+var userData:UserData?=null
     private val _userDetails = MutableLiveData<Event<UserData?>>()
     var userDetails: MutableLiveData<Event<UserData?>> = _userDetails
 
@@ -71,8 +71,11 @@ class EditProfileViewModel @Inject constructor(
     var editUserDetails: MutableLiveData<Event<EditProfileRes>> = _editUserDetails
 
     private fun handleEditProfileSuccess(data: EditProfileRes) {
-        if (data.success)
+        if (data.success){
+
             _editUserDetails.postValue(Event(data))
+        }
+
         else
             failure.postValue(Event(data.message.toString()))
     }

@@ -52,4 +52,10 @@
             android:id="@+id/action_netBankingFragment_to_razorPayViewFragment"
             app:destination="@id/razorPayViewFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/nav_payment_result"
+        android:name="com.ballchalu.ui.razorpay.checkout.result.PaymentSucessDialog"
+        tools:layout="@layout/fragment_profile_list" >
+
+    </dialog>
 </navigation>
