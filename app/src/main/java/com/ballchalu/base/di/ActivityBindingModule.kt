@@ -30,8 +30,6 @@ import com.ballchalu.ui.razorpay.payment_mode.PaymentModeModule
 import com.ballchalu.ui.splash.SplashActivity
 import com.ballchalu.ui.splash.SplashModule
 import com.ballchalu.ui.winners.WinnerModule
-import com.dl.gc.ui.navigation.ui.gallery.PaymentCardModule
-import com.dl.gc.ui.navigation.ui.gallery.PaymentNetBankingModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -84,11 +82,7 @@ abstract class ActivityBindingModule {
             ProfileContainerModule::class,
             EditProfileModule::class,
             ChangePasswordModule::class,
-            HowToPlayModule::class,
-            PaymentCardModule::class,
-        PaymentNetBankingModule::class
-
-        ]
+            HowToPlayModule::class]
     )
 
     internal abstract fun navigationActivity(): NavigationActivity
