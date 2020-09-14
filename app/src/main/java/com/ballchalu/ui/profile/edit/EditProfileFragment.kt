@@ -3,6 +3,8 @@ package com.ballchalu.ui.profile.edit
 import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.drawable.Drawable
+
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ import com.ballchalu.R
 import com.ballchalu.base.BaseFragment
 import com.ballchalu.databinding.FragmentEditProfileBinding
 import com.bumptech.glide.Glide
+
 import com.ccpp.shared.core.result.EventObserver
 import com.ccpp.shared.database.prefs.SharedPreferenceStorage
 import com.ccpp.shared.domain.profile.EditProfileReq
@@ -57,6 +60,7 @@ class EditProfileFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = viewModelProvider(viewModelFactory)
         viewModel.userDetails.observe(viewLifecycleOwner, EventObserver {
+            viewModel.userData=it
             binding.edtEmailValue.setText(it?.email.toString())
             binding.edtFirstNameValue.setText(it?.firstName.toString())
             binding.edtLastNameValue.setText(it?.lastName.toString())
@@ -73,6 +77,7 @@ class EditProfileFragment : BaseFragment() {
             findNavController().popBackStack()
         }
         viewModel.editUserDetails.observe(viewLifecycleOwner, EventObserver {
+            it.user?.profileUrl?.let { it1 -> loadImage(it1) }?:loadImage(R.drawable.ic_user)
             openLogoutDialog(it.message)
         })
         binding.ivEditProfile.setOnClickListener {
@@ -87,6 +92,7 @@ class EditProfileFragment : BaseFragment() {
                 binding.edtLastNameValue.error = "Last Name is Empty"
                 return@setOnClickListener
             }
+
             viewModel.saveDetails(
                 EditProfileReq(
                     binding.edtFirstNameValue.text.toString(),
@@ -170,11 +176,8 @@ class EditProfileFragment : BaseFragment() {
 
     private fun openImageSelection() {
 
-        var values = arrayOf<CharSequence>(
-
-        )
-        Timber.d("Tag123 ${binding.ivProfile.tag}")
-        if (binding.ivProfile.tag == 0) {
+        var values = arrayOf<CharSequence>()
+        if (viewModel.userData?.profileUrl==null) {
             values = arrayOf<CharSequence>(
                 GALLERY_PICKER,
                 CAMERA_PICKER
@@ -183,9 +186,7 @@ class EditProfileFragment : BaseFragment() {
         } else {
             values = arrayOf<CharSequence>(
                 GALLERY_PICKER,
-                CAMERA_PICKER, REMOVE
-
-            )
+                CAMERA_PICKER, REMOVE)
         }
 
 

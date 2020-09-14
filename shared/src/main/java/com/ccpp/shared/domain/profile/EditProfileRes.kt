@@ -3,6 +3,8 @@ package com.ccpp.shared.domain.profile
 
 import android.os.Parcelable
 import com.ccpp.shared.domain.User
+import com.ccpp.shared.domain.user.UserData
+import com.ccpp.shared.domain.user.UserRes
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -13,6 +15,6 @@ data class EditProfileRes(
     @SerializedName("message")
     var message: String?,
     @SerializedName("user")
-    var user: User? = null
+    var user: UserData? = null
 ) : Parcelable
 
