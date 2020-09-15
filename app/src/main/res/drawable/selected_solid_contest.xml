@@ -4,6 +4,6 @@
     <corners android:radius="@dimen/_8sdp" />
     <solid android:color="@color/color_contest" />
     <stroke
-        android:width="2dp"
+        android:width="1dp"
         android:color="@color/contest_btn_selector" />
 </shape>
