@@ -40,7 +40,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="center"
                     android:padding="@dimen/_7sdp"
-                    android:src="@drawable/ic_user"
+                    android:src="@drawable/ic_paymentuser"
                     app:civ_border_color="@color/color_text"
                     app:civ_border_width="1dp"
                     tools:src="@color/text_color_grey" />
