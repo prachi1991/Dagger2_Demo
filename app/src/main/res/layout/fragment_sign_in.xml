@@ -28,7 +28,7 @@
                 android:inputType="textEmailAddress"
                 android:paddingTop="@dimen/_5sdp"
                 android:selectAllOnFocus="true"
-                android:text="@string/username"
+                android:text="@string/username_emailid"
                 android:textColor="@color/login_blue_text"
                 android:textSize="@dimen/_10ssp" />
 

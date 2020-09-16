@@ -36,6 +36,7 @@
     <string name="login_with_google">Login with Google</string>
     <string name="login_with_facebook">Login with Facebook</string>
     <string name="username">Username</string>
+    <string name="username_emailid">Username/Email id</string>
     <string name="sign_up">Sign Up</string>
     <string name="first_name">First Name</string>
     <string name="email_id">Email ID</string>

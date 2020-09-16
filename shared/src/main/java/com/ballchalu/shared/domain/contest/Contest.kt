@@ -36,6 +36,10 @@ data class Contest(
     @Expose
     val availableSpots: Int? = 0,
 
+    @SerializedName("distribution_prize")
+    @Expose
+    val distributionPrize: Int? = 0,
+
     @SerializedName("match")
     @Expose
     val match: Match,
@@ -45,23 +49,21 @@ data class Contest(
     val isParticipated: Boolean = false
 ) {
 
-    public fun getPrice()= "$pricePool/-"
+    public fun getPrice() = "$distributionPrize/-"
 
-    public fun getEntery()= "$fess/-"
+    public fun getEntery() = "$fess/-"
 
     public fun remainingSpots() = "$availableSpots"
 
-    public fun winners()= "$winners"
+    public fun winners() = "$winners"
 
 
-    public fun getCredit():String
-    {
-        return creditCoins.toString()+"/-"
+    public fun getCredit(): String {
+        return creditCoins.toString() + "/-"
     }
 
-    public fun getTotalSpots():String
-    {
-        return "TOTAL "+spots+" SPOT"
+    public fun getTotalSpots(): String {
+        return "TOTAL " + spots + " SPOT"
     }
 
 }
