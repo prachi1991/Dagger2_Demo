@@ -33,7 +33,6 @@ android {
             buildConfigField 'String', 'mqttUrl', mqttStageUrl
             buildConfigField 'String', 'mqttUserName', mqttStageUserName
             buildConfigField 'String', 'mqttPassword', mqttStagePassword
-
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         prod {
