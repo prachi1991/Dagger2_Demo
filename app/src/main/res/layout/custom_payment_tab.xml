@@ -5,8 +5,8 @@
 
     <LinearLayout
         android:id="@+id/llCardtype"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/color_content_1"
         android:orientation="horizontal"
 
@@ -16,7 +16,7 @@
             android:id="@+id/ll_credit_card"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="match_parent"
-            android:background="@drawable/back_solid_contest"
+            android:background="@drawable/tab_background"
             android:orientation="vertical"
             android:padding="@dimen/_3sdp">
 
@@ -31,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="@dimen/_9ssp"
                 android:text="@string/credit_card"
                 android:textColor="@color/deep_sky_blue" />
 
@@ -40,9 +41,7 @@
             android:id="@+id/ll_debit"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="match_parent"
-
-
-            android:background="@drawable/back_solid_contest"
+            android:background="@drawable/tab_background"
             android:orientation="vertical"
             android:padding="@dimen/_3sdp">
 
@@ -57,6 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="@dimen/_9ssp"
                 android:text="@string/debit_card"
                 android:textColor="@color/deep_sky_blue" />
         </LinearLayout>
@@ -65,7 +65,7 @@
             android:id="@+id/ll_net_banking"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="match_parent"
-            android:background="@drawable/back_solid_contest"
+            android:background="@drawable/tab_background"
             android:orientation="vertical"
             android:padding="@dimen/_3sdp">
 
@@ -81,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:singleLine="true"
+                android:textSize="@dimen/_9ssp"
                 android:text="@string/net_banking"
                 android:textColor="@color/deep_sky_blue" />
         </LinearLayout>
@@ -89,7 +90,7 @@
             android:id="@+id/ll_wallet"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="match_parent"
-            android:background="@drawable/back_solid_contest"
+            android:background="@drawable/tab_background"
             android:orientation="vertical"
             android:padding="@dimen/_3sdp">
 
@@ -105,6 +106,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/wallet"
+                android:textSize="@dimen/_9ssp"
                 android:textColor="@color/deep_sky_blue" />
         </LinearLayout>
     </LinearLayout>
