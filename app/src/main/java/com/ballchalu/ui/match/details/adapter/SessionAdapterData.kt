@@ -16,4 +16,6 @@ data class SessionAdapterData(var session: Session?) {
     val noRate = if (session?.canNo == true && !isSuspend) session?.sessionRun?.noRate ?: "" else ""
 
     val title = if (session?.title?.isEmpty() == true) session?.heroicTitle else session?.title
+    val team = if (session?.team?.isEmpty() == true) " " else session?.team
+    val sessionvalue=title+","+team
 }
