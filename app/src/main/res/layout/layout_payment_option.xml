@@ -13,16 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_3sdp"
-        android:background="@drawable/backgroud_solid_border_grey"
-        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+
+        android:layout_marginBottom="@dimen/_15sdp"
        >
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="wrap_content"
             android:background="@android:color/transparent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_35sdp"
             android:orientation="horizontal"
+
             app:tabIndicatorHeight="0dp"
             app:tabMode="auto" />
 

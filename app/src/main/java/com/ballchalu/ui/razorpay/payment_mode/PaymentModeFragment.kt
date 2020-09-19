@@ -1,7 +1,6 @@
 package com.ballchalu.ui.razorpay.payment_mode
 
 import android.app.Activity
-import android.app.Fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
@@ -28,7 +28,7 @@ import com.google.android.material.tabs.TabLayout
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.layout_choose_package.view.*
 import kotlinx.android.synthetic.main.layout_payment_option.view.*
-import java.util.ArrayList
+import java.util.*
 import java.util.regex.Pattern
 
 class PaymentModeFragment : BaseFragment() {
@@ -211,7 +211,7 @@ class PaymentModeFragment : BaseFragment() {
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                (tab.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.back_solid_contest))
+                (tab.customView as LinearLayout).setBackgroundDrawable(resources.getDrawable(R.drawable.tab_background))
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
@@ -219,6 +219,17 @@ class PaymentModeFragment : BaseFragment() {
             }
 
         })
+        setMargin()
+    }
+
+   private fun setMargin() {
+        for (i in 0 until binding?.layoutPaymentOption.tablayout.getTabCount()) {
+            val tab =
+                (binding?.layoutPaymentOption.tablayout.getChildAt(0) as ViewGroup).getChildAt(i)
+            val p = tab.layoutParams as MarginLayoutParams
+            p.setMargins(-20, 0, -20, 0)
+            tab.requestLayout()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

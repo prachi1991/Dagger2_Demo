@@ -13,6 +13,7 @@
             android:id="@+id/rl_card_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20sdp"
 
             android:orientation="vertical">
 
@@ -143,8 +144,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:text="Card Number"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textColor="@color/card_text"
+                        android:textSize="@dimen/_8ssp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -155,7 +158,7 @@
                             android:id="@+id/edtCardNumber"
                             fontPath="fonts/Roboto_Regular.ttf"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="@dimen/_32sdp"
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginRight="@dimen/_5sdp"
                             android:background="@drawable/back_corner_light_blue"
@@ -164,8 +167,8 @@
                             android:hint="@string/card_number_hint"
                             android:inputType="number"
                             android:maxLength="19"
-
-                            android:padding="@dimen/_5sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_10sdp"
                             android:textColor="@color/black"
                             android:textColorHint="@color/text_color_grey"
                             android:textSize="@dimen/_10ssp" />
@@ -175,9 +178,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginTop="@dimen/_10ssp"
-                        android:layout_weight="2">
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -189,20 +192,21 @@
 
                             <TextView
                                 fontPath="fonts/Roboto_Regular.ttf"
-
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/_5sdp"
                                 android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_10sdp"
                                 android:text="@string/valid"
-                                android:textSize="@dimen/_10ssp" />
+                                android:textColor="@color/card_text"
+                                android:textSize="@dimen/_8ssp" />
 
 
                             <EditText
                                 android:id="@+id/edtExpiryDate"
                                 fontPath="fonts/Roboto_Regular.ttf"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_35sdp"
+                                android:layout_height="@dimen/_32sdp"
                                 android:layout_weight="1"
                                 android:background="@drawable/back_corner_light_blue"
                                 android:ems="2"
@@ -210,7 +214,7 @@
                                 android:hint="MM/YY"
                                 android:inputType="number"
                                 android:maxLength="5"
-                                android:padding="@dimen/_5ssp"
+                                android:paddingStart="@dimen/_10sdp"
 
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/text_color_grey"
@@ -236,21 +240,24 @@
                                 android:layout_marginLeft="@dimen/_5ssp"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginRight="@dimen/_10ssp"
+                                android:layout_marginBottom="@dimen/_10sdp"
                                 android:text="CVV"
-                                android:textSize="@dimen/_10ssp" />
+
+                                android:textColor="@color/card_text"
+                                android:textSize="@dimen/_8ssp" />
 
                             <EditText
                                 android:id="@+id/edtCvv"
                                 fontPath="fonts/Roboto_Regular.ttf"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_35sdp"
+                                android:layout_height="@dimen/_32sdp"
                                 android:background="@drawable/back_corner_light_blue"
                                 android:ems="3"
                                 android:hint="@string/enter_cvv"
                                 android:inputType="number"
                                 android:maxLength="3"
 
-                                android:padding="@dimen/_5sdp"
+                                android:paddingStart="@dimen/_10sdp"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/text_color_grey"
                                 android:textSize="@dimen/_10sdp" />
@@ -269,17 +276,19 @@
                             fontPath="fonts/Roboto_Regular.ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
                             android:text="@string/card_name"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textColor="@color/card_text"
+                            android:textSize="@dimen/_8ssp" />
 
 
                         <EditText
                             android:id="@+id/edtHolderName"
                             fontPath="fonts/Roboto_Regular.ttf"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_35sdp"
+                            android:layout_height="@dimen/_32sdp"
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginRight="@dimen/_5sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
@@ -288,7 +297,7 @@
                             android:hint="@string/enter_name"
                             android:inputType="textPersonName"
                             android:maxLength="19"
-                            android:padding="@dimen/_5sdp"
+                            android:paddingStart="@dimen/_10sdp"
                             android:textColor="@color/black"
                             android:textColorHint="@color/text_color_grey"
 
@@ -307,6 +316,7 @@
                         android:backgroundTint="@color/white"
                         android:buttonTint="@color/white"
                         android:text="@string/remember"
+                        android:textSize="@dimen/_8ssp"
                         android:textColor="@color/color_remember" />
 
                     <androidx.appcompat.widget.AppCompatButton

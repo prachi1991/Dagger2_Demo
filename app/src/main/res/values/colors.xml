@@ -116,4 +116,5 @@
     <color name="midgreen">#4cad48</color>
     <color name="color_remember">#716e6e</color>
     <color name="dialog_subtext">#716e6e</color>
+    <color name="card_text">#1a1a1a</color>
 </resources>

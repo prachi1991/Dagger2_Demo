@@ -116,4 +116,5 @@
     <color name="color_close">#ffff</color>
     <color name="close_btn_background">#a9a9ad</color>
     <color name="dialog_subtext">#babee0</color>
+    <color name="card_text">#ffffff</color>
 </resources>
